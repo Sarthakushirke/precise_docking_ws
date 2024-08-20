@@ -1,0 +1,18 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance/lib/python3.10/site-packages",
+        "/home/sarthak/feature_based_robust_localization/install/live_data_visualization/lib/python3.10/site-packages",
+        "/home/sarthak/ws/install/ros_ign_interfaces/local/lib/python3.10/dist-packages",
+        "/home/sarthak/ws/install/ros_gz_interfaces/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance/lib/python3.10/site-packages",
+        "/home/sarthak/feature_based_robust_localization/install/live_data_visualization/lib/python3.10/site-packages",
+        "/home/sarthak/ws/install/ros_ign_interfaces/local/lib/python3.10/dist-packages",
+        "/home/sarthak/ws/install/ros_gz_interfaces/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

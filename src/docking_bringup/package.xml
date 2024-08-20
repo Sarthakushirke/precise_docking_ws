@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>docking_bringup</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="37041521+Sarthakushirke@users.noreply.github.com">sarthak</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>arcuo_marker_detection</exec_depend>
+  <exec_depend>reach_the_goal_node</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,24 @@
+[3.898s] Invoking command in '/home/sarthak/precise_docking_ws/src/arcuo_marker_detection': PYTHONPATH=/home/sarthak/precise_docking_ws/build/arcuo_marker_detection/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/arcuo_marker_detection build --build-base /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/build install --record /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/install.log --single-version-externally-managed install_data
+[4.720s] running egg_info
+[4.720s] writing ../../build/arcuo_marker_detection/arcuo_marker_detection.egg-info/PKG-INFO
+[4.721s] writing dependency_links to ../../build/arcuo_marker_detection/arcuo_marker_detection.egg-info/dependency_links.txt
+[4.721s] writing entry points to ../../build/arcuo_marker_detection/arcuo_marker_detection.egg-info/entry_points.txt
+[4.721s] writing requirements to ../../build/arcuo_marker_detection/arcuo_marker_detection.egg-info/requires.txt
+[4.721s] writing top-level names to ../../build/arcuo_marker_detection/arcuo_marker_detection.egg-info/top_level.txt
+[4.725s] reading manifest file '../../build/arcuo_marker_detection/arcuo_marker_detection.egg-info/SOURCES.txt'
+[4.728s] writing manifest file '../../build/arcuo_marker_detection/arcuo_marker_detection.egg-info/SOURCES.txt'
+[4.728s] running build
+[4.728s] running build_py
+[4.729s] copying arcuo_marker_detection/arcuo_detection.py -> /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/build/lib/arcuo_marker_detection
+[4.729s] running install
+[4.729s] running install_lib
+[4.731s] copying /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/build/lib/arcuo_marker_detection/arcuo_detection.py -> /home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages/arcuo_marker_detection
+[4.733s] byte-compiling /home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages/arcuo_marker_detection/arcuo_detection.py to arcuo_detection.cpython-310.pyc
+[4.736s] running install_data
+[4.740s] running install_egg_info
+[4.747s] removing '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages/arcuo_marker_detection-0.0.0-py3.10.egg-info' (and everything under it)
+[4.748s] Copying ../../build/arcuo_marker_detection/arcuo_marker_detection.egg-info to /home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages/arcuo_marker_detection-0.0.0-py3.10.egg-info
+[4.750s] running install_scripts
+[4.824s] Installing aruco_marker_detection_node script to /home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/arcuo_marker_detection
+[4.831s] writing list of installed files to '/home/sarthak/precise_docking_ws/build/arcuo_marker_detection/install.log'
+[4.883s] Invoked command in '/home/sarthak/precise_docking_ws/src/arcuo_marker_detection' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/arcuo_marker_detection/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/arcuo_marker_detection build --build-base /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/build install --record /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/install.log --single-version-externally-managed install_data

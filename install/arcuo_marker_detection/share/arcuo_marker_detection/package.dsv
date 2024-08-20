@@ -1,0 +1,8 @@
+source;ros_domain_id.txt
+source;share/arcuo_marker_detection/hook/pythonpath.ps1
+source;share/arcuo_marker_detection/hook/pythonpath.dsv
+source;share/arcuo_marker_detection/hook/pythonpath.sh
+source;ros_domain_id.txt
+source;share/arcuo_marker_detection/hook/ament_prefix_path.ps1
+source;share/arcuo_marker_detection/hook/ament_prefix_path.dsv
+source;share/arcuo_marker_detection/hook/ament_prefix_path.sh

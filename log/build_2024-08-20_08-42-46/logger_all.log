@@ -1,0 +1,330 @@
+[0.595s] DEBUG:colcon:Command line arguments: ['/home/sarthak/.local/bin/colcon', 'build']
+[0.595s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=20, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], bazel_args=None, bazel_task=None, cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, meson_args=[], ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_alias.argument_parser.alias.AliasArgumentDecorator object at 0x7090f7dc2e90>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7090f7dc1f60>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7090f7dc1f60>>, mixin_verb=('build',))
+[0.646s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.646s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.647s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.647s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.647s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.647s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.647s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/sarthak/precise_docking_ws'
+[0.647s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.647s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.647s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.647s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.647s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.648s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.648s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.648s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.648s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.650s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['bazel', 'cmake', 'meson', 'python']
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'bazel'
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'meson'
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.651s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['bazel', 'cmake', 'meson', 'python']
+[0.652s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'bazel'
+[0.653s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.653s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'meson'
+[0.653s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.653s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.653s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.653s] Level 1:colcon.colcon_core.package_identification:_identify(src/arcuo_marker_detection) by extensions ['ignore', 'ignore_ament_install']
+[0.654s] Level 1:colcon.colcon_core.package_identification:_identify(src/arcuo_marker_detection) by extension 'ignore'
+[0.654s] Level 1:colcon.colcon_core.package_identification:_identify(src/arcuo_marker_detection) by extension 'ignore_ament_install'
+[0.654s] Level 1:colcon.colcon_core.package_identification:_identify(src/arcuo_marker_detection) by extensions ['colcon_pkg']
+[0.654s] Level 1:colcon.colcon_core.package_identification:_identify(src/arcuo_marker_detection) by extension 'colcon_pkg'
+[0.654s] Level 1:colcon.colcon_core.package_identification:_identify(src/arcuo_marker_detection) by extensions ['colcon_meta']
+[0.654s] Level 1:colcon.colcon_core.package_identification:_identify(src/arcuo_marker_detection) by extension 'colcon_meta'
+[0.654s] Level 1:colcon.colcon_core.package_identification:_identify(src/arcuo_marker_detection) by extensions ['ros']
+[0.654s] Level 1:colcon.colcon_core.package_identification:_identify(src/arcuo_marker_detection) by extension 'ros'
+[0.659s] DEBUG:colcon.colcon_core.package_identification:Package 'src/arcuo_marker_detection' with type 'ros.ament_python' and name 'arcuo_marker_detection'
+[0.659s] Level 1:colcon.colcon_core.package_identification:_identify(src/docking_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.659s] Level 1:colcon.colcon_core.package_identification:_identify(src/docking_bringup) by extension 'ignore'
+[0.659s] Level 1:colcon.colcon_core.package_identification:_identify(src/docking_bringup) by extension 'ignore_ament_install'
+[0.659s] Level 1:colcon.colcon_core.package_identification:_identify(src/docking_bringup) by extensions ['colcon_pkg']
+[0.659s] Level 1:colcon.colcon_core.package_identification:_identify(src/docking_bringup) by extension 'colcon_pkg'
+[0.659s] Level 1:colcon.colcon_core.package_identification:_identify(src/docking_bringup) by extensions ['colcon_meta']
+[0.659s] Level 1:colcon.colcon_core.package_identification:_identify(src/docking_bringup) by extension 'colcon_meta'
+[0.659s] Level 1:colcon.colcon_core.package_identification:_identify(src/docking_bringup) by extensions ['ros']
+[0.659s] Level 1:colcon.colcon_core.package_identification:_identify(src/docking_bringup) by extension 'ros'
+[0.660s] DEBUG:colcon.colcon_core.package_identification:Package 'src/docking_bringup' with type 'ros.ament_cmake' and name 'docking_bringup'
+[0.660s] Level 1:colcon.colcon_core.package_identification:_identify(src/reach_the_goal) by extensions ['ignore', 'ignore_ament_install']
+[0.660s] Level 1:colcon.colcon_core.package_identification:_identify(src/reach_the_goal) by extension 'ignore'
+[0.660s] Level 1:colcon.colcon_core.package_identification:_identify(src/reach_the_goal) by extension 'ignore_ament_install'
+[0.660s] Level 1:colcon.colcon_core.package_identification:_identify(src/reach_the_goal) by extensions ['colcon_pkg']
+[0.660s] Level 1:colcon.colcon_core.package_identification:_identify(src/reach_the_goal) by extension 'colcon_pkg'
+[0.660s] Level 1:colcon.colcon_core.package_identification:_identify(src/reach_the_goal) by extensions ['colcon_meta']
+[0.660s] Level 1:colcon.colcon_core.package_identification:_identify(src/reach_the_goal) by extension 'colcon_meta'
+[0.660s] Level 1:colcon.colcon_core.package_identification:_identify(src/reach_the_goal) by extensions ['ros']
+[0.660s] Level 1:colcon.colcon_core.package_identification:_identify(src/reach_the_goal) by extension 'ros'
+[0.660s] DEBUG:colcon.colcon_core.package_identification:Package 'src/reach_the_goal' with type 'ros.ament_python' and name 'reach_the_goal'
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(src/template_ros2) by extensions ['ignore', 'ignore_ament_install']
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(src/template_ros2) by extension 'ignore'
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(src/template_ros2) by extension 'ignore_ament_install'
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(src/template_ros2) by extensions ['colcon_pkg']
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(src/template_ros2) by extension 'colcon_pkg'
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(src/template_ros2) by extensions ['colcon_meta']
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(src/template_ros2) by extension 'colcon_meta'
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(src/template_ros2) by extensions ['ros']
+[0.661s] Level 1:colcon.colcon_core.package_identification:_identify(src/template_ros2) by extension 'ros'
+[0.661s] DEBUG:colcon.colcon_core.package_identification:Package 'src/template_ros2' with type 'ros.ament_python' and name 'template_ros2'
+[0.661s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.661s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.661s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.661s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.661s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.683s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.684s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.688s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 1 installed packages in /home/sarthak/Masters-Thesis-Precise-docking-with-Active-perception/install
+[0.689s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 4 installed packages in /home/sarthak/precise_docking_ws/install
+[0.689s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 4 installed packages in /home/sarthak/template_ws/install
+[0.689s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 13 installed packages in /home/sarthak/ws/install
+[0.690s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 4 installed packages in /home/sarthak/feature_based_robust_localization/install
+[0.690s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 1 installed packages in /home/sarthak/dev_ws/install
+[0.690s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 4 installed packages in /home/sarthak/precise_docking_simulatiom_ws/install
+[0.692s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 394 installed packages in /opt/ros/humble
+[0.695s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.749s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'bazel_args' from command line to 'None'
+[0.749s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'bazel_task' from command line to 'None'
+[0.749s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'cmake_args' from command line to 'None'
+[0.749s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'cmake_target' from command line to 'None'
+[0.749s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.750s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'cmake_clean_cache' from command line to 'False'
+[0.750s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'cmake_clean_first' from command line to 'False'
+[0.750s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'cmake_force_configure' from command line to 'False'
+[0.750s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'meson_args' from command line to '[]'
+[0.750s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'ament_cmake_args' from command line to 'None'
+[0.750s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'catkin_cmake_args' from command line to 'None'
+[0.750s] Level 5:colcon.colcon_core.verb:set package 'arcuo_marker_detection' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.750s] DEBUG:colcon.colcon_core.verb:Building package 'arcuo_marker_detection' with the following arguments: {'ament_cmake_args': None, 'bazel_args': None, 'bazel_task': None, 'build_base': '/home/sarthak/precise_docking_ws/build/arcuo_marker_detection', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection', 'merge_install': False, 'meson_args': [], 'path': '/home/sarthak/precise_docking_ws/src/arcuo_marker_detection', 'symlink_install': False, 'test_result_base': None}
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'bazel_args' from command line to 'None'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'bazel_task' from command line to 'None'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'cmake_args' from command line to 'None'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'cmake_target' from command line to 'None'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'cmake_clean_cache' from command line to 'False'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'cmake_clean_first' from command line to 'False'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'cmake_force_configure' from command line to 'False'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'meson_args' from command line to '[]'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'ament_cmake_args' from command line to 'None'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'catkin_cmake_args' from command line to 'None'
+[0.760s] Level 5:colcon.colcon_core.verb:set package 'reach_the_goal' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.760s] DEBUG:colcon.colcon_core.verb:Building package 'reach_the_goal' with the following arguments: {'ament_cmake_args': None, 'bazel_args': None, 'bazel_task': None, 'build_base': '/home/sarthak/precise_docking_ws/build/reach_the_goal', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/sarthak/precise_docking_ws/install/reach_the_goal', 'merge_install': False, 'meson_args': [], 'path': '/home/sarthak/precise_docking_ws/src/reach_the_goal', 'symlink_install': False, 'test_result_base': None}
+[0.768s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'bazel_args' from command line to 'None'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'bazel_task' from command line to 'None'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'cmake_args' from command line to 'None'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'cmake_target' from command line to 'None'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'cmake_clean_cache' from command line to 'False'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'cmake_clean_first' from command line to 'False'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'cmake_force_configure' from command line to 'False'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'meson_args' from command line to '[]'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'ament_cmake_args' from command line to 'None'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'catkin_cmake_args' from command line to 'None'
+[0.769s] Level 5:colcon.colcon_core.verb:set package 'template_ros2' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.769s] DEBUG:colcon.colcon_core.verb:Building package 'template_ros2' with the following arguments: {'ament_cmake_args': None, 'bazel_args': None, 'bazel_task': None, 'build_base': '/home/sarthak/precise_docking_ws/build/template_ros2', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/sarthak/precise_docking_ws/install/template_ros2', 'merge_install': False, 'meson_args': [], 'path': '/home/sarthak/precise_docking_ws/src/template_ros2', 'symlink_install': False, 'test_result_base': None}
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'bazel_args' from command line to 'None'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'bazel_task' from command line to 'None'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'cmake_args' from command line to 'None'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'cmake_target' from command line to 'None'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'meson_args' from command line to '[]'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.778s] Level 5:colcon.colcon_core.verb:set package 'docking_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.778s] DEBUG:colcon.colcon_core.verb:Building package 'docking_bringup' with the following arguments: {'ament_cmake_args': None, 'bazel_args': None, 'bazel_task': None, 'build_base': '/home/sarthak/precise_docking_ws/build/docking_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/sarthak/precise_docking_ws/install/docking_bringup', 'merge_install': False, 'meson_args': [], 'path': '/home/sarthak/precise_docking_ws/src/docking_bringup', 'symlink_install': False, 'test_result_base': None}
+[0.778s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.779s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.779s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/sarthak/precise_docking_ws/src/arcuo_marker_detection' with build type 'ament_python'
+[0.779s] Level 1:colcon.colcon_core.shell:create_environment_hook('arcuo_marker_detection', 'ament_prefix_path')
+[0.782s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.782s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/hook/ament_prefix_path.ps1'
+[0.783s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/hook/ament_prefix_path.dsv'
+[0.784s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/hook/ament_prefix_path.sh'
+[0.785s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Allocated ROS_DOMAIN_ID=73 for '/home/sarthak/precise_docking_ws/build/arcuo_marker_detection'
+[0.785s] INFO:colcon.colcon_core.shell:Skip shell extension 'ros_domain_id' for command environment: 
+[0.785s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.785s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.792s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/sarthak/precise_docking_ws/src/reach_the_goal' with build type 'ament_python'
+[0.792s] Level 1:colcon.colcon_core.shell:create_environment_hook('reach_the_goal', 'ament_prefix_path')
+[0.793s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/hook/ament_prefix_path.ps1'
+[0.793s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/hook/ament_prefix_path.dsv'
+[0.793s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/hook/ament_prefix_path.sh'
+[0.794s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Allocated ROS_DOMAIN_ID=7 for '/home/sarthak/precise_docking_ws/build/reach_the_goal'
+[0.794s] INFO:colcon.colcon_core.shell:Skip shell extension 'ros_domain_id' for command environment: 
+[0.794s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.794s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.801s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/sarthak/precise_docking_ws/src/template_ros2' with build type 'ament_python'
+[0.801s] Level 1:colcon.colcon_core.shell:create_environment_hook('template_ros2', 'ament_prefix_path')
+[0.802s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/hook/ament_prefix_path.ps1'
+[0.803s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/hook/ament_prefix_path.dsv'
+[0.804s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/hook/ament_prefix_path.sh'
+[0.805s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Allocated ROS_DOMAIN_ID=57 for '/home/sarthak/precise_docking_ws/build/template_ros2'
+[0.805s] INFO:colcon.colcon_core.shell:Skip shell extension 'ros_domain_id' for command environment: 
+[0.805s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.805s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.187s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/sarthak/precise_docking_ws/src/arcuo_marker_detection'
+[1.188s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Allocated ROS_DOMAIN_ID=73 for '/home/sarthak/precise_docking_ws/build/arcuo_marker_detection'
+[1.188s] INFO:colcon.colcon_core.shell:Skip shell extension 'ros_domain_id' for command environment: 
+[1.189s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.189s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.547s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/sarthak/precise_docking_ws/src/reach_the_goal'
+[1.548s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Allocated ROS_DOMAIN_ID=7 for '/home/sarthak/precise_docking_ws/build/reach_the_goal'
+[1.548s] INFO:colcon.colcon_core.shell:Skip shell extension 'ros_domain_id' for command environment: 
+[1.548s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.548s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.932s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/sarthak/precise_docking_ws/src/template_ros2'
+[1.933s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Allocated ROS_DOMAIN_ID=57 for '/home/sarthak/precise_docking_ws/build/template_ros2'
+[1.933s] INFO:colcon.colcon_core.shell:Skip shell extension 'ros_domain_id' for command environment: 
+[1.933s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.933s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.479s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/sarthak/precise_docking_ws/src/reach_the_goal': PYTHONPATH=/home/sarthak/precise_docking_ws/build/reach_the_goal/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=7 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/reach_the_goal build --build-base /home/sarthak/precise_docking_ws/build/reach_the_goal/build install --record /home/sarthak/precise_docking_ws/build/reach_the_goal/install.log --single-version-externally-managed install_data
+[2.486s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/sarthak/precise_docking_ws/src/template_ros2': PYTHONPATH=/home/sarthak/precise_docking_ws/build/template_ros2/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/template_ros2 build --build-base /home/sarthak/precise_docking_ws/build/template_ros2/build install --record /home/sarthak/precise_docking_ws/build/template_ros2/install.log --single-version-externally-managed install_data
+[2.517s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/sarthak/precise_docking_ws/src/arcuo_marker_detection': PYTHONPATH=/home/sarthak/precise_docking_ws/build/arcuo_marker_detection/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=73 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/arcuo_marker_detection build --build-base /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/build install --record /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/install.log --single-version-externally-managed install_data
+[2.858s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/sarthak/precise_docking_ws/src/reach_the_goal' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/reach_the_goal/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=7 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/reach_the_goal build --build-base /home/sarthak/precise_docking_ws/build/reach_the_goal/build install --record /home/sarthak/precise_docking_ws/build/reach_the_goal/install.log --single-version-externally-managed install_data
+[2.863s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/reach_the_goal' for CMake module files
+[2.863s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/reach_the_goal' for CMake config files
+[2.864s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/reach_the_goal/lib'
+[2.864s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/reach_the_goal/bin'
+[2.864s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/pkgconfig/reach_the_goal.pc'
+[2.865s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages'
+[2.865s] Level 1:colcon.colcon_core.shell:create_environment_hook('reach_the_goal', 'pythonpath')
+[2.866s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/hook/pythonpath.ps1'
+[2.867s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/hook/pythonpath.dsv'
+[2.868s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/hook/pythonpath.sh'
+[2.870s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/reach_the_goal/bin'
+[2.871s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(reach_the_goal)
+[2.872s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/package.ps1'
+[2.875s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/package.dsv'
+[2.877s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/package.sh'
+[2.881s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/package.bash'
+[2.884s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal/package.zsh'
+[2.886s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/sarthak/precise_docking_ws/install/reach_the_goal/share/colcon-core/packages/reach_the_goal)
+[2.887s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Released ROS_DOMAIN_ID=7 for '/home/sarthak/precise_docking_ws/build/reach_the_goal'
+[2.890s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/template_ros2' for CMake module files
+[2.891s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/sarthak/precise_docking_ws/src/template_ros2' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/template_ros2/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/template_ros2 build --build-base /home/sarthak/precise_docking_ws/build/template_ros2/build install --record /home/sarthak/precise_docking_ws/build/template_ros2/install.log --single-version-externally-managed install_data
+[2.892s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/template_ros2' for CMake config files
+[2.893s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/template_ros2/lib'
+[2.893s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/template_ros2/bin'
+[2.893s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/template_ros2/lib/pkgconfig/template_ros2.pc'
+[2.895s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages'
+[2.895s] Level 1:colcon.colcon_core.shell:create_environment_hook('template_ros2', 'pythonpath')
+[2.896s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/hook/pythonpath.ps1'
+[2.897s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/hook/pythonpath.dsv'
+[2.897s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/hook/pythonpath.sh'
+[2.899s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/template_ros2/bin'
+[2.899s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(template_ros2)
+[2.900s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/package.ps1'
+[2.901s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/package.dsv'
+[2.902s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/package.sh'
+[2.903s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/package.bash'
+[2.904s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2/package.zsh'
+[2.905s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/sarthak/precise_docking_ws/install/template_ros2/share/colcon-core/packages/template_ros2)
+[2.905s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Released ROS_DOMAIN_ID=57 for '/home/sarthak/precise_docking_ws/build/template_ros2'
+[2.908s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection' for CMake module files
+[2.909s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection' for CMake config files
+[2.911s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/sarthak/precise_docking_ws/src/arcuo_marker_detection' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/arcuo_marker_detection/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=73 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/arcuo_marker_detection build --build-base /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/build install --record /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/install.log --single-version-externally-managed install_data
+[2.913s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib'
+[2.914s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/bin'
+[2.914s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/pkgconfig/arcuo_marker_detection.pc'
+[2.915s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages'
+[2.915s] Level 1:colcon.colcon_core.shell:create_environment_hook('arcuo_marker_detection', 'pythonpath')
+[2.916s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/hook/pythonpath.ps1'
+[2.916s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/hook/pythonpath.dsv'
+[2.917s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/hook/pythonpath.sh'
+[2.918s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/bin'
+[2.918s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arcuo_marker_detection)
+[2.919s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/package.ps1'
+[2.920s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/package.dsv'
+[2.921s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/package.sh'
+[2.921s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/package.bash'
+[2.921s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/arcuo_marker_detection/package.zsh'
+[2.922s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/share/colcon-core/packages/arcuo_marker_detection)
+[2.922s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/sarthak/precise_docking_ws/src/docking_bringup' with build type 'ament_cmake'
+[2.922s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/sarthak/precise_docking_ws/src/docking_bringup'
+[2.923s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Allocated ROS_DOMAIN_ID=52 for '/home/sarthak/precise_docking_ws/build/docking_bringup'
+[2.923s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Released ROS_DOMAIN_ID=73 for '/home/sarthak/precise_docking_ws/build/arcuo_marker_detection'
+[2.923s] INFO:colcon.colcon_core.shell:Skip shell extension 'ros_domain_id' for command environment: 
+[2.923s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.923s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.938s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/sarthak/precise_docking_ws/build/docking_bringup': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/Masters-Thesis-Precise-docking-with-Active-perception/install/mobile_robot_model_package:/home/sarthak/dev_ws/install/basic_mobile_robot:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_bringup:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_gazebo:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_description:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_application:/home/sarthak/feature_based_robust_localization/install/feature_localization_bringup:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance:/home/sarthak/feature_based_robust_localization/install/live_data_visualization:/home/sarthak/feature_based_robust_localization/install/feature_extraction:/home/sarthak/template_ws/install/ros_gz_example_bringup:/home/sarthak/template_ws/install/ros_gz_example_gazebo:/home/sarthak/template_ws/install/ros_gz_example_description:/home/sarthak/template_ws/install/ros_gz_example_application:/home/sarthak/ws/install/test_ros_gz_bridge:/home/sarthak/ws/install/ros_ign_interfaces:/home/sarthak/ws/install/ros_ign:/home/sarthak/ws/install/ros_ign_image:/home/sarthak/ws/install/ros_ign_gazebo_demos:/home/sarthak/ws/install/ros_ign_gazebo:/home/sarthak/ws/install/ros_ign_bridge:/home/sarthak/ws/install/ros_gz:/home/sarthak/ws/install/ros_gz_sim_demos:/home/sarthak/ws/install/ros_gz_sim:/home/sarthak/ws/install/ros_gz_image:/home/sarthak/ws/install/ros_gz_bridge:/home/sarthak/ws/install/ros_gz_interfaces:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance:/home/sarthak/feature_based_robust_localization/install/live_data_visualization:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance/lib/python3.10/site-packages:/home/sarthak/feature_based_robust_localization/install/live_data_visualization/lib/python3.10/site-packages:/home/sarthak/ws/install/ros_ign_interfaces/local/lib/python3.10/dist-packages:/home/sarthak/ws/install/ros_gz_interfaces/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/docking_bringup -- -j20 -l20
+[2.991s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/sarthak/precise_docking_ws/build/docking_bringup' returned '0': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/Masters-Thesis-Precise-docking-with-Active-perception/install/mobile_robot_model_package:/home/sarthak/dev_ws/install/basic_mobile_robot:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_bringup:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_gazebo:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_description:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_application:/home/sarthak/feature_based_robust_localization/install/feature_localization_bringup:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance:/home/sarthak/feature_based_robust_localization/install/live_data_visualization:/home/sarthak/feature_based_robust_localization/install/feature_extraction:/home/sarthak/template_ws/install/ros_gz_example_bringup:/home/sarthak/template_ws/install/ros_gz_example_gazebo:/home/sarthak/template_ws/install/ros_gz_example_description:/home/sarthak/template_ws/install/ros_gz_example_application:/home/sarthak/ws/install/test_ros_gz_bridge:/home/sarthak/ws/install/ros_ign_interfaces:/home/sarthak/ws/install/ros_ign:/home/sarthak/ws/install/ros_ign_image:/home/sarthak/ws/install/ros_ign_gazebo_demos:/home/sarthak/ws/install/ros_ign_gazebo:/home/sarthak/ws/install/ros_ign_bridge:/home/sarthak/ws/install/ros_gz:/home/sarthak/ws/install/ros_gz_sim_demos:/home/sarthak/ws/install/ros_gz_sim:/home/sarthak/ws/install/ros_gz_image:/home/sarthak/ws/install/ros_gz_bridge:/home/sarthak/ws/install/ros_gz_interfaces:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance:/home/sarthak/feature_based_robust_localization/install/live_data_visualization:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance/lib/python3.10/site-packages:/home/sarthak/feature_based_robust_localization/install/live_data_visualization/lib/python3.10/site-packages:/home/sarthak/ws/install/ros_ign_interfaces/local/lib/python3.10/dist-packages:/home/sarthak/ws/install/ros_gz_interfaces/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/docking_bringup -- -j20 -l20
+[3.042s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/sarthak/precise_docking_ws/build/docking_bringup': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/Masters-Thesis-Precise-docking-with-Active-perception/install/mobile_robot_model_package:/home/sarthak/dev_ws/install/basic_mobile_robot:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_bringup:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_gazebo:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_description:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_application:/home/sarthak/feature_based_robust_localization/install/feature_localization_bringup:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance:/home/sarthak/feature_based_robust_localization/install/live_data_visualization:/home/sarthak/feature_based_robust_localization/install/feature_extraction:/home/sarthak/template_ws/install/ros_gz_example_bringup:/home/sarthak/template_ws/install/ros_gz_example_gazebo:/home/sarthak/template_ws/install/ros_gz_example_description:/home/sarthak/template_ws/install/ros_gz_example_application:/home/sarthak/ws/install/test_ros_gz_bridge:/home/sarthak/ws/install/ros_ign_interfaces:/home/sarthak/ws/install/ros_ign:/home/sarthak/ws/install/ros_ign_image:/home/sarthak/ws/install/ros_ign_gazebo_demos:/home/sarthak/ws/install/ros_ign_gazebo:/home/sarthak/ws/install/ros_ign_bridge:/home/sarthak/ws/install/ros_gz:/home/sarthak/ws/install/ros_gz_sim_demos:/home/sarthak/ws/install/ros_gz_sim:/home/sarthak/ws/install/ros_gz_image:/home/sarthak/ws/install/ros_gz_bridge:/home/sarthak/ws/install/ros_gz_interfaces:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance:/home/sarthak/feature_based_robust_localization/install/live_data_visualization:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance/lib/python3.10/site-packages:/home/sarthak/feature_based_robust_localization/install/live_data_visualization/lib/python3.10/site-packages:/home/sarthak/ws/install/ros_ign_interfaces/local/lib/python3.10/dist-packages:/home/sarthak/ws/install/ros_gz_interfaces/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/docking_bringup
+[3.063s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(docking_bringup)
+[3.064s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup' for CMake module files
+[3.065s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/sarthak/precise_docking_ws/build/docking_bringup' returned '0': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/Masters-Thesis-Precise-docking-with-Active-perception/install/mobile_robot_model_package:/home/sarthak/dev_ws/install/basic_mobile_robot:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_bringup:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_gazebo:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_description:/home/sarthak/precise_docking_simulatiom_ws/install/ros_gz_example_application:/home/sarthak/feature_based_robust_localization/install/feature_localization_bringup:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance:/home/sarthak/feature_based_robust_localization/install/live_data_visualization:/home/sarthak/feature_based_robust_localization/install/feature_extraction:/home/sarthak/template_ws/install/ros_gz_example_bringup:/home/sarthak/template_ws/install/ros_gz_example_gazebo:/home/sarthak/template_ws/install/ros_gz_example_description:/home/sarthak/template_ws/install/ros_gz_example_application:/home/sarthak/ws/install/test_ros_gz_bridge:/home/sarthak/ws/install/ros_ign_interfaces:/home/sarthak/ws/install/ros_ign:/home/sarthak/ws/install/ros_ign_image:/home/sarthak/ws/install/ros_ign_gazebo_demos:/home/sarthak/ws/install/ros_ign_gazebo:/home/sarthak/ws/install/ros_ign_bridge:/home/sarthak/ws/install/ros_gz:/home/sarthak/ws/install/ros_gz_sim_demos:/home/sarthak/ws/install/ros_gz_sim:/home/sarthak/ws/install/ros_gz_image:/home/sarthak/ws/install/ros_gz_bridge:/home/sarthak/ws/install/ros_gz_interfaces:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance:/home/sarthak/feature_based_robust_localization/install/live_data_visualization:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/feature_based_robust_localization/install/state_prediction_and_covariance/lib/python3.10/site-packages:/home/sarthak/feature_based_robust_localization/install/live_data_visualization/lib/python3.10/site-packages:/home/sarthak/ws/install/ros_ign_interfaces/local/lib/python3.10/dist-packages:/home/sarthak/ws/install/ros_gz_interfaces/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/docking_bringup
+[3.065s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup' for CMake config files
+[3.065s] Level 1:colcon.colcon_core.shell:create_environment_hook('docking_bringup', 'cmake_prefix_path')
+[3.065s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/hook/cmake_prefix_path.ps1'
+[3.066s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/hook/cmake_prefix_path.dsv'
+[3.067s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/hook/cmake_prefix_path.sh'
+[3.068s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup/bin'
+[3.068s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup/lib/pkgconfig/docking_bringup.pc'
+[3.069s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup/lib/python3.10/site-packages'
+[3.069s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup/bin'
+[3.070s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.ps1'
+[3.071s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.dsv'
+[3.071s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.sh'
+[3.072s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.bash'
+[3.072s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.zsh'
+[3.073s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/sarthak/precise_docking_ws/install/docking_bringup/share/colcon-core/packages/docking_bringup)
+[3.121s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(docking_bringup)
+[3.122s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup' for CMake module files
+[3.124s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup' for CMake config files
+[3.124s] Level 1:colcon.colcon_core.shell:create_environment_hook('docking_bringup', 'cmake_prefix_path')
+[3.125s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/hook/cmake_prefix_path.ps1'
+[3.125s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/hook/cmake_prefix_path.dsv'
+[3.126s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/hook/cmake_prefix_path.sh'
+[3.127s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup/bin'
+[3.127s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup/lib/pkgconfig/docking_bringup.pc'
+[3.127s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup/lib/python3.10/site-packages'
+[3.127s] Level 1:colcon.colcon_core.environment:checking '/home/sarthak/precise_docking_ws/install/docking_bringup/bin'
+[3.129s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.ps1'
+[3.131s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.dsv'
+[3.132s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.sh'
+[3.133s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.bash'
+[3.134s] INFO:colcon.colcon_core.shell:Creating package script '/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.zsh'
+[3.136s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/sarthak/precise_docking_ws/install/docking_bringup/share/colcon-core/packages/docking_bringup)
+[3.137s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[3.137s] DEBUG:colcon.colcon_ros_domain_id_coordinator.shell.ros_domain_id:Released ROS_DOMAIN_ID=52 for '/home/sarthak/precise_docking_ws/build/docking_bringup'
+[3.138s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[3.139s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[3.139s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[3.150s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[3.151s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[3.151s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[3.177s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[3.177s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sarthak/precise_docking_ws/install/local_setup.ps1'
+[3.179s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/sarthak/precise_docking_ws/install/_local_setup_util_ps1.py'
+[3.183s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sarthak/precise_docking_ws/install/setup.ps1'
+[3.192s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sarthak/precise_docking_ws/install/local_setup.sh'
+[3.194s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/sarthak/precise_docking_ws/install/_local_setup_util_sh.py'
+[3.195s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sarthak/precise_docking_ws/install/setup.sh'
+[3.200s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sarthak/precise_docking_ws/install/local_setup.bash'
+[3.202s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sarthak/precise_docking_ws/install/setup.bash'
+[3.209s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sarthak/precise_docking_ws/install/local_setup.zsh'
+[3.209s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sarthak/precise_docking_ws/install/setup.zsh'
+[3.211s] INFO:colcon.colcon_core.shell:Creating '/home/sarthak/precise_docking_ws/install/spawn_shell.bash'

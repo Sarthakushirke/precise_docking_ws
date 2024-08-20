@@ -1,0 +1,4 @@
+source;share/docking_bringup/local_setup.bash
+source;share/docking_bringup/local_setup.dsv
+source;share/docking_bringup/local_setup.sh
+source;share/docking_bringup/local_setup.zsh

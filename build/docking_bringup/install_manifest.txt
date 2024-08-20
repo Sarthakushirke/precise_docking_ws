@@ -1,0 +1,16 @@
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/launch/docking.launch.py
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/ament_index/resource_index/package_run_dependencies/docking_bringup
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/ament_index/resource_index/parent_prefix_path/docking_bringup
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/environment/ament_prefix_path.sh
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/environment/ament_prefix_path.dsv
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/environment/path.sh
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/environment/path.dsv
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/local_setup.bash
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/local_setup.sh
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/local_setup.zsh
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/local_setup.dsv
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.dsv
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/ament_index/resource_index/packages/docking_bringup
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/cmake/docking_bringupConfig.cmake
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/cmake/docking_bringupConfig-version.cmake
+/home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.xml
