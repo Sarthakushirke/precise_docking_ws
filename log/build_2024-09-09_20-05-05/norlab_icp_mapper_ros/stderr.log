@@ -1,0 +1,45 @@
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:[m[K In constructor ‘[01m[KMapperNode::MapperNode()[m[K’:
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:31:17:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass NodeParameters[m[K’ has no member named ‘[01m[KmapResolution[m[K’
+   31 |         params->[01;31m[KmapResolution[m[K = 0.05; // Set map resolution
+      |                 [01;31m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:35:17:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass NodeParameters[m[K’ has no member named ‘[01m[KmapSavePath[m[K’
+   35 |         params->[01;31m[KmapSavePath[m[K = "/path/to/map.pcd"; // Save map path
+      |                 [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:38:31:[m[K [01;31m[Kerror: [m[K‘[01m[Kstd::string[m[K’ {aka ‘[01m[Kclass std::__cxx11::basic_string<char>[m[K’} has no member named ‘[01m[Kmatcher[m[K’
+   38 |         params->mappingConfig.[01;31m[Kmatcher[m[K.name = "KDTreeMatcher";
+      |                               [01;31m[K^~~~~~~[m[K
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:39:31:[m[K [01;31m[Kerror: [m[K‘[01m[Kstd::string[m[K’ {aka ‘[01m[Kclass std::__cxx11::basic_string<char>[m[K’} has no member named ‘[01m[Kmatcher[m[K’
+   39 |         params->mappingConfig.[01;31m[Kmatcher[m[K.params["knn"] = "1";
+      |                               [01;31m[K^~~~~~~[m[K
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:40:31:[m[K [01;31m[Kerror: [m[K‘[01m[Kstd::string[m[K’ {aka ‘[01m[Kclass std::__cxx11::basic_string<char>[m[K’} has no member named ‘[01m[Kmatcher[m[K’
+   40 |         params->mappingConfig.[01;31m[Kmatcher[m[K.params["epsilon"] = "3.16";
+      |                               [01;31m[K^~~~~~~[m[K
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:42:31:[m[K [01;31m[Kerror: [m[K‘[01m[Kstd::string[m[K’ {aka ‘[01m[Kclass std::__cxx11::basic_string<char>[m[K’} has no member named ‘[01m[KoutlierFilters[m[K’
+   42 |         params->mappingConfig.[01;31m[KoutlierFilters[m[K.push_back({
+      |                               [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:47:31:[m[K [01;31m[Kerror: [m[K‘[01m[Kstd::string[m[K’ {aka ‘[01m[Kclass std::__cxx11::basic_string<char>[m[K’} has no member named ‘[01m[KerrorMinimizer[m[K’
+   47 |         params->mappingConfig.[01;31m[KerrorMinimizer[m[K.name = "PointToPointErrorMinimizer";
+      |                               [01;31m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/c++/11/memory:76[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:153[m[K,
+                 from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4[m[K,
+                 from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:1[m[K:
+/usr/include/c++/11/bits/unique_ptr.h: In instantiation of ‘[01m[Ktypename std::_MakeUniq<_Tp>::__single_object std::make_unique(_Args&& ...) [with _Tp = NodeParameters; _Args = {}; typename std::_MakeUniq<_Tp>::__single_object = std::unique_ptr<NodeParameters>][m[K’:
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:25:50:[m[K   required from here
+[01m[K/usr/include/c++/11/bits/unique_ptr.h:962:30:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KNodeParameters::NodeParameters()[m[K’
+  962 |     { return unique_ptr<_Tp>([01;31m[Knew _Tp(std::forward<_Args>(__args)...)[m[K); }
+      |                              [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:1[m[K:
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:36:9:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KNodeParameters::NodeParameters(rclcpp::Node&)[m[K’
+   36 |         [01;36m[KNodeParameters[m[K(rclcpp::Node& node);
+      |         [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:36:9:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:7:7:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KNodeParameters::NodeParameters(const NodeParameters&)[m[K’
+    7 | class [01;36m[KNodeParameters[m[K
+      |       [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:7:7:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:7:7:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KNodeParameters::NodeParameters(NodeParameters&&)[m[K’
+[01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:7:7:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+gmake[2]: *** [CMakeFiles/mapper_node.dir/build.make:76: CMakeFiles/mapper_node.dir/src/mapper_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:593: CMakeFiles/mapper_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

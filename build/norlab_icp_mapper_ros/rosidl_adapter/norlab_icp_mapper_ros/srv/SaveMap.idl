@@ -1,0 +1,16 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from norlab_icp_mapper_ros/srv/SaveMap.srv
+// generated code does not contain a copyright notice
+
+#include "std_msgs/msg/String.idl"
+
+module norlab_icp_mapper_ros {
+  module srv {
+    struct SaveMap_Request {
+      std_msgs::msg::String map_file_name;
+    };
+    struct SaveMap_Response {
+      uint8 structure_needs_at_least_one_member;
+    };
+  };
+};

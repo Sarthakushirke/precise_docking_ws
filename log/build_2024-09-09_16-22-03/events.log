@@ -1,0 +1,139 @@
+[0.000000] (-) TimerEvent: {}
+[0.000791] (-) JobUnselected: {'identifier': 'arcuo_marker_detection'}
+[0.000840] (-) JobUnselected: {'identifier': 'docking_bringup'}
+[0.000925] (-) JobUnselected: {'identifier': 'reach_the_goal'}
+[0.000999] (-) JobUnselected: {'identifier': 'template_ros2'}
+[0.001088] (frontend) JobQueued: {'identifier': 'frontend', 'dependencies': OrderedDict()}
+[0.001120] (frontend) JobStarted: {'identifier': 'frontend'}
+[0.008342] (frontend) JobProgress: {'identifier': 'frontend', 'progress': 'cmake'}
+[0.008929] (frontend) JobProgress: {'identifier': 'frontend', 'progress': 'build'}
+[0.009693] (frontend) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/sarthak/precise_docking_ws/build/frontend', '--', '-j20', '-l20'], 'cwd': '/home/sarthak/precise_docking_ws/build/frontend', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('OLDPWD', '/home/sarthak'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '2897'), ('SYSTEMD_EXEC_PID', '3546'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '7614'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:11625'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3480,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3480'), ('INVOCATION_ID', '8784830e11dc4fd68585320601bc20ef'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '23'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:b874f726-78be-4bf8-b8b5-d1eafb281436'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/frontend'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[0.063707] (frontend) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target icp_node\x1b[0m\n'}
+[0.076679] (frontend) StdoutLine: {'line': b'[ 50%] Built target cpp_executable\n'}
+[0.076873] (frontend) StdoutLine: {'line': b'[ 50%] Built target ament_cmake_python_copy_frontend\n'}
+[0.092764] (frontend) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o\x1b[0m\n'}
+[0.099738] (-) TimerEvent: {}
+[0.200059] (-) TimerEvent: {}
+[0.281847] (frontend) StdoutLine: {'line': b'running egg_info\n'}
+[0.282316] (frontend) StdoutLine: {'line': b'writing frontend.egg-info/PKG-INFO\n'}
+[0.282519] (frontend) StdoutLine: {'line': b'writing dependency_links to frontend.egg-info/dependency_links.txt\n'}
+[0.282580] (frontend) StdoutLine: {'line': b'writing top-level names to frontend.egg-info/top_level.txt\n'}
+[0.284861] (frontend) StdoutLine: {'line': b"reading manifest file 'frontend.egg-info/SOURCES.txt'\n"}
+[0.285535] (frontend) StdoutLine: {'line': b"writing manifest file 'frontend.egg-info/SOURCES.txt'\n"}
+[0.300160] (-) TimerEvent: {}
+[0.321874] (frontend) StdoutLine: {'line': b'[ 75%] Built target ament_cmake_python_build_frontend_egg\n'}
+[0.400270] (-) TimerEvent: {}
+[0.500557] (-) TimerEvent: {}
+[0.600863] (-) TimerEvent: {}
+[0.701162] (-) TimerEvent: {}
+[0.801464] (-) TimerEvent: {}
+[0.901771] (-) TimerEvent: {}
+[1.002053] (-) TimerEvent: {}
+[1.102345] (-) TimerEvent: {}
+[1.202649] (-) TimerEvent: {}
+[1.302946] (-) TimerEvent: {}
+[1.403269] (-) TimerEvent: {}
+[1.503571] (-) TimerEvent: {}
+[1.603887] (-) TimerEvent: {}
+[1.704300] (-) TimerEvent: {}
+[1.804724] (-) TimerEvent: {}
+[1.905132] (-) TimerEvent: {}
+[2.005579] (-) TimerEvent: {}
+[2.105976] (-) TimerEvent: {}
+[2.206337] (-) TimerEvent: {}
+[2.306626] (-) TimerEvent: {}
+[2.406879] (-) TimerEvent: {}
+[2.507251] (-) TimerEvent: {}
+[2.607889] (-) TimerEvent: {}
+[2.708272] (-) TimerEvent: {}
+[2.808631] (-) TimerEvent: {}
+[2.909148] (-) TimerEvent: {}
+[3.009456] (-) TimerEvent: {}
+[3.109876] (-) TimerEvent: {}
+[3.210376] (-) TimerEvent: {}
+[3.310716] (-) TimerEvent: {}
+[3.411040] (-) TimerEvent: {}
+[3.511418] (-) TimerEvent: {}
+[3.611725] (-) TimerEvent: {}
+[3.712037] (-) TimerEvent: {}
+[3.812397] (-) TimerEvent: {}
+[3.912764] (-) TimerEvent: {}
+[4.013100] (-) TimerEvent: {}
+[4.113501] (-) TimerEvent: {}
+[4.213843] (-) TimerEvent: {}
+[4.216925] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[KDP ICPNode::laserScanToPointCloud(sensor_msgs::msg::LaserScan_<std::allocator<void> >::SharedPtr)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.217117] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:55:30:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KLabel\x1b[m\x1b[K\xe2\x80\x99 is not a member of \xe2\x80\x98\x1b[01m\x1b[KPM\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<float>\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[4.217166] (frontend) StderrLine: {'line': b'   55 |         labels.push_back(PM::\x1b[01;31m\x1b[KLabel\x1b[m\x1b[K("x", 1));\n'}
+[4.217204] (frontend) StderrLine: {'line': b'      |                              \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K\n'}
+[4.217240] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:56:30:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KLabel\x1b[m\x1b[K\xe2\x80\x99 is not a member of \xe2\x80\x98\x1b[01m\x1b[KPM\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<float>\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[4.217282] (frontend) StderrLine: {'line': b'   56 |         labels.push_back(PM::\x1b[01;31m\x1b[KLabel\x1b[m\x1b[K("y", 1));\n'}
+[4.217317] (frontend) StderrLine: {'line': b'      |                              \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K\n'}
+[4.217604] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:57:44:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<float>::DataPoints::DataPoints(PointMatcher<float>::DataPoints::Labels&, std::vector<float>::size_type)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[4.217638] (frontend) StderrLine: {'line': b'   57 |         DP pointCloud(labels, ranges.size()\x1b[01;31m\x1b[K)\x1b[m\x1b[K;\n'}
+[4.217693] (frontend) StderrLine: {'line': b'      |                                            \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[4.217721] (frontend) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:3\x1b[m\x1b[K:\n'}
+[4.217750] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:263:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<T>::DataPoints::DataPoints(const Matrix&, const PointMatcher<T>::DataPoints::Labels&, const Matrix&, const PointMatcher<T>::DataPoints::Labels&, const Int64Matrix&, const PointMatcher<T>::DataPoints::Labels&) [with T = float; PointMatcher<T>::Matrix = Eigen::Matrix<float, -1, -1>; PointMatcher<T>::Int64Matrix = Eigen::Matrix<long int, -1, -1>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[4.217781] (frontend) StderrLine: {'line': b'  263 |                 \x1b[01;36m\x1b[KDataPoints\x1b[m\x1b[K(const Matrix& features, const Labels& featureLabels, const Matrix& descriptors, const Labels& descriptorLabels, const Int64Matrix& times, const Labels& timeLabels);\n'}
+[4.217818] (frontend) StderrLine: {'line': b'      |                 \x1b[01;36m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[4.217848] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:263:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 6 arguments, 2 provided\n'}
+[4.217880] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:262:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<T>::DataPoints::DataPoints(const Matrix&, const PointMatcher<T>::DataPoints::Labels&, const Matrix&, const PointMatcher<T>::DataPoints::Labels&) [with T = float; PointMatcher<T>::Matrix = Eigen::Matrix<float, -1, -1>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[4.217910] (frontend) StderrLine: {'line': b'  262 |                 \x1b[01;36m\x1b[KDataPoints\x1b[m\x1b[K(const Matrix& features, const Labels& featureLabels, const Matrix& descriptors, const Labels& descriptorLabels);\n'}
+[4.217941] (frontend) StderrLine: {'line': b'      |                 \x1b[01;36m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[4.217972] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:262:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 2 provided\n'}
+[4.217999] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:261:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<T>::DataPoints::DataPoints(const Matrix&, const PointMatcher<T>::DataPoints::Labels&) [with T = float; PointMatcher<T>::Matrix = Eigen::Matrix<float, -1, -1>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[4.218026] (frontend) StderrLine: {'line': b'  261 |                 \x1b[01;36m\x1b[KDataPoints\x1b[m\x1b[K(const Matrix& features, const Labels& featureLabels);\n'}
+[4.218052] (frontend) StderrLine: {'line': b'      |                 \x1b[01;36m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[4.218077] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:261:42:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 1 from \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<float>::DataPoints::Labels\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Kconst Matrix&\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kconst Eigen::Matrix<float, -1, -1>&\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[4.218109] (frontend) StderrLine: {'line': b'  261 |                 DataPoints(\x1b[01;36m\x1b[Kconst Matrix& features\x1b[m\x1b[K, const Labels& featureLabels);\n'}
+[4.218135] (frontend) StderrLine: {'line': b'      |                            \x1b[01;36m\x1b[K~~~~~~~~~~~~~~^~~~~~~~\x1b[m\x1b[K\n'}
+[4.218160] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:258:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<T>::DataPoints::DataPoints(const PointMatcher<T>::DataPoints::Labels&, const PointMatcher<T>::DataPoints::Labels&, const PointMatcher<T>::DataPoints::Labels&, size_t) [with T = float; size_t = long unsigned int]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[4.218190] (frontend) StderrLine: {'line': b'  258 |                 \x1b[01;36m\x1b[KDataPoints\x1b[m\x1b[K(const Labels& featureLabels, const Labels& descriptorLabels, const Labels& timeLabels, const size_t pointCount);\n'}
+[4.218216] (frontend) StderrLine: {'line': b'      |                 \x1b[01;36m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[4.218241] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:258:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 2 provided\n'}
+[4.218268] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:257:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<T>::DataPoints::DataPoints(const PointMatcher<T>::DataPoints::Labels&, const PointMatcher<T>::DataPoints::Labels&, size_t) [with T = float; size_t = long unsigned int]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[4.218294] (frontend) StderrLine: {'line': b'  257 |                 \x1b[01;36m\x1b[KDataPoints\x1b[m\x1b[K(const Labels& featureLabels, const Labels& descriptorLabels, const size_t pointCount);\n'}
+[4.218323] (frontend) StderrLine: {'line': b'      |                 \x1b[01;36m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[4.218351] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:257:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 3 arguments, 2 provided\n'}
+[4.218380] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:256:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<T>::DataPoints::DataPoints() [with T = float]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[4.218408] (frontend) StderrLine: {'line': b'  256 |                 \x1b[01;36m\x1b[KDataPoints\x1b[m\x1b[K();\n'}
+[4.218434] (frontend) StderrLine: {'line': b'      |                 \x1b[01;36m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[4.218460] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:256:17:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 0 arguments, 2 provided\n'}
+[4.218486] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:207:16:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<float>::DataPoints::DataPoints(const PointMatcher<float>::DataPoints&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[4.218513] (frontend) StderrLine: {'line': b'  207 |         struct \x1b[01;36m\x1b[KDataPoints\x1b[m\x1b[K\n'}
+[4.218539] (frontend) StderrLine: {'line': b'      |                \x1b[01;36m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[4.218568] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:207:16:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 2 provided\n'}
+[4.218594] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:207:16:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KPointMatcher<float>::DataPoints::DataPoints(PointMatcher<float>::DataPoints&&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[4.218620] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/pointmatcher/PointMatcher.h:207:16:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 2 provided\n'}
+[4.313955] (-) TimerEvent: {}
+[4.414246] (-) TimerEvent: {}
+[4.514615] (-) TimerEvent: {}
+[4.614970] (-) TimerEvent: {}
+[4.715298] (-) TimerEvent: {}
+[4.815629] (-) TimerEvent: {}
+[4.915891] (-) TimerEvent: {}
+[5.016192] (-) TimerEvent: {}
+[5.116543] (-) TimerEvent: {}
+[5.216900] (-) TimerEvent: {}
+[5.317240] (-) TimerEvent: {}
+[5.417541] (-) TimerEvent: {}
+[5.517886] (-) TimerEvent: {}
+[5.618185] (-) TimerEvent: {}
+[5.718469] (-) TimerEvent: {}
+[5.818764] (-) TimerEvent: {}
+[5.919102] (-) TimerEvent: {}
+[6.019440] (-) TimerEvent: {}
+[6.119760] (-) TimerEvent: {}
+[6.220130] (-) TimerEvent: {}
+[6.320529] (-) TimerEvent: {}
+[6.420943] (-) TimerEvent: {}
+[6.521430] (-) TimerEvent: {}
+[6.621774] (-) TimerEvent: {}
+[6.722211] (-) TimerEvent: {}
+[6.822678] (-) TimerEvent: {}
+[6.872051] (frontend) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1\n'}
+[6.872342] (frontend) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2\n'}
+[6.872554] (frontend) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[6.875284] (frontend) CommandEnded: {'returncode': 2}
+[6.922465] (frontend) JobEnded: {'identifier': 'frontend', 'rc': 2}
+[6.923251] (-) TimerEvent: {}
+[6.933124] (-) EventReactorShutdown: {}

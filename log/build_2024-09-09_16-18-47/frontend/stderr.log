@@ -1,0 +1,4 @@
+[01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::scanCallback(sensor_msgs::msg::LaserScan_<std::allocator<void> >::SharedPtr)[m[K’:
+[01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:24:68:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kscan_msg[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   24 |     void scanCallback([01;35m[Kconst sensor_msgs::msg::LaserScan::SharedPtr scan_msg[m[K)
+      |                       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~[m[K

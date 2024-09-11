@@ -1,0 +1,211 @@
+[0.000000] (-) TimerEvent: {}
+[0.000844] (-) JobUnselected: {'identifier': 'arcuo_marker_detection'}
+[0.000896] (-) JobUnselected: {'identifier': 'docking_bringup'}
+[0.000926] (-) JobUnselected: {'identifier': 'frontend'}
+[0.000952] (-) JobUnselected: {'identifier': 'libpointmatcher_ros'}
+[0.000979] (-) JobUnselected: {'identifier': 'norlab_icp_mapper'}
+[0.001007] (-) JobUnselected: {'identifier': 'reach_the_goal'}
+[0.001034] (-) JobUnselected: {'identifier': 'template_ros2'}
+[0.001059] (norlab_icp_mapper_ros) JobQueued: {'identifier': 'norlab_icp_mapper_ros', 'dependencies': OrderedDict([('libpointmatcher_ros', '/home/sarthak/precise_docking_ws/install/libpointmatcher_ros')])}
+[0.001091] (norlab_icp_mapper_ros) JobStarted: {'identifier': 'norlab_icp_mapper_ros'}
+[0.011903] (norlab_icp_mapper_ros) JobProgress: {'identifier': 'norlab_icp_mapper_ros', 'progress': 'cmake'}
+[0.012957] (norlab_icp_mapper_ros) JobProgress: {'identifier': 'norlab_icp_mapper_ros', 'progress': 'build'}
+[0.013087] (norlab_icp_mapper_ros) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros', '--', '-j20', '-l20'], 'cwd': '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('OLDPWD', '/home/sarthak/precise_docking_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '2897'), ('SYSTEMD_EXEC_PID', '3546'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '7614'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:11625'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/x86_64-linux-gnu/pkgconfig:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3480,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3480'), ('INVOCATION_ID', '8784830e11dc4fd68585320601bc20ef'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '81'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:b874f726-78be-4bf8-b8b5-d1eafb281436'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/cmake:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[0.092457] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[  2%] Built target norlab_icp_mapper_ros__cpp\n'}
+[0.098715] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 12%] Built target norlab_icp_mapper_ros__rosidl_generator_c\n'}
+[0.099376] (-) TimerEvent: {}
+[0.103376] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 12%] Built target ament_cmake_python_copy_norlab_icp_mapper_ros\n'}
+[0.120274] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 22%] Built target norlab_icp_mapper_ros__rosidl_typesupport_cpp\n'}
+[0.122987] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 32%] Built target norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_cpp\n'}
+[0.123367] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 42%] Built target norlab_icp_mapper_ros__rosidl_typesupport_c\n'}
+[0.126621] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 52%] Built target norlab_icp_mapper_ros__rosidl_typesupport_introspection_cpp\n'}
+[0.133102] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 62%] Built target norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_c\n'}
+[0.133520] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 72%] Built target norlab_icp_mapper_ros__rosidl_typesupport_introspection_c\n'}
+[0.161181] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 72%] Built target norlab_icp_mapper_ros\n'}
+[0.178300] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 74%] \x1b[32mBuilding CXX object CMakeFiles/mapper_node.dir/src/mapper_node.cpp.o\x1b[0m\n'}
+[0.196821] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 76%] Built target norlab_icp_mapper_ros__py\n'}
+[0.199530] (-) TimerEvent: {}
+[0.227829] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 84%] Built target norlab_icp_mapper_ros__rosidl_generator_py\n'}
+[0.253327] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 88%] Built target norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_c__pyext\n'}
+[0.255412] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 92%] Built target norlab_icp_mapper_ros__rosidl_typesupport_introspection_c__pyext\n'}
+[0.255704] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 96%] Built target norlab_icp_mapper_ros__rosidl_typesupport_c__pyext\n'}
+[0.299646] (-) TimerEvent: {}
+[0.391903] (norlab_icp_mapper_ros) StdoutLine: {'line': b'running egg_info\n'}
+[0.392561] (norlab_icp_mapper_ros) StdoutLine: {'line': b'writing norlab_icp_mapper_ros.egg-info/PKG-INFO\n'}
+[0.392726] (norlab_icp_mapper_ros) StdoutLine: {'line': b'writing dependency_links to norlab_icp_mapper_ros.egg-info/dependency_links.txt\n'}
+[0.393050] (norlab_icp_mapper_ros) StdoutLine: {'line': b'writing top-level names to norlab_icp_mapper_ros.egg-info/top_level.txt\n'}
+[0.395548] (norlab_icp_mapper_ros) StdoutLine: {'line': b"reading manifest file 'norlab_icp_mapper_ros.egg-info/SOURCES.txt'\n"}
+[0.395975] (norlab_icp_mapper_ros) StdoutLine: {'line': b"writing manifest file 'norlab_icp_mapper_ros.egg-info/SOURCES.txt'\n"}
+[0.399752] (-) TimerEvent: {}
+[0.428407] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 96%] Built target ament_cmake_python_build_norlab_icp_mapper_ros_egg\n'}
+[0.499905] (-) TimerEvent: {}
+[0.600240] (-) TimerEvent: {}
+[0.700729] (-) TimerEvent: {}
+[0.801300] (-) TimerEvent: {}
+[0.901688] (-) TimerEvent: {}
+[1.002021] (-) TimerEvent: {}
+[1.102488] (-) TimerEvent: {}
+[1.202916] (-) TimerEvent: {}
+[1.303645] (-) TimerEvent: {}
+[1.404231] (-) TimerEvent: {}
+[1.504810] (-) TimerEvent: {}
+[1.605253] (-) TimerEvent: {}
+[1.705673] (-) TimerEvent: {}
+[1.806078] (-) TimerEvent: {}
+[1.906399] (-) TimerEvent: {}
+[2.006735] (-) TimerEvent: {}
+[2.107109] (-) TimerEvent: {}
+[2.207802] (-) TimerEvent: {}
+[2.308290] (-) TimerEvent: {}
+[2.408718] (-) TimerEvent: {}
+[2.509137] (-) TimerEvent: {}
+[2.609706] (-) TimerEvent: {}
+[2.710244] (-) TimerEvent: {}
+[2.810624] (-) TimerEvent: {}
+[2.911060] (-) TimerEvent: {}
+[3.011452] (-) TimerEvent: {}
+[3.111833] (-) TimerEvent: {}
+[3.212233] (-) TimerEvent: {}
+[3.312587] (-) TimerEvent: {}
+[3.412941] (-) TimerEvent: {}
+[3.513352] (-) TimerEvent: {}
+[3.613726] (-) TimerEvent: {}
+[3.714108] (-) TimerEvent: {}
+[3.814479] (-) TimerEvent: {}
+[3.914862] (-) TimerEvent: {}
+[4.015316] (-) TimerEvent: {}
+[4.115779] (-) TimerEvent: {}
+[4.216187] (-) TimerEvent: {}
+[4.316577] (-) TimerEvent: {}
+[4.417173] (-) TimerEvent: {}
+[4.517591] (-) TimerEvent: {}
+[4.617943] (-) TimerEvent: {}
+[4.718256] (-) TimerEvent: {}
+[4.818700] (-) TimerEvent: {}
+[4.919499] (-) TimerEvent: {}
+[5.020085] (-) TimerEvent: {}
+[5.120582] (-) TimerEvent: {}
+[5.221072] (-) TimerEvent: {}
+[5.321564] (-) TimerEvent: {}
+[5.413783] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[KMapperNode::MapperNode()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.414332] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:31:17:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kclass NodeParameters\x1b[m\x1b[K\xe2\x80\x99 has no member named \xe2\x80\x98\x1b[01m\x1b[KmapResolution\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.414441] (norlab_icp_mapper_ros) StderrLine: {'line': b'   31 |         params->\x1b[01;31m\x1b[KmapResolution\x1b[m\x1b[K = 0.05; // Set map resolution\n'}
+[5.414533] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |                 \x1b[01;31m\x1b[K^~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.414620] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:35:17:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kclass NodeParameters\x1b[m\x1b[K\xe2\x80\x99 has no member named \xe2\x80\x98\x1b[01m\x1b[KmapSavePath\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.414710] (norlab_icp_mapper_ros) StderrLine: {'line': b'   35 |         params->\x1b[01;31m\x1b[KmapSavePath\x1b[m\x1b[K = "/path/to/map.pcd"; // Save map path\n'}
+[5.414807] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |                 \x1b[01;31m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.414897] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:38:31:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kstd::string\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kclass std::__cxx11::basic_string<char>\x1b[m\x1b[K\xe2\x80\x99} has no member named \xe2\x80\x98\x1b[01m\x1b[Kmatcher\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.414982] (norlab_icp_mapper_ros) StderrLine: {'line': b'   38 |         params->mappingConfig.\x1b[01;31m\x1b[Kmatcher\x1b[m\x1b[K.name = "KDTreeMatcher";\n'}
+[5.415070] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |                               \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[5.415153] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:39:31:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kstd::string\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kclass std::__cxx11::basic_string<char>\x1b[m\x1b[K\xe2\x80\x99} has no member named \xe2\x80\x98\x1b[01m\x1b[Kmatcher\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.415256] (norlab_icp_mapper_ros) StderrLine: {'line': b'   39 |         params->mappingConfig.\x1b[01;31m\x1b[Kmatcher\x1b[m\x1b[K.params["knn"] = "1";\n'}
+[5.415347] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |                               \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[5.415428] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:40:31:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kstd::string\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kclass std::__cxx11::basic_string<char>\x1b[m\x1b[K\xe2\x80\x99} has no member named \xe2\x80\x98\x1b[01m\x1b[Kmatcher\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.415510] (norlab_icp_mapper_ros) StderrLine: {'line': b'   40 |         params->mappingConfig.\x1b[01;31m\x1b[Kmatcher\x1b[m\x1b[K.params["epsilon"] = "3.16";\n'}
+[5.415587] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |                               \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[5.415664] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:42:31:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kstd::string\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kclass std::__cxx11::basic_string<char>\x1b[m\x1b[K\xe2\x80\x99} has no member named \xe2\x80\x98\x1b[01m\x1b[KoutlierFilters\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.415792] (norlab_icp_mapper_ros) StderrLine: {'line': b'   42 |         params->mappingConfig.\x1b[01;31m\x1b[KoutlierFilters\x1b[m\x1b[K.push_back({\n'}
+[5.415903] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |                               \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.415943] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:47:31:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kstd::string\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kclass std::__cxx11::basic_string<char>\x1b[m\x1b[K\xe2\x80\x99} has no member named \xe2\x80\x98\x1b[01m\x1b[KerrorMinimizer\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.415994] (norlab_icp_mapper_ros) StderrLine: {'line': b'   47 |         params->mappingConfig.\x1b[01;31m\x1b[KerrorMinimizer\x1b[m\x1b[K.name = "PointToPointErrorMinimizer";\n'}
+[5.416028] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |                               \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.421649] (-) TimerEvent: {}
+[5.522062] (-) TimerEvent: {}
+[5.622481] (-) TimerEvent: {}
+[5.723093] (-) TimerEvent: {}
+[5.796036] (norlab_icp_mapper_ros) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/c++/11/memory:76\x1b[m\x1b[K,\n'}
+[5.796344] (norlab_icp_mapper_ros) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:153\x1b[m\x1b[K,\n'}
+[5.796439] (norlab_icp_mapper_ros) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4\x1b[m\x1b[K,\n'}
+[5.796522] (norlab_icp_mapper_ros) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:1\x1b[m\x1b[K:\n'}
+[5.796603] (norlab_icp_mapper_ros) StderrLine: {'line': b'/usr/include/c++/11/bits/unique_ptr.h: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Ktypename std::_MakeUniq<_Tp>::__single_object std::make_unique(_Args&& ...) [with _Tp = NodeParameters; _Args = {}; typename std::_MakeUniq<_Tp>::__single_object = std::unique_ptr<NodeParameters>]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.796683] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:25:50:\x1b[m\x1b[K   required from here\n'}
+[5.796774] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/unique_ptr.h:962:30:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[KNodeParameters::NodeParameters()\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.796859] (norlab_icp_mapper_ros) StderrLine: {'line': b'  962 |     { return unique_ptr<_Tp>(\x1b[01;31m\x1b[Knew _Tp(std::forward<_Args>(__args)...)\x1b[m\x1b[K); }\n'}
+[5.796933] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |                              \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.797027] (norlab_icp_mapper_ros) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/mapper_node.cpp:1\x1b[m\x1b[K:\n'}
+[5.797099] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:36:9:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KNodeParameters::NodeParameters(rclcpp::Node&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.797171] (norlab_icp_mapper_ros) StderrLine: {'line': b'   36 |         \x1b[01;36m\x1b[KNodeParameters\x1b[m\x1b[K(rclcpp::Node& node);\n'}
+[5.797243] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |         \x1b[01;36m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.797315] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:36:9:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 0 provided\n'}
+[5.797397] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:7:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KNodeParameters::NodeParameters(const NodeParameters&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.797470] (norlab_icp_mapper_ros) StderrLine: {'line': b'    7 | class \x1b[01;36m\x1b[KNodeParameters\x1b[m\x1b[K\n'}
+[5.797540] (norlab_icp_mapper_ros) StderrLine: {'line': b'      |       \x1b[01;36m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.797610] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:7:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 0 provided\n'}
+[5.797680] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:7:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KNodeParameters::NodeParameters(NodeParameters&&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.797764] (norlab_icp_mapper_ros) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:7:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 0 provided\n'}
+[5.823268] (-) TimerEvent: {}
+[5.923665] (-) TimerEvent: {}
+[6.024062] (-) TimerEvent: {}
+[6.124448] (-) TimerEvent: {}
+[6.224851] (-) TimerEvent: {}
+[6.325244] (-) TimerEvent: {}
+[6.425625] (-) TimerEvent: {}
+[6.526015] (-) TimerEvent: {}
+[6.626484] (-) TimerEvent: {}
+[6.726970] (-) TimerEvent: {}
+[6.827351] (-) TimerEvent: {}
+[6.927747] (-) TimerEvent: {}
+[7.028184] (-) TimerEvent: {}
+[7.128473] (-) TimerEvent: {}
+[7.228817] (-) TimerEvent: {}
+[7.329146] (-) TimerEvent: {}
+[7.429613] (-) TimerEvent: {}
+[7.530012] (-) TimerEvent: {}
+[7.630433] (-) TimerEvent: {}
+[7.730852] (-) TimerEvent: {}
+[7.831195] (-) TimerEvent: {}
+[7.931535] (-) TimerEvent: {}
+[8.031911] (-) TimerEvent: {}
+[8.132256] (-) TimerEvent: {}
+[8.232664] (-) TimerEvent: {}
+[8.333157] (-) TimerEvent: {}
+[8.433614] (-) TimerEvent: {}
+[8.533986] (-) TimerEvent: {}
+[8.634354] (-) TimerEvent: {}
+[8.734801] (-) TimerEvent: {}
+[8.835356] (-) TimerEvent: {}
+[8.935856] (-) TimerEvent: {}
+[9.036527] (-) TimerEvent: {}
+[9.137090] (-) TimerEvent: {}
+[9.237701] (-) TimerEvent: {}
+[9.338158] (-) TimerEvent: {}
+[9.438573] (-) TimerEvent: {}
+[9.538940] (-) TimerEvent: {}
+[9.639322] (-) TimerEvent: {}
+[9.739892] (-) TimerEvent: {}
+[9.840453] (-) TimerEvent: {}
+[9.940806] (-) TimerEvent: {}
+[10.041134] (-) TimerEvent: {}
+[10.141425] (-) TimerEvent: {}
+[10.241751] (-) TimerEvent: {}
+[10.342137] (-) TimerEvent: {}
+[10.442448] (-) TimerEvent: {}
+[10.542873] (-) TimerEvent: {}
+[10.643397] (-) TimerEvent: {}
+[10.743714] (-) TimerEvent: {}
+[10.844082] (-) TimerEvent: {}
+[10.944476] (-) TimerEvent: {}
+[11.044850] (-) TimerEvent: {}
+[11.145224] (-) TimerEvent: {}
+[11.245642] (-) TimerEvent: {}
+[11.346036] (-) TimerEvent: {}
+[11.446405] (-) TimerEvent: {}
+[11.546784] (-) TimerEvent: {}
+[11.647171] (-) TimerEvent: {}
+[11.747536] (-) TimerEvent: {}
+[11.848024] (-) TimerEvent: {}
+[11.948348] (-) TimerEvent: {}
+[12.048690] (-) TimerEvent: {}
+[12.149091] (-) TimerEvent: {}
+[12.249565] (-) TimerEvent: {}
+[12.349925] (-) TimerEvent: {}
+[12.450336] (-) TimerEvent: {}
+[12.550710] (-) TimerEvent: {}
+[12.589814] (norlab_icp_mapper_ros) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/mapper_node.dir/build.make:76: CMakeFiles/mapper_node.dir/src/mapper_node.cpp.o] Error 1\n'}
+[12.590006] (norlab_icp_mapper_ros) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:593: CMakeFiles/mapper_node.dir/all] Error 2\n'}
+[12.590204] (norlab_icp_mapper_ros) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[12.592430] (norlab_icp_mapper_ros) CommandEnded: {'returncode': 2}
+[12.650884] (-) TimerEvent: {}
+[12.752436] (-) TimerEvent: {}
+[12.755781] (norlab_icp_mapper_ros) JobEnded: {'identifier': 'norlab_icp_mapper_ros', 'rc': 2}
+[12.766450] (-) EventReactorShutdown: {}

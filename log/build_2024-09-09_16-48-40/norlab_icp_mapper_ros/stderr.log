@@ -1,0 +1,13 @@
+[31mCMake Error at CMakeLists.txt:17 (find_package):
+  Could not find a package configuration file provided by "norlab_icp_mapper"
+  (requested version 2.0.0) with any of the following names:
+
+    norlab_icp_mapperConfig.cmake
+    norlab_icp_mapper-config.cmake
+
+  Add the installation prefix of "norlab_icp_mapper" to CMAKE_PREFIX_PATH or
+  set "norlab_icp_mapper_DIR" to a directory containing one of the above
+  files.  If "norlab_icp_mapper" provides a separate development package or
+  SDK, be sure it has been installed.
+
+[0m

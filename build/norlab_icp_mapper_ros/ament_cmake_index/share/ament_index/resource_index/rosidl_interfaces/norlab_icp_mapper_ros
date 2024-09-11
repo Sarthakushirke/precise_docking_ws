@@ -1,0 +1,12 @@
+srv/LoadMap.idl
+srv/LoadMap.srv
+srv/LoadMap_Request.msg
+srv/LoadMap_Response.msg
+srv/SaveMap.idl
+srv/SaveMap.srv
+srv/SaveMap_Request.msg
+srv/SaveMap_Response.msg
+srv/SaveTrajectory.idl
+srv/SaveTrajectory.srv
+srv/SaveTrajectory_Request.msg
+srv/SaveTrajectory_Response.msg

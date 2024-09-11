@@ -1,0 +1,19 @@
+[0.283s] Invoking command in '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble ROS_DOMAIN_ID=24 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/norlab_icp_mapper -- -j20 -l20
+[0.773s] [100%] Built target norlab_icp_mapper
+[0.777s] Invoked command in '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble ROS_DOMAIN_ID=24 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/norlab_icp_mapper -- -j20 -l20
+[0.853s] Invoking command in '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble ROS_DOMAIN_ID=24 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/norlab_icp_mapper
+[0.867s] -- Install configuration: ""
+[0.867s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/libnorlab_icp_mapper.a
+[0.867s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/Mapper.h
+[0.867s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/Map.h
+[0.867s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/Trajectory.h
+[0.868s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/CellManager.h
+[0.868s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/RAMCellManager.h
+[0.868s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/HardDriveCellManager.h
+[0.868s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/MapperModules/MapperModule.h
+[0.868s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/MapperModules/DynamicPointsMapperModule.h
+[0.868s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/MapperModules/OctreeMapperModule.h
+[0.868s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/MapperModules/PointDistanceMapperModule.h
+[0.868s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/cmake/norlab_icp_mapper/norlab_icp_mapperConfig.cmake
+[0.868s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/cmake/norlab_icp_mapper/norlab_icp_mapperConfigVersion.cmake
+[0.870s] Invoked command in '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble ROS_DOMAIN_ID=24 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/norlab_icp_mapper

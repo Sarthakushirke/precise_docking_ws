@@ -1,0 +1,48 @@
+[0.008s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.060s] [35m[1mConsolidate compiler generated dependencies of target icp_node[0m
+[0.063s] [ 50%] Built target cpp_executable
+[0.069s] [ 50%] Built target ament_cmake_python_copy_frontend
+[0.083s] [ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[0.244s] running egg_info
+[0.244s] writing frontend.egg-info/PKG-INFO
+[0.244s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[0.244s] writing top-level names to frontend.egg-info/top_level.txt
+[0.245s] reading manifest file 'frontend.egg-info/SOURCES.txt'
+[0.246s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[0.265s] [ 75%] Built target ament_cmake_python_build_frontend_egg
+[3.247s] [100%] [32m[1mLinking CXX executable icp_node[0m
+[3.573s] [100%] Built target icp_node
+[3.582s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[3.636s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/frontend
+[3.646s] -- Install configuration: ""
+[3.646s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/cpp_executable
+[3.646s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/icp_node
+[3.653s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/frontend/lib/frontend/icp_node" to ""
+[3.653s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/pythonpath.sh
+[3.653s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/pythonpath.dsv
+[3.653s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info
+[3.653s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/top_level.txt
+[3.653s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/SOURCES.txt
+[3.653s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/PKG-INFO
+[3.653s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/dependency_links.txt
+[3.653s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend
+[3.653s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend/__init__.py
+[3.653s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend/module_to_import.py
+[3.680s] Listing '/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend'...
+[3.682s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/py_node.py
+[3.682s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/package_run_dependencies/frontend
+[3.682s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/parent_prefix_path/frontend
+[3.682s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/ament_prefix_path.sh
+[3.682s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/ament_prefix_path.dsv
+[3.682s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/path.sh
+[3.682s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/path.dsv
+[3.683s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.bash
+[3.683s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.sh
+[3.683s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.zsh
+[3.683s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.dsv
+[3.683s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/package.dsv
+[3.683s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/packages/frontend
+[3.683s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/cmake/frontendConfig.cmake
+[3.683s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/cmake/frontendConfig-version.cmake
+[3.683s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/package.xml
+[3.684s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/frontend

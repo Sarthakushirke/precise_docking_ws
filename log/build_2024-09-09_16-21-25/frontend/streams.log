@@ -1,0 +1,20 @@
+[0.010s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.076s] [35m[1mConsolidate compiler generated dependencies of target icp_node[0m
+[0.095s] [ 50%] Built target cpp_executable
+[0.100s] [ 50%] Built target ament_cmake_python_copy_frontend
+[0.121s] [ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[0.326s] running egg_info
+[0.327s] writing frontend.egg-info/PKG-INFO
+[0.327s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[0.327s] writing top-level names to frontend.egg-info/top_level.txt
+[0.330s] reading manifest file 'frontend.egg-info/SOURCES.txt'
+[0.330s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[0.366s] [ 75%] Built target ament_cmake_python_build_frontend_egg
+[4.708s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::scanCallback(sensor_msgs::msg::LaserScan_<std::allocator<void> >::SharedPtr)[m[K’:
+[4.708s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:29:25:[m[K [01;31m[Kerror: [m[K‘[01m[KlaserScanToPointCloud[m[K’ was not declared in this scope
+[4.708s]    29 |         DP pointCloud = [01;31m[KlaserScanToPointCloud[m[K(scan_msg);
+[4.709s]       |                         [01;31m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+[7.552s] gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
+[7.552s] gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
+[7.552s] gmake: *** [Makefile:146: all] Error 2
+[7.556s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20

@@ -1,0 +1,9 @@
+[0.000000] (-) TimerEvent: {}
+[0.000449] (-) JobUnselected: {'identifier': 'arcuo_marker_detection'}
+[0.000524] (-) JobUnselected: {'identifier': 'docking_bringup'}
+[0.000545] (-) JobUnselected: {'identifier': 'frontend'}
+[0.000561] (-) JobUnselected: {'identifier': 'libpointmatcher_ros'}
+[0.000573] (-) JobUnselected: {'identifier': 'norlab_icp_mapper_ros'}
+[0.000584] (-) JobUnselected: {'identifier': 'reach_the_goal'}
+[0.000595] (-) JobUnselected: {'identifier': 'template_ros2'}
+[0.000857] (-) EventReactorShutdown: {}

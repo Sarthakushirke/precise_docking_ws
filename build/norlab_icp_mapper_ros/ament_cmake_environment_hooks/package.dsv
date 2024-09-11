@@ -1,0 +1,4 @@
+source;share/norlab_icp_mapper_ros/local_setup.bash
+source;share/norlab_icp_mapper_ros/local_setup.dsv
+source;share/norlab_icp_mapper_ros/local_setup.sh
+source;share/norlab_icp_mapper_ros/local_setup.zsh

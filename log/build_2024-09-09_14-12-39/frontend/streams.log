@@ -1,0 +1,35 @@
+[0.008s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.052s] [35m[1mConsolidate compiler generated dependencies of target icp_node[0m
+[0.055s] [35m[1mConsolidate compiler generated dependencies of target cpp_executable[0m
+[0.066s] [  0%] Built target ament_cmake_python_copy_frontend
+[0.069s] [ 25%] [32mBuilding CXX object CMakeFiles/cpp_executable.dir/src/cpp_node.cpp.o[0m
+[0.075s] [ 50%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[0.249s] running egg_info
+[0.249s] writing frontend.egg-info/PKG-INFO
+[0.249s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[0.249s] writing top-level names to frontend.egg-info/top_level.txt
+[0.251s] reading manifest file 'frontend.egg-info/SOURCES.txt'
+[0.251s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[0.270s] [ 50%] Built target ament_cmake_python_build_frontend_egg
+[1.784s] [ 75%] [32m[1mLinking CXX executable cpp_executable[0m
+[1.861s] [ 75%] Built target cpp_executable
+[2.766s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[2.766s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[2.767s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:1[m[K:
+[2.767s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In constructor ‘[01m[KMycustomNode::MycustomNode()[m[K’:
+[2.767s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:29:121:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst class Eigen::WithFormat<Eigen::Matrix<float, -1, -1> >[m[K’ has no member named ‘[01m[Kc_str[m[K’
+[2.767s]    29 |         RCLCPP_INFO(this->get_logger(), "Transformation matrix:\n%s", transformation.matrix().format(Eigen::IOFormat()).[01;31m[Kc_str[m[K());
+[2.767s]       |                                                                                                                         [01;31m[K^~~~~[m[K
+[3.134s] gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
+[3.134s] gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
+[3.134s] gmake: *** [Makefile:146: all] Error 2
+[3.137s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20

@@ -1,0 +1,8 @@
+{
+  "package_name": "norlab_icp_mapper_ros",
+  "non_idl_tuples": [
+    "/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros:srv/SaveTrajectory.srv",
+    "/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros:srv/SaveMap.srv",
+    "/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros:srv/LoadMap.srv"
+  ]
+}

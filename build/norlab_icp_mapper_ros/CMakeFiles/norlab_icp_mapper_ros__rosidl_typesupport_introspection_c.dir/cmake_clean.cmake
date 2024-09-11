@@ -1,0 +1,21 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/norlab_icp_mapper_ros__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/load_map__type_support.c.o"
+  "CMakeFiles/norlab_icp_mapper_ros__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/load_map__type_support.c.o.d"
+  "CMakeFiles/norlab_icp_mapper_ros__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/save_map__type_support.c.o"
+  "CMakeFiles/norlab_icp_mapper_ros__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/save_map__type_support.c.o.d"
+  "CMakeFiles/norlab_icp_mapper_ros__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/save_trajectory__type_support.c.o"
+  "CMakeFiles/norlab_icp_mapper_ros__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/save_trajectory__type_support.c.o.d"
+  "libnorlab_icp_mapper_ros__rosidl_typesupport_introspection_c.pdb"
+  "libnorlab_icp_mapper_ros__rosidl_typesupport_introspection_c.so"
+  "rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/load_map__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/load_map__type_support.c"
+  "rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/save_map__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/save_map__type_support.c"
+  "rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/save_trajectory__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/norlab_icp_mapper_ros/srv/detail/save_trajectory__type_support.c"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/norlab_icp_mapper_ros__rosidl_typesupport_introspection_c.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

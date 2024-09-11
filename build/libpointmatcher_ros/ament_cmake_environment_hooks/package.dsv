@@ -1,0 +1,4 @@
+source;share/libpointmatcher_ros/local_setup.bash
+source;share/libpointmatcher_ros/local_setup.dsv
+source;share/libpointmatcher_ros/local_setup.sh
+source;share/libpointmatcher_ros/local_setup.zsh

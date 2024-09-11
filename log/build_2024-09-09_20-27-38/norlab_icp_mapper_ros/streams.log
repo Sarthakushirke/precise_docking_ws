@@ -1,0 +1,146 @@
+[0.012s] Invoking command in '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros': CMAKE_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/cmake:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros -- -j20 -l20
+[0.079s] [ 10%] Built target norlab_icp_mapper_ros__rosidl_generator_c
+[0.080s] [ 12%] Built target norlab_icp_mapper_ros__cpp
+[0.090s] [ 12%] Built target ament_cmake_python_copy_norlab_icp_mapper_ros
+[0.113s] [ 30%] Built target norlab_icp_mapper_ros__rosidl_typesupport_introspection_c
+[0.113s] [ 32%] Built target norlab_icp_mapper_ros__rosidl_typesupport_introspection_cpp
+[0.114s] [ 42%] Built target norlab_icp_mapper_ros__rosidl_typesupport_c
+[0.115s] [ 52%] Built target norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_c
+[0.125s] [ 62%] Built target norlab_icp_mapper_ros__rosidl_typesupport_cpp
+[0.141s] [ 72%] Built target norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_cpp
+[0.171s] [35m[1mConsolidate compiler generated dependencies of target mapper_node[0m
+[0.175s] [ 72%] Built target norlab_icp_mapper_ros
+[0.200s] [ 74%] Built target norlab_icp_mapper_ros__py
+[0.201s] [ 76%] [32mBuilding CXX object CMakeFiles/mapper_node.dir/src/NodeParameters.cpp.o[0m
+[0.223s] [ 84%] Built target norlab_icp_mapper_ros__rosidl_generator_py
+[0.246s] [ 92%] Built target norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_c__pyext
+[0.246s] [ 92%] Built target norlab_icp_mapper_ros__rosidl_typesupport_c__pyext
+[0.248s] [ 96%] Built target norlab_icp_mapper_ros__rosidl_typesupport_introspection_c__pyext
+[0.370s] running egg_info
+[0.371s] writing norlab_icp_mapper_ros.egg-info/PKG-INFO
+[0.371s] writing dependency_links to norlab_icp_mapper_ros.egg-info/dependency_links.txt
+[0.371s] writing top-level names to norlab_icp_mapper_ros.egg-info/top_level.txt
+[0.372s] reading manifest file 'norlab_icp_mapper_ros.egg-info/SOURCES.txt'
+[0.373s] writing manifest file 'norlab_icp_mapper_ros.egg-info/SOURCES.txt'
+[0.400s] [ 96%] Built target ament_cmake_python_build_norlab_icp_mapper_ros_egg
+[4.845s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:[m[K In member function ‘[01m[Kvoid NodeParameters::retrieveParameters(rclcpp::Node&)[m[K’:
+[4.846s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:63:61:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type ‘[01m[Kdouble&[m[K’ to an rvalue of type ‘[01m[Kdouble[m[K’
+[4.846s]    63 |     mapPublishRate = node.get_parameter("map_publish_rate", [01;31m[K10.0[m[K);
+[4.846s]       |                                                             [01;31m[K^~~~[m[K
+[4.846s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[4.846s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[4.846s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[4.846s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.846s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4[m[K,
+[4.846s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:1[m[K:
+[4.846s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:286:60:[m[K [01;36m[Knote: [m[K  initializing argument 2 of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = double; std::string = std::__cxx11::basic_string<char>][m[K’
+[4.847s]   286 | Node::get_parameter(const std::string & name, [01;36m[KParameterT & parameter[m[K) const
+[4.847s]       |                                               [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[4.847s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:64:66:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type ‘[01m[Kdouble&[m[K’ to an rvalue of type ‘[01m[Kdouble[m[K’
+[4.847s]    64 |     mapTfPublishRate = node.get_parameter("map_tf_publish_rate", [01;31m[K10.0[m[K);
+[4.847s]       |                                                                  [01;31m[K^~~~[m[K
+[4.847s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[4.847s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[4.847s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[4.847s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.847s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4[m[K,
+[4.847s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:1[m[K:
+[4.847s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:286:60:[m[K [01;36m[Knote: [m[K  initializing argument 2 of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = double; std::string = std::__cxx11::basic_string<char>][m[K’
+[4.847s]   286 | Node::get_parameter(const std::string & name, [01;36m[KParameterT & parameter[m[K) const
+[4.848s]       |                                               [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[4.848s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:65:55:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type ‘[01m[Kdouble&[m[K’ to an rvalue of type ‘[01m[Kdouble[m[K’
+[4.848s]    65 |     maxIdleTime = node.get_parameter("max_idle_time", [01;31m[K10.0[m[K);
+[4.848s]       |                                                       [01;31m[K^~~~[m[K
+[4.848s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[4.848s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[4.848s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[4.848s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.848s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4[m[K,
+[4.848s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:1[m[K:
+[4.848s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:286:60:[m[K [01;36m[Knote: [m[K  initializing argument 2 of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = double; std::string = std::__cxx11::basic_string<char>][m[K’
+[4.849s]   286 | Node::get_parameter(const std::string & name, [01;36m[KParameterT & parameter[m[K) const
+[4.849s]       |                                               [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[4.849s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:66:40:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type ‘[01m[Kbool&[m[K’ to an rvalue of type ‘[01m[Kbool[m[K’
+[4.849s]    66 |     is3D = node.get_parameter("is_3D", [01;31m[Kfalse[m[K);
+[4.849s]       |                                        [01;31m[K^~~~~[m[K
+[4.849s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[4.849s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[4.849s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[4.849s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.849s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4[m[K,
+[4.849s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:1[m[K:
+[4.849s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:286:60:[m[K [01;36m[Knote: [m[K  initializing argument 2 of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = bool; std::string = std::__cxx11::basic_string<char>][m[K’
+[4.849s]   286 | Node::get_parameter(const std::string & name, [01;36m[KParameterT & parameter[m[K) const
+[4.850s]       |                                               [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[4.850s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:67:50:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type ‘[01m[Kbool&[m[K’ to an rvalue of type ‘[01m[Kbool[m[K’
+[4.850s]    67 |     isMapping = node.get_parameter("is_mapping", [01;31m[Ktrue[m[K);
+[4.850s]       |                                                  [01;31m[K^~~~[m[K
+[4.850s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[4.850s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[4.850s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[4.850s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.850s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4[m[K,
+[4.850s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:1[m[K:
+[4.850s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:286:60:[m[K [01;36m[Knote: [m[K  initializing argument 2 of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = bool; std::string = std::__cxx11::basic_string<char>][m[K’
+[4.850s]   286 | Node::get_parameter(const std::string & name, [01;36m[KParameterT & parameter[m[K) const
+[4.850s]       |                                               [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[4.851s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:68:48:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type ‘[01m[Kbool&[m[K’ to an rvalue of type ‘[01m[Kbool[m[K’
+[4.851s]    68 |     isOnline = node.get_parameter("is_online", [01;31m[Ktrue[m[K);
+[4.851s]       |                                                [01;31m[K^~~~[m[K
+[4.851s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[4.851s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[4.851s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[4.851s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.851s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4[m[K,
+[4.851s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:1[m[K:
+[4.851s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:286:60:[m[K [01;36m[Knote: [m[K  initializing argument 2 of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = bool; std::string = std::__cxx11::basic_string<char>][m[K’
+[4.852s]   286 | Node::get_parameter(const std::string & name, [01;36m[KParameterT & parameter[m[K) const
+[4.852s]       |                                               [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[4.852s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:69:82:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type ‘[01m[Kbool&[m[K’ to an rvalue of type ‘[01m[Kbool[m[K’
+[4.852s]    69 |     saveMapCellsOnHardDrive = node.get_parameter("save_map_cells_on_hard_drive", [01;31m[Ktrue[m[K);
+[4.852s]       |                                                                                  [01;31m[K^~~~[m[K
+[4.853s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[4.853s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[4.853s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[4.853s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.853s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4[m[K,
+[4.854s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:1[m[K:
+[4.854s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:286:60:[m[K [01;36m[Knote: [m[K  initializing argument 2 of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = bool; std::string = std::__cxx11::basic_string<char>][m[K’
+[4.854s]   286 | Node::get_parameter(const std::string & name, [01;36m[KParameterT & parameter[m[K) const
+[4.854s]       |                                               [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[4.854s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:70:94:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type ‘[01m[Kbool&[m[K’ to an rvalue of type ‘[01m[Kbool[m[K’
+[4.855s]    70 |     publishTfsBetweenRegistrations = node.get_parameter("publish_tfs_between_registrations", [01;31m[Ktrue[m[K);
+[4.855s]       |                                                                                              [01;31m[K^~~~[m[K
+[4.855s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[4.855s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[4.856s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[4.856s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.856s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.h:4[m[K,
+[4.856s]                  from [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:1[m[K:
+[4.856s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:286:60:[m[K [01;36m[Knote: [m[K  initializing argument 2 of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = bool; std::string = std::__cxx11::basic_string<char>][m[K’
+[4.856s]   286 | Node::get_parameter(const std::string & name, [01;36m[KParameterT & parameter[m[K) const
+[4.856s]       |                                               [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[4.974s] /opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp: In instantiation of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = const char [5]; std::string = std::__cxx11::basic_string<char>][m[K’:
+[4.974s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:53:35:[m[K   required from here
+[4.975s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:294:17:[m[K [01;31m[Kerror: [m[Kinvalid ‘[01m[Kstatic_cast[m[K’ from type ‘[01m[Kstd::__cxx11::basic_string<char>[m[K’ to type ‘[01m[Kconst char [5][m[K’
+[4.975s]   294 |     parameter = [01;31m[Kstatic_cast<ParameterT>(parameter_variant.get_value<ParameterT>())[m[K;
+[4.975s]       |                 [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.975s] /opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp: In instantiation of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = const char [10]; std::string = std::__cxx11::basic_string<char>][m[K’:
+[4.976s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:54:36:[m[K   required from here
+[4.976s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:294:17:[m[K [01;31m[Kerror: [m[Kinvalid ‘[01m[Kstatic_cast[m[K’ from type ‘[01m[Kstd::__cxx11::basic_string<char>[m[K’ to type ‘[01m[Kconst char [10][m[K’
+[4.977s] /opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp: In instantiation of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = const char [1]; std::string = std::__cxx11::basic_string<char>][m[K’:
+[4.977s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:57:39:[m[K   required from here
+[4.977s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:294:17:[m[K [01;31m[Kerror: [m[Kinvalid ‘[01m[Kstatic_cast[m[K’ from type ‘[01m[Kstd::__cxx11::basic_string<char>[m[K’ to type ‘[01m[Kconst char [1][m[K’
+[4.978s] /opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp: In instantiation of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = const char [22]; std::string = std::__cxx11::basic_string<char>][m[K’:
+[4.978s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:60:48:[m[K   required from here
+[4.978s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:294:17:[m[K [01;31m[Kerror: [m[Kinvalid ‘[01m[Kstatic_cast[m[K’ from type ‘[01m[Kstd::__cxx11::basic_string<char>[m[K’ to type ‘[01m[Kconst char [22][m[K’
+[4.979s] /opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp: In instantiation of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = const char [8]; std::string = std::__cxx11::basic_string<char>][m[K’:
+[4.979s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:61:42:[m[K   required from here
+[4.979s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:294:17:[m[K [01;31m[Kerror: [m[Kinvalid ‘[01m[Kstatic_cast[m[K’ from type ‘[01m[Kstd::__cxx11::basic_string<char>[m[K’ to type ‘[01m[Kconst char [8][m[K’
+[4.980s] /opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp: In instantiation of ‘[01m[Kbool rclcpp::Node::get_parameter(const string&, ParameterT&) const [with ParameterT = const char [15]; std::string = std::__cxx11::basic_string<char>][m[K’:
+[4.980s] [01m[K/home/sarthak/precise_docking_ws/src/norlab_icp_mapper_ros/src/NodeParameters.cpp:62:49:[m[K   required from here
+[4.980s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:294:17:[m[K [01;31m[Kerror: [m[Kinvalid ‘[01m[Kstatic_cast[m[K’ from type ‘[01m[Kstd::__cxx11::basic_string<char>[m[K’ to type ‘[01m[Kconst char [15][m[K’
+[5.439s] gmake[2]: *** [CMakeFiles/mapper_node.dir/build.make:90: CMakeFiles/mapper_node.dir/src/NodeParameters.cpp.o] Error 1
+[5.439s] gmake[1]: *** [CMakeFiles/Makefile2:593: CMakeFiles/mapper_node.dir/all] Error 2
+[5.439s] gmake: *** [Makefile:146: all] Error 2
+[5.442s] Invoked command in '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros' returned '2': CMAKE_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/cmake:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros -- -j20 -l20

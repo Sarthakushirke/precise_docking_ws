@@ -1,0 +1,45 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found package version: 2.0.1
+-- Looking for libpointmatcher on system...
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time chrono 
+-- Looking for yaml-cpp on system...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/sarthak/precise_docking_ws/build/norlab_icp_mapper
+[ 10%] [32mBuilding CXX object CMakeFiles/norlab_icp_mapper.dir/norlab_icp_mapper/Mapper.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/norlab_icp_mapper.dir/norlab_icp_mapper/Trajectory.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/norlab_icp_mapper.dir/norlab_icp_mapper/Map.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/norlab_icp_mapper.dir/norlab_icp_mapper/RAMCellManager.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/norlab_icp_mapper.dir/norlab_icp_mapper/HardDriveCellManager.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/norlab_icp_mapper.dir/norlab_icp_mapper/MapperModules/MapperModule.cpp.o[0m
+[ 90%] [32mBuilding CXX object CMakeFiles/norlab_icp_mapper.dir/norlab_icp_mapper/MapperModules/PointDistanceMapperModule.cpp.o[0m
+[ 90%] [32mBuilding CXX object CMakeFiles/norlab_icp_mapper.dir/norlab_icp_mapper/MapperModules/DynamicPointsMapperModule.cpp.o[0m
+[ 90%] [32mBuilding CXX object CMakeFiles/norlab_icp_mapper.dir/norlab_icp_mapper/MapperModules/OctreeMapperModule.cpp.o[0m
+[100%] [32m[1mLinking CXX static library libnorlab_icp_mapper.a[0m
+[100%] Built target norlab_icp_mapper
+-- Install configuration: ""
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/libnorlab_icp_mapper.a
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/Mapper.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/Map.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/Trajectory.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/CellManager.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/RAMCellManager.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/HardDriveCellManager.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/MapperModules/MapperModule.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/MapperModules/DynamicPointsMapperModule.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/MapperModules/OctreeMapperModule.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/include/norlab_icp_mapper/MapperModules/PointDistanceMapperModule.h
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/cmake/norlab_icp_mapper/norlab_icp_mapperConfig.cmake
+-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/cmake/norlab_icp_mapper/norlab_icp_mapperConfigVersion.cmake

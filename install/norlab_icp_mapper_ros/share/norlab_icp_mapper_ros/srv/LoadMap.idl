@@ -1,0 +1,19 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from norlab_icp_mapper_ros/srv/LoadMap.srv
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/Pose.idl"
+#include "std_msgs/msg/String.idl"
+
+module norlab_icp_mapper_ros {
+  module srv {
+    struct LoadMap_Request {
+      std_msgs::msg::String map_file_name;
+
+      geometry_msgs::msg::Pose pose;
+    };
+    struct LoadMap_Response {
+      uint8 structure_needs_at_least_one_member;
+    };
+  };
+};

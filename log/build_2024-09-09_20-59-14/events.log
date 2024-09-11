@@ -1,0 +1,285 @@
+[0.000000] (-) TimerEvent: {}
+[0.000596] (-) JobUnselected: {'identifier': 'arcuo_marker_detection'}
+[0.000744] (-) JobUnselected: {'identifier': 'docking_bringup'}
+[0.000832] (-) JobUnselected: {'identifier': 'frontend'}
+[0.000897] (-) JobUnselected: {'identifier': 'libpointmatcher_ros'}
+[0.000915] (-) JobUnselected: {'identifier': 'norlab_icp_mapper'}
+[0.000925] (-) JobUnselected: {'identifier': 'reach_the_goal'}
+[0.000934] (-) JobUnselected: {'identifier': 'template_ros2'}
+[0.000945] (norlab_icp_mapper_ros) JobQueued: {'identifier': 'norlab_icp_mapper_ros', 'dependencies': OrderedDict([('libpointmatcher_ros', '/home/sarthak/precise_docking_ws/install/libpointmatcher_ros')])}
+[0.000962] (norlab_icp_mapper_ros) JobStarted: {'identifier': 'norlab_icp_mapper_ros'}
+[0.010087] (norlab_icp_mapper_ros) JobProgress: {'identifier': 'norlab_icp_mapper_ros', 'progress': 'cmake'}
+[0.010672] (norlab_icp_mapper_ros) JobProgress: {'identifier': 'norlab_icp_mapper_ros', 'progress': 'build'}
+[0.011201] (norlab_icp_mapper_ros) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros', '--', '-j20', '-l20'], 'cwd': '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('OLDPWD', '/home/sarthak/precise_docking_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '2897'), ('SYSTEMD_EXEC_PID', '3546'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '7614'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:11625'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/x86_64-linux-gnu/pkgconfig:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3480,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3480'), ('INVOCATION_ID', '8784830e11dc4fd68585320601bc20ef'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '230'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:b874f726-78be-4bf8-b8b5-d1eafb281436'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/cmake:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[0.077762] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[  2%] Built target norlab_icp_mapper_ros__cpp\n'}
+[0.081025] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 12%] Built target norlab_icp_mapper_ros__rosidl_generator_c\n'}
+[0.091427] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 12%] Built target ament_cmake_python_copy_norlab_icp_mapper_ros\n'}
+[0.099792] (-) TimerEvent: {}
+[0.108221] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 22%] Built target norlab_icp_mapper_ros__rosidl_typesupport_cpp\n'}
+[0.109565] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 34%] Built target norlab_icp_mapper_ros__rosidl_typesupport_introspection_c\n'}
+[0.109822] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 42%] Built target norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_cpp\n'}
+[0.110394] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 52%] Built target norlab_icp_mapper_ros__rosidl_typesupport_introspection_cpp\n'}
+[0.115018] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 62%] Built target norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_c\n'}
+[0.118447] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 72%] Built target norlab_icp_mapper_ros__rosidl_typesupport_c\n'}
+[0.132671] (norlab_icp_mapper_ros) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target mapper_node\x1b[0m\n'}
+[0.146541] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 72%] Built target norlab_icp_mapper_ros\n'}
+[0.165522] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 74%] \x1b[32mBuilding CXX object CMakeFiles/mapper_node.dir/src/NodeParameters.cpp.o\x1b[0m\n'}
+[0.171455] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 76%] Built target norlab_icp_mapper_ros__py\n'}
+[0.196868] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 84%] Built target norlab_icp_mapper_ros__rosidl_generator_py\n'}
+[0.199900] (-) TimerEvent: {}
+[0.222192] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 92%] Built target norlab_icp_mapper_ros__rosidl_typesupport_c__pyext\n'}
+[0.222446] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 92%] Built target norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_c__pyext\n'}
+[0.225762] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 96%] Built target norlab_icp_mapper_ros__rosidl_typesupport_introspection_c__pyext\n'}
+[0.300009] (-) TimerEvent: {}
+[0.333588] (norlab_icp_mapper_ros) StdoutLine: {'line': b'running egg_info\n'}
+[0.334158] (norlab_icp_mapper_ros) StdoutLine: {'line': b'writing norlab_icp_mapper_ros.egg-info/PKG-INFO\n'}
+[0.334405] (norlab_icp_mapper_ros) StdoutLine: {'line': b'writing dependency_links to norlab_icp_mapper_ros.egg-info/dependency_links.txt\n'}
+[0.334710] (norlab_icp_mapper_ros) StdoutLine: {'line': b'writing top-level names to norlab_icp_mapper_ros.egg-info/top_level.txt\n'}
+[0.337150] (norlab_icp_mapper_ros) StdoutLine: {'line': b"reading manifest file 'norlab_icp_mapper_ros.egg-info/SOURCES.txt'\n"}
+[0.337664] (norlab_icp_mapper_ros) StdoutLine: {'line': b"writing manifest file 'norlab_icp_mapper_ros.egg-info/SOURCES.txt'\n"}
+[0.369971] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 96%] Built target ament_cmake_python_build_norlab_icp_mapper_ros_egg\n'}
+[0.400130] (-) TimerEvent: {}
+[0.500523] (-) TimerEvent: {}
+[0.600875] (-) TimerEvent: {}
+[0.701185] (-) TimerEvent: {}
+[0.801490] (-) TimerEvent: {}
+[0.901815] (-) TimerEvent: {}
+[1.002210] (-) TimerEvent: {}
+[1.102570] (-) TimerEvent: {}
+[1.202968] (-) TimerEvent: {}
+[1.303328] (-) TimerEvent: {}
+[1.403695] (-) TimerEvent: {}
+[1.504044] (-) TimerEvent: {}
+[1.604388] (-) TimerEvent: {}
+[1.704713] (-) TimerEvent: {}
+[1.805071] (-) TimerEvent: {}
+[1.905422] (-) TimerEvent: {}
+[2.005724] (-) TimerEvent: {}
+[2.106114] (-) TimerEvent: {}
+[2.206707] (-) TimerEvent: {}
+[2.307316] (-) TimerEvent: {}
+[2.407806] (-) TimerEvent: {}
+[2.508252] (-) TimerEvent: {}
+[2.608579] (-) TimerEvent: {}
+[2.708921] (-) TimerEvent: {}
+[2.809244] (-) TimerEvent: {}
+[2.909603] (-) TimerEvent: {}
+[3.009916] (-) TimerEvent: {}
+[3.110273] (-) TimerEvent: {}
+[3.210614] (-) TimerEvent: {}
+[3.310908] (-) TimerEvent: {}
+[3.411256] (-) TimerEvent: {}
+[3.511587] (-) TimerEvent: {}
+[3.611905] (-) TimerEvent: {}
+[3.712265] (-) TimerEvent: {}
+[3.812631] (-) TimerEvent: {}
+[3.912972] (-) TimerEvent: {}
+[4.013347] (-) TimerEvent: {}
+[4.113664] (-) TimerEvent: {}
+[4.213999] (-) TimerEvent: {}
+[4.314315] (-) TimerEvent: {}
+[4.414727] (-) TimerEvent: {}
+[4.515130] (-) TimerEvent: {}
+[4.615488] (-) TimerEvent: {}
+[4.715848] (-) TimerEvent: {}
+[4.816219] (-) TimerEvent: {}
+[4.916645] (-) TimerEvent: {}
+[5.017031] (-) TimerEvent: {}
+[5.117339] (-) TimerEvent: {}
+[5.217654] (-) TimerEvent: {}
+[5.317904] (-) TimerEvent: {}
+[5.418199] (-) TimerEvent: {}
+[5.518552] (-) TimerEvent: {}
+[5.618938] (-) TimerEvent: {}
+[5.719499] (-) TimerEvent: {}
+[5.768203] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[ 98%] \x1b[32m\x1b[1mLinking CXX executable mapper_node\x1b[0m\n'}
+[5.819601] (-) TimerEvent: {}
+[5.920052] (-) TimerEvent: {}
+[6.020440] (-) TimerEvent: {}
+[6.120896] (-) TimerEvent: {}
+[6.221346] (-) TimerEvent: {}
+[6.321871] (-) TimerEvent: {}
+[6.422256] (-) TimerEvent: {}
+[6.522575] (-) TimerEvent: {}
+[6.622925] (-) TimerEvent: {}
+[6.723354] (-) TimerEvent: {}
+[6.823887] (-) TimerEvent: {}
+[6.924249] (-) TimerEvent: {}
+[7.024657] (-) TimerEvent: {}
+[7.125186] (-) TimerEvent: {}
+[7.150844] (norlab_icp_mapper_ros) StdoutLine: {'line': b'[100%] Built target mapper_node\n'}
+[7.163340] (norlab_icp_mapper_ros) CommandEnded: {'returncode': 0}
+[7.225307] (-) TimerEvent: {}
+[7.293219] (norlab_icp_mapper_ros) JobProgress: {'identifier': 'norlab_icp_mapper_ros', 'progress': 'install'}
+[7.302976] (norlab_icp_mapper_ros) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros'], 'cwd': '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('OLDPWD', '/home/sarthak/precise_docking_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '2897'), ('SYSTEMD_EXEC_PID', '3546'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '7614'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:11625'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/x86_64-linux-gnu/pkgconfig:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3480,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3480'), ('INVOCATION_ID', '8784830e11dc4fd68585320601bc20ef'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '230'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:b874f726-78be-4bf8-b8b5-d1eafb281436'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/norlab_icp_mapper_ros'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/cmake:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[7.313959] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Install configuration: "Release"\n'}
+[7.314501] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/ament_index/resource_index/rosidl_interfaces/norlab_icp_mapper_ros\n'}
+[7.314630] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros\n'}
+[7.314833] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv\n'}
+[7.315015] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/save_map.h\n'}
+[7.315180] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/save_trajectory.h\n'}
+[7.315278] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/load_map.h\n'}
+[7.315385] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail\n'}
+[7.315493] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__functions.h\n'}
+[7.315652] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__functions.c\n'}
+[7.315738] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__functions.c\n'}
+[7.315871] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__functions.c\n'}
+[7.315999] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__struct.h\n'}
+[7.316091] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__type_support.h\n'}
+[7.316200] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__type_support.h\n'}
+[7.316323] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__struct.h\n'}
+[7.316424] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__functions.h\n'}
+[7.316541] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__struct.h\n'}
+[7.316644] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__functions.h\n'}
+[7.316849] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__type_support.h\n'}
+[7.317018] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/msg\n'}
+[7.317076] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/msg/rosidl_generator_c__visibility_control.h\n'}
+[7.317110] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/environment/library_path.sh\n'}
+[7.317141] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/environment/library_path.dsv\n'}
+[7.317169] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/libnorlab_icp_mapper_ros__rosidl_generator_c.so\n'}
+[7.317197] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros\n'}
+[7.317231] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv\n'}
+[7.317259] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail\n'}
+[7.317288] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__rosidl_typesupport_fastrtps_c.h\n'}
+[7.317318] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__rosidl_typesupport_fastrtps_c.h\n'}
+[7.317347] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__rosidl_typesupport_fastrtps_c.h\n'}
+[7.317375] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/msg\n'}
+[7.317403] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[7.317431] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/libnorlab_icp_mapper_ros__rosidl_typesupport_fastrtps_c.so\n'}
+[7.317459] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros\n'}
+[7.317487] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv\n'}
+[7.317516] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/save_map.hpp\n'}
+[7.317557] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/save_trajectory.hpp\n'}
+[7.317591] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/load_map.hpp\n'}
+[7.317623] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail\n'}
+[7.317654] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__traits.hpp\n'}
+[7.317697] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__struct.hpp\n'}
+[7.317726] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__traits.hpp\n'}
+[7.317755] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__traits.hpp\n'}
+[7.317789] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__builder.hpp\n'}
+[7.317820] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__builder.hpp\n'}
+[7.317858] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__builder.hpp\n'}
+[7.317890] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__struct.hpp\n'}
+[7.317923] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__struct.hpp\n'}
+[7.317955] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros\n'}
+[7.318009] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv\n'}
+[7.318046] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail\n'}
+[7.318079] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[7.318115] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[7.318149] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[7.318183] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/dds_fastrtps\n'}
+[7.318217] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/msg\n'}
+[7.318251] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[7.318282] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/libnorlab_icp_mapper_ros__rosidl_typesupport_fastrtps_cpp.so\n'}
+[7.318319] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros\n'}
+[7.318352] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv\n'}
+[7.318384] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail\n'}
+[7.318416] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__type_support.c\n'}
+[7.318444] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__type_support.c\n'}
+[7.318476] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__rosidl_typesupport_introspection_c.h\n'}
+[7.318507] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__rosidl_typesupport_introspection_c.h\n'}
+[7.318539] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__type_support.c\n'}
+[7.318571] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__rosidl_typesupport_introspection_c.h\n'}
+[7.318604] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/msg\n'}
+[7.318643] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[7.318678] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/libnorlab_icp_mapper_ros__rosidl_typesupport_introspection_c.so\n'}
+[7.318725] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/libnorlab_icp_mapper_ros__rosidl_typesupport_c.so\n'}
+[7.318761] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros\n'}
+[7.318799] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv\n'}
+[7.318834] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail\n'}
+[7.318880] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__rosidl_typesupport_introspection_cpp.hpp\n'}
+[7.318915] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__rosidl_typesupport_introspection_cpp.hpp\n'}
+[7.318949] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_trajectory__type_support.cpp\n'}
+[7.318978] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/load_map__type_support.cpp\n'}
+[7.319006] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__rosidl_typesupport_introspection_cpp.hpp\n'}
+[7.319033] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/norlab_icp_mapper_ros/norlab_icp_mapper_ros/srv/detail/save_map__type_support.cpp\n'}
+[7.319061] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/libnorlab_icp_mapper_ros__rosidl_typesupport_introspection_cpp.so\n'}
+[7.319094] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/libnorlab_icp_mapper_ros__rosidl_typesupport_cpp.so\n'}
+[7.319125] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/environment/pythonpath.sh\n'}
+[7.319157] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/environment/pythonpath.dsv\n'}
+[7.319188] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros-2.0.0-py3.10.egg-info\n'}
+[7.319220] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros-2.0.0-py3.10.egg-info/top_level.txt\n'}
+[7.319254] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros-2.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[7.319289] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros-2.0.0-py3.10.egg-info/PKG-INFO\n'}
+[7.319321] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros-2.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[7.319352] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros\n'}
+[7.319387] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/norlab_icp_mapper_ros_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[7.319419] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/_norlab_icp_mapper_ros_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[7.319450] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/_norlab_icp_mapper_ros_s.ep.rosidl_typesupport_c.c\n'}
+[7.319489] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/__init__.py\n'}
+[7.319526] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/norlab_icp_mapper_ros_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[7.319560] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/srv\n'}
+[7.319600] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/srv/_save_trajectory_s.c\n'}
+[7.319631] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/srv/_save_map_s.c\n'}
+[7.319664] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/srv/_save_trajectory.py\n'}
+[7.319695] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/srv/__init__.py\n'}
+[7.319725] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/srv/_load_map.py\n'}
+[7.319754] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/srv/_load_map_s.c\n'}
+[7.319783] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/srv/_save_map.py\n'}
+[7.319813] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/norlab_icp_mapper_ros_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[7.319855] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/libnorlab_icp_mapper_ros__rosidl_generator_py.so\n'}
+[7.319915] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/_norlab_icp_mapper_ros_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[7.325389] (-) TimerEvent: {}
+[7.350346] (norlab_icp_mapper_ros) StdoutLine: {'line': b"Listing '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros'...\n"}
+[7.350503] (norlab_icp_mapper_ros) StdoutLine: {'line': b"Listing '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/srv'...\n"}
+[7.354868] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/norlab_icp_mapper_ros_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[7.355160] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/norlab_icp_mapper_ros_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[7.355258] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages/norlab_icp_mapper_ros/norlab_icp_mapper_ros_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[7.355337] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/libnorlab_icp_mapper_ros__rosidl_generator_py.so\n'}
+[7.355412] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/SaveTrajectory.idl\n'}
+[7.355461] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/SaveMap.idl\n'}
+[7.355511] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/LoadMap.idl\n'}
+[7.355588] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/SaveTrajectory.srv\n'}
+[7.355635] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/SaveTrajectory_Request.msg\n'}
+[7.355697] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/SaveTrajectory_Response.msg\n'}
+[7.355759] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/SaveMap.srv\n'}
+[7.355803] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/SaveMap_Request.msg\n'}
+[7.355850] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/SaveMap_Response.msg\n'}
+[7.355988] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/LoadMap.srv\n'}
+[7.356051] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/LoadMap_Request.msg\n'}
+[7.356100] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/srv/LoadMap_Response.msg\n'}
+[7.356142] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/norlab_icp_mapper_ros/mapper_node\n'}
+[7.364751] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib/norlab_icp_mapper_ros/mapper_node" to ""\n'}
+[7.364957] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/ament_index/resource_index/package_run_dependencies/norlab_icp_mapper_ros\n'}
+[7.364999] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/ament_index/resource_index/parent_prefix_path/norlab_icp_mapper_ros\n'}
+[7.365046] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/environment/ament_prefix_path.sh\n'}
+[7.365079] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/environment/ament_prefix_path.dsv\n'}
+[7.365124] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/environment/path.sh\n'}
+[7.365161] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/environment/path.dsv\n'}
+[7.365197] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/local_setup.bash\n'}
+[7.365248] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/local_setup.sh\n'}
+[7.365286] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/local_setup.zsh\n'}
+[7.365322] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/local_setup.dsv\n'}
+[7.365357] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/package.dsv\n'}
+[7.365392] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/ament_index/resource_index/packages/norlab_icp_mapper_ros\n'}
+[7.365430] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/export_norlab_icp_mapper_ros__rosidl_generator_cExport.cmake\n'}
+[7.365496] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/export_norlab_icp_mapper_ros__rosidl_generator_cExport-release.cmake\n'}
+[7.365540] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/export_norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[7.365579] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/export_norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_cExport-release.cmake\n'}
+[7.365643] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/export_norlab_icp_mapper_ros__rosidl_generator_cppExport.cmake\n'}
+[7.365689] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/export_norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[7.365732] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/export_norlab_icp_mapper_ros__rosidl_typesupport_fastrtps_cppExport-release.cmake\n'}
+[7.365766] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_ros__rosidl_typesupport_introspection_cExport.cmake\n'}
+[7.365801] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_ros__rosidl_typesupport_introspection_cExport-release.cmake\n'}
+[7.365917] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_ros__rosidl_typesupport_cExport.cmake\n'}
+[7.365951] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_ros__rosidl_typesupport_cExport-release.cmake\n'}
+[7.365981] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_ros__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[7.366027] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_ros__rosidl_typesupport_introspection_cppExport-release.cmake\n'}
+[7.366232] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_ros__rosidl_typesupport_cppExport.cmake\n'}
+[7.366334] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_ros__rosidl_typesupport_cppExport-release.cmake\n'}
+[7.366417] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/export_norlab_icp_mapper_ros__rosidl_generator_pyExport.cmake\n'}
+[7.366499] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/export_norlab_icp_mapper_ros__rosidl_generator_pyExport-release.cmake\n'}
+[7.366578] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/rosidl_cmake-extras.cmake\n'}
+[7.366656] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[7.366733] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[7.366809] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[7.366898] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[7.366939] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[7.366978] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[7.367007] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_rosConfig.cmake\n'}
+[7.367049] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/cmake/norlab_icp_mapper_rosConfig-version.cmake\n'}
+[7.367076] (norlab_icp_mapper_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/share/norlab_icp_mapper_ros/package.xml\n'}
+[7.368396] (norlab_icp_mapper_ros) CommandEnded: {'returncode': 0}
+[7.425537] (-) TimerEvent: {}
+[7.519421] (norlab_icp_mapper_ros) JobEnded: {'identifier': 'norlab_icp_mapper_ros', 'rc': 0}
+[7.520994] (-) EventReactorShutdown: {}
