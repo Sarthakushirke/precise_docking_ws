@@ -105,33 +105,33 @@ class LaserToPointCloud(Node):
         print("FALSE - No data change")
         return False
 
-    # def plot_previous_and_current(self, Q_transformed):
-    #     """Plots the previous scan, current scan, and transformed scan on the same figure."""
+    def plot_previous_and_current(self, Q_transformed):
+        """Plots the previous scan, current scan, and transformed scan on the same figure."""
 
-    #     # Clear the current plot (allows for continuous updates)
-    #     plt.clf()
+        # Clear the current plot (allows for continuous updates)
+        plt.clf()
 
-    #     # Plot the previous scan in red
-    #     if self.prev_scan is not None:
-    #         plt.scatter(self.prev_scan[:, 0], self.prev_scan[:, 1], c='red', marker='o', label='Previous Scan')
+        # Plot the previous scan in red
+        if self.prev_scan is not None:
+            plt.scatter(self.prev_scan[:, 0], self.prev_scan[:, 1], c='red', marker='o', label='Previous Scan')
 
-    #     # Plot the current scan in blue
-    #     if self.current_scan is not None:
-    #         plt.scatter(self.current_scan[:, 0], self.current_scan[:, 1], c='blue', marker='o', label='Current Scan')
+        # Plot the current scan in blue
+        if self.current_scan is not None:
+            plt.scatter(self.current_scan[:, 0], self.current_scan[:, 1], c='blue', marker='o', label='Current Scan')
 
-    #     # Plot the transformed scan in green (only circle outline, no fill)
-    #     if Q_transformed is not None:
-    #         plt.scatter(Q_transformed[:, 0], Q_transformed[:, 1], edgecolors='green', facecolors='none', marker='o', label='Transformed Scan')
+        # Plot the transformed scan in green (only circle outline, no fill)
+        if Q_transformed is not None:
+            plt.scatter(Q_transformed[:, 0], Q_transformed[:, 1], edgecolors='green', facecolors='none', marker='o', label='Transformed Scan')
 
-    #     # Configure the plot
-    #     plt.title('Previous, Current, and Transformed Scans')
-    #     plt.xlabel('X Coordinate (meters)')
-    #     plt.ylabel('Y Coordinate (meters)')
-    #     plt.legend()
-    #     plt.grid(True)
+        # Configure the plot
+        plt.title('Previous, Current, and Transformed Scans')
+        plt.xlabel('X Coordinate (meters)')
+        plt.ylabel('Y Coordinate (meters)')
+        plt.legend()
+        plt.grid(True)
 
-    #     # Use plt.pause to update the figure without blocking
-    #     plt.pause(0.01)  # Pause for a small time to allow plot to update
+        # Use plt.pause to update the figure without blocking
+        plt.pause(0.01)  # Pause for a small time to allow plot to update
 
 
 

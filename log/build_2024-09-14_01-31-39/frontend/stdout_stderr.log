@@ -1,0 +1,21 @@
+[35m[1mConsolidate compiler generated dependencies of target icp_node[0m
+[ 50%] Built target cpp_executable
+[ 50%] Built target ament_cmake_python_copy_frontend
+[ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+running egg_info
+writing frontend.egg-info/PKG-INFO
+writing dependency_links to frontend.egg-info/dependency_links.txt
+writing top-level names to frontend.egg-info/top_level.txt
+reading manifest file 'frontend.egg-info/SOURCES.txt'
+writing manifest file 'frontend.egg-info/SOURCES.txt'
+[ 75%] Built target ament_cmake_python_build_frontend_egg
+[01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::pointCloudCallback(sensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr)[m[K’:
+[01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:58:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kprevious_cloud[m[K’ was not declared in this scope
+   58 |         if (![01;31m[Kprevious_cloud[m[K)
+      |              [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:86:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kprevious_cloud[m[K’ was not declared in this scope
+   86 |         [01;31m[Kprevious_cloud[m[K = data_cloud;
+      |         [01;31m[K^~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

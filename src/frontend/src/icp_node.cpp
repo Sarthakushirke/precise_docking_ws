@@ -54,13 +54,21 @@ private:
             return;
         }
 
+        // If this is the first cloud, store it as the previous cloud and return
+        // if (!previous_cloud)
+        // {
+        //     previous_cloud = data_cloud;
+        //     RCLCPP_INFO(this->get_logger(), "Received first cloud as previous.");
+        //     printPointCloud(*previous_cloud, "previous_cloud");
+        //     return;
+        // }
+
         // // Compute the transformation to express data in reference frame
         PM::TransformationParameters T = icp(data_cloud, *reference_cloud);
 
         // // Apply the transformation
         DP transformed_cloud(data_cloud);
         icp.transformations.apply(transformed_cloud, T);
-
 
 
         // Print the transformed cloud
@@ -73,6 +81,9 @@ private:
         // // Convert back to PointCloud2 and publish
         auto transformed_msg = dataPointsToRosMsg(transformed_cloud);
         transformed_cloud_publisher_->publish(transformed_msg);
+
+        // Update previous_cloud to the current data cloud for the next callback
+        previous_cloud = data_cloud;
 
         // RCLCPP_INFO(this->get_logger(), "Published transformed cloud. Final transformation: \n%s", T);
     }
@@ -225,6 +236,7 @@ private:
 
     PM::ICP icp;
     std::optional<DP> reference_cloud; // Store the reference point cloud
+    std::optional<DP> previous_cloud; // Store the previous point cloud
 };
 
 int main(int argc, char *argv[])
