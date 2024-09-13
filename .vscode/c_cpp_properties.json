@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/include/**",
+        "/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/sarthak/precise_docking_ws/src/frontend/include/**",
+        "/home/sarthak/precise_docking_ws/src/libpointmatcher_ros/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

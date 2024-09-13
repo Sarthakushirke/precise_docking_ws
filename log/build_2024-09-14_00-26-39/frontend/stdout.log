@@ -1,0 +1,10 @@
+[ 50%] Built target cpp_executable
+[ 50%] Built target ament_cmake_python_copy_frontend
+[ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+running egg_info
+writing frontend.egg-info/PKG-INFO
+writing dependency_links to frontend.egg-info/dependency_links.txt
+writing top-level names to frontend.egg-info/top_level.txt
+reading manifest file 'frontend.egg-info/SOURCES.txt'
+writing manifest file 'frontend.egg-info/SOURCES.txt'
+[ 75%] Built target ament_cmake_python_build_frontend_egg

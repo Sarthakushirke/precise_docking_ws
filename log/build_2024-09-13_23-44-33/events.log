@@ -1,0 +1,144 @@
+[0.000000] (-) TimerEvent: {}
+[0.000345] (-) JobUnselected: {'identifier': 'arcuo_marker_detection'}
+[0.000365] (-) JobUnselected: {'identifier': 'docking_bringup'}
+[0.000376] (-) JobUnselected: {'identifier': 'reach_the_goal'}
+[0.000386] (-) JobUnselected: {'identifier': 'template_ros2'}
+[0.000400] (frontend) JobQueued: {'identifier': 'frontend', 'dependencies': OrderedDict()}
+[0.000676] (frontend) JobStarted: {'identifier': 'frontend'}
+[0.009900] (frontend) JobProgress: {'identifier': 'frontend', 'progress': 'cmake'}
+[0.010438] (frontend) JobProgress: {'identifier': 'frontend', 'progress': 'build'}
+[0.011127] (frontend) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/sarthak/precise_docking_ws/build/frontend', '--', '-j20', '-l20'], 'cwd': '/home/sarthak/precise_docking_ws/build/frontend', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '3158'), ('SYSTEMD_EXEC_PID', '3862'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '7243'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:3638'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/x86_64-linux-gnu/pkgconfig:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3824,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3824'), ('INVOCATION_ID', '9350d58de8324d3c9b567241a39417cc'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '25'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:ace5fc49-c312-44bc-b0ab-a566731312e0'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/frontend'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[0.080093] (frontend) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target icp_node\x1b[0m\n'}
+[0.099687] (-) TimerEvent: {}
+[0.101036] (frontend) StdoutLine: {'line': b'[ 50%] Built target cpp_executable\n'}
+[0.104253] (frontend) StdoutLine: {'line': b'[ 50%] Built target ament_cmake_python_copy_frontend\n'}
+[0.126657] (frontend) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o\x1b[0m\n'}
+[0.199826] (-) TimerEvent: {}
+[0.300294] (-) TimerEvent: {}
+[0.357582] (frontend) StdoutLine: {'line': b'running egg_info\n'}
+[0.358160] (frontend) StdoutLine: {'line': b'writing frontend.egg-info/PKG-INFO\n'}
+[0.358359] (frontend) StdoutLine: {'line': b'writing dependency_links to frontend.egg-info/dependency_links.txt\n'}
+[0.358464] (frontend) StdoutLine: {'line': b'writing top-level names to frontend.egg-info/top_level.txt\n'}
+[0.361336] (frontend) StdoutLine: {'line': b"reading manifest file 'frontend.egg-info/SOURCES.txt'\n"}
+[0.361736] (frontend) StdoutLine: {'line': b"writing manifest file 'frontend.egg-info/SOURCES.txt'\n"}
+[0.400393] (-) TimerEvent: {}
+[0.400918] (frontend) StdoutLine: {'line': b'[ 75%] Built target ament_cmake_python_build_frontend_egg\n'}
+[0.500563] (-) TimerEvent: {}
+[0.601183] (-) TimerEvent: {}
+[0.701703] (-) TimerEvent: {}
+[0.802102] (-) TimerEvent: {}
+[0.902528] (-) TimerEvent: {}
+[1.002924] (-) TimerEvent: {}
+[1.103341] (-) TimerEvent: {}
+[1.203792] (-) TimerEvent: {}
+[1.304289] (-) TimerEvent: {}
+[1.404776] (-) TimerEvent: {}
+[1.505302] (-) TimerEvent: {}
+[1.605793] (-) TimerEvent: {}
+[1.706269] (-) TimerEvent: {}
+[1.806715] (-) TimerEvent: {}
+[1.907133] (-) TimerEvent: {}
+[2.007571] (-) TimerEvent: {}
+[2.108154] (-) TimerEvent: {}
+[2.208626] (-) TimerEvent: {}
+[2.309074] (-) TimerEvent: {}
+[2.409483] (-) TimerEvent: {}
+[2.509997] (-) TimerEvent: {}
+[2.610437] (-) TimerEvent: {}
+[2.710810] (-) TimerEvent: {}
+[2.811159] (-) TimerEvent: {}
+[2.911606] (-) TimerEvent: {}
+[3.012165] (-) TimerEvent: {}
+[3.112522] (-) TimerEvent: {}
+[3.212935] (-) TimerEvent: {}
+[3.313306] (-) TimerEvent: {}
+[3.414027] (-) TimerEvent: {}
+[3.514471] (-) TimerEvent: {}
+[3.614817] (-) TimerEvent: {}
+[3.715233] (-) TimerEvent: {}
+[3.815632] (-) TimerEvent: {}
+[3.916031] (-) TimerEvent: {}
+[4.016549] (-) TimerEvent: {}
+[4.117119] (-) TimerEvent: {}
+[4.217621] (-) TimerEvent: {}
+[4.318224] (-) TimerEvent: {}
+[4.418850] (-) TimerEvent: {}
+[4.519496] (-) TimerEvent: {}
+[4.620111] (-) TimerEvent: {}
+[4.720566] (-) TimerEvent: {}
+[4.821111] (-) TimerEvent: {}
+[4.921547] (-) TimerEvent: {}
+[5.022023] (-) TimerEvent: {}
+[5.122451] (-) TimerEvent: {}
+[5.222888] (-) TimerEvent: {}
+[5.323370] (-) TimerEvent: {}
+[5.423845] (-) TimerEvent: {}
+[5.475529] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid ICPNode::plotPointCloud(const DP&, const string&, const string&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.475753] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:174:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kplt\x1b[m\x1b[K\xe2\x80\x99 has not been declared\n'}
+[5.475831] (frontend) StderrLine: {'line': b'  174 |         \x1b[01;31m\x1b[Kplt\x1b[m\x1b[K::scatter(x, y, 10.0, {{"color", color}});\n'}
+[5.475883] (frontend) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[5.475931] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:175:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kplt\x1b[m\x1b[K\xe2\x80\x99 has not been declared\n'}
+[5.475978] (frontend) StderrLine: {'line': b'  175 |         \x1b[01;31m\x1b[Kplt\x1b[m\x1b[K::title(cloud_name);\n'}
+[5.476011] (frontend) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[5.476042] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:176:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kplt\x1b[m\x1b[K\xe2\x80\x99 has not been declared\n'}
+[5.476079] (frontend) StderrLine: {'line': b'  176 |         \x1b[01;31m\x1b[Kplt\x1b[m\x1b[K::xlabel("X");\n'}
+[5.476114] (frontend) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[5.476147] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:177:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kplt\x1b[m\x1b[K\xe2\x80\x99 has not been declared\n'}
+[5.476176] (frontend) StderrLine: {'line': b'  177 |         \x1b[01;31m\x1b[Kplt\x1b[m\x1b[K::ylabel("Y");\n'}
+[5.476205] (frontend) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[5.476233] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:178:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kplt\x1b[m\x1b[K\xe2\x80\x99 has not been declared\n'}
+[5.476268] (frontend) StderrLine: {'line': b'  178 |         \x1b[01;31m\x1b[Kplt\x1b[m\x1b[K::grid(true);\n'}
+[5.476296] (frontend) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[5.476324] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:179:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kplt\x1b[m\x1b[K\xe2\x80\x99 has not been declared\n'}
+[5.476354] (frontend) StderrLine: {'line': b'  179 |         \x1b[01;31m\x1b[Kplt\x1b[m\x1b[K::pause(0.01);  // Pause to allow live updates\n'}
+[5.476383] (frontend) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[5.476412] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:180:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kplt\x1b[m\x1b[K\xe2\x80\x99 has not been declared\n'}
+[5.476440] (frontend) StderrLine: {'line': b'  180 |         \x1b[01;31m\x1b[Kplt\x1b[m\x1b[K::clf();  // Clear the plot for the next frame\n'}
+[5.476468] (frontend) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[5.523981] (-) TimerEvent: {}
+[5.624473] (-) TimerEvent: {}
+[5.724853] (-) TimerEvent: {}
+[5.825258] (-) TimerEvent: {}
+[5.925821] (-) TimerEvent: {}
+[6.026170] (-) TimerEvent: {}
+[6.126614] (-) TimerEvent: {}
+[6.227008] (-) TimerEvent: {}
+[6.327550] (-) TimerEvent: {}
+[6.427959] (-) TimerEvent: {}
+[6.528325] (-) TimerEvent: {}
+[6.628757] (-) TimerEvent: {}
+[6.729103] (-) TimerEvent: {}
+[6.829483] (-) TimerEvent: {}
+[6.929929] (-) TimerEvent: {}
+[7.030331] (-) TimerEvent: {}
+[7.130794] (-) TimerEvent: {}
+[7.231249] (-) TimerEvent: {}
+[7.331689] (-) TimerEvent: {}
+[7.432045] (-) TimerEvent: {}
+[7.532396] (-) TimerEvent: {}
+[7.632935] (-) TimerEvent: {}
+[7.733387] (-) TimerEvent: {}
+[7.833972] (-) TimerEvent: {}
+[7.934422] (-) TimerEvent: {}
+[8.034906] (-) TimerEvent: {}
+[8.135270] (-) TimerEvent: {}
+[8.235891] (-) TimerEvent: {}
+[8.336562] (-) TimerEvent: {}
+[8.436914] (-) TimerEvent: {}
+[8.537512] (-) TimerEvent: {}
+[8.637864] (-) TimerEvent: {}
+[8.738378] (-) TimerEvent: {}
+[8.839007] (-) TimerEvent: {}
+[8.940202] (-) TimerEvent: {}
+[9.041031] (-) TimerEvent: {}
+[9.141357] (-) TimerEvent: {}
+[9.241887] (-) TimerEvent: {}
+[9.342510] (-) TimerEvent: {}
+[9.443002] (-) TimerEvent: {}
+[9.543459] (-) TimerEvent: {}
+[9.545640] (frontend) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1\n'}
+[9.545925] (frontend) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2\n'}
+[9.546203] (frontend) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[9.549614] (frontend) CommandEnded: {'returncode': 2}
+[9.632776] (frontend) JobEnded: {'identifier': 'frontend', 'rc': 2}
+[9.643379] (-) EventReactorShutdown: {}

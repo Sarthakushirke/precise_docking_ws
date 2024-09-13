@@ -1,0 +1,38 @@
+[0.011s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.080s] [35m[1mConsolidate compiler generated dependencies of target icp_node[0m
+[0.101s] [ 50%] Built target cpp_executable
+[0.104s] [ 50%] Built target ament_cmake_python_copy_frontend
+[0.126s] [ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[0.357s] running egg_info
+[0.358s] writing frontend.egg-info/PKG-INFO
+[0.358s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[0.358s] writing top-level names to frontend.egg-info/top_level.txt
+[0.361s] reading manifest file 'frontend.egg-info/SOURCES.txt'
+[0.361s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[0.400s] [ 75%] Built target ament_cmake_python_build_frontend_egg
+[5.475s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::plotPointCloud(const DP&, const string&, const string&)[m[K’:
+[5.475s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:174:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[5.475s]   174 |         [01;31m[Kplt[m[K::scatter(x, y, 10.0, {{"color", color}});
+[5.475s]       |         [01;31m[K^~~[m[K
+[5.475s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:175:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[5.475s]   175 |         [01;31m[Kplt[m[K::title(cloud_name);
+[5.475s]       |         [01;31m[K^~~[m[K
+[5.475s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:176:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[5.475s]   176 |         [01;31m[Kplt[m[K::xlabel("X");
+[5.475s]       |         [01;31m[K^~~[m[K
+[5.475s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:177:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[5.476s]   177 |         [01;31m[Kplt[m[K::ylabel("Y");
+[5.476s]       |         [01;31m[K^~~[m[K
+[5.476s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:178:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[5.476s]   178 |         [01;31m[Kplt[m[K::grid(true);
+[5.476s]       |         [01;31m[K^~~[m[K
+[5.476s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:179:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[5.476s]   179 |         [01;31m[Kplt[m[K::pause(0.01);  // Pause to allow live updates
+[5.476s]       |         [01;31m[K^~~[m[K
+[5.476s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:180:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[5.476s]   180 |         [01;31m[Kplt[m[K::clf();  // Clear the plot for the next frame
+[5.476s]       |         [01;31m[K^~~[m[K
+[9.545s] gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
+[9.545s] gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
+[9.546s] gmake: *** [Makefile:146: all] Error 2
+[9.550s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20

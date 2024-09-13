@@ -1,0 +1,63 @@
+[0.016s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.054s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.252s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.289s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.291s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.297s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.313s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.324s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.370s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[0.388s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.390s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.492s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.533s] -- Found rclpy: 3.3.14 (/opt/ros/humble/share/rclpy/cmake)
+[0.545s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time 
+[0.553s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time chrono 
+[0.554s] -- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)
+[0.567s] -- Found tf2_ros: 0.25.7 (/opt/ros/humble/share/tf2_ros/cmake)
+[0.627s] -- Found tf2_geometry_msgs: 0.25.7 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[0.629s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[0.630s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.829s] -- Configuring done
+[0.848s] -- Generating done
+[0.851s] -- Build files have been written to: /home/sarthak/precise_docking_ws/build/frontend
+[0.895s] [35m[1mConsolidate compiler generated dependencies of target cpp_executable[0m
+[0.897s] [35m[1mConsolidate compiler generated dependencies of target icp_node[0m
+[0.922s] [ 25%] [32mBuilding CXX object CMakeFiles/cpp_executable.dir/src/cpp_node.cpp.o[0m
+[0.925s] [ 25%] Built target ament_cmake_python_copy_frontend
+[0.938s] [ 50%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[1.182s] running egg_info
+[1.182s] writing frontend.egg-info/PKG-INFO
+[1.183s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[1.183s] writing top-level names to frontend.egg-info/top_level.txt
+[1.186s] reading manifest file 'frontend.egg-info/SOURCES.txt'
+[1.187s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[1.230s] [ 50%] Built target ament_cmake_python_build_frontend_egg
+[4.294s] [ 75%] [32m[1mLinking CXX executable cpp_executable[0m
+[4.528s] [ 75%] Built target cpp_executable
+[6.561s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::plotPointCloud(const DP&, const string&, const string&)[m[K’:
+[6.561s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:176:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[6.561s]   176 |         [01;31m[Kplt[m[K::scatter(x, y, 10.0, {{"color", color}});
+[6.561s]       |         [01;31m[K^~~[m[K
+[6.561s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:177:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[6.562s]   177 |         [01;31m[Kplt[m[K::title(cloud_name);
+[6.562s]       |         [01;31m[K^~~[m[K
+[6.562s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:178:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[6.562s]   178 |         [01;31m[Kplt[m[K::xlabel("X");
+[6.562s]       |         [01;31m[K^~~[m[K
+[6.563s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:179:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[6.563s]   179 |         [01;31m[Kplt[m[K::ylabel("Y");
+[6.563s]       |         [01;31m[K^~~[m[K
+[6.563s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:180:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[6.564s]   180 |         [01;31m[Kplt[m[K::grid(true);
+[6.564s]       |         [01;31m[K^~~[m[K
+[6.564s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:181:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[6.564s]   181 |         [01;31m[Kplt[m[K::pause(0.01);  // Pause to allow live updates
+[6.565s]       |         [01;31m[K^~~[m[K
+[6.565s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:182:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kplt[m[K’ has not been declared
+[6.565s]   182 |         [01;31m[Kplt[m[K::clf();  // Clear the plot for the next frame
+[6.565s]       |         [01;31m[K^~~[m[K
+[10.476s] gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
+[10.476s] gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
+[10.476s] gmake: *** [Makefile:146: all] Error 2
+[10.479s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20

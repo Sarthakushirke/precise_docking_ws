@@ -1,5 +1,6 @@
 setup.py
 frontend/__init__.py
+frontend/icp.py
 frontend/module_to_import.py
 frontend.egg-info/PKG-INFO
 frontend.egg-info/SOURCES.txt

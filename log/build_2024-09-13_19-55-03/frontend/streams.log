@@ -1,0 +1,168 @@
+[0.020s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.057s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.234s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.261s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.264s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.270s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.284s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.299s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.381s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[0.412s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.414s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.614s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.668s] -- Found rclpy: 3.3.14 (/opt/ros/humble/share/rclpy/cmake)
+[0.685s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time 
+[0.693s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time chrono 
+[0.695s] -- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)
+[0.715s] -- Found tf2_ros: 0.25.7 (/opt/ros/humble/share/tf2_ros/cmake)
+[0.819s] -- Found tf2_geometry_msgs: 0.25.7 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[0.822s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[0.825s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[1.046s] -- Configuring done
+[1.073s] -- Generating done
+[1.080s] -- Build files have been written to: /home/sarthak/precise_docking_ws/build/frontend
+[1.137s] [35m[1mConsolidate compiler generated dependencies of target icp_node[0m
+[1.138s] [35m[1mConsolidate compiler generated dependencies of target cpp_executable[0m
+[1.172s] [ 25%] Built target ament_cmake_python_copy_frontend
+[1.173s] [ 50%] Built target cpp_executable
+[1.189s] [ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[1.501s] running egg_info
+[1.503s] writing frontend.egg-info/PKG-INFO
+[1.503s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[1.504s] writing top-level names to frontend.egg-info/top_level.txt
+[1.509s] reading manifest file 'frontend.egg-info/SOURCES.txt'
+[1.511s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[1.555s] [ 75%] Built target ament_cmake_python_build_frontend_egg
+[7.448s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[7.448s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[7.448s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[7.448s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[7.448s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[7.448s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[7.449s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[7.449s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[7.449s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.449s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.449s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.449s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:1[m[K:
+[7.449s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::pointCloudCallback(sensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr)[m[K’:
+[7.449s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:54:41:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%s[m[K’ expects argument of type ‘[01m[Kchar*[m[K’, but argument 5 has type ‘[01m[KPointMatcher<float>::TransformationParameters[m[K’ {aka ‘[01m[KEigen::Matrix<float, -1, -1>[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+[7.449s]    54 |         RCLCPP_INFO(this->get_logger(), [01;35m[K"Published transformed cloud. Final transformation: \n%s"[m[K, T);
+[7.450s]       |                                         [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[7.450s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:54:96:[m[K [01;36m[Knote: [m[Kformat string is defined here
+[7.450s]    54 |         RCLCPP_INFO(this->get_logger(), "Published transformed cloud. Final transformation: \n[01;36m[K%s[m[K", T);
+[7.450s]       |                                                                                               [01;36m[K~^[m[K
+[7.450s]       |                                                                                                [01;36m[K|[m[K
+[7.450s]       |                                                                                                [01;36m[Kchar*[m[K
+[7.465s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[KDP ICPNode::rosMsgToDataPoints(sensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr)[m[K’:
+[7.465s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:69:63:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KEigen::Block<Eigen::Matrix<float, -1, -1>, -1, -1, false>::Block(unsigned char*, sensor_msgs::msg::PointCloud2_<std::allocator<void> >::_width_type&)[m[K’
+[7.465s]    69 |         DP::View viewX = DP::View(msg->data.data(), msg->width[01;31m[K)[m[K;
+[7.465s]       |                                                               [01;31m[K^[m[K
+[7.465s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:309[m[K,
+[7.465s]                  from [01m[K/usr/include/eigen3/Eigen/StdVector:14[m[K,
+[7.465s]                  from [01m[K/usr/local/include/pointmatcher/PointMatcher.h:47[m[K,
+[7.466s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:4[m[K:
+[7.466s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:139:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Block<XprType, BlockRows, BlockCols, InnerPanel>::Block(XprType&, Eigen::Index, Eigen::Index, Eigen::Index, Eigen::Index) [with XprType = Eigen::Matrix<float, -1, -1>; int BlockRows = -1; int BlockCols = -1; bool InnerPanel = false; Eigen::Index = long int][m[K’
+[7.466s]   139 |     [01;36m[KBlock[m[K(XprType& xpr,
+[7.466s]       |     [01;36m[K^~~~~[m[K
+[7.467s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:139:5:[m[K [01;36m[Knote: [m[K  candidate expects 5 arguments, 2 provided
+[7.467s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:128:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Block<XprType, BlockRows, BlockCols, InnerPanel>::Block(XprType&, Eigen::Index, Eigen::Index) [with XprType = Eigen::Matrix<float, -1, -1>; int BlockRows = -1; int BlockCols = -1; bool InnerPanel = false; Eigen::Index = long int][m[K’
+[7.467s]   128 |     [01;36m[KBlock[m[K(XprType& xpr, Index startRow, Index startCol)
+[7.467s]       |     [01;36m[K^~~~~[m[K
+[7.467s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:128:5:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 2 provided
+[7.467s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:118:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Block<XprType, BlockRows, BlockCols, InnerPanel>::Block(XprType&, Eigen::Index) [with XprType = Eigen::Matrix<float, -1, -1>; int BlockRows = -1; int BlockCols = -1; bool InnerPanel = false; Eigen::Index = long int][m[K’
+[7.467s]   118 |     [01;36m[KBlock[m[K(XprType& xpr, Index i) : Impl(xpr,i)
+[7.467s]       |     [01;36m[K^~~~~[m[K
+[7.468s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:118:20:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kunsigned char*[m[K’ to ‘[01m[KEigen::Matrix<float, -1, -1>&[m[K’
+[7.468s]   118 |     Block([01;36m[KXprType& xpr[m[K, Index i) : Impl(xpr,i)
+[7.468s]       |           [01;36m[K~~~~~~~~~^~~[m[K
+[7.468s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:19[m[K,
+[7.468s]                  from [01m[K/usr/include/eigen3/Eigen/StdVector:14[m[K,
+[7.468s]                  from [01m[K/usr/local/include/pointmatcher/PointMatcher.h:47[m[K,
+[7.468s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:4[m[K:
+[7.468s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:111:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kconstexpr Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>::Block(const Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>&) [with XprType = Eigen::Matrix<float, -1, -1>; int BlockRows = -1; int BlockCols = -1; bool InnerPanel = false][m[K’
+[7.468s]   111 |     [01;36m[KEIGEN_INHERIT_ASSIGNMENT_OPERATORS[m[K(Block)
+[7.468s]       |     [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[7.468s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:111:5:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 2 provided
+[7.468s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:70:79:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KEigen::Block<Eigen::Matrix<float, -1, -1>, -1, -1, false>::Block(unsigned char*, sensor_msgs::msg::PointCloud2_<std::allocator<void> >::_width_type&)[m[K’
+[7.468s]    70 |         DP::View viewY = DP::View(msg->data.data() + sizeof(float), msg->width[01;31m[K)[m[K;
+[7.468s]       |                                                                               [01;31m[K^[m[K
+[7.468s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:309[m[K,
+[7.468s]                  from [01m[K/usr/include/eigen3/Eigen/StdVector:14[m[K,
+[7.468s]                  from [01m[K/usr/local/include/pointmatcher/PointMatcher.h:47[m[K,
+[7.468s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:4[m[K:
+[7.468s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:139:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Block<XprType, BlockRows, BlockCols, InnerPanel>::Block(XprType&, Eigen::Index, Eigen::Index, Eigen::Index, Eigen::Index) [with XprType = Eigen::Matrix<float, -1, -1>; int BlockRows = -1; int BlockCols = -1; bool InnerPanel = false; Eigen::Index = long int][m[K’
+[7.468s]   139 |     [01;36m[KBlock[m[K(XprType& xpr,
+[7.468s]       |     [01;36m[K^~~~~[m[K
+[7.468s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:139:5:[m[K [01;36m[Knote: [m[K  candidate expects 5 arguments, 2 provided
+[7.469s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:128:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Block<XprType, BlockRows, BlockCols, InnerPanel>::Block(XprType&, Eigen::Index, Eigen::Index) [with XprType = Eigen::Matrix<float, -1, -1>; int BlockRows = -1; int BlockCols = -1; bool InnerPanel = false; Eigen::Index = long int][m[K’
+[7.469s]   128 |     [01;36m[KBlock[m[K(XprType& xpr, Index startRow, Index startCol)
+[7.469s]       |     [01;36m[K^~~~~[m[K
+[7.469s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:128:5:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 2 provided
+[7.469s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:118:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Block<XprType, BlockRows, BlockCols, InnerPanel>::Block(XprType&, Eigen::Index) [with XprType = Eigen::Matrix<float, -1, -1>; int BlockRows = -1; int BlockCols = -1; bool InnerPanel = false; Eigen::Index = long int][m[K’
+[7.469s]   118 |     [01;36m[KBlock[m[K(XprType& xpr, Index i) : Impl(xpr,i)
+[7.469s]       |     [01;36m[K^~~~~[m[K
+[7.469s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:118:20:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kunsigned char*[m[K’ to ‘[01m[KEigen::Matrix<float, -1, -1>&[m[K’
+[7.469s]   118 |     Block([01;36m[KXprType& xpr[m[K, Index i) : Impl(xpr,i)
+[7.469s]       |           [01;36m[K~~~~~~~~~^~~[m[K
+[7.469s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:19[m[K,
+[7.469s]                  from [01m[K/usr/include/eigen3/Eigen/StdVector:14[m[K,
+[7.469s]                  from [01m[K/usr/local/include/pointmatcher/PointMatcher.h:47[m[K,
+[7.469s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:4[m[K:
+[7.469s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:111:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kconstexpr Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>::Block(const Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>&) [with XprType = Eigen::Matrix<float, -1, -1>; int BlockRows = -1; int BlockCols = -1; bool InnerPanel = false][m[K’
+[7.469s]   111 |     [01;36m[KEIGEN_INHERIT_ASSIGNMENT_OPERATORS[m[K(Block)
+[7.469s]       |     [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[7.469s] [01m[K/usr/include/eigen3/Eigen/src/Core/Block.h:111:5:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 2 provided
+[7.469s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:72:36:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KPointMatcher<float>::DataPoints::DataPoints(PointMatcher<float>::DataPoints::Labels&)[m[K’
+[7.469s]    72 |         DP dataPoints(featureLabels[01;31m[K)[m[K;
+[7.469s]       |                                    [01;31m[K^[m[K
+[7.469s] In file included from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:4[m[K:
+[7.469s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:263:17:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KPointMatcher<T>::DataPoints::DataPoints(const Matrix&, const PointMatcher<T>::DataPoints::Labels&, const Matrix&, const PointMatcher<T>::DataPoints::Labels&, const Int64Matrix&, const PointMatcher<T>::DataPoints::Labels&) [with T = float; PointMatcher<T>::Matrix = Eigen::Matrix<float, -1, -1>; PointMatcher<T>::Int64Matrix = Eigen::Matrix<long int, -1, -1>][m[K’
+[7.470s]   263 |                 [01;36m[KDataPoints[m[K(const Matrix& features, const Labels& featureLabels, const Matrix& descriptors, const Labels& descriptorLabels, const Int64Matrix& times, const Labels& timeLabels);
+[7.470s]       |                 [01;36m[K^~~~~~~~~~[m[K
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:263:17:[m[K [01;36m[Knote: [m[K  candidate expects 6 arguments, 1 provided
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:262:17:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KPointMatcher<T>::DataPoints::DataPoints(const Matrix&, const PointMatcher<T>::DataPoints::Labels&, const Matrix&, const PointMatcher<T>::DataPoints::Labels&) [with T = float; PointMatcher<T>::Matrix = Eigen::Matrix<float, -1, -1>][m[K’
+[7.470s]   262 |                 [01;36m[KDataPoints[m[K(const Matrix& features, const Labels& featureLabels, const Matrix& descriptors, const Labels& descriptorLabels);
+[7.470s]       |                 [01;36m[K^~~~~~~~~~[m[K
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:262:17:[m[K [01;36m[Knote: [m[K  candidate expects 4 arguments, 1 provided
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:261:17:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KPointMatcher<T>::DataPoints::DataPoints(const Matrix&, const PointMatcher<T>::DataPoints::Labels&) [with T = float; PointMatcher<T>::Matrix = Eigen::Matrix<float, -1, -1>][m[K’
+[7.470s]   261 |                 [01;36m[KDataPoints[m[K(const Matrix& features, const Labels& featureLabels);
+[7.470s]       |                 [01;36m[K^~~~~~~~~~[m[K
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:261:17:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:258:17:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KPointMatcher<T>::DataPoints::DataPoints(const PointMatcher<T>::DataPoints::Labels&, const PointMatcher<T>::DataPoints::Labels&, const PointMatcher<T>::DataPoints::Labels&, size_t) [with T = float; size_t = long unsigned int][m[K’
+[7.470s]   258 |                 [01;36m[KDataPoints[m[K(const Labels& featureLabels, const Labels& descriptorLabels, const Labels& timeLabels, const size_t pointCount);
+[7.470s]       |                 [01;36m[K^~~~~~~~~~[m[K
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:258:17:[m[K [01;36m[Knote: [m[K  candidate expects 4 arguments, 1 provided
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:257:17:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KPointMatcher<T>::DataPoints::DataPoints(const PointMatcher<T>::DataPoints::Labels&, const PointMatcher<T>::DataPoints::Labels&, size_t) [with T = float; size_t = long unsigned int][m[K’
+[7.470s]   257 |                 [01;36m[KDataPoints[m[K(const Labels& featureLabels, const Labels& descriptorLabels, const size_t pointCount);
+[7.470s]       |                 [01;36m[K^~~~~~~~~~[m[K
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:257:17:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 1 provided
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:256:17:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KPointMatcher<T>::DataPoints::DataPoints() [with T = float][m[K’
+[7.470s]   256 |                 [01;36m[KDataPoints[m[K();
+[7.470s]       |                 [01;36m[K^~~~~~~~~~[m[K
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:256:17:[m[K [01;36m[Knote: [m[K  candidate expects 0 arguments, 1 provided
+[7.470s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:207:16:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KPointMatcher<float>::DataPoints::DataPoints(const PointMatcher<float>::DataPoints&)[m[K’
+[7.470s]   207 |         struct [01;36m[KDataPoints[m[K
+[7.471s]       |                [01;36m[K^~~~~~~~~~[m[K
+[7.471s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:207:16:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[KPointMatcher<float>::DataPoints::Labels[m[K’ to ‘[01m[Kconst PointMatcher<float>::DataPoints&[m[K’
+[7.471s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:207:16:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KPointMatcher<float>::DataPoints::DataPoints(PointMatcher<float>::DataPoints&&)[m[K’
+[7.471s] [01m[K/usr/local/include/pointmatcher/PointMatcher.h:207:16:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[KPointMatcher<float>::DataPoints::Labels[m[K’ to ‘[01m[KPointMatcher<float>::DataPoints&&[m[K’
+[7.471s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Ksensor_msgs::msg::PointCloud2 ICPNode::dataPointsToRosMsg(const DP&)[m[K’:
+[7.471s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:87:64:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcloud[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[7.472s]    87 |     sensor_msgs::msg::PointCloud2 dataPointsToRosMsg([01;35m[Kconst DP& cloud[m[K)
+[7.472s]       |                                                      [01;35m[K~~~~~~~~~~^~~~~[m[K
+[7.926s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:164[m[K,
+[7.926s]                  from [01m[K/usr/include/eigen3/Eigen/StdVector:14[m[K,
+[7.926s]                  from [01m[K/usr/local/include/pointmatcher/PointMatcher.h:47[m[K,
+[7.926s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:4[m[K:
+[7.926s] /usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h: In instantiation of ‘[01m[KEigen::DenseCoeffsBase<Derived, 1>::Scalar& Eigen::DenseCoeffsBase<Derived, 1>::coeffRef(Eigen::Index) [with Derived = Eigen::Block<Eigen::Matrix<float, -1, -1>, -1, -1, false>; Eigen::DenseCoeffsBase<Derived, 1>::Scalar = float; Eigen::Index = long int][m[K’:
+[7.926s] [01m[K/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:428:22:[m[K   required from ‘[01m[KEigen::DenseCoeffsBase<Derived, 1>::Scalar& Eigen::DenseCoeffsBase<Derived, 1>::operator()(Eigen::Index) [with Derived = Eigen::Block<Eigen::Matrix<float, -1, -1>, -1, -1, false>; Eigen::DenseCoeffsBase<Derived, 1>::Scalar = float; Eigen::Index = long int][m[K’
+[7.926s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:76:28:[m[K   required from here
+[7.926s] [01m[K/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:391:7:[m[K [01;31m[Kerror: [m[Kstatic assertion failed: THIS_COEFFICIENT_ACCESSOR_TAKING_ONE_ACCESS_IS_ONLY_FOR_EXPRESSIONS_ALLOWING_LINEAR_ACCESS
+[7.926s]   391 |       [01;31m[KEIGEN_STATIC_ASSERT[m[K(internal::evaluator<Derived>::Flags & LinearAccessBit,
+[7.926s]       |       [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
+[7.926s] [01m[K/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:391:7:[m[K [01;36m[Knote: [m[K‘[01m[K(((unsigned int)((int)Eigen::internal::evaluator<Eigen::Block<Eigen::Matrix<float, -1, -1>, -1, -1, false> >::Flags)) & ((unsigned int)Eigen::LinearAccessBit))[m[K’ evaluates to false
+[11.791s] gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
+[11.791s] gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
+[11.792s] gmake: *** [Makefile:146: all] Error 2
+[11.795s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20

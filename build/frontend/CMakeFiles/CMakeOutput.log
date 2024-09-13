@@ -495,3 +495,20 @@ int main(void)
   return 0;
 }
 
+Performing C++ SOURCE FILE Test HAS_FLTO succeeded with the following output:
+Change Dir: /home/sarthak/precise_docking_ws/build/frontend/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_498fc/fast && gmake[1]: Entering directory '/home/sarthak/precise_docking_ws/build/frontend/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_498fc.dir/build.make CMakeFiles/cmTC_498fc.dir/build
+gmake[2]: Entering directory '/home/sarthak/precise_docking_ws/build/frontend/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_498fc.dir/src.cxx.o
+/usr/bin/c++ -DHAS_FLTO  -flto -fno-fat-lto-objects -o CMakeFiles/cmTC_498fc.dir/src.cxx.o -c /home/sarthak/precise_docking_ws/build/frontend/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_498fc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_498fc.dir/link.txt --verbose=1
+/usr/bin/c++ CMakeFiles/cmTC_498fc.dir/src.cxx.o -o cmTC_498fc  -flto 
+gmake[2]: Leaving directory '/home/sarthak/precise_docking_ws/build/frontend/CMakeFiles/CMakeTmp'
+gmake[1]: Leaving directory '/home/sarthak/precise_docking_ws/build/frontend/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main() { return 0; }

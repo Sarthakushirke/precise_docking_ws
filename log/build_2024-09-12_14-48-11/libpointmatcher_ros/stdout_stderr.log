@@ -1,0 +1,26 @@
+[100%] Built target pointmatcher_ros
+-- Install configuration: ""
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/include/libpointmatcher_ros/include
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/include/libpointmatcher_ros/include/pointmatcher_ros
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/include/libpointmatcher_ros/include/pointmatcher_ros/PointMatcher_ROS.h
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib/libpointmatcher_ros.a
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/environment/library_path.sh
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/environment/library_path.dsv
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/ament_index/resource_index/package_run_dependencies/libpointmatcher_ros
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/ament_index/resource_index/parent_prefix_path/libpointmatcher_ros
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/environment/ament_prefix_path.sh
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/environment/path.sh
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/environment/path.dsv
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/local_setup.bash
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/local_setup.sh
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/local_setup.zsh
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/local_setup.dsv
+-- Installing: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/package.dsv
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/ament_index/resource_index/packages/libpointmatcher_ros
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/cmake/ament_cmake_export_libraries-extras.cmake
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/cmake/libpointmatcher_rosConfig.cmake
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/cmake/libpointmatcher_rosConfig-version.cmake
+-- Up-to-date: /home/sarthak/precise_docking_ws/install/libpointmatcher_ros/share/libpointmatcher_ros/package.xml
