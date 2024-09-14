@@ -45,26 +45,28 @@ private:
 
         
         // // Assuming we already have the reference point cloud
-        if (!reference_cloud)
-        {
-            reference_cloud = data_cloud;
-            RCLCPP_INFO(this->get_logger(), "Received first cloud as reference.");
-            printPointCloud(*reference_cloud, "reference_cloud");
-            
-            return;
-        }
-
-        // If this is the first cloud, store it as the previous cloud and return
-        // if (!previous_cloud)
+        // if (!reference_cloud)
         // {
-        //     previous_cloud = data_cloud;
-        //     RCLCPP_INFO(this->get_logger(), "Received first cloud as previous.");
-        //     printPointCloud(*previous_cloud, "previous_cloud");
+        //     reference_cloud = data_cloud;
+        //     RCLCPP_INFO(this->get_logger(), "Received first cloud as reference.");
+        //     printPointCloud(*reference_cloud, "reference_cloud");
+            
         //     return;
         // }
 
+        // If this is the first cloud, store it as the previous cloud and return
+        if (!previous_cloud)
+        {
+            previous_cloud = data_cloud;
+            RCLCPP_INFO(this->get_logger(), "Received first cloud as previous.");
+            printPointCloud(*previous_cloud, "previous_cloud");
+            return;
+        }
+
         // // Compute the transformation to express data in reference frame
-        PM::TransformationParameters T = icp(data_cloud, *reference_cloud);
+        // PM::TransformationParameters T = icp(data_cloud, *reference_cloud);
+
+        PM::TransformationParameters T = icp(data_cloud, *previous_cloud);
 
         // // Apply the transformation
         DP transformed_cloud(data_cloud);
@@ -75,7 +77,8 @@ private:
         printPointCloud(transformed_cloud, "transformed_cloud");
 
         // Plot all clouds together
-        plotMultiplePointClouds(*reference_cloud, data_cloud, transformed_cloud);
+        // plotMultiplePointClouds(*reference_cloud, data_cloud, transformed_cloud);
+        plotMultiplePointClouds(*previous_cloud, data_cloud, transformed_cloud);
 
 
         // // Convert back to PointCloud2 and publish
