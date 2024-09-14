@@ -39,42 +39,29 @@ private:
         RCLCPP_INFO(this->get_logger(), "Received a new point cloud.");
         // Convert the ROS PointCloud2 message to libpointmatcher DataPoints
         DP data_cloud = rosMsgToDataPoints(msg);
-
-         // Print the data_cloud
-        printPointCloud(data_cloud, "data_cloud");
-
         
-        // // Assuming we already have the reference point cloud
-        // if (!reference_cloud)
-        // {
-        //     reference_cloud = data_cloud;
-        //     RCLCPP_INFO(this->get_logger(), "Received first cloud as reference.");
-        //     printPointCloud(*reference_cloud, "reference_cloud");
-            
-        //     return;
-        // }
-
         // If this is the first cloud, store it as the previous cloud and return
         if (!previous_cloud)
         {
             previous_cloud = data_cloud;
             RCLCPP_INFO(this->get_logger(), "Received first cloud as previous.");
-            printPointCloud(*previous_cloud, "previous_cloud");
+            // printPointCloud(*previous_cloud, "previous_cloud");
             return;
         }
 
         // // Compute the transformation to express data in reference frame
-        // PM::TransformationParameters T = icp(data_cloud, *reference_cloud);
-
         PM::TransformationParameters T = icp(data_cloud, *previous_cloud);
+
+        // Convert matrix T to string for logging
+        std::ostringstream oss;
+        oss << T;
+
+        RCLCPP_INFO(this->get_logger(), "Published transformed cloud. Final transformation: \n%s", oss.str().c_str());
+
 
         // // Apply the transformation
         DP transformed_cloud(data_cloud);
         icp.transformations.apply(transformed_cloud, T);
-
-
-        // Print the transformed cloud
-        printPointCloud(transformed_cloud, "transformed_cloud");
 
         // Plot all clouds together
         // plotMultiplePointClouds(*reference_cloud, data_cloud, transformed_cloud);
@@ -88,7 +75,6 @@ private:
         // Update previous_cloud to the current data cloud for the next callback
         previous_cloud = data_cloud;
 
-        // RCLCPP_INFO(this->get_logger(), "Published transformed cloud. Final transformation: \n%s", T);
     }
 
     // Helper function to convert ROS PointCloud2 to libpointmatcher DataPoints

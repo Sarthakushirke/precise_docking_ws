@@ -6,6 +6,7 @@ from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import Odometry
 from tf2_ros import Buffer, TransformListener, TransformException
 from tf2_geometry_msgs.tf2_geometry_msgs import do_transform_pose
+import matplotlib.pyplot as plt
 
 class OdomToMap(Node):
     def __init__(self):
@@ -23,6 +24,17 @@ class OdomToMap(Node):
             10
         )
 
+        # Store the previous transformed odom pose
+        self.previous_transformed_pose = None
+
+        # Initialize lists to store x and y positions for plotting
+        self.x_positions = []
+        self.y_positions = []
+
+        # Setup the plot
+        plt.ion()  # Interactive mode on
+        self.fig, self.ax = plt.subplots()
+
     def odom_callback(self, msg):
         # Extract position and orientation from odometry data
         odom_pose = PoseStamped()
@@ -31,10 +43,41 @@ class OdomToMap(Node):
 
 
         # Print the pose (position and orientation) from odometry
-        self.print_pose(odom_pose.pose)
+        # self.print_pose(odom_pose.pose)
 
         # Transform odometry pose to the map frame
-        self.transform_odometry_to_map(odom_pose.pose)
+        transformed_pose = self.transform_odometry_to_map(odom_pose.pose)
+
+
+        if transformed_pose:
+            # Print the current transformed pose
+            # self.print_pose(transformed_pose.pose, frame="diff_drive/lidar_link")
+
+            # Calculate and print the difference between the current and previous transformed poses
+            if self.previous_transformed_pose:
+                self.calculate_pose_difference(self.previous_transformed_pose, transformed_pose)
+
+                
+            # Update the previous transformed pose to the current one
+            self.previous_transformed_pose = transformed_pose
+
+            # Add the current transformed position to the lists
+            self.x_positions.append(transformed_pose.position.x)
+            self.y_positions.append(transformed_pose.position.y)
+
+            # Plot the odometry trajectory
+            self.plot_trajectory()
+
+
+    def calculate_pose_difference(self, previous_pose, current_pose):
+        # Calculate the translation difference
+        delta_x = current_pose.position.x - previous_pose.position.x
+        delta_y = current_pose.position.y - previous_pose.position.y
+        delta_z = current_pose.position.z - previous_pose.position.z
+
+        # Log the differences
+        self.get_logger().info(f"Transformed Pose Difference: Δx={delta_x:.3f}, Δy={delta_y:.3f}, Δz={delta_z:.3f}")
+
 
 
     def print_pose(self, pose):
@@ -64,8 +107,8 @@ class OdomToMap(Node):
             # self.get_logger().info("Here is the data")
 
             # # Log the transformed position and orientation in the map frame
-            self.get_logger().info(f"Transformed Odometry in lidar  Frame: {transformed_pose.position.x}, "
-                                        f"{transformed_pose.position.y}, {transformed_pose.position.z}")
+            # self.get_logger().info(f"Transformed Odometry in lidar  Frame: {transformed_pose.position.x}, "
+            #                             f"{transformed_pose.position.y}, {transformed_pose.position.z}")
             # self.get_logger().info(f"Transformed Orientation: {transformed_pose.orientation.x}, "
             #                             f"{transformed_pose.orientation.y}, {transformed_pose.orientation.z}, "
             #                             f"{transformed_pose.orientation.w}")
@@ -73,8 +116,31 @@ class OdomToMap(Node):
             
             self.get_logger().info(f"transforming")
 
+            return transformed_pose
+
         except TransformException as ex:
             self.get_logger().warn(f"Could not transform odometry to map frame: {ex}")
+
+            return None
+        
+    def plot_trajectory(self):
+        # Clear the previous plot
+        # self.ax.clear()
+
+        # Plot the new trajectory
+        self.ax.plot(self.x_positions, self.y_positions, label="Odometry Trajectory")
+
+        # Add labels and grid
+        self.ax.set_xlabel("X Position (m)")
+        self.ax.set_ylabel("Y Position (m)")
+        self.ax.grid(True)
+
+        # Add a legend
+        self.ax.legend()
+
+        # Redraw the plot
+        self.fig.canvas.draw()
+        self.fig.canvas.flush_events()
 
 def main(args=None):
     rclpy.init(args=args)
