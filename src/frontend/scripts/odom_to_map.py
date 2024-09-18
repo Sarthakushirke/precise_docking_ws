@@ -66,7 +66,7 @@ class OdomToMap(Node):
             self.y_positions.append(transformed_pose.position.y)
 
             # Plot the odometry trajectory
-            self.plot_trajectory()
+            # self.plot_trajectory()
 
 
     def calculate_pose_difference(self, previous_pose, current_pose):
@@ -90,13 +90,13 @@ class OdomToMap(Node):
     def transform_odometry_to_map(self, odom_pose):
         try:
             # Wait for the transform from odom to map with a timeout (e.g., 1 second)
-            if not self.tf_buffer.can_transform('diff_drive/lidar_link', 'odom', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
+            if not self.tf_buffer.can_transform('odom', 'map', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
                 self.get_logger().warn('Transform from odom to map is not available yet. Retrying...')
                 return  # Skip this callback if transform is not available
 
             # Look up the transformation from odom to map
             transform_stamped = self.tf_buffer.lookup_transform(
-                'diff_drive/lidar_link',  # Target frame
+                'map',  # Target frame
                 'odom',  # Source frame
                 rclpy.time.Time()  # Get the latest available transform
             )
@@ -112,9 +112,8 @@ class OdomToMap(Node):
             # self.get_logger().info(f"Transformed Orientation: {transformed_pose.orientation.x}, "
             #                             f"{transformed_pose.orientation.y}, {transformed_pose.orientation.z}, "
             #                             f"{transformed_pose.orientation.w}")
-
             
-            self.get_logger().info(f"transforming")
+            # self.get_logger().info(f"transforming")
 
             return transformed_pose
 

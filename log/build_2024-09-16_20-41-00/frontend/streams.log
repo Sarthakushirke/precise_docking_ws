@@ -1,0 +1,36 @@
+[0.015s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.112s] [ 50%] Built target cpp_executable
+[0.127s] [ 50%] Built target ament_cmake_python_copy_frontend
+[0.152s] [ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[0.439s] running egg_info
+[0.440s] writing frontend.egg-info/PKG-INFO
+[0.441s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[0.441s] writing top-level names to frontend.egg-info/top_level.txt
+[0.445s] reading manifest file 'frontend.egg-info/SOURCES.txt'
+[0.446s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[0.488s] [ 75%] Built target ament_cmake_python_build_frontend_egg
+[1.490s] In file included from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:11[m[K:
+[1.490s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[1.490s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[1.490s]       |  [01;35m[K^~~~~~~[m[K
+[6.204s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In constructor ‘[01m[KICPNode::ICPNode()[m[K’:
+[6.204s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:320:16:[m[K [01;35m[Kwarning: [m[K‘[01m[KICPNode::map_builder[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[6.204s]   320 |     MapBuilder [01;35m[Kmap_builder[m[K;
+[6.204s]       |                [01;35m[K^~~~~~~~~~~[m[K
+[6.204s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:38:21:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Ktf2_ros::Buffer ICPNode::tf_buffer_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[6.204s]    38 |     tf2_ros::Buffer [01;35m[Ktf_buffer_[m[K;  // Declare TF buffer
+[6.205s]       |                     [01;35m[K^~~~~~~~~~[m[K
+[6.205s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:22:5:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[6.205s]    22 |     [01;35m[KICPNode[m[K() : Node("icp_node"), map_builder() ,tf_buffer_(this->get_clock())
+[6.205s]       |     [01;35m[K^~~~~~~[m[K
+[6.234s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::pointCloudCallback(sensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr)[m[K’:
+[6.235s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:97:29:[m[K [01;31m[Kerror: [m[Kreturn-statement with a value, in function returning ‘[01m[Kvoid[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[6.235s]    97 |                 return [01;31m[Kstd::nullopt[m[K;
+[6.235s]       |                        [01;31m[K~~~~~^~~~~~~[m[K
+[6.236s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:107:25:[m[K [01;31m[Kerror: [m[Kreturn-statement with a value, in function returning ‘[01m[Kvoid[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[6.236s]   107 |             return [01;31m[Kstd::nullopt[m[K;
+[6.236s]       |                    [01;31m[K~~~~~^~~~~~~[m[K
+[10.411s] gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
+[10.411s] gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
+[10.411s] gmake: *** [Makefile:146: all] Error 2
+[10.414s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20

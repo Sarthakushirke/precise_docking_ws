@@ -7,13 +7,13 @@
 /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/PKG-INFO
 /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/dependency_links.txt
 /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend/__init__.py
-/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend/icp.py
 /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend/module_to_import.py
 /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/py_node.py
 /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/main.py
 /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/laser_scan.py
 /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/odom_to_map.py
 /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/scan_to_map.py
+/home/sarthak/precise_docking_ws/install/frontend/lib/frontend/map_create.py
 /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/package_run_dependencies/frontend
 /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/parent_prefix_path/frontend
 /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/ament_prefix_path.sh

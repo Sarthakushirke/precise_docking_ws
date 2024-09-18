@@ -16,6 +16,8 @@ find_package(nav_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(Python3 REQUIRED COMPONENTS Development)
+find_package(tf2_sensor_msgs REQUIRED)
+
 
 # Include Cpp "include" directory
 include_directories(include)
@@ -32,7 +34,7 @@ ament_target_dependencies(cpp_executable rclcpp )
 
 # Create ICP executable
 add_executable(icp_node src/icp_node.cpp)
-ament_target_dependencies(icp_node rclcpp sensor_msgs libpointmatcher tf2 )
+ament_target_dependencies(icp_node rclcpp sensor_msgs libpointmatcher tf2 tf2_geometry_msgs tf2_ros)
 
 target_link_libraries(icp_node ${Python3_LIBRARIES})
 
@@ -68,6 +70,11 @@ install(PROGRAMS
 
 install(PROGRAMS
   scripts/scan_to_map.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(PROGRAMS
+  scripts/map_create.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

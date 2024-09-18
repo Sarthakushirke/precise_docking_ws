@@ -6,11 +6,11 @@
 #include <iostream>
 #include <sstream>  // For ostringstream
 #include "frontend/matplotlibcpp.h"
+#include "frontend/icp_mapping.h"
+#include "tf2_ros/buffer.h"  // Include for TF buffer
+#include "tf2_geometry_msgs/tf2_geometry_msgs.h"
 
 namespace plt = matplotlibcpp;
-
-
-
 
 using namespace std;
 typedef PointMatcher<float> PM;
@@ -19,24 +19,27 @@ typedef PM::DataPoints DP;
 class ICPNode : public rclcpp::Node
 {
 public:
-    ICPNode() : Node("icp_node")
+    ICPNode() : Node("icp_node"), map_builder() ,tf_buffer_(this->get_clock())
     {
+        // Enable a dedicated thread for tf2 buffer
+        tf_buffer_.setUsingDedicatedThread(true);
         // Create a subscription for point cloud data
         point_cloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
-            "pointcloud", 10, std::bind(&ICPNode::pointCloudCallback, this, std::placeholders::_1));
+            "transform_cloud", 10, std::bind(&ICPNode::pointCloudCallback, this, std::placeholders::_1));
 
         // Create a publisher for the transformed point cloud
-        transformed_cloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("transformed_cloud", 10);
+        transformed_cloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("icp_transformed_cloud", 10);
 
         // Create the default ICP algorithm
         icp.setDefault();
     }
 
 private:
+    tf2_ros::Buffer tf_buffer_;  // Declare TF buffer
     // Callback when point clouds are received
     void pointCloudCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
     {
-        RCLCPP_INFO(this->get_logger(), "Received a new point cloud.");
+        // RCLCPP_INFO(this->get_logger(), "Received a new point cloud.");
         // Convert the ROS PointCloud2 message to libpointmatcher DataPoints
         DP data_cloud = rosMsgToDataPoints(msg);
         
@@ -44,7 +47,7 @@ private:
         if (!previous_cloud)
         {
             previous_cloud = data_cloud;
-            RCLCPP_INFO(this->get_logger(), "Received first cloud as previous.");
+            // RCLCPP_INFO(this->get_logger(), "Received first cloud as previous.");
             // printPointCloud(*previous_cloud, "previous_cloud");
             return;
         }
@@ -63,10 +66,55 @@ private:
         DP transformed_cloud(data_cloud);
         icp.transformations.apply(transformed_cloud, T);
 
-        // Plot all clouds together
-        // plotMultiplePointClouds(*reference_cloud, data_cloud, transformed_cloud);
         plotMultiplePointClouds(*previous_cloud, data_cloud, transformed_cloud);
+        
+        // // Get the transformation from `diff_drive/lidar_link` to `map`
+        // geometry_msgs::msg::TransformStamped transform_stamped;
+        // try
+        // {
+        //     // Specify a 5-second timeout
+        //     rclcpp::Duration timeout(15, 0);
 
+        //     // Use `rclcpp::Time(0)` instead of `tf2::TimePointZero`
+        //     transform_stamped = tf_buffer_.lookupTransform("odom", "diff_drive/lidar_link", rclcpp::Time(0), timeout);
+        // }
+        // catch (tf2::TransformException &ex)
+        // {
+        //     RCLCPP_WARN(this->get_logger(), "Could not get transform within timeout: %s", ex.what());
+        //     return;
+        // }
+
+
+        // Convert the transform into a matrix
+        // PM::TransformationParameters transform_matrix = tfToEigen(transform_stamped);  
+
+        // Apply the global frame transformation
+        // DP global_transformed_cloud(transformed_cloud);
+        // for (int i = 0; i < transformed_cloud.features.cols(); ++i)
+        // {
+        //     Eigen::Vector4f point(
+        //         transformed_cloud.features(0, i),  // x
+        //         transformed_cloud.features(1, i),  // y
+        //         0.0,                              // z (assuming 2D)
+        //         1.0);                             // homogeneous coordinate
+
+        //     // Apply the global transformation matrix
+        //     Eigen::Vector4f transformed_point = transform_matrix * point;
+
+        //     // Update the transformed cloud with global coordinates
+        //     global_transformed_cloud.features(0, i) = transformed_point(0);  // x in global frame
+        //     global_transformed_cloud.features(1, i) = transformed_point(1);  // y in global frame
+        // }
+
+        // Plot the transformed cloud in the global `map` frame
+        // printPointCloud(transformed_cloud, "Transformed Cloud in Global Frame (map)");
+
+        
+        // // Update the global map with the transformed cloud
+        // map_builder.updateGlobalMap(transformed_cloud);
+
+        // // Plot the updated global map
+        // map_builder.plotGlobalMap();
 
         // // Convert back to PointCloud2 and publish
         auto transformed_msg = dataPointsToRosMsg(transformed_cloud);
@@ -75,6 +123,32 @@ private:
         // Update previous_cloud to the current data cloud for the next callback
         previous_cloud = data_cloud;
 
+    }
+
+    // Helper function to convert the transform from TF2 to Eigen matrix (for libpointmatcher)
+    PM::TransformationParameters tfToEigen(const geometry_msgs::msg::TransformStamped &transform_stamped)
+    {
+        PM::TransformationParameters transform_matrix = PM::TransformationParameters::Identity(3, 3);
+
+        transform_matrix(0, 2) = transform_stamped.transform.translation.x;
+        transform_matrix(1, 2) = transform_stamped.transform.translation.y;
+
+        tf2::Quaternion q(
+            transform_stamped.transform.rotation.x,
+            transform_stamped.transform.rotation.y,
+            transform_stamped.transform.rotation.z,
+            transform_stamped.transform.rotation.w);
+
+        double roll, pitch, yaw;
+        tf2::Matrix3x3(q).getRPY(roll, pitch, yaw);
+
+        // Set rotation matrix for 2D transformation (yaw rotation only)
+        transform_matrix(0, 0) = cos(yaw);
+        transform_matrix(0, 1) = -sin(yaw);
+        transform_matrix(1, 0) = sin(yaw);
+        transform_matrix(1, 1) = cos(yaw);
+
+        return transform_matrix;
     }
 
     // Helper function to convert ROS PointCloud2 to libpointmatcher DataPoints
@@ -115,44 +189,58 @@ private:
     }
 
 
-    // Helper function to convert libpointmatcher DataPoints back to ROS PointCloud2
     sensor_msgs::msg::PointCloud2 dataPointsToRosMsg(const DP& cloud)
     {
-        sensor_msgs::msg::PointCloud2 cloud_msg;
-        // Set the metadata
-        cloud_msg.header.frame_id = "map";
-        cloud_msg.height = 1;
-        cloud_msg.width = cloud.features.cols();
+        // RCLCPP_INFO(this->get_logger(), "cloud.features.cols(): %d", cloud.features.cols());
+        // RCLCPP_INFO(this->get_logger(), "cloud.features.rows(): %d", cloud.features.rows());
 
-        // Define point fields
+        sensor_msgs::msg::PointCloud2 cloud_msg;
+
+        // Set the metadata
+        cloud_msg.header.frame_id = "diff_drive/lidar_link";
+        cloud_msg.height = 1; // Unorganized point cloud
+        cloud_msg.width = cloud.features.cols(); // Number of points
+
+        // Define point fields for x, y, z
         cloud_msg.fields.resize(3);
         cloud_msg.fields[0].name = "x";
-        cloud_msg.fields[1].name = "y";
-        cloud_msg.fields[2].name = "z";
+        cloud_msg.fields[0].offset = 0;
+        cloud_msg.fields[0].datatype = sensor_msgs::msg::PointField::FLOAT32;
+        cloud_msg.fields[0].count = 1;
 
+        cloud_msg.fields[1].name = "y";
+        cloud_msg.fields[1].offset = 4;
+        cloud_msg.fields[1].datatype = sensor_msgs::msg::PointField::FLOAT32;
+        cloud_msg.fields[1].count = 1;
+
+        cloud_msg.fields[2].name = "z";
+        cloud_msg.fields[2].offset = 8;
+        cloud_msg.fields[2].datatype = sensor_msgs::msg::PointField::FLOAT32;
+        cloud_msg.fields[2].count = 1;
+
+        // Set byte layout
         cloud_msg.is_bigendian = false;
-        cloud_msg.point_step = 12;  // 3 floats (x, y, z)
+        cloud_msg.point_step = 12;  // 12 bytes per point (3 floats: x, y, z)
         cloud_msg.row_step = cloud_msg.point_step * cloud_msg.width;
         cloud_msg.is_dense = true;
         cloud_msg.data.resize(cloud_msg.row_step);
 
-        // Fill in the data
-        sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "x");
-        sensor_msgs::PointCloud2Iterator<float> iter_y(cloud_msg, "y");
-        sensor_msgs::PointCloud2Iterator<float> iter_z(cloud_msg, "z");
-
-        for (int i = 0; i < cloud.features.cols(); ++i, ++iter_x, ++iter_y, ++iter_z)
+        // Fill in the data (copy x, y, z into the byte array)
+        for (int i = 0; i < cloud.features.cols(); ++i)
         {
-            *iter_x = cloud.features(0, i);
-            *iter_y = cloud.features(1, i);
-            if (cloud.featureExists("z"))
-                *iter_z = cloud.features(2, i);
-            else
-                *iter_z = 0.0;  // No z value in 2D clouds
+            float x = cloud.features(0, i);
+            float y = cloud.features(1, i);
+            float z = (cloud.featureExists("z")) ? cloud.features(2, i) : 0.0f;  // Default to 0 for 2D
+
+            // Copy the floats into the `data` array in byte format
+            memcpy(&cloud_msg.data[i * cloud_msg.point_step + 0], &x, sizeof(float)); // Copy x
+            memcpy(&cloud_msg.data[i * cloud_msg.point_step + 4], &y, sizeof(float)); // Copy y
+            memcpy(&cloud_msg.data[i * cloud_msg.point_step + 8], &z, sizeof(float)); // Copy z
         }
 
         return cloud_msg;
     }
+
 
 
     void printPointCloud(const DP& cloud, const std::string& cloud_name)
@@ -169,7 +257,7 @@ private:
             }
             oss << "\n";
         }
-        RCLCPP_INFO(this->get_logger(), "%s", oss.str().c_str());
+        // RCLCPP_INFO(this->get_logger(), "%s", oss.str().c_str());
     }
 
     // Function to live plot point clouds
@@ -205,7 +293,10 @@ private:
         plt::scatter(data_x, data_y, 10.0, {{"color", "blue"}, {"label", "Data Cloud"}});
         
         // Plot transformed cloud in green
-        plt::scatter(trans_x, trans_y, 10.0, {{"color", "green"}, {"label", "Transformed Cloud"}});
+        // plt::scatter(trans_x, trans_y, 10.0, {{"color", "green"}, {"label", "Transformed Cloud"}});
+        // Plot the transformed cloud with hollow circles
+        plt::scatter(trans_x, trans_y, 10.0, {{"color", "green"}, {"marker", "o"}, {"facecolor", "none"}, {"label", "Transformed Cloud"}});
+
 
         // Set plot labels and grid
         plt::title("Point Clouds: Reference, Data, and Transformed");
@@ -214,11 +305,14 @@ private:
         plt::grid(true);
         plt::legend();
 
-        // Display the plot
-        plt::pause(0.01);  // Pause to allow live updates
-        plt::clf();  // Clear the plot for the next frame
+        // // Display the plot
+        // plt::pause(0.01);  // Pause to allow live updates
+        // plt::clf();  // Clear the plot for the next frame
+        plt::show();
     }
 
+    // Declare the MapBuilder object
+    MapBuilder map_builder;
 
     rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr point_cloud_subscriber_;
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr transformed_cloud_publisher_;

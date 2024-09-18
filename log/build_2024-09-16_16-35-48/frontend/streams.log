@@ -1,0 +1,45 @@
+[0.013s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.064s] [35m[1mConsolidate compiler generated dependencies of target icp_node[0m
+[0.072s] [ 50%] Built target cpp_executable
+[0.072s] [ 50%] Built target ament_cmake_python_copy_frontend
+[0.094s] [ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[0.289s] running egg_info
+[0.289s] writing frontend.egg-info/PKG-INFO
+[0.290s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[0.290s] writing top-level names to frontend.egg-info/top_level.txt
+[0.291s] reading manifest file 'frontend.egg-info/SOURCES.txt'
+[0.292s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[0.322s] [ 75%] Built target ament_cmake_python_build_frontend_egg
+[1.135s] In file included from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:10[m[K:
+[1.136s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[1.136s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[1.136s]       |  [01;35m[K^~~~~~~[m[K
+[4.972s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In constructor ‘[01m[KICPNode::ICPNode()[m[K’:
+[4.972s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:23:47:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Ktf2_ros::Buffer::Buffer()[m[K’
+[4.972s]    23 |     ICPNode() : Node("icp_node"), map_builder([01;31m[K)[m[K
+[4.972s]       |                                               [01;31m[K^[m[K
+[4.972s] In file included from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:12[m[K:
+[4.972s] [01m[K/opt/ros/humble/include/tf2_ros/tf2_ros/buffer.h:73:18:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktf2_ros::Buffer::Buffer(rclcpp::Clock::SharedPtr, tf2::Duration, rclcpp::Node::SharedPtr)[m[K’
+[4.972s]    73 |   TF2_ROS_PUBLIC [01;36m[KBuffer[m[K(
+[4.973s]       |                  [01;36m[K^~~~~~[m[K
+[4.973s] [01m[K/opt/ros/humble/include/tf2_ros/tf2_ros/buffer.h:73:18:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 0 provided
+[4.973s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:23:47:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Ktf2_ros::TransformListener::TransformListener()[m[K’
+[4.973s]    23 |     ICPNode() : Node("icp_node"), map_builder([01;31m[K)[m[K
+[4.973s]       |                                               [01;31m[K^[m[K
+[4.973s] In file included from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:11[m[K:
+[4.973s] [01m[K/opt/ros/humble/include/tf2_ros/tf2_ros/transform_listener.h:90:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class NodeT, class AllocatorT> tf2_ros::TransformListener::TransformListener(tf2::BufferCore&, NodeT&&, bool, const rclcpp::QoS&, const rclcpp::QoS&, const rclcpp::SubscriptionOptionsWithAllocator<AllocatorT>&, const rclcpp::SubscriptionOptionsWithAllocator<AllocatorT>&)[m[K’
+[4.973s]    90 |   [01;36m[KTransformListener[m[K(
+[4.973s]       |   [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+[4.973s] [01m[K/opt/ros/humble/include/tf2_ros/tf2_ros/transform_listener.h:90:3:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.973s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:23:47:[m[K [01;36m[Knote: [m[K  candidate expects 7 arguments, 0 provided
+[4.973s]    23 |     ICPNode() : Node("icp_node"), map_builder([01;36m[K)[m[K
+[4.973s]       |                                               [01;36m[K^[m[K
+[4.973s] In file included from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:11[m[K:
+[4.973s] [01m[K/opt/ros/humble/include/tf2_ros/tf2_ros/transform_listener.h:87:12:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktf2_ros::TransformListener::TransformListener(tf2::BufferCore&, bool)[m[K’
+[4.973s]    87 |   explicit [01;36m[KTransformListener[m[K(tf2::BufferCore & buffer, bool spin_thread = true);
+[4.973s]       |            [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+[4.973s] [01m[K/opt/ros/humble/include/tf2_ros/tf2_ros/transform_listener.h:87:12:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 0 provided
+[8.155s] gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
+[8.156s] gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
+[8.156s] gmake: *** [Makefile:146: all] Error 2
+[8.158s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20

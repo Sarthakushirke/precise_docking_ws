@@ -1,0 +1,19 @@
+[0.012s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.116s] [  0%] Built target ament_cmake_python_copy_frontend
+[0.117s] [ 50%] Built target cpp_executable
+[0.129s] [ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[0.315s] running egg_info
+[0.315s] writing frontend.egg-info/PKG-INFO
+[0.315s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[0.315s] writing top-level names to frontend.egg-info/top_level.txt
+[0.317s] reading manifest file 'frontend.egg-info/SOURCES.txt'
+[0.318s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[0.340s] [ 75%] Built target ament_cmake_python_build_frontend_egg
+[3.452s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::pointCloudCallback(sensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr)[m[K’:
+[3.452s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:71:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kicp_mapper[m[K’ was not declared in this scope
+[3.452s]    71 |         [01;31m[Kicp_mapper[m[K.updateGlobalMap(transformed_cloud);
+[3.452s]       |         [01;31m[K^~~~~~~~~~[m[K
+[5.322s] gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
+[5.323s] gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
+[5.323s] gmake: *** [Makefile:146: all] Error 2
+[5.325s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
