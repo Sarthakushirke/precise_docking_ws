@@ -1,0 +1,299 @@
+[0.000000] (-) TimerEvent: {}
+[0.000899] (-) JobUnselected: {'identifier': 'arcuo_marker_detection'}
+[0.000959] (-) JobUnselected: {'identifier': 'docking_bringup'}
+[0.000992] (-) JobUnselected: {'identifier': 'reach_the_goal'}
+[0.001020] (-) JobUnselected: {'identifier': 'template_ros2'}
+[0.001072] (frontend) JobQueued: {'identifier': 'frontend', 'dependencies': OrderedDict()}
+[0.001193] (frontend) JobStarted: {'identifier': 'frontend'}
+[0.010766] (frontend) JobProgress: {'identifier': 'frontend', 'progress': 'cmake'}
+[0.011480] (frontend) JobProgress: {'identifier': 'frontend', 'progress': 'build'}
+[0.011914] (frontend) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/sarthak/precise_docking_ws/build/frontend', '--', '-j20', '-l20'], 'cwd': '/home/sarthak/precise_docking_ws/build/frontend', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '2905'), ('SYSTEMD_EXEC_PID', '3586'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '16546'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:31128'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/x86_64-linux-gnu/pkgconfig:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3560,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3560'), ('INVOCATION_ID', 'eba1752dbb10440089a9098bff906270'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '7'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:7b81461a-4b21-4ed1-b114-0760eed553e5'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/frontend'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[0.099733] (-) TimerEvent: {}
+[0.121344] (frontend) StdoutLine: {'line': b'[ 50%] Built target cpp_executable\n'}
+[0.133037] (frontend) StdoutLine: {'line': b'[ 50%] Built target ament_cmake_python_copy_frontend\n'}
+[0.143467] (frontend) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o\x1b[0m\n'}
+[0.199885] (-) TimerEvent: {}
+[0.300548] (-) TimerEvent: {}
+[0.395556] (frontend) StdoutLine: {'line': b'running egg_info\n'}
+[0.400716] (-) TimerEvent: {}
+[0.426101] (frontend) StdoutLine: {'line': b'writing frontend.egg-info/PKG-INFO\n'}
+[0.426547] (frontend) StdoutLine: {'line': b'writing dependency_links to frontend.egg-info/dependency_links.txt\n'}
+[0.426736] (frontend) StdoutLine: {'line': b'writing top-level names to frontend.egg-info/top_level.txt\n'}
+[0.500801] (-) TimerEvent: {}
+[0.601286] (-) TimerEvent: {}
+[0.702307] (-) TimerEvent: {}
+[0.802737] (-) TimerEvent: {}
+[0.903141] (-) TimerEvent: {}
+[1.003587] (-) TimerEvent: {}
+[1.104191] (-) TimerEvent: {}
+[1.204576] (-) TimerEvent: {}
+[1.305003] (-) TimerEvent: {}
+[1.378016] (frontend) StdoutLine: {'line': b"writing manifest file 'frontend.egg-info/SOURCES.txt'\n"}
+[1.405203] (-) TimerEvent: {}
+[1.409798] (frontend) StdoutLine: {'line': b'[ 75%] Built target ament_cmake_python_build_frontend_egg\n'}
+[1.505287] (-) TimerEvent: {}
+[1.605628] (-) TimerEvent: {}
+[1.706031] (-) TimerEvent: {}
+[1.755828] (frontend) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:11\x1b[m\x1b[K:\n'}
+[1.756212] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp\x07-Wcpp\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[1.756269] (frontend) StderrLine: {'line': b'   35 | #\x1b[01;35m\x1b[Kwarning\x1b[m\x1b[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead\n'}
+[1.756306] (frontend) StderrLine: {'line': b'      |  \x1b[01;35m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[1.806185] (-) TimerEvent: {}
+[1.906598] (-) TimerEvent: {}
+[2.006958] (-) TimerEvent: {}
+[2.107619] (-) TimerEvent: {}
+[2.208021] (-) TimerEvent: {}
+[2.308482] (-) TimerEvent: {}
+[2.409107] (-) TimerEvent: {}
+[2.509482] (-) TimerEvent: {}
+[2.609980] (-) TimerEvent: {}
+[2.710417] (-) TimerEvent: {}
+[2.810815] (-) TimerEvent: {}
+[2.911190] (-) TimerEvent: {}
+[3.011534] (-) TimerEvent: {}
+[3.111898] (-) TimerEvent: {}
+[3.212286] (-) TimerEvent: {}
+[3.312680] (-) TimerEvent: {}
+[3.413070] (-) TimerEvent: {}
+[3.513574] (-) TimerEvent: {}
+[3.614133] (-) TimerEvent: {}
+[3.714497] (-) TimerEvent: {}
+[3.814980] (-) TimerEvent: {}
+[3.915316] (-) TimerEvent: {}
+[4.015705] (-) TimerEvent: {}
+[4.116054] (-) TimerEvent: {}
+[4.216623] (-) TimerEvent: {}
+[4.316959] (-) TimerEvent: {}
+[4.417328] (-) TimerEvent: {}
+[4.517833] (-) TimerEvent: {}
+[4.618271] (-) TimerEvent: {}
+[4.718673] (-) TimerEvent: {}
+[4.819149] (-) TimerEvent: {}
+[4.919503] (-) TimerEvent: {}
+[5.019785] (-) TimerEvent: {}
+[5.120102] (-) TimerEvent: {}
+[5.220439] (-) TimerEvent: {}
+[5.320821] (-) TimerEvent: {}
+[5.421154] (-) TimerEvent: {}
+[5.521438] (-) TimerEvent: {}
+[5.621730] (-) TimerEvent: {}
+[5.722072] (-) TimerEvent: {}
+[5.769867] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[KICPNode::ICPNode()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.770121] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:292:16:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KICPNode::map_builder\x1b[m\x1b[K\xe2\x80\x99 will be initialized after [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.770183] (frontend) StderrLine: {'line': b'  292 |     MapBuilder \x1b[01;35m\x1b[Kmap_builder\x1b[m\x1b[K;\n'}
+[5.770218] (frontend) StderrLine: {'line': b'      |                \x1b[01;35m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.770253] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:42:21:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  \xe2\x80\x98\x1b[01m\x1b[Ktf2_ros::Buffer ICPNode::tf_buffer_\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.770299] (frontend) StderrLine: {'line': b'   42 |     tf2_ros::Buffer \x1b[01;35m\x1b[Ktf_buffer_\x1b[m\x1b[K;  // Declare TF buffer\n'}
+[5.770333] (frontend) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.770373] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:22:5:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  when initialized here [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.770437] (frontend) StderrLine: {'line': b'   22 |     \x1b[01;35m\x1b[KICPNode\x1b[m\x1b[K() : Node("icp_node"), map_builder() ,tf_buffer_(this->get_clock())\n'}
+[5.770482] (frontend) StderrLine: {'line': b'      |     \x1b[01;35m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[5.787970] (frontend) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24\x1b[m\x1b[K,\n'}
+[5.788409] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40\x1b[m\x1b[K,\n'}
+[5.788748] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24\x1b[m\x1b[K,\n'}
+[5.788957] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20\x1b[m\x1b[K,\n'}
+[5.789071] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25\x1b[m\x1b[K,\n'}
+[5.789174] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18\x1b[m\x1b[K,\n'}
+[5.789268] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20\x1b[m\x1b[K,\n'}
+[5.789354] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37\x1b[m\x1b[K,\n'}
+[5.789439] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[5.789522] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[5.789606] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[5.789707] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:1\x1b[m\x1b[K:\n'}
+[5.789794] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid ICPNode::pointCloudCallback(sensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.789882] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:86:41:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kformat \xe2\x80\x98\x1b[01m\x1b[K%d\x1b[m\x1b[K\xe2\x80\x99 expects argument of type \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99, but argument 5 has type \xe2\x80\x98\x1b[01m\x1b[KEigen::Index\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong int\x1b[m\x1b[K\xe2\x80\x99} [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=\x07-Wformat=\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.789991] (frontend) StderrLine: {'line': b'   86 |         RCLCPP_INFO(this->get_logger(), \x1b[01;35m\x1b[K"Published transformed cloud with %d points"\x1b[m\x1b[K, \x1b[32m\x1b[Ktransformed_cloud.features.cols()\x1b[m\x1b[K);\n'}
+[5.790072] (frontend) StderrLine: {'line': b'      |                                         \x1b[01;35m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K  \x1b[32m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.790163] (frontend) StderrLine: {'line': b'      |                                                                                                                      \x1b[32m\x1b[K|\x1b[m\x1b[K\n'}
+[5.790254] (frontend) StderrLine: {'line': b'      |                                                                                                                      \x1b[32m\x1b[KEigen::Index {aka long int}\x1b[m\x1b[K\n'}
+[5.790348] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:86:76:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kformat string is defined here\n'}
+[5.790430] (frontend) StderrLine: {'line': b'   86 |         RCLCPP_INFO(this->get_logger(), "Published transformed cloud with \x1b[01;36m\x1b[K%d\x1b[m\x1b[K points", transformed_cloud.features.cols());\n'}
+[5.790514] (frontend) StderrLine: {'line': b'      |                                                                           \x1b[01;36m\x1b[K~^\x1b[m\x1b[K\n'}
+[5.790605] (frontend) StderrLine: {'line': b'      |                                                                            \x1b[01;36m\x1b[K|\x1b[m\x1b[K\n'}
+[5.790687] (frontend) StderrLine: {'line': b'      |                                                                            \x1b[01;36m\x1b[Kint\x1b[m\x1b[K\n'}
+[5.790776] (frontend) StderrLine: {'line': b'      |                                                                           \x1b[32m\x1b[K%ld\x1b[m\x1b[K\n'}
+[5.790863] (frontend) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24\x1b[m\x1b[K,\n'}
+[5.790943] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40\x1b[m\x1b[K,\n'}
+[5.791026] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24\x1b[m\x1b[K,\n'}
+[5.791115] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20\x1b[m\x1b[K,\n'}
+[5.791202] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25\x1b[m\x1b[K,\n'}
+[5.791294] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18\x1b[m\x1b[K,\n'}
+[5.791385] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20\x1b[m\x1b[K,\n'}
+[5.791471] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37\x1b[m\x1b[K,\n'}
+[5.791555] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[5.791642] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[5.791725] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[5.791808] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:1\x1b[m\x1b[K:\n'}
+[5.791893] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:90:41:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kformat \xe2\x80\x98\x1b[01m\x1b[K%d\x1b[m\x1b[K\xe2\x80\x99 expects argument of type \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99, but argument 5 has type \xe2\x80\x98\x1b[01m\x1b[KEigen::Index\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong int\x1b[m\x1b[K\xe2\x80\x99} [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=\x07-Wformat=\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.791984] (frontend) StderrLine: {'line': b'   90 |         RCLCPP_INFO(this->get_logger(), \x1b[01;35m\x1b[K"Published previous cloud with %d points"\x1b[m\x1b[K, \x1b[32m\x1b[Kprevious_cloud->features.cols()\x1b[m\x1b[K);\n'}
+[5.792072] (frontend) StderrLine: {'line': b'      |                                         \x1b[01;35m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K  \x1b[32m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.792193] (frontend) StderrLine: {'line': b'      |                                                                                                                 \x1b[32m\x1b[K|\x1b[m\x1b[K\n'}
+[5.792355] (frontend) StderrLine: {'line': b'      |                                                                                                                 \x1b[32m\x1b[KEigen::Index {aka long int}\x1b[m\x1b[K\n'}
+[5.792533] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:90:73:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kformat string is defined here\n'}
+[5.792714] (frontend) StderrLine: {'line': b'   90 |         RCLCPP_INFO(this->get_logger(), "Published previous cloud with \x1b[01;36m\x1b[K%d\x1b[m\x1b[K points", previous_cloud->features.cols());\n'}
+[5.792887] (frontend) StderrLine: {'line': b'      |                                                                        \x1b[01;36m\x1b[K~^\x1b[m\x1b[K\n'}
+[5.793052] (frontend) StderrLine: {'line': b'      |                                                                         \x1b[01;36m\x1b[K|\x1b[m\x1b[K\n'}
+[5.793234] (frontend) StderrLine: {'line': b'      |                                                                         \x1b[01;36m\x1b[Kint\x1b[m\x1b[K\n'}
+[5.793408] (frontend) StderrLine: {'line': b'      |                                                                        \x1b[32m\x1b[K%ld\x1b[m\x1b[K\n'}
+[5.793571] (frontend) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24\x1b[m\x1b[K,\n'}
+[5.793731] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40\x1b[m\x1b[K,\n'}
+[5.793904] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24\x1b[m\x1b[K,\n'}
+[5.794072] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20\x1b[m\x1b[K,\n'}
+[5.794285] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25\x1b[m\x1b[K,\n'}
+[5.794445] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18\x1b[m\x1b[K,\n'}
+[5.794596] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20\x1b[m\x1b[K,\n'}
+[5.794742] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37\x1b[m\x1b[K,\n'}
+[5.794897] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[5.795057] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[5.795242] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[5.795402] (frontend) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:1\x1b[m\x1b[K:\n'}
+[5.795561] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:94:41:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kformat \xe2\x80\x98\x1b[01m\x1b[K%d\x1b[m\x1b[K\xe2\x80\x99 expects argument of type \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99, but argument 5 has type \xe2\x80\x98\x1b[01m\x1b[KEigen::Index\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong int\x1b[m\x1b[K\xe2\x80\x99} [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=\x07-Wformat=\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.795725] (frontend) StderrLine: {'line': b'   94 |         RCLCPP_INFO(this->get_logger(), \x1b[01;35m\x1b[K"Published data cloud with %d points"\x1b[m\x1b[K, \x1b[32m\x1b[Kdata_cloud.features.cols()\x1b[m\x1b[K);\n'}
+[5.795827] (frontend) StderrLine: {'line': b'      |                                         \x1b[01;35m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K  \x1b[32m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.795908] (frontend) StderrLine: {'line': b'      |                                                                                                        \x1b[32m\x1b[K|\x1b[m\x1b[K\n'}
+[5.795986] (frontend) StderrLine: {'line': b'      |                                                                                                        \x1b[32m\x1b[KEigen::Index {aka long int}\x1b[m\x1b[K\n'}
+[5.796064] (frontend) StderrLine: {'line': b'\x1b[01m\x1b[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:94:69:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kformat string is defined here\n'}
+[5.796153] (frontend) StderrLine: {'line': b'   94 |         RCLCPP_INFO(this->get_logger(), "Published data cloud with \x1b[01;36m\x1b[K%d\x1b[m\x1b[K points", data_cloud.features.cols());\n'}
+[5.796231] (frontend) StderrLine: {'line': b'      |                                                                    \x1b[01;36m\x1b[K~^\x1b[m\x1b[K\n'}
+[5.796304] (frontend) StderrLine: {'line': b'      |                                                                     \x1b[01;36m\x1b[K|\x1b[m\x1b[K\n'}
+[5.796377] (frontend) StderrLine: {'line': b'      |                                                                     \x1b[01;36m\x1b[Kint\x1b[m\x1b[K\n'}
+[5.796451] (frontend) StderrLine: {'line': b'      |                                                                    \x1b[32m\x1b[K%ld\x1b[m\x1b[K\n'}
+[5.822238] (-) TimerEvent: {}
+[5.922845] (-) TimerEvent: {}
+[6.023303] (-) TimerEvent: {}
+[6.123739] (-) TimerEvent: {}
+[6.224056] (-) TimerEvent: {}
+[6.324524] (-) TimerEvent: {}
+[6.425044] (-) TimerEvent: {}
+[6.525769] (-) TimerEvent: {}
+[6.626272] (-) TimerEvent: {}
+[6.726754] (-) TimerEvent: {}
+[6.827200] (-) TimerEvent: {}
+[6.927617] (-) TimerEvent: {}
+[7.028019] (-) TimerEvent: {}
+[7.128585] (-) TimerEvent: {}
+[7.229035] (-) TimerEvent: {}
+[7.329722] (-) TimerEvent: {}
+[7.430103] (-) TimerEvent: {}
+[7.530518] (-) TimerEvent: {}
+[7.630947] (-) TimerEvent: {}
+[7.731333] (-) TimerEvent: {}
+[7.831871] (-) TimerEvent: {}
+[7.932364] (-) TimerEvent: {}
+[8.033011] (-) TimerEvent: {}
+[8.133551] (-) TimerEvent: {}
+[8.234168] (-) TimerEvent: {}
+[8.334592] (-) TimerEvent: {}
+[8.435094] (-) TimerEvent: {}
+[8.535559] (-) TimerEvent: {}
+[8.636077] (-) TimerEvent: {}
+[8.736514] (-) TimerEvent: {}
+[8.837035] (-) TimerEvent: {}
+[8.937747] (-) TimerEvent: {}
+[9.038428] (-) TimerEvent: {}
+[9.138988] (-) TimerEvent: {}
+[9.239791] (-) TimerEvent: {}
+[9.340481] (-) TimerEvent: {}
+[9.440935] (-) TimerEvent: {}
+[9.541291] (-) TimerEvent: {}
+[9.641693] (-) TimerEvent: {}
+[9.742067] (-) TimerEvent: {}
+[9.842385] (-) TimerEvent: {}
+[9.942695] (-) TimerEvent: {}
+[10.043158] (-) TimerEvent: {}
+[10.143534] (-) TimerEvent: {}
+[10.243877] (-) TimerEvent: {}
+[10.344379] (-) TimerEvent: {}
+[10.444727] (-) TimerEvent: {}
+[10.545072] (-) TimerEvent: {}
+[10.645780] (-) TimerEvent: {}
+[10.746342] (-) TimerEvent: {}
+[10.846798] (-) TimerEvent: {}
+[10.947204] (-) TimerEvent: {}
+[11.047700] (-) TimerEvent: {}
+[11.148101] (-) TimerEvent: {}
+[11.248505] (-) TimerEvent: {}
+[11.348945] (-) TimerEvent: {}
+[11.449440] (-) TimerEvent: {}
+[11.549854] (-) TimerEvent: {}
+[11.650265] (-) TimerEvent: {}
+[11.750685] (-) TimerEvent: {}
+[11.851076] (-) TimerEvent: {}
+[11.951478] (-) TimerEvent: {}
+[12.051880] (-) TimerEvent: {}
+[12.152310] (-) TimerEvent: {}
+[12.252718] (-) TimerEvent: {}
+[12.353182] (-) TimerEvent: {}
+[12.453529] (-) TimerEvent: {}
+[12.553849] (-) TimerEvent: {}
+[12.654170] (-) TimerEvent: {}
+[12.754553] (-) TimerEvent: {}
+[12.854934] (-) TimerEvent: {}
+[12.955305] (-) TimerEvent: {}
+[13.055659] (-) TimerEvent: {}
+[13.156044] (-) TimerEvent: {}
+[13.256410] (-) TimerEvent: {}
+[13.356881] (-) TimerEvent: {}
+[13.457270] (-) TimerEvent: {}
+[13.557750] (-) TimerEvent: {}
+[13.658269] (-) TimerEvent: {}
+[13.758685] (-) TimerEvent: {}
+[13.856674] (frontend) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable icp_node\x1b[0m\n'}
+[13.858799] (-) TimerEvent: {}
+[13.959180] (-) TimerEvent: {}
+[14.059600] (-) TimerEvent: {}
+[14.160042] (-) TimerEvent: {}
+[14.260424] (-) TimerEvent: {}
+[14.360964] (-) TimerEvent: {}
+[14.461361] (-) TimerEvent: {}
+[14.561895] (-) TimerEvent: {}
+[14.662574] (-) TimerEvent: {}
+[14.763155] (-) TimerEvent: {}
+[14.863565] (-) TimerEvent: {}
+[14.964049] (-) TimerEvent: {}
+[15.059460] (frontend) StdoutLine: {'line': b'[100%] Built target icp_node\n'}
+[15.064177] (-) TimerEvent: {}
+[15.075902] (frontend) CommandEnded: {'returncode': 0}
+[15.132696] (frontend) JobProgress: {'identifier': 'frontend', 'progress': 'install'}
+[15.145944] (frontend) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/sarthak/precise_docking_ws/build/frontend'], 'cwd': '/home/sarthak/precise_docking_ws/build/frontend', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '2905'), ('SYSTEMD_EXEC_PID', '3586'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '16546'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:31128'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/x86_64-linux-gnu/pkgconfig:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3560,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3560'), ('INVOCATION_ID', 'eba1752dbb10440089a9098bff906270'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '7'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:7b81461a-4b21-4ed1-b114-0760eed553e5'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/frontend'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[15.153290] (frontend) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[15.153565] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/cpp_executable\n'}
+[15.153728] (frontend) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/icp_node\n'}
+[15.164336] (-) TimerEvent: {}
+[15.170650] (frontend) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/frontend/lib/frontend/icp_node" to ""\n'}
+[15.170906] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/pythonpath.sh\n'}
+[15.171042] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/pythonpath.dsv\n'}
+[15.171228] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info\n'}
+[15.171346] (frontend) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/top_level.txt\n'}
+[15.171461] (frontend) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[15.171560] (frontend) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/PKG-INFO\n'}
+[15.171678] (frontend) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[15.171832] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend\n'}
+[15.171930] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend/__init__.py\n'}
+[15.172020] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend/module_to_import.py\n'}
+[15.204635] (frontend) StdoutLine: {'line': b"Listing '/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend'...\n"}
+[15.211136] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/py_node.py\n'}
+[15.211487] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/main.py\n'}
+[15.211579] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/laser_scan.py\n'}
+[15.211670] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/odom_to_map.py\n'}
+[15.211742] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/scan_to_map.py\n'}
+[15.211810] (frontend) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/map_create.py\n'}
+[15.211983] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/package_run_dependencies/frontend\n'}
+[15.212187] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/parent_prefix_path/frontend\n'}
+[15.212468] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/ament_prefix_path.sh\n'}
+[15.212593] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/ament_prefix_path.dsv\n'}
+[15.212693] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/path.sh\n'}
+[15.212785] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/path.dsv\n'}
+[15.212917] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.bash\n'}
+[15.213018] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.sh\n'}
+[15.213162] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.zsh\n'}
+[15.213355] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.dsv\n'}
+[15.213513] (frontend) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/package.dsv\n'}
+[15.213610] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/packages/frontend\n'}
+[15.213762] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/cmake/frontendConfig.cmake\n'}
+[15.213896] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/cmake/frontendConfig-version.cmake\n'}
+[15.213995] (frontend) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/package.xml\n'}
+[15.216794] (frontend) CommandEnded: {'returncode': 0}
+[15.264501] (-) TimerEvent: {}
+[15.276759] (frontend) JobEnded: {'identifier': 'frontend', 'rc': 0}
+[15.279149] (-) EventReactorShutdown: {}

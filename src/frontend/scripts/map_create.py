@@ -73,19 +73,66 @@ class PointCloudTransformer(Node):
         self.fig, self.ax = plt.subplots()
 
     def current_pointcloud_callback(self, msg):
-        self.current_cloud = self.transform_pointcloud_2d(msg)
-        self.received_current = True
-        self.check_and_plot()
+        try:
+            # Wait for the transform from odom to map with a timeout (e.g., 1 second)
+            if not self.tf_buffer.can_transform('diff_drive/lidar_link', 'map', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
+                self.get_logger().warn('Transform from odom to map is not available yet. Retrying...')
+                return  # Skip this callback if transform is not available
+            
+            # Look up the transformation from diff_lidar to map
+            transform_stamped = self.tf_buffer.lookup_transform(
+                'map',  # Target frame
+                'diff_drive/lidar_link',  # Source frame
+                rclpy.time.Time()  # Get the latest available transform
+            )
+            self.current_cloud = self.transform_pointcloud_2d(msg,transform_stamped)
+            self.received_current = True
+            self.check_and_plot()
+
+        except TransformException as ex:
+            self.get_logger().warn(f"Could not transform point cloud to map frame: {ex}")
+
 
     def previous_pointcloud_callback(self, msg):
-        self.previous_cloud = self.transform_pointcloud_2d(msg)
-        self.received_previous = True
-        self.check_and_plot()
+        try:
+            # Wait for the transform from odom to map with a timeout (e.g., 1 second)
+            if not self.tf_buffer.can_transform('diff_drive/lidar_link', 'map', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
+                self.get_logger().warn('Transform from odom to map is not available yet. Retrying...')
+                return  # Skip this callback if transform is not available
+            
+            # Look up the transformation from diff_lidar to map
+            transform_stamped = self.tf_buffer.lookup_transform(
+                'map',  # Target frame
+                'diff_drive/lidar_link',  # Source frame
+                rclpy.time.Time()  # Get the latest available transform
+            )
+            self.previous_cloud = self.transform_pointcloud_2d(msg,transform_stamped)
+            self.received_previous = True
+            self.check_and_plot()
+
+        except TransformException as ex:
+            self.get_logger().warn(f"Could not transform point cloud to map frame: {ex}")
 
     def transformed_pointcloud_callback(self, msg):
-        self.transformed_cloud = self.transform_pointcloud_2d(msg)
-        self.received_transformed = True
-        self.check_and_plot()
+        try:
+            # Wait for the transform from odom to map with a timeout (e.g., 1 second)
+            if not self.tf_buffer.can_transform('diff_drive/lidar_link', 'map', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
+                self.get_logger().warn('Transform from odom to map is not available yet. Retrying...')
+                return  # Skip this callback if transform is not available
+            
+            # Look up the transformation from diff_lidar to map
+            transform_stamped = self.tf_buffer.lookup_transform(
+                'map',  # Target frame
+                'diff_drive/lidar_link',  # Source frame
+                rclpy.time.Time()  # Get the latest available transform
+            )
+            self.transformed_cloud = self.transform_pointcloud_2d(msg,transform_stamped)
+            self.received_transformed = True
+            self.check_and_plot()
+
+        except TransformException as ex:
+            self.get_logger().warn(f"Could not transform point cloud to map frame: {ex}")
+        
 
     def check_and_plot(self):
         # Check if all point clouds have been received
@@ -142,14 +189,45 @@ class PointCloudTransformer(Node):
             self.get_logger().warn(f"Could not transform odometry to map frame: {ex}")
             return None
 
-    def transform_pointcloud_2d(self, cloud_msg):
+    # def transform_pointcloud_2d(self, cloud_msg):
+
+    #     # Extract the point cloud data (x, y only for 2D)
+    #     points = self.pointcloud2_to_xy(cloud_msg)
+
+
+    #     return points
+
+
+    def transform_pointcloud_2d(self, cloud_msg, transform_stamped):
+        # Extract the transformation matrix from TransformStamped
+        translation = transform_stamped.transform.translation
+        rotation = transform_stamped.transform.rotation
+
+        # Convert the quaternion to a 2D rotation matrix (yaw only)
+        yaw = self.quaternion_to_yaw(rotation)
+
+        # Create the transformation matrix (3x3 for 2D)
+        T = np.eye(3)
+        T[0:2, 0:2] = [[np.cos(yaw), -np.sin(yaw)], [np.sin(yaw), np.cos(yaw)]]
+        T[0:2, 2] = [translation.x, translation.y]  # Set translation (x, y)
 
         # Extract the point cloud data (x, y only for 2D)
         points = self.pointcloud2_to_xy(cloud_msg)
 
+        # Apply the transformation to each point
+        points_hom = np.hstack([points, np.ones((points.shape[0], 1))])  # Convert to homogeneous coordinates
+        transformed_points_hom = (T @ points_hom.T).T  # Apply the transformation
 
-        return points
+        # Extract transformed xy
+        transformed_points = transformed_points_hom[:, 0:2]
 
+        return transformed_points
+    
+    def quaternion_to_yaw(self, q):
+        """Convert a quaternion into a yaw (2D rotation around the z-axis)."""
+        siny_cosp = 2 * (q.w * q.z + q.x * q.y)
+        cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z)
+        return np.arctan2(siny_cosp, cosy_cosp)
 
 
     def plot_global_map(self, output_dir="plots", base_filename="global_map"):
