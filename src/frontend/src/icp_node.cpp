@@ -30,6 +30,10 @@ public:
         // Create a publisher for the transformed point cloud
         transformed_cloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("icp_transformed_cloud", 10);
 
+        previous_cloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("icp_previous_cloud", 10);
+
+        data_cloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("icp_data_cloud", 10);
+
         // Create the default ICP algorithm
         icp.setDefault();
     }
@@ -47,10 +51,19 @@ private:
         if (!previous_cloud)
         {
             previous_cloud = data_cloud;
-            // RCLCPP_INFO(this->get_logger(), "Received first cloud as previous.");
+            RCLCPP_INFO(this->get_logger(), "I am out.");
             // printPointCloud(*previous_cloud, "previous_cloud");
             return;
         }
+
+        // Compare the current cloud with the previous cloud
+        if (data_cloud.features == previous_cloud->features)  // Check if the features are identical
+        {
+            RCLCPP_INFO(this->get_logger(), "Current cloud is identical to the previous cloud. Skipping ICP.");
+            return;
+        }
+
+        // RCLCPP_INFO(this->get_logger(), "Received first cloud as previous.");
 
         // // Compute the transformation to express data in reference frame
         PM::TransformationParameters T = icp(data_cloud, *previous_cloud);
@@ -59,69 +72,33 @@ private:
         std::ostringstream oss;
         oss << T;
 
-        RCLCPP_INFO(this->get_logger(), "Published transformed cloud. Final transformation: \n%s", oss.str().c_str());
+        // RCLCPP_INFO(this->get_logger(), "Published transformed cloud. Final transformation: \n%s", oss.str().c_str());
 
 
         // // Apply the transformation
         DP transformed_cloud(data_cloud);
         icp.transformations.apply(transformed_cloud, T);
 
-        plotMultiplePointClouds(*previous_cloud, data_cloud, transformed_cloud);
-        
-        // // Get the transformation from `diff_drive/lidar_link` to `map`
-        // geometry_msgs::msg::TransformStamped transform_stamped;
-        // try
-        // {
-        //     // Specify a 5-second timeout
-        //     rclcpp::Duration timeout(15, 0);
 
-        //     // Use `rclcpp::Time(0)` instead of `tf2::TimePointZero`
-        //     transform_stamped = tf_buffer_.lookupTransform("odom", "diff_drive/lidar_link", rclcpp::Time(0), timeout);
-        // }
-        // catch (tf2::TransformException &ex)
-        // {
-        //     RCLCPP_WARN(this->get_logger(), "Could not get transform within timeout: %s", ex.what());
-        //     return;
-        // }
-
-
-        // Convert the transform into a matrix
-        // PM::TransformationParameters transform_matrix = tfToEigen(transform_stamped);  
-
-        // Apply the global frame transformation
-        // DP global_transformed_cloud(transformed_cloud);
-        // for (int i = 0; i < transformed_cloud.features.cols(); ++i)
-        // {
-        //     Eigen::Vector4f point(
-        //         transformed_cloud.features(0, i),  // x
-        //         transformed_cloud.features(1, i),  // y
-        //         0.0,                              // z (assuming 2D)
-        //         1.0);                             // homogeneous coordinate
-
-        //     // Apply the global transformation matrix
-        //     Eigen::Vector4f transformed_point = transform_matrix * point;
-
-        //     // Update the transformed cloud with global coordinates
-        //     global_transformed_cloud.features(0, i) = transformed_point(0);  // x in global frame
-        //     global_transformed_cloud.features(1, i) = transformed_point(1);  // y in global frame
-        // }
-
-        // Plot the transformed cloud in the global `map` frame
-        // printPointCloud(transformed_cloud, "Transformed Cloud in Global Frame (map)");
-
-        
-        // // Update the global map with the transformed cloud
-        // map_builder.updateGlobalMap(transformed_cloud);
-
-        // // Plot the updated global map
-        // map_builder.plotGlobalMap();
-
-        // // Convert back to PointCloud2 and publish
+        // Convert back to PointCloud2 and publish
         auto transformed_msg = dataPointsToRosMsg(transformed_cloud);
         transformed_cloud_publisher_->publish(transformed_msg);
+        RCLCPP_INFO(this->get_logger(), "Published transformed cloud with %d points", transformed_cloud.features.cols());
+
+        auto previous_msg = dataPointsToRosMsg(*previous_cloud);
+        previous_cloud_publisher_->publish(previous_msg);
+        RCLCPP_INFO(this->get_logger(), "Published previous cloud with %d points", previous_cloud->features.cols());
+
+        auto data_msg = dataPointsToRosMsg(data_cloud);
+        data_cloud_publisher_->publish(data_msg); 
+        RCLCPP_INFO(this->get_logger(), "Published data cloud with %d points", data_cloud.features.cols()); 
 
         // Update previous_cloud to the current data cloud for the next callback
         previous_cloud = data_cloud;
+
+        // plotMultiplePointClouds(*previous_cloud, data_cloud, transformed_cloud);
+
+      
 
     }
 
@@ -306,8 +283,8 @@ private:
         plt::legend();
 
         // // Display the plot
-        // plt::pause(0.01);  // Pause to allow live updates
-        // plt::clf();  // Clear the plot for the next frame
+        plt::pause(0.01);  // Pause to allow live updates
+        plt::clf();  // Clear the plot for the next frame
         plt::show();
     }
 
@@ -316,6 +293,8 @@ private:
 
     rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr point_cloud_subscriber_;
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr transformed_cloud_publisher_;
+    rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr data_cloud_publisher_;
+    rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr previous_cloud_publisher_;
 
     PM::ICP icp;
     std::optional<DP> reference_cloud; // Store the reference point cloud
