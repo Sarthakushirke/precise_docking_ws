@@ -13,6 +13,7 @@ from sensor_msgs.msg import LaserScan, PointCloud2, PointField
 import open3d as o3d
 import sensor_msgs_py.point_cloud2 as pc2
 
+
 class LaserToPointCloud(Node):
     def __init__(self):
         super().__init__('laser_to_pointcloud')
@@ -60,9 +61,6 @@ class LaserToPointCloud(Node):
             # T_delta_icp = icp_result.transformation
 
         self.prev_scan_pcd = self.current_scan_pcd
-
-
-        
 
         # pointcloud_ros = self.create_pointcloud2(pointcloud, msg.header)
 

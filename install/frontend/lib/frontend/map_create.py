@@ -57,11 +57,14 @@ class PointCloudTransformer(Node):
         self.previous_cloud = None
         self.transformed_cloud = None
 
-        # Initialize an empty list for the global map (accumulated points)
-        self.global_map = []
+        # Initialize an empty list for the lidar map 
+        self.lidar_map = []
 
         # Store odometry positions (robot path)
         self.robot_path = []
+
+        # Initialize an empty list for the global map (accumulated points)
+        self.global_map = []
 
         # Flags to check if all point clouds have been received
         self.received_current = False
@@ -88,6 +91,12 @@ class PointCloudTransformer(Node):
             self.current_cloud = self.transform_pointcloud_2d(msg,transform_stamped)
             self.received_current = True
             self.check_and_plot()
+
+            # Accumulate the points into the global map
+            self.global_map.extend(self.current_cloud.tolist())
+
+            # Plot the updated global map
+            # self.plot_global_map()
 
         except TransformException as ex:
             self.get_logger().warn(f"Could not transform point cloud to map frame: {ex}")
@@ -138,7 +147,7 @@ class PointCloudTransformer(Node):
         # Check if all point clouds have been received
         if self.received_current and self.received_previous and self.received_transformed:
             # Once all clouds are received, plot the map
-            self.plot_global_map()
+            self.plot_lidar_map()
             # Reset the flags
             self.received_current = False
             self.received_previous = False
@@ -230,7 +239,7 @@ class PointCloudTransformer(Node):
         return np.arctan2(siny_cosp, cosy_cosp)
 
 
-    def plot_global_map(self, output_dir="plots", base_filename="global_map"):
+    def plot_lidar_map(self, output_dir="plots", base_filename="lidar_map"):
         """Plot the current point clouds and the robot's path, and save each plot with a unique name."""
         
         # Create the output directory if it doesn't exist
@@ -309,6 +318,30 @@ class PointCloudTransformer(Node):
                         yield (x, y)
                 else:
                     yield struct.unpack_from(fmt, cloud.data, offset=point_offset)
+
+    def plot_global_map(self):
+        """Plot the accumulated global map and robot's path."""
+        self.ax.clear()
+
+        # Plot the global map (points from the point cloud)
+        if self.global_map:
+            x, y = zip(*self.global_map)
+            self.ax.scatter(x, y, s=1, c='black', label='Global Map')
+
+        # Plot the robot's path (odometry data)
+        if self.robot_path:
+            x_path, y_path = zip(*self.robot_path)
+            self.ax.plot(x_path, y_path, c='red', label='Robot Path', marker='x')
+
+        self.ax.set_title('2D Global Map with Robot Path')
+        self.ax.set_xlabel('X')
+        self.ax.set_ylabel('Y')
+        self.ax.grid(True)
+        self.ax.legend()
+
+        # Redraw the plot
+        plt.draw()
+        plt.pause(0.01)
 
 
 def main(args=None):

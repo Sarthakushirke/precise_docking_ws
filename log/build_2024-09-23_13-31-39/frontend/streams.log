@@ -1,0 +1,136 @@
+[0.013s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.118s] [35m[1mConsolidate compiler generated dependencies of target icp_node[0m
+[0.132s] [ 50%] Built target cpp_executable
+[0.132s] [ 50%] Built target ament_cmake_python_copy_frontend
+[0.199s] [ 75%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[0.368s] running egg_info
+[0.395s] writing frontend.egg-info/PKG-INFO
+[0.395s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[0.396s] writing top-level names to frontend.egg-info/top_level.txt
+[1.581s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[1.633s] [ 75%] Built target ament_cmake_python_build_frontend_egg
+[1.865s] In file included from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:11[m[K:
+[1.866s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[1.866s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[1.866s]       |  [01;35m[K^~~~~~~[m[K
+[5.950s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In constructor ‘[01m[KICPNode::ICPNode()[m[K’:
+[5.950s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:298:16:[m[K [01;35m[Kwarning: [m[K‘[01m[KICPNode::map_builder[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[5.950s]   298 |     MapBuilder [01;35m[Kmap_builder[m[K;
+[5.950s]       |                [01;35m[K^~~~~~~~~~~[m[K
+[5.950s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:42:21:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Ktf2_ros::Buffer ICPNode::tf_buffer_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[5.951s]    42 |     tf2_ros::Buffer [01;35m[Ktf_buffer_[m[K;  // Declare TF buffer
+[5.951s]       |                     [01;35m[K^~~~~~~~~~[m[K
+[5.951s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:22:5:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[5.951s]    22 |     [01;35m[KICPNode[m[K() : Node("icp_node"), map_builder() ,tf_buffer_(this->get_clock())
+[5.951s]       |     [01;35m[K^~~~~~~[m[K
+[5.977s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[5.977s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[5.978s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[5.978s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[5.978s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[5.978s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[5.978s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[5.978s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[5.978s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[5.978s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[5.978s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[5.979s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:1[m[K:
+[5.979s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::pointCloudCallback(sensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr)[m[K’:
+[5.979s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:92:41:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%d[m[K’ expects argument of type ‘[01m[Kint[m[K’, but argument 5 has type ‘[01m[KEigen::Index[m[K’ {aka ‘[01m[Klong int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+[5.979s]    92 |         RCLCPP_INFO(this->get_logger(), [01;35m[K"Published transformed cloud with %d points"[m[K, [32m[Ktransformed_cloud.features.cols()[m[K);
+[5.979s]       |                                         [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K  [32m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[5.979s]       |                                                                                                                      [32m[K|[m[K
+[5.979s]       |                                                                                                                      [32m[KEigen::Index {aka long int}[m[K
+[5.979s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:92:76:[m[K [01;36m[Knote: [m[Kformat string is defined here
+[5.980s]    92 |         RCLCPP_INFO(this->get_logger(), "Published transformed cloud with [01;36m[K%d[m[K points", transformed_cloud.features.cols());
+[5.980s]       |                                                                           [01;36m[K~^[m[K
+[5.980s]       |                                                                            [01;36m[K|[m[K
+[5.980s]       |                                                                            [01;36m[Kint[m[K
+[5.980s]       |                                                                           [32m[K%ld[m[K
+[5.980s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[5.980s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[5.980s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:1[m[K:
+[5.980s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:96:41:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%d[m[K’ expects argument of type ‘[01m[Kint[m[K’, but argument 5 has type ‘[01m[KEigen::Index[m[K’ {aka ‘[01m[Klong int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+[5.980s]    96 |         RCLCPP_INFO(this->get_logger(), [01;35m[K"Published previous cloud with %d points"[m[K, [32m[Kprevious_cloud->features.cols()[m[K);
+[5.980s]       |                                         [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K  [32m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[5.980s]       |                                                                                                                 [32m[K|[m[K
+[5.980s]       |                                                                                                                 [32m[KEigen::Index {aka long int}[m[K
+[5.981s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:96:73:[m[K [01;36m[Knote: [m[Kformat string is defined here
+[5.981s]    96 |         RCLCPP_INFO(this->get_logger(), "Published previous cloud with [01;36m[K%d[m[K points", previous_cloud->features.cols());
+[5.981s]       |                                                                        [01;36m[K~^[m[K
+[5.981s]       |                                                                         [01;36m[K|[m[K
+[5.981s]       |                                                                         [01;36m[Kint[m[K
+[5.981s]       |                                                                        [32m[K%ld[m[K
+[5.981s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[5.981s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[5.981s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[5.981s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[5.982s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[5.982s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[5.982s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[5.982s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[5.982s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[5.982s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[5.982s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[5.982s]                  from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:1[m[K:
+[5.982s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:100:41:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%d[m[K’ expects argument of type ‘[01m[Kint[m[K’, but argument 5 has type ‘[01m[KEigen::Index[m[K’ {aka ‘[01m[Klong int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+[5.982s]   100 |         RCLCPP_INFO(this->get_logger(), [01;35m[K"Published data cloud with %d points"[m[K, [32m[Kdata_cloud.features.cols()[m[K);
+[5.982s]       |                                         [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K  [32m[K~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[5.982s]       |                                                                                                        [32m[K|[m[K
+[5.983s]       |                                                                                                        [32m[KEigen::Index {aka long int}[m[K
+[5.983s] [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:100:69:[m[K [01;36m[Knote: [m[Kformat string is defined here
+[5.983s]   100 |         RCLCPP_INFO(this->get_logger(), "Published data cloud with [01;36m[K%d[m[K points", data_cloud.features.cols());
+[5.983s]       |                                                                    [01;36m[K~^[m[K
+[5.983s]       |                                                                     [01;36m[K|[m[K
+[5.983s]       |                                                                     [01;36m[Kint[m[K
+[5.983s]       |                                                                    [32m[K%ld[m[K
+[13.068s] [100%] [32m[1mLinking CXX executable icp_node[0m
+[14.266s] [100%] Built target icp_node
+[14.284s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[14.335s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/frontend
+[14.346s] -- Install configuration: ""
+[14.348s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/cpp_executable
+[14.349s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/icp_node
+[14.365s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/frontend/lib/frontend/icp_node" to ""
+[14.366s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/pythonpath.sh
+[14.366s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/pythonpath.dsv
+[14.366s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info
+[14.366s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/top_level.txt
+[14.366s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/SOURCES.txt
+[14.366s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/PKG-INFO
+[14.366s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend-0.0.0-py3.10.egg-info/dependency_links.txt
+[14.366s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend
+[14.367s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend/__init__.py
+[14.367s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend/module_to_import.py
+[14.402s] Listing '/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages/frontend'...
+[14.406s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/py_node.py
+[14.407s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/main.py
+[14.407s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/laser_scan.py
+[14.407s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/odom_to_map.py
+[14.407s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/scan_to_map.py
+[14.407s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/map_create.py
+[14.408s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/package_run_dependencies/frontend
+[14.409s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/parent_prefix_path/frontend
+[14.409s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/ament_prefix_path.sh
+[14.409s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/ament_prefix_path.dsv
+[14.409s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/path.sh
+[14.409s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/path.dsv
+[14.409s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.bash
+[14.410s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.sh
+[14.410s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.zsh
+[14.410s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/local_setup.dsv
+[14.410s] -- Installing: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/package.dsv
+[14.410s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/packages/frontend
+[14.410s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/cmake/frontendConfig.cmake
+[14.410s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/cmake/frontendConfig-version.cmake
+[14.410s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/frontend/share/frontend/package.xml
+[14.413s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/frontend

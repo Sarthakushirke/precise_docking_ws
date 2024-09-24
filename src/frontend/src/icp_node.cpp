@@ -9,6 +9,9 @@
 #include "frontend/icp_mapping.h"
 #include "tf2_ros/buffer.h"  // Include for TF buffer
 #include "tf2_geometry_msgs/tf2_geometry_msgs.h"
+#include "geometry_msgs/msg/transform_stamped.hpp"
+#include "tf2/LinearMath/Quaternion.h"
+
 
 namespace plt = matplotlibcpp;
 
@@ -33,6 +36,8 @@ public:
         previous_cloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("icp_previous_cloud", 10);
 
         data_cloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("icp_data_cloud", 10);
+
+        T_publisher_ = this->create_publisher<geometry_msgs::msg::TransformStamped>("icp_transform", 10);
 
         // Create the default ICP algorithm
         icp.setDefault();
@@ -65,15 +70,51 @@ private:
 
         // RCLCPP_INFO(this->get_logger(), "Received first cloud as previous.");
 
+        // icp.errorMinimizer = PM::ErrorMinimizer::Ptr(new PM::ErrorMinimizersImpl<float>::PointToPlaneErrorMinimizer());
+
+
         // // Compute the transformation to express data in reference frame
         PM::TransformationParameters T = icp(data_cloud, *previous_cloud);
+
+        // Extract translation components
+        double tx = T(0, 2);
+        double ty = T(1, 2);
+
+        // Extract rotation angle (theta)
+        double theta = atan2(T(1, 0), T(0, 0));
+        double theta_degrees = theta * 180.0 / M_PI;
+
+        // Create a TransformStamped message
+        geometry_msgs::msg::TransformStamped transform_msg;
+        transform_msg.header.stamp = this->get_clock()->now();
+        transform_msg.header.frame_id = "diff_drive/lidar_link";        // Replace with your reference frame
+
+        // Set translation
+        transform_msg.transform.translation.x = tx;
+        transform_msg.transform.translation.y = ty;
+        transform_msg.transform.translation.z = 0.0;  // For 2D, z is zero
+
+        // Convert theta to quaternion
+        tf2::Quaternion q;
+        q.setRPY(0, 0, theta);
+        transform_msg.transform.rotation = tf2::toMsg(q);
+
+        // Publish the transform
+        T_publisher_->publish(transform_msg);
+
+
+        // Get transformation covariance (if using an ErrorMinimizer that supports it)
+        PM::Matrix covMatrix = icp.errorMinimizer->getCovariance();
+
+        // Print covariance matrix (transformation noise estimate)
+        // std::cout << "Transformation Covariance Matrix: " << std::endl;
+        // std::cout << covMatrix << std::endl;
 
         // Convert matrix T to string for logging
         std::ostringstream oss;
         oss << T;
 
-        // RCLCPP_INFO(this->get_logger(), "Published transformed cloud. Final transformation: \n%s", oss.str().c_str());
-
+        RCLCPP_INFO(this->get_logger(), "Published transformed cloud. Final transformation: \n%s", oss.str().c_str());
 
         // // Apply the transformation
         DP transformed_cloud(data_cloud);
@@ -295,6 +336,7 @@ private:
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr transformed_cloud_publisher_;
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr data_cloud_publisher_;
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr previous_cloud_publisher_;
+    rclcpp::Publisher<geometry_msgs::msg::TransformStamped>::SharedPtr T_publisher_;
 
     PM::ICP icp;
     std::optional<DP> reference_cloud; // Store the reference point cloud
