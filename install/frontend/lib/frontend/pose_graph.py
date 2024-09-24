@@ -99,6 +99,8 @@ class PoseGraphOptimization(Node):
 
         # Compare transformed_pose with previous odometry data
         if self.previous_odom_data is not None:
+            check = self.is_pose_changed(self.previous_odom_data, transformed_pose)
+            print(check)
             if self.is_pose_changed(self.previous_odom_data, transformed_pose):
                 # Odometry data has changed
                 self.odom_data = transformed_pose
@@ -113,22 +115,16 @@ class PoseGraphOptimization(Node):
             self.previous_odom_data = transformed_pose
             # self.process_data()
 
-    def is_pose_changed(self, previous_pose, current_pose, position_threshold=1e-4, orientation_threshold=1e-4):
-        """Check if the pose has changed beyond specified thresholds."""
-        # Compare positions
-        dx = abs(previous_pose.position.x - current_pose.position.x)
-        dy = abs(previous_pose.position.y - current_pose.position.y)
-        dz = abs(previous_pose.position.z - current_pose.position.z)
-        position_changed = dx > position_threshold or dy > position_threshold or dz > position_threshold
+    def is_pose_changed(self, previous_pose, current_pose):
 
-        # Compare orientations (quaternions)
-        dqx = abs(previous_pose.orientation.x - current_pose.orientation.x)
-        dqy = abs(previous_pose.orientation.y - current_pose.orientation.y)
-        dqz = abs(previous_pose.orientation.z - current_pose.orientation.z)
-        dqw = abs(previous_pose.orientation.w - current_pose.orientation.w)
-        orientation_changed = dqx > orientation_threshold or dqy > orientation_threshold or dqz > orientation_threshold or dqw > orientation_threshold
+        if previous_pose.position == current_pose.position:
+            return False
+        else:
+            print("Previous pose ", previous_pose.position)
+            print("current pose", current_pose.position)
+            return True
 
-        return position_changed or orientation_changed    
+  
 
     def icp_callback(self, msg):
         """Handles incoming ICP transformation data"""
@@ -167,6 +163,7 @@ class PoseGraphOptimization(Node):
 
             # Increment pose count
             self.pose_num += 1
+            print(self.pose_num)
 
             # Reset the odometry and ICP data after processing
             self.odom_data = None

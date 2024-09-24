@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt  # Import Matplotlib
 from geometry_msgs.msg import PoseStamped
 from tf2_ros import Buffer, TransformListener, TransformException
 from tf2_geometry_msgs.tf2_geometry_msgs import do_transform_pose
+from geometry_msgs.msg import Twist
 
 class PoseGraphOptimization(Node):
     def __init__(self):
@@ -22,6 +23,8 @@ class PoseGraphOptimization(Node):
         # Subscriptions for odometry and ICP data
         self.odometry_sub = self.create_subscription(
             Odometry, '/odom', self.odometry_callback, 10)
+        self.cmd_velocity = self.create_subscription(
+            Twist, '/cmd_vel', self.velocity_callback, 10)
         self.icp_sub = self.create_subscription(
             TransformStamped, '/icp_transform', self.icp_callback, 10)
         
@@ -41,6 +44,9 @@ class PoseGraphOptimization(Node):
 
         # Initialize previous odometry data
         self.previous_odom_data = None
+
+        # Variable to store previous velocity command
+        self.previous_cmd_vel = None
         
         # Track the pose number (start from pose 0)
         self.pose_num = 0
@@ -67,22 +73,6 @@ class PoseGraphOptimization(Node):
         self.ax.grid(True)
         self.ax.legend()
     
-    # def odometry_callback(self, msg):
-    #     """Handles incoming odometry data"""
-    #     # Extract position and orientation from odometry data
-    #     odom_pose = PoseStamped()
-    #     odom_pose.header = msg.header
-    #     odom_pose.pose = msg.pose.pose  # Use the position and orientation from odom
-
-
-    #     # Print the pose (position and orientation) from odometry
-    #     # self.print_pose(odom_pose.pose)
-
-    #     # Transform odometry pose to the map frame
-    #     transformed_pose = self.transform_odometry_to_lidar(odom_pose.pose)
-    #     # self.odom_data = msg.pose.pose
-    #     self.odom_data = transformed_pose
-    #     self.process_data()
 
     def odometry_callback(self, msg):
         """Handles incoming odometry data"""
@@ -99,6 +89,8 @@ class PoseGraphOptimization(Node):
 
         # Compare transformed_pose with previous odometry data
         if self.previous_odom_data is not None:
+            check = self.is_pose_changed(self.previous_odom_data, transformed_pose)
+            print(check)
             if self.is_pose_changed(self.previous_odom_data, transformed_pose):
                 # Odometry data has changed
                 self.odom_data = transformed_pose
@@ -113,22 +105,41 @@ class PoseGraphOptimization(Node):
             self.previous_odom_data = transformed_pose
             # self.process_data()
 
-    def is_pose_changed(self, previous_pose, current_pose, position_threshold=1e-4, orientation_threshold=1e-4):
-        """Check if the pose has changed beyond specified thresholds."""
-        # Compare positions
-        dx = abs(previous_pose.position.x - current_pose.position.x)
-        dy = abs(previous_pose.position.y - current_pose.position.y)
-        dz = abs(previous_pose.position.z - current_pose.position.z)
-        position_changed = dx > position_threshold or dy > position_threshold or dz > position_threshold
 
-        # Compare orientations (quaternions)
-        dqx = abs(previous_pose.orientation.x - current_pose.orientation.x)
-        dqy = abs(previous_pose.orientation.y - current_pose.orientation.y)
-        dqz = abs(previous_pose.orientation.z - current_pose.orientation.z)
-        dqw = abs(previous_pose.orientation.w - current_pose.orientation.w)
-        orientation_changed = dqx > orientation_threshold or dqy > orientation_threshold or dqz > orientation_threshold or dqw > orientation_threshold
+    def velocity_callback(self, msg):
+        # Check if this is the first message
+        if self.previous_cmd_vel is None:
+            self.previous_cmd_vel = msg
+            self.get_logger().info('Received first command velocity')
+            return
+        
+        # Compare current and previous command velocities
+        if self.has_velocity_changed(msg, self.previous_cmd_vel):
+            self.get_logger().info('Command velocity has changed!')
+        else:
+            self.get_logger().info('Command velocity is the same.')
 
-        return position_changed or orientation_changed    
+        # Update previous command velocity
+        self.previous_cmd_vel = msg
+
+
+    def has_velocity_changed(self, current, previous):
+        # Check for changes in linear and angular velocity
+        return (current.linear.x != previous.linear.x or
+                current.linear.y != previous.linear.y or
+                current.linear.z != previous.linear.z or
+                current.angular.x != previous.angular.x or
+                current.angular.y != previous.angular.y or
+                current.angular.z != previous.angular.z)
+
+    def is_pose_changed(self, previous_pose, current_pose):
+
+        if previous_pose.position == current_pose.position:
+            return False
+        else:
+            print("Previous pose ", previous_pose.position)
+            print("current pose", current_pose.position)
+            return True
 
     def icp_callback(self, msg):
         """Handles incoming ICP transformation data"""
@@ -167,6 +178,7 @@ class PoseGraphOptimization(Node):
 
             # Increment pose count
             self.pose_num += 1
+            print(self.pose_num)
 
             # Reset the odometry and ICP data after processing
             self.odom_data = None
