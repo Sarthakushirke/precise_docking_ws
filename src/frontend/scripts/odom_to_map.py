@@ -61,6 +61,8 @@ class OdomToMap(Node):
             # Update the previous transformed pose to the current one
             self.previous_transformed_pose = transformed_pose
 
+            
+
             # Add the current transformed position to the lists
             self.x_positions.append(transformed_pose.position.x)
             self.y_positions.append(transformed_pose.position.y)
@@ -71,12 +73,13 @@ class OdomToMap(Node):
 
     def calculate_pose_difference(self, previous_pose, current_pose):
         # Calculate the translation difference
+        print("Current pose",current_pose.position.x ,current_pose.position.y)
         delta_x = current_pose.position.x - previous_pose.position.x
         delta_y = current_pose.position.y - previous_pose.position.y
         delta_z = current_pose.position.z - previous_pose.position.z
 
         # Log the differences
-        self.get_logger().info(f"Transformed Pose Difference: Δx={delta_x:.3f}, Δy={delta_y:.3f}, Δz={delta_z:.3f}")
+        # self.get_logger().info(f"Transformed Pose Difference: Δx={delta_x:.3f}, Δy={delta_y:.3f}, Δz={delta_z:.3f}")
 
 
 
@@ -90,13 +93,13 @@ class OdomToMap(Node):
     def transform_odometry_to_map(self, odom_pose):
         try:
             # Wait for the transform from odom to map with a timeout (e.g., 1 second)
-            if not self.tf_buffer.can_transform('odom', 'map', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
+            if not self.tf_buffer.can_transform('odom', 'diff_drive/lidar_link', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
                 self.get_logger().warn('Transform from odom to map is not available yet. Retrying...')
                 return  # Skip this callback if transform is not available
 
             # Look up the transformation from odom to map
             transform_stamped = self.tf_buffer.lookup_transform(
-                'map',  # Target frame
+                'diff_drive/lidar_link',  # Target frame
                 'odom',  # Source frame
                 rclpy.time.Time()  # Get the latest available transform
             )

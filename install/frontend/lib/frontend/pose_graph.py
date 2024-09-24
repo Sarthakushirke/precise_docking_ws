@@ -11,6 +11,7 @@ from geometry_msgs.msg import PoseStamped
 from tf2_ros import Buffer, TransformListener, TransformException
 from tf2_geometry_msgs.tf2_geometry_msgs import do_transform_pose
 
+
 class PoseGraphOptimization(Node):
     def __init__(self):
         super().__init__('pose_graph_optimization')
@@ -22,6 +23,7 @@ class PoseGraphOptimization(Node):
         # Subscriptions for odometry and ICP data
         self.odometry_sub = self.create_subscription(
             Odometry, '/odom', self.odometry_callback, 10)
+
         self.icp_sub = self.create_subscription(
             TransformStamped, '/icp_transform', self.icp_callback, 10)
         
@@ -41,6 +43,8 @@ class PoseGraphOptimization(Node):
 
         # Initialize previous odometry data
         self.previous_odom_data = None
+
+        
         
         # Track the pose number (start from pose 0)
         self.pose_num = 0
@@ -117,14 +121,10 @@ class PoseGraphOptimization(Node):
 
     def is_pose_changed(self, previous_pose, current_pose):
 
-        if previous_pose.position == current_pose.position:
+        if previous_pose.position == current_pose.position or abs(previous_pose.position.x - current_pose.position.x) > 1:
             return False
         else:
-            print("Previous pose ", previous_pose.position)
-            print("current pose", current_pose.position)
             return True
-
-  
 
     def icp_callback(self, msg):
         """Handles incoming ICP transformation data"""
