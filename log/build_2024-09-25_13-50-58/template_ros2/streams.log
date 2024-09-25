@@ -1,0 +1,24 @@
+[1.203s] Invoking command in '/home/sarthak/precise_docking_ws/src/template_ros2': PYTHONPATH=/home/sarthak/precise_docking_ws/build/template_ros2/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/template_ros2 build --build-base /home/sarthak/precise_docking_ws/build/template_ros2/build install --record /home/sarthak/precise_docking_ws/build/template_ros2/install.log --single-version-externally-managed install_data
+[1.439s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+[1.439s]   warnings.warn(msg)
+[1.561s] running egg_info
+[1.587s] writing ../../build/template_ros2/template_ros2.egg-info/PKG-INFO
+[1.588s] writing dependency_links to ../../build/template_ros2/template_ros2.egg-info/dependency_links.txt
+[1.588s] writing requirements to ../../build/template_ros2/template_ros2.egg-info/requires.txt
+[1.588s] writing top-level names to ../../build/template_ros2/template_ros2.egg-info/top_level.txt
+[2.410s] writing manifest file '../../build/template_ros2/template_ros2.egg-info/SOURCES.txt'
+[2.410s] running build
+[2.410s] running build_py
+[2.410s] copying template_ros2/__init__.py -> /home/sarthak/precise_docking_ws/build/template_ros2/build/lib/template_ros2
+[2.410s] copying template_ros2/template_sub_pub.py -> /home/sarthak/precise_docking_ws/build/template_ros2/build/lib/template_ros2
+[2.410s] running install
+[2.415s] running install_lib
+[2.433s] running install_data
+[2.434s] copying resource/template_ros2 -> /home/sarthak/precise_docking_ws/install/template_ros2/share/ament_index/resource_index/packages
+[2.434s] copying package.xml -> /home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2
+[2.434s] running install_egg_info
+[2.447s] removing '/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template_ros2-0.0.0-py3.10.egg-info' (and everything under it)
+[2.447s] Copying ../../build/template_ros2/template_ros2.egg-info to /home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template_ros2-0.0.0-py3.10.egg-info
+[2.448s] running install_scripts
+[2.570s] writing list of installed files to '/home/sarthak/precise_docking_ws/build/template_ros2/install.log'
+[2.619s] Invoked command in '/home/sarthak/precise_docking_ws/src/template_ros2' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/template_ros2/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=218 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/template_ros2 build --build-base /home/sarthak/precise_docking_ws/build/template_ros2/build install --record /home/sarthak/precise_docking_ws/build/template_ros2/install.log --single-version-externally-managed install_data

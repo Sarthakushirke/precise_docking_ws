@@ -13,6 +13,8 @@ import numpy as np # Import Numpy library
 from scipy.spatial.transform import Rotation as R
 import tf2_ros
 import tf2_geometry_msgs
+from geometry_msgs.msg import PointStamped
+
 
 # The different ArUco dictionaries built into the OpenCV library. 
 ARUCO_DICT = {
@@ -46,6 +48,9 @@ class arcuo_marker_detection(Node): # Node class
             '/diff_drive/camera_rgb',  #topic name
             self.arcuo_detection_callback, 
             10)
+        
+        self.publisher_marker_in_robot_frame = self.create_publisher(PointStamped, 'marker_in_robot_frame', 10)
+
         
 
         # Declare parameters
@@ -151,18 +156,36 @@ class arcuo_marker_detection(Node): # Node class
 
 
                 # Send the transform
-                self.tfbroadcaster.sendTransform(t)    
+                # self.tfbroadcaster.sendTransform(t)    
                 
 
-                # Transform to robot base frame using TF lookup
-                try:
-                    transform = self.tf_buffer.lookup_transform('base_link', 'camera_link', rclpy.time.Time())
-                    marker_in_robot_frame = tf2_geometry_msgs.do_transform_point(t, transform)
+            # Transform to robot base frame using TF lookup
+            try:
+                # Lookup the transformation between 'diff_drive/lidar_link' and 'camera_link'
+                transform = self.tf_buffer.lookup_transform('diff_drive/lidar_link', 'camera_link', rclpy.time.Time())
+                
+                # Create a PointStamped message to hold the marker position in the camera frame
+                point_in_camera_frame = PointStamped()
+                point_in_camera_frame.header.stamp = self.get_clock().now().to_msg()
+                point_in_camera_frame.header.frame_id = 'camera_link'
+                
+                # Set the marker's position in the camera frame
+                point_in_camera_frame.point.x = t.transform.translation.x
+                point_in_camera_frame.point.y = t.transform.translation.y
+                point_in_camera_frame.point.z = t.transform.translation.z
 
-                    # Log the transform in the robot's frame
-                    self.get_logger().info(f'Marker position in robot frame: x={marker_in_robot_frame.transform.translation.x}, y={marker_in_robot_frame.transform.translation.y}, z={marker_in_robot_frame.transform.translation.z}')
-                except Exception as e:
-                    self.get_logger().error(f'Could not transform marker pose to robot frame: {e}')
+                # Perform the transformation to the robot's frame
+                marker_in_robot_frame = tf2_geometry_msgs.do_transform_point(point_in_camera_frame, transform)
+
+                # Log the transformed position in the robot's frame
+                self.get_logger().info(f'Marker position in robot frame: x={marker_in_robot_frame.point.x}, y={marker_in_robot_frame.point.y}, z={marker_in_robot_frame.point.z}')
+            
+                # Publish the transformed marker position
+                self.publisher_marker_in_robot_frame.publish(marker_in_robot_frame)
+            
+            except Exception as e:
+                self.get_logger().error(f'Could not transform marker pose to robot frame: {e}')
+
 
                 # Draw the axes on the marker
                 cv2.aruco.drawAxis(current_frame, self.mtx, self.dst, rvecs[i], tvecs[i], 0.05) 

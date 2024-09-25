@@ -1,12 +1,8 @@
 Metadata-Version: 2.1
-Name: arcuo-marker-detection
+Name: arcuo_marker_detection
 Version: 0.0.0
 Summary: TODO: Package description
-Home-page: UNKNOWN
 Maintainer: sarthak
 Maintainer-email: 37041521+Sarthakushirke@users.noreply.github.com
 License: TODO: License declaration
-Platform: UNKNOWN
-
-UNKNOWN
-
+Requires-Dist: setuptools

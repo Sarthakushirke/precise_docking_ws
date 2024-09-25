@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt  # Import Matplotlib
 from geometry_msgs.msg import PoseStamped
 from tf2_ros import Buffer, TransformListener, TransformException
 from tf2_geometry_msgs.tf2_geometry_msgs import do_transform_pose
+from geometry_msgs.msg import PointStamped
 
 
 class PoseGraphOptimization(Node):
@@ -27,11 +28,16 @@ class PoseGraphOptimization(Node):
         self.icp_sub = self.create_subscription(
             TransformStamped, '/icp_transform', self.icp_callback, 10)
         
+        self.marker_sub = self.create_subscription(
+            PointStamped, '/marker_in_robot_frame', self.marker_callback, 10)  # Subscribe to ArUco marker data
+        
         # Noise models for the factors (adjust based on your data)
         self.odometry_noise_model = gtsam.noiseModel.Diagonal.Sigmas(
             np.array([0.1, 0.1, np.radians(5.0)]))  # [x, y, theta]
         self.icp_noise_model = gtsam.noiseModel.Diagonal.Sigmas(
             np.array([0.05, 0.05, np.radians(2.0)]))  # Adjust based on ICP accuracy
+        self.landmark_noise_model = gtsam.noiseModel.Diagonal.Sigmas(
+            np.array([0.1, 0.1]))  # Noise model for landmark measurements
         
         # Create a factor graph
         self.graph = gtsam.NonlinearFactorGraph()
@@ -48,6 +54,11 @@ class PoseGraphOptimization(Node):
         
         # Track the pose number (start from pose 0)
         self.pose_num = 0
+
+        # Track which landmarks have already been inserted
+        self.landmark_inserted = set()  # Track inserted landmark keys
+
+
         
         # Set the number of poses after which to trigger optimization
         self.pose_threshold = 10
@@ -131,9 +142,16 @@ class PoseGraphOptimization(Node):
         self.icp_data = msg
         self.process_data()
 
+    def marker_callback(self, msg):
+        """Handles incoming ArUco marker pose data"""
+        self.marker_data = msg.point  # Store the marker's pose
+        print("This is the data",msg.point)
+        self.process_data()
+
     def process_data(self):
         """Process odometry and ICP data when both are available"""
-        if self.odom_data and self.icp_data:
+        if self.odom_data and self.icp_data  :  
+            # and self.marker_data
             # Extract odometry pose (convert to 2D pose)
 
             odom_pose = self.extract_pose2_from_msg(self.odom_data)
@@ -153,6 +171,21 @@ class PoseGraphOptimization(Node):
                 # Add ICP factor
                 self.graph.add(gtsam.BetweenFactorPose2(
                     self.pose_num - 1, self.pose_num, icp_relative_pose, self.icp_noise_model))
+                
+                # landmark_pose = gtsam.Point2(self.marker_data.x, self.marker_data.y)
+                # landmark_id = 1  # Assign a unique ID for each landmark (e.g., from ArUco marker)
+
+                # # If landmark data (ArUco marker) is available, add a landmark factor
+                # if landmark_id not in self.landmark_inserted:
+                
+                #     self.graph.add(gtsam.BearingRangeFactor2D(
+                #         self.pose_num, landmark_id, odom_pose.bearing(landmark_pose), odom_pose.range(landmark_pose), self.landmark_noise_model))
+
+                #     self.initial_estimates.insert(landmark_id, landmark_pose)
+
+                #     # Mark this landmark as inserted
+                #     self.landmark_inserted.add(landmark_id)
+                      
             else:
                 # For the first pose, add a prior factor to fix the initial pose
                 prior_noise = gtsam.noiseModel.Diagonal.Variances([1e-6, 1e-6, 1e-8])
@@ -168,6 +201,7 @@ class PoseGraphOptimization(Node):
             # Reset the odometry and ICP data after processing
             self.odom_data = None
             self.icp_data = None
+            self.marker_data = None
 
             # Trigger optimization after threshold
             if self.pose_num >= self.pose_threshold:

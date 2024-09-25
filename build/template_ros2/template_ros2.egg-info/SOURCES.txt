@@ -4,7 +4,6 @@ setup.py
 ../../build/template_ros2/template_ros2.egg-info/PKG-INFO
 ../../build/template_ros2/template_ros2.egg-info/SOURCES.txt
 ../../build/template_ros2/template_ros2.egg-info/dependency_links.txt
-../../build/template_ros2/template_ros2.egg-info/entry_points.txt
 ../../build/template_ros2/template_ros2.egg-info/requires.txt
 ../../build/template_ros2/template_ros2.egg-info/top_level.txt
 ../../build/template_ros2/template_ros2.egg-info/zip-safe
