@@ -1,6 +1,0 @@
-[31mCMake Error at cmake_install.cmake:94 (file):
-  file INSTALL cannot find
-  "/home/sarthak/precise_docking_ws/src/frontend/scripts/laser_scan_to_pointcloud.py":
-  No such file or directory.
-
-[0m

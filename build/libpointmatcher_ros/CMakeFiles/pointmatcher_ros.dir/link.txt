@@ -1,2 +1,0 @@
-/usr/bin/ar qc libpointmatcher_ros.a CMakeFiles/pointmatcher_ros.dir/src/PointMatcher_ROS.cpp.o
-/usr/bin/ranlib libpointmatcher_ros.a

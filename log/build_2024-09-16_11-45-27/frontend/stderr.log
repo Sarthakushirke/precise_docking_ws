@@ -1,7 +1,0 @@
-[01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:[m[K In member function ‘[01m[Kvoid ICPNode::pointCloudCallback(sensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr)[m[K’:
-[01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:71:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kicp_mapper[m[K’ was not declared in this scope
-   71 |         [01;31m[Kicp_mapper[m[K.updateGlobalMap(transformed_cloud);
-      |         [01;31m[K^~~~~~~~~~[m[K
-gmake[2]: *** [CMakeFiles/icp_node.dir/build.make:76: CMakeFiles/icp_node.dir/src/icp_node.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:168: CMakeFiles/icp_node.dir/all] Error 2
-gmake: *** [Makefile:146: all] Error 2

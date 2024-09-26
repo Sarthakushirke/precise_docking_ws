@@ -1,9 +1,0 @@
-setup.py
-frontend/__init__.py
-frontend/icp.py
-frontend/module_to_import.py
-frontend/pose_graph.py
-frontend.egg-info/PKG-INFO
-frontend.egg-info/SOURCES.txt
-frontend.egg-info/dependency_links.txt
-frontend.egg-info/top_level.txt

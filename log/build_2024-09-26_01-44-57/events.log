@@ -1,0 +1,507 @@
+[0.000000] (-) TimerEvent: {}
+[0.000328] (-) JobUnselected: {'identifier': 'arcuo_marker_detection'}
+[0.000346] (-) JobUnselected: {'identifier': 'docking_bringup'}
+[0.000357] (-) JobUnselected: {'identifier': 'frontend'}
+[0.000366] (-) JobUnselected: {'identifier': 'reach_the_goal'}
+[0.000374] (-) JobUnselected: {'identifier': 'teleop_cpp_ros2'}
+[0.000382] (-) JobUnselected: {'identifier': 'template_ros2'}
+[0.000392] (ultralytics_ros) JobQueued: {'identifier': 'ultralytics_ros', 'dependencies': OrderedDict()}
+[0.000735] (ultralytics_ros) JobStarted: {'identifier': 'ultralytics_ros'}
+[0.007118] (ultralytics_ros) JobProgress: {'identifier': 'ultralytics_ros', 'progress': 'cmake'}
+[0.007750] (ultralytics_ros) Command: {'cmd': ['/usr/bin/cmake', '/home/sarthak/precise_docking_ws/src/ultralytics_ros', '-DCMAKE_INSTALL_PREFIX=/home/sarthak/precise_docking_ws/install/ultralytics_ros'], 'cwd': '/home/sarthak/precise_docking_ws/build/ultralytics_ros', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('OLDPWD', '/home/sarthak/precise_docking_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '2650'), ('SYSTEMD_EXEC_PID', '3297'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '6602'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:2708'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/x86_64-linux-gnu/pkgconfig:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3248,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3248'), ('INVOCATION_ID', '6496fbdcecb9461ca1b597809726e8d3'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/teleop_cpp_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '39'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:9f1cd0ba-8eea-4fd8-9719-9263996770bb'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/ultralytics_ros'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/teleop_cpp_ros2:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[0.024913] (ultralytics_ros) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.099899] (-) TimerEvent: {}
+[0.127443] (ultralytics_ros) StdoutLine: {'line': b'-- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.146577] (ultralytics_ros) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.148087] (ultralytics_ros) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.152772] (ultralytics_ros) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.159757] (ultralytics_ros) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.168430] (ultralytics_ros) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.189015] (ultralytics_ros) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.189955] (ultralytics_ros) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.199971] (-) TimerEvent: {}
+[0.275812] (ultralytics_ros) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.300092] (-) TimerEvent: {}
+[0.307562] (ultralytics_ros) StdoutLine: {'line': b'-- Found rclpy: 3.3.14 (/opt/ros/humble/share/rclpy/cmake)\n'}
+[0.307722] (ultralytics_ros) StdoutLine: {'line': b'-- Found geometry_msgs: 4.2.4 (/opt/ros/humble/share/geometry_msgs/cmake)\n'}
+[0.315408] (ultralytics_ros) StdoutLine: {'line': b'-- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[0.325944] (ultralytics_ros) StdoutLine: {'line': b'-- Found vision_msgs: 4.1.1 (/opt/ros/humble/share/vision_msgs/cmake)\n'}
+[0.335841] (ultralytics_ros) StdoutLine: {'line': b'-- Found visualization_msgs: 4.2.4 (/opt/ros/humble/share/visualization_msgs/cmake)\n'}
+[0.348369] (ultralytics_ros) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)\n'}
+[0.352770] (ultralytics_ros) StdoutLine: {'line': b'-- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)\n'}
+[0.358579] (ultralytics_ros) StdoutLine: {'line': b'-- Found image_geometry: 3.2.1 (/opt/ros/humble/share/image_geometry/cmake)\n'}
+[0.359994] (ultralytics_ros) StdoutLine: {'line': b'-- Found message_filters: 4.3.5 (/opt/ros/humble/share/message_filters/cmake)\n'}
+[0.361650] (ultralytics_ros) StdoutLine: {'line': b'-- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)\n'}
+[0.382800] (ultralytics_ros) StdoutLine: {'line': b'-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)\n'}
+[0.400222] (-) TimerEvent: {}
+[0.405365] (ultralytics_ros) StdoutLine: {'line': b'-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)\n'}
+[0.500352] (-) TimerEvent: {}
+[0.600654] (-) TimerEvent: {}
+[0.656783] (ultralytics_ros) StdoutLine: {'line': b'-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)\n'}
+[0.662269] (ultralytics_ros) StdoutLine: {'line': b'-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)\n'}
+[0.700859] (-) TimerEvent: {}
+[0.794273] (ultralytics_ros) StdoutLine: {'line': b'-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)\n'}
+[0.798906] (ultralytics_ros) StdoutLine: {'line': b'-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)\n'}
+[0.800913] (-) TimerEvent: {}
+[0.804957] (ultralytics_ros) StdoutLine: {'line': b'-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)\n'}
+[0.901031] (-) TimerEvent: {}
+[0.932071] (ultralytics_ros) StdoutLine: {'line': b'-- Found Qhull version 8.0.2\n'}
+[1.001120] (-) TimerEvent: {}
+[1.041269] (ultralytics_ros) StdoutLine: {'line': b'-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)\n'}
+[1.101310] (-) TimerEvent: {}
+[1.164468] (ultralytics_ros) StdoutLine: {'line': b'-- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)\n'}
+[1.193459] (ultralytics_ros) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)\n'}
+[1.194459] (ultralytics_ros) StdoutLine: {'line': b'-- Found Eigen3: TRUE (found version "3.4.0") \n'}
+[1.194540] (ultralytics_ros) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[1.201490] (-) TimerEvent: {}
+[1.261127] (ultralytics_ros) StdoutLine: {'line': b'-- Found tf2_eigen: 0.25.7 (/opt/ros/humble/share/tf2_eigen/cmake)\n'}
+[1.265684] (ultralytics_ros) StdoutLine: {'line': b'-- Found OpenCV: /usr (found version "4.5.4") \n'}
+[1.301681] (-) TimerEvent: {}
+[1.401936] (-) TimerEvent: {}
+[1.502270] (-) TimerEvent: {}
+[1.535160] (ultralytics_ros) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[1.602470] (-) TimerEvent: {}
+[1.702849] (-) TimerEvent: {}
+[1.803216] (-) TimerEvent: {}
+[1.903534] (-) TimerEvent: {}
+[1.932362] (ultralytics_ros) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.003662] (-) TimerEvent: {}
+[2.080718] (ultralytics_ros) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.103864] (-) TimerEvent: {}
+[2.111725] (ultralytics_ros) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") \n'}
+[2.113058] (ultralytics_ros) StdoutLine: {'line': b'-- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)\n'}
+[2.135089] (ultralytics_ros) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") \n'}
+[2.135234] (ultralytics_ros) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[2.135275] (ultralytics_ros) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10\n'}
+[2.135309] (ultralytics_ros) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so\n'}
+[2.157856] (ultralytics_ros) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[2.204053] (-) TimerEvent: {}
+[2.226066] (ultralytics_ros) StdoutLine: {'line': b'-- Configuring done\n'}
+[2.297865] (ultralytics_ros) StdoutLine: {'line': b'-- Generating done\n'}
+[2.301254] (ultralytics_ros) StdoutLine: {'line': b'-- Build files have been written to: /home/sarthak/precise_docking_ws/build/ultralytics_ros\n'}
+[2.304107] (-) TimerEvent: {}
+[2.315854] (ultralytics_ros) CommandEnded: {'returncode': 0}
+[2.316691] (ultralytics_ros) JobProgress: {'identifier': 'ultralytics_ros', 'progress': 'build'}
+[2.318560] (ultralytics_ros) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/sarthak/precise_docking_ws/build/ultralytics_ros', '--', '-j20', '-l20'], 'cwd': '/home/sarthak/precise_docking_ws/build/ultralytics_ros', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('OLDPWD', '/home/sarthak/precise_docking_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '2650'), ('SYSTEMD_EXEC_PID', '3297'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '6602'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:2708'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/x86_64-linux-gnu/pkgconfig:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3248,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3248'), ('INVOCATION_ID', '6496fbdcecb9461ca1b597809726e8d3'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/teleop_cpp_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '39'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:9f1cd0ba-8eea-4fd8-9719-9263996770bb'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/ultralytics_ros'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/teleop_cpp_ros2:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[2.376369] (ultralytics_ros) StdoutLine: {'line': b'[  3%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[2.385878] (ultralytics_ros) StdoutLine: {'line': b'[  6%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[2.394806] (ultralytics_ros) StdoutLine: {'line': b'[  6%] Built target ament_cmake_python_copy_ultralytics_ros\n'}
+[2.404193] (-) TimerEvent: {}
+[2.504571] (-) TimerEvent: {}
+[2.552653] (ultralytics_ros) StdoutLine: {'line': b'[  6%] Built target ultralytics_ros__cpp\n'}
+[2.554525] (ultralytics_ros) StdoutLine: {'line': b'[  9%] \x1b[32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_generator_c.dir/rosidl_generator_c/ultralytics_ros/msg/detail/yolo_result__functions.c.o\x1b[0m\n'}
+[2.560510] (ultralytics_ros) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[2.563360] (ultralytics_ros) StdoutLine: {'line': b'[ 18%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[2.563595] (ultralytics_ros) StdoutLine: {'line': b'[ 18%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[2.596403] (ultralytics_ros) StdoutLine: {'line': b'[ 21%] \x1b[32m\x1b[1mLinking C shared library libultralytics_ros__rosidl_generator_c.so\x1b[0m\n'}
+[2.599993] (ultralytics_ros) StdoutLine: {'line': b'running egg_info\n'}
+[2.600828] (ultralytics_ros) StdoutLine: {'line': b'creating ultralytics_ros.egg-info\n'}
+[2.604643] (-) TimerEvent: {}
+[2.612248] (ultralytics_ros) StdoutLine: {'line': b'writing ultralytics_ros.egg-info/PKG-INFO\n'}
+[2.612513] (ultralytics_ros) StdoutLine: {'line': b'writing dependency_links to ultralytics_ros.egg-info/dependency_links.txt\n'}
+[2.612675] (ultralytics_ros) StdoutLine: {'line': b'writing top-level names to ultralytics_ros.egg-info/top_level.txt\n'}
+[2.612781] (ultralytics_ros) StdoutLine: {'line': b"writing manifest file 'ultralytics_ros.egg-info/SOURCES.txt'\n"}
+[2.629092] (ultralytics_ros) StdoutLine: {'line': b'[ 21%] Built target ultralytics_ros__rosidl_generator_c\n'}
+[2.637365] (ultralytics_ros) StdoutLine: {'line': b'[ 27%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[2.637578] (ultralytics_ros) StdoutLine: {'line': b'[ 27%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[2.639471] (ultralytics_ros) StdoutLine: {'line': b'[ 30%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[2.704785] (-) TimerEvent: {}
+[2.710834] (ultralytics_ros) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ultralytics_ros/msg/yolo_result__type_support.cpp.o\x1b[0m\n'}
+[2.727457] (ultralytics_ros) StdoutLine: {'line': b'[ 36%] \x1b[32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ultralytics_ros/msg/detail/dds_fastrtps/yolo_result__type_support.cpp.o\x1b[0m\n'}
+[2.727972] (ultralytics_ros) StdoutLine: {'line': b'[ 39%] \x1b[32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ultralytics_ros/msg/detail/yolo_result__type_support.cpp.o\x1b[0m\n'}
+[2.801420] (ultralytics_ros) StdoutLine: {'line': b'[ 42%] \x1b[32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ultralytics_ros/msg/detail/yolo_result__type_support_c.cpp.o\x1b[0m\n'}
+[2.804589] (ultralytics_ros) StdoutLine: {'line': b'[ 45%] \x1b[32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ultralytics_ros/msg/detail/yolo_result__type_support.c.o\x1b[0m\n'}
+[2.804783] (-) TimerEvent: {}
+[2.826373] (ultralytics_ros) StdoutLine: {'line': b'[ 48%] \x1b[32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_c.dir/rosidl_typesupport_c/ultralytics_ros/msg/yolo_result__type_support.cpp.o\x1b[0m\n'}
+[2.846671] (ultralytics_ros) StdoutLine: {'line': b'[ 51%] \x1b[32m\x1b[1mLinking C shared library libultralytics_ros__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[2.862834] (ultralytics_ros) StdoutLine: {'line': b'[ 54%] \x1b[32m\x1b[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_c.so\x1b[0m\n'}
+[2.883246] (ultralytics_ros) StdoutLine: {'line': b'[ 54%] Built target ultralytics_ros__rosidl_typesupport_introspection_c\n'}
+[2.899326] (ultralytics_ros) StdoutLine: {'line': b'[ 54%] Built target ultralytics_ros__rosidl_typesupport_c\n'}
+[2.904907] (-) TimerEvent: {}
+[2.905351] (ultralytics_ros) StdoutLine: {'line': b'[ 57%] \x1b[32m\x1b[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[2.939875] (ultralytics_ros) StdoutLine: {'line': b'[ 57%] Built target ultralytics_ros__rosidl_typesupport_cpp\n'}
+[2.961166] (ultralytics_ros) StdoutLine: {'line': b'[ 60%] \x1b[32mBuilding CXX object CMakeFiles/tracker_with_cloud_node.dir/src/tracker_with_cloud_node.cpp.o\x1b[0m\n'}
+[3.005028] (-) TimerEvent: {}
+[3.009220] (ultralytics_ros) StdoutLine: {'line': b'[ 63%] \x1b[32m\x1b[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[3.018403] (ultralytics_ros) StdoutLine: {'line': b'[ 66%] \x1b[32m\x1b[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[3.071510] (ultralytics_ros) StdoutLine: {'line': b'[ 66%] Built target ultralytics_ros__rosidl_typesupport_fastrtps_c\n'}
+[3.074761] (ultralytics_ros) StdoutLine: {'line': b'[ 69%] \x1b[32m\x1b[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[3.078398] (ultralytics_ros) StdoutLine: {'line': b'[ 69%] Built target ultralytics_ros__rosidl_typesupport_fastrtps_cpp\n'}
+[3.105139] (-) TimerEvent: {}
+[3.131653] (ultralytics_ros) StdoutLine: {'line': b'[ 69%] Built target ultralytics_ros__rosidl_typesupport_introspection_cpp\n'}
+[3.149133] (ultralytics_ros) StdoutLine: {'line': b'[ 69%] Built target ultralytics_ros\n'}
+[3.167114] (ultralytics_ros) StdoutLine: {'line': b'[ 72%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[3.205304] (-) TimerEvent: {}
+[3.305636] (-) TimerEvent: {}
+[3.362139] (ultralytics_ros) StdoutLine: {'line': b"reading manifest file 'ultralytics_ros.egg-info/SOURCES.txt'\n"}
+[3.362757] (ultralytics_ros) StdoutLine: {'line': b"writing manifest file 'ultralytics_ros.egg-info/SOURCES.txt'\n"}
+[3.370513] (ultralytics_ros) StdoutLine: {'line': b'[ 72%] Built target ultralytics_ros__py\n'}
+[3.388676] (ultralytics_ros) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_generator_py.dir/rosidl_generator_py/ultralytics_ros/msg/_yolo_result_s.c.o\x1b[0m\n'}
+[3.394996] (ultralytics_ros) StdoutLine: {'line': b'[ 75%] Built target ament_cmake_python_build_ultralytics_ros_egg\n'}
+[3.405744] (-) TimerEvent: {}
+[3.466966] (ultralytics_ros) StdoutLine: {'line': b'[ 78%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/ultralytics_ros/libultralytics_ros__rosidl_generator_py.so\x1b[0m\n'}
+[3.505901] (-) TimerEvent: {}
+[3.508021] (ultralytics_ros) StdoutLine: {'line': b'[ 78%] Built target ultralytics_ros__rosidl_generator_py\n'}
+[3.528719] (ultralytics_ros) StdoutLine: {'line': b'[ 81%] \x1b[32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[3.529240] (ultralytics_ros) StdoutLine: {'line': b'[ 84%] \x1b[32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[3.529429] (ultralytics_ros) StdoutLine: {'line': b'[ 87%] \x1b[32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[3.598142] (ultralytics_ros) StdoutLine: {'line': b'[ 90%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[3.598677] (ultralytics_ros) StdoutLine: {'line': b'[ 96%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[3.598803] (ultralytics_ros) StdoutLine: {'line': b'[ 96%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[3.606002] (-) TimerEvent: {}
+[3.630079] (ultralytics_ros) StdoutLine: {'line': b'[ 96%] Built target ultralytics_ros__rosidl_typesupport_introspection_c__pyext\n'}
+[3.635111] (ultralytics_ros) StdoutLine: {'line': b'[ 96%] Built target ultralytics_ros__rosidl_typesupport_fastrtps_c__pyext\n'}
+[3.635284] (ultralytics_ros) StdoutLine: {'line': b'[ 96%] Built target ultralytics_ros__rosidl_typesupport_c__pyext\n'}
+[3.706225] (-) TimerEvent: {}
+[3.806649] (-) TimerEvent: {}
+[3.907126] (-) TimerEvent: {}
+[4.007603] (-) TimerEvent: {}
+[4.108045] (-) TimerEvent: {}
+[4.208444] (-) TimerEvent: {}
+[4.308787] (-) TimerEvent: {}
+[4.409220] (-) TimerEvent: {}
+[4.509643] (-) TimerEvent: {}
+[4.610090] (-) TimerEvent: {}
+[4.710517] (-) TimerEvent: {}
+[4.810977] (-) TimerEvent: {}
+[4.911271] (-) TimerEvent: {}
+[5.011534] (-) TimerEvent: {}
+[5.111844] (-) TimerEvent: {}
+[5.212087] (-) TimerEvent: {}
+[5.312378] (-) TimerEvent: {}
+[5.412649] (-) TimerEvent: {}
+[5.512913] (-) TimerEvent: {}
+[5.613156] (-) TimerEvent: {}
+[5.713446] (-) TimerEvent: {}
+[5.813800] (-) TimerEvent: {}
+[5.914054] (-) TimerEvent: {}
+[6.014325] (-) TimerEvent: {}
+[6.114603] (-) TimerEvent: {}
+[6.214975] (-) TimerEvent: {}
+[6.315223] (-) TimerEvent: {}
+[6.415523] (-) TimerEvent: {}
+[6.515877] (-) TimerEvent: {}
+[6.616121] (-) TimerEvent: {}
+[6.716405] (-) TimerEvent: {}
+[6.816783] (-) TimerEvent: {}
+[6.917041] (-) TimerEvent: {}
+[7.017315] (-) TimerEvent: {}
+[7.117653] (-) TimerEvent: {}
+[7.217983] (-) TimerEvent: {}
+[7.318230] (-) TimerEvent: {}
+[7.418594] (-) TimerEvent: {}
+[7.518959] (-) TimerEvent: {}
+[7.619201] (-) TimerEvent: {}
+[7.719566] (-) TimerEvent: {}
+[7.819927] (-) TimerEvent: {}
+[7.920167] (-) TimerEvent: {}
+[8.020468] (-) TimerEvent: {}
+[8.120841] (-) TimerEvent: {}
+[8.221092] (-) TimerEvent: {}
+[8.321381] (-) TimerEvent: {}
+[8.421726] (-) TimerEvent: {}
+[8.521977] (-) TimerEvent: {}
+[8.622238] (-) TimerEvent: {}
+[8.722639] (-) TimerEvent: {}
+[8.822976] (-) TimerEvent: {}
+[8.923218] (-) TimerEvent: {}
+[9.023551] (-) TimerEvent: {}
+[9.123896] (-) TimerEvent: {}
+[9.224157] (-) TimerEvent: {}
+[9.324487] (-) TimerEvent: {}
+[9.424841] (-) TimerEvent: {}
+[9.525089] (-) TimerEvent: {}
+[9.625341] (-) TimerEvent: {}
+[9.725687] (-) TimerEvent: {}
+[9.825997] (-) TimerEvent: {}
+[9.926287] (-) TimerEvent: {}
+[10.026664] (-) TimerEvent: {}
+[10.126976] (-) TimerEvent: {}
+[10.227222] (-) TimerEvent: {}
+[10.327585] (-) TimerEvent: {}
+[10.427953] (-) TimerEvent: {}
+[10.528233] (-) TimerEvent: {}
+[10.628506] (-) TimerEvent: {}
+[10.728859] (-) TimerEvent: {}
+[10.829102] (-) TimerEvent: {}
+[10.929357] (-) TimerEvent: {}
+[11.029628] (-) TimerEvent: {}
+[11.129989] (-) TimerEvent: {}
+[11.230228] (-) TimerEvent: {}
+[11.330584] (-) TimerEvent: {}
+[11.430936] (-) TimerEvent: {}
+[11.531179] (-) TimerEvent: {}
+[11.631471] (-) TimerEvent: {}
+[11.731839] (-) TimerEvent: {}
+[11.832083] (-) TimerEvent: {}
+[11.932370] (-) TimerEvent: {}
+[12.032730] (-) TimerEvent: {}
+[12.133024] (-) TimerEvent: {}
+[12.233289] (-) TimerEvent: {}
+[12.333654] (-) TimerEvent: {}
+[12.433993] (-) TimerEvent: {}
+[12.534267] (-) TimerEvent: {}
+[12.634640] (-) TimerEvent: {}
+[12.735011] (-) TimerEvent: {}
+[12.835311] (-) TimerEvent: {}
+[12.935695] (-) TimerEvent: {}
+[13.035988] (-) TimerEvent: {}
+[13.136249] (-) TimerEvent: {}
+[13.236593] (-) TimerEvent: {}
+[13.336951] (-) TimerEvent: {}
+[13.437201] (-) TimerEvent: {}
+[13.537626] (-) TimerEvent: {}
+[13.638008] (-) TimerEvent: {}
+[13.738246] (-) TimerEvent: {}
+[13.838529] (-) TimerEvent: {}
+[13.938886] (-) TimerEvent: {}
+[14.039132] (-) TimerEvent: {}
+[14.139424] (-) TimerEvent: {}
+[14.239777] (-) TimerEvent: {}
+[14.340039] (-) TimerEvent: {}
+[14.440329] (-) TimerEvent: {}
+[14.540919] (-) TimerEvent: {}
+[14.641196] (-) TimerEvent: {}
+[14.741549] (-) TimerEvent: {}
+[14.841979] (-) TimerEvent: {}
+[14.942280] (-) TimerEvent: {}
+[15.042624] (-) TimerEvent: {}
+[15.142967] (-) TimerEvent: {}
+[15.243204] (-) TimerEvent: {}
+[15.343486] (-) TimerEvent: {}
+[15.443836] (-) TimerEvent: {}
+[15.544074] (-) TimerEvent: {}
+[15.644347] (-) TimerEvent: {}
+[15.744614] (-) TimerEvent: {}
+[15.844986] (-) TimerEvent: {}
+[15.945231] (-) TimerEvent: {}
+[16.045568] (-) TimerEvent: {}
+[16.145902] (-) TimerEvent: {}
+[16.246135] (-) TimerEvent: {}
+[16.346400] (-) TimerEvent: {}
+[16.446756] (-) TimerEvent: {}
+[16.547015] (-) TimerEvent: {}
+[16.647249] (-) TimerEvent: {}
+[16.747524] (-) TimerEvent: {}
+[16.847873] (-) TimerEvent: {}
+[16.948105] (-) TimerEvent: {}
+[17.048373] (-) TimerEvent: {}
+[17.148711] (-) TimerEvent: {}
+[17.248982] (-) TimerEvent: {}
+[17.349216] (-) TimerEvent: {}
+[17.449569] (-) TimerEvent: {}
+[17.549907] (-) TimerEvent: {}
+[17.650137] (-) TimerEvent: {}
+[17.750412] (-) TimerEvent: {}
+[17.850745] (-) TimerEvent: {}
+[17.950977] (-) TimerEvent: {}
+[18.051209] (-) TimerEvent: {}
+[18.151442] (-) TimerEvent: {}
+[18.251808] (-) TimerEvent: {}
+[18.352049] (-) TimerEvent: {}
+[18.452301] (-) TimerEvent: {}
+[18.552645] (-) TimerEvent: {}
+[18.653007] (-) TimerEvent: {}
+[18.753263] (-) TimerEvent: {}
+[18.853598] (-) TimerEvent: {}
+[18.953938] (-) TimerEvent: {}
+[19.054168] (-) TimerEvent: {}
+[19.154430] (-) TimerEvent: {}
+[19.254773] (-) TimerEvent: {}
+[19.355022] (-) TimerEvent: {}
+[19.455300] (-) TimerEvent: {}
+[19.555655] (-) TimerEvent: {}
+[19.656007] (-) TimerEvent: {}
+[19.756249] (-) TimerEvent: {}
+[19.856526] (-) TimerEvent: {}
+[19.956862] (-) TimerEvent: {}
+[20.057103] (-) TimerEvent: {}
+[20.157353] (-) TimerEvent: {}
+[20.257701] (-) TimerEvent: {}
+[20.357983] (-) TimerEvent: {}
+[20.458234] (-) TimerEvent: {}
+[20.558624] (-) TimerEvent: {}
+[20.658994] (-) TimerEvent: {}
+[20.759263] (-) TimerEvent: {}
+[20.859539] (-) TimerEvent: {}
+[20.959894] (-) TimerEvent: {}
+[21.060147] (-) TimerEvent: {}
+[21.160394] (-) TimerEvent: {}
+[21.260757] (-) TimerEvent: {}
+[21.361026] (-) TimerEvent: {}
+[21.461327] (-) TimerEvent: {}
+[21.561675] (-) TimerEvent: {}
+[21.581011] (ultralytics_ros) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable tracker_with_cloud_node\x1b[0m\n'}
+[21.661902] (-) TimerEvent: {}
+[21.762194] (-) TimerEvent: {}
+[21.862597] (-) TimerEvent: {}
+[21.962976] (-) TimerEvent: {}
+[22.063230] (-) TimerEvent: {}
+[22.163592] (-) TimerEvent: {}
+[22.263959] (-) TimerEvent: {}
+[22.364236] (-) TimerEvent: {}
+[22.464650] (-) TimerEvent: {}
+[22.564997] (-) TimerEvent: {}
+[22.665287] (-) TimerEvent: {}
+[22.765674] (-) TimerEvent: {}
+[22.865997] (-) TimerEvent: {}
+[22.966309] (-) TimerEvent: {}
+[23.066706] (-) TimerEvent: {}
+[23.166991] (-) TimerEvent: {}
+[23.267267] (-) TimerEvent: {}
+[23.367653] (-) TimerEvent: {}
+[23.467985] (-) TimerEvent: {}
+[23.568249] (-) TimerEvent: {}
+[23.668558] (-) TimerEvent: {}
+[23.768929] (-) TimerEvent: {}
+[23.796540] (ultralytics_ros) StdoutLine: {'line': b'[100%] Built target tracker_with_cloud_node\n'}
+[23.809718] (ultralytics_ros) CommandEnded: {'returncode': 0}
+[23.869056] (-) TimerEvent: {}
+[23.909156] (ultralytics_ros) JobProgress: {'identifier': 'ultralytics_ros', 'progress': 'install'}
+[23.919523] (ultralytics_ros) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/sarthak/precise_docking_ws/build/ultralytics_ros'], 'cwd': '/home/sarthak/precise_docking_ws/build/ultralytics_ros', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sarthak'), ('LC_TIME', 'nl_NL.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/lib:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sarthak'), ('OLDPWD', '/home/sarthak/precise_docking_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'nl_NL.UTF-8'), ('MANAGERPID', '2650'), ('SYSTEMD_EXEC_PID', '3297'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '6602'), ('COLCON_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sarthak'), ('JOURNAL_STREAM', '8:2708'), ('_', '/home/sarthak/.local/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/x86_64-linux-gnu/pkgconfig:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sarthak'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3248,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3248'), ('INVOCATION_ID', '6496fbdcecb9461ca1b597809726e8d3'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'nl_NL.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'nl_NL.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/teleop_cpp_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble'), ('ROS_DOMAIN_ID', '39'), ('SHELL', '/bin/bash'), ('LC_NAME', 'nl_NL.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:9f1cd0ba-8eea-4fd8-9719-9263996770bb'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'nl_NL.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'nl_NL.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sarthak/precise_docking_ws/build/ultralytics_ros'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'nl_NL.UTF-8'), ('LC_PAPER', 'nl_NL.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sarthak/precise_docking_ws/install/teleop_cpp_ros2:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper_ros:/home/sarthak/precise_docking_ws/install/norlab_icp_mapper:/home/sarthak/precise_docking_ws/install/libpointmatcher_ros:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble')]), 'shell': False}
+[23.931182] (ultralytics_ros) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[23.931593] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ament_index/resource_index/rosidl_interfaces/ultralytics_ros\n'}
+[23.931792] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros\n'}
+[23.932011] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg\n'}
+[23.932167] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/rosidl_generator_c__visibility_control.h\n'}
+[23.932328] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/yolo_result.h\n'}
+[23.932477] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail\n'}
+[23.932623] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__type_support.h\n'}
+[23.932752] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__struct.h\n'}
+[23.932933] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__functions.c\n'}
+[23.933099] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__functions.h\n'}
+[23.933260] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/library_path.sh\n'}
+[23.933410] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/library_path.dsv\n'}
+[23.933528] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_generator_c.so\n'}
+[23.933714] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_generator_c.so" to ""\n'}
+[23.933883] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros\n'}
+[23.934317] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg\n'}
+[23.934471] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[23.934620] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail\n'}
+[23.934744] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__rosidl_typesupport_fastrtps_c.h\n'}
+[23.934897] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_fastrtps_c.so\n'}
+[23.935091] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_fastrtps_c.so" to ""\n'}
+[23.935254] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros\n'}
+[23.935424] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg\n'}
+[23.935569] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/yolo_result.hpp\n'}
+[23.935707] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail\n'}
+[23.935838] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__traits.hpp\n'}
+[23.935989] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__struct.hpp\n'}
+[23.936199] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__builder.hpp\n'}
+[23.936377] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros\n'}
+[23.936522] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg\n'}
+[23.936639] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail\n'}
+[23.936759] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[23.936890] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/dds_fastrtps\n'}
+[23.937050] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[23.937172] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_fastrtps_cpp.so\n'}
+[23.937295] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_fastrtps_cpp.so" to ""\n'}
+[23.937420] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros\n'}
+[23.937549] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg\n'}
+[23.937676] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[23.937805] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail\n'}
+[23.938468] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__rosidl_typesupport_introspection_c.h\n'}
+[23.938719] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__type_support.c\n'}
+[23.938914] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_introspection_c.so\n'}
+[23.939092] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_introspection_c.so" to ""\n'}
+[23.939234] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_c.so\n'}
+[23.939353] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_c.so" to ""\n'}
+[23.939474] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros\n'}
+[23.939602] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg\n'}
+[23.939746] (ultralytics_ros) StdoutLine: {'line': b'-- Up-to-date: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail\n'}
+[23.939887] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__type_support.cpp\n'}
+[23.940019] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__rosidl_typesupport_introspection_cpp.hpp\n'}
+[23.940142] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_introspection_cpp.so\n'}
+[23.940264] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_introspection_cpp.so" to ""\n'}
+[23.940405] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_cpp.so\n'}
+[23.940531] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_cpp.so" to ""\n'}
+[23.940654] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/pythonpath.sh\n'}
+[23.940786] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/pythonpath.dsv\n'}
+[23.940918] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros-0.0.0-py3.10.egg-info\n'}
+[23.941051] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros-0.0.0-py3.10.egg-info/top_level.txt\n'}
+[23.941174] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros-0.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[23.941295] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros-0.0.0-py3.10.egg-info/PKG-INFO\n'}
+[23.941417] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros-0.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[23.941538] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros\n'}
+[23.941661] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[23.941786] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/__init__.py\n'}
+[23.941930] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg\n'}
+[23.942055] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/_yolo_result.py\n'}
+[23.942177] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/__init__.py\n'}
+[23.942309] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/_yolo_result_s.c\n'}
+[23.942432] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[23.942553] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[23.942677] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/libultralytics_ros__rosidl_generator_py.so\n'}
+[23.942798] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[23.942936] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_c.c\n'}
+[23.943060] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[23.968170] (ultralytics_ros) StdoutLine: {'line': b"Listing '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros'...\n"}
+[23.968336] (ultralytics_ros) StdoutLine: {'line': b"Compiling '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/__init__.py'...\n"}
+[23.968426] (ultralytics_ros) StdoutLine: {'line': b"Listing '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg'...\n"}
+[23.968507] (ultralytics_ros) StdoutLine: {'line': b"Compiling '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/__init__.py'...\n"}
+[23.968585] (ultralytics_ros) StdoutLine: {'line': b"Compiling '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/_yolo_result.py'...\n"}
+[23.969102] (-) TimerEvent: {}
+[23.971231] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[23.971503] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""\n'}
+[23.971661] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[23.971749] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""\n'}
+[23.971894] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[23.972026] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""\n'}
+[23.972120] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_generator_py.so\n'}
+[23.972299] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_generator_py.so" to ""\n'}
+[23.972409] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/msg/YoloResult.idl\n'}
+[23.972495] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/msg/YoloResult.msg\n'}
+[23.972573] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/ultralytics_ros/tracker_with_cloud_node\n'}
+[23.978099] (ultralytics_ros) StdoutLine: {'line': b'-- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/ultralytics_ros/tracker_with_cloud_node" to ""\n'}
+[23.978260] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/ultralytics_ros/tracker_node.py\n'}
+[23.978362] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/launch\n'}
+[23.978444] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/launch/tracker.launch.xml\n'}
+[23.978524] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/launch/kitti_tracker_with_cloud.launch.xml\n'}
+[23.978603] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/launch/tracker_with_cloud.launch.xml\n'}
+[23.978681] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/launch/kitti_tracker.launch.xml\n'}
+[23.978759] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/rviz2\n'}
+[23.978844] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/rviz2/default.rviz\n'}
+[23.978993] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/rviz2/kitti.rviz\n'}
+[23.979073] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ament_index/resource_index/package_run_dependencies/ultralytics_ros\n'}
+[23.979151] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ament_index/resource_index/parent_prefix_path/ultralytics_ros\n'}
+[23.979230] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/ament_prefix_path.sh\n'}
+[23.979309] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/ament_prefix_path.dsv\n'}
+[23.979388] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/path.sh\n'}
+[23.979468] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/path.dsv\n'}
+[23.979548] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/local_setup.bash\n'}
+[23.979650] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/local_setup.sh\n'}
+[23.979789] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/local_setup.zsh\n'}
+[23.979914] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/local_setup.dsv\n'}
+[23.980013] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/package.dsv\n'}
+[23.980093] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ament_index/resource_index/packages/ultralytics_ros\n'}
+[23.980171] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_cExport.cmake\n'}
+[23.980249] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_cExport-noconfig.cmake\n'}
+[23.980324] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[23.980399] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[23.980475] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_cppExport.cmake\n'}
+[23.980550] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[23.980626] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[23.980701] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_introspection_cExport.cmake\n'}
+[23.980777] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[23.980907] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_cExport.cmake\n'}
+[23.980981] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[23.981052] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[23.981122] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[23.981193] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_cppExport.cmake\n'}
+[23.981264] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[23.981340] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_pyExport.cmake\n'}
+[23.981413] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_pyExport-noconfig.cmake\n'}
+[23.981541] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/rosidl_cmake-extras.cmake\n'}
+[23.981616] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[23.981809] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[23.982724] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[23.982818] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[23.982857] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[23.982889] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[23.983070] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_rosConfig.cmake\n'}
+[23.983121] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_rosConfig-version.cmake\n'}
+[23.983156] (ultralytics_ros) StdoutLine: {'line': b'-- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/package.xml\n'}
+[23.983190] (ultralytics_ros) CommandEnded: {'returncode': 0}
+[24.069212] (-) TimerEvent: {}
+[24.101316] (ultralytics_ros) JobEnded: {'identifier': 'ultralytics_ros', 'rc': 0}
+[24.102307] (-) EventReactorShutdown: {}

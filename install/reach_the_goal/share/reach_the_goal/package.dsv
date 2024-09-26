@@ -1,8 +1,0 @@
-source;ros_domain_id.txt
-source;share/reach_the_goal/hook/pythonpath.ps1
-source;share/reach_the_goal/hook/pythonpath.dsv
-source;share/reach_the_goal/hook/pythonpath.sh
-source;ros_domain_id.txt
-source;share/reach_the_goal/hook/ament_prefix_path.ps1
-source;share/reach_the_goal/hook/ament_prefix_path.dsv
-source;share/reach_the_goal/hook/ament_prefix_path.sh

@@ -1,1 +1,0 @@
-std_msgs/String map_file_name

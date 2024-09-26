@@ -1,0 +1,6 @@
+{
+  "package_name": "ultralytics_ros",
+  "non_idl_tuples": [
+    "/home/sarthak/precise_docking_ws/src/ultralytics_ros:msg/YoloResult.msg"
+  ]
+}

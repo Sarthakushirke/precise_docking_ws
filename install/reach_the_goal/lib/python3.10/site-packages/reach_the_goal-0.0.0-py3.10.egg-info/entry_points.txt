@@ -1,2 +1,0 @@
-[console_scripts]
-reach_the_goal_node = reach_the_goal.reach_the_goal:main

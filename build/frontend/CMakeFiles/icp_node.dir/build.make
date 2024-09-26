@@ -98,9 +98,9 @@ icp_node: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_c
 icp_node: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_cpp.so
 icp_node: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_py.so
 icp_node: /opt/ros/humble/lib/libstatic_transform_broadcaster_node.so
-icp_node: /usr/local/lib/libpointmatcher.a
-icp_node: /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.7.0
-icp_node: /usr/local/lib/libnabo.a
+icp_node: /opt/ros/humble/lib/x86_64-linux-gnu/libpointmatcher.a
+icp_node: /opt/ros/humble/lib/x86_64-linux-gnu/libnabo.a
+icp_node: /opt/ros/humble/lib/x86_64-linux-gnu/libyaml-cpp-pm.a
 icp_node: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.74.0
 icp_node: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.74.0
 icp_node: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0
