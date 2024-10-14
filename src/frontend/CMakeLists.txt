@@ -83,4 +83,20 @@ install(PROGRAMS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(PROGRAMS
+  scripts/pose_graph_odom.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(PROGRAMS
+  scripts/pose_graph_odom_landmark.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(PROGRAMS
+  scripts/plot_odom.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+
 ament_package()

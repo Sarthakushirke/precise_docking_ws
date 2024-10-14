@@ -1,0 +1,28 @@
+[2.088s] Invoking command in '/home/sarthak/precise_docking_ws/src/reach_the_goal': PYTHONPATH=/home/sarthak/precise_docking_ws/build/reach_the_goal/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=38 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/reach_the_goal build --build-base /home/sarthak/precise_docking_ws/build/reach_the_goal/build install --record /home/sarthak/precise_docking_ws/build/reach_the_goal/install.log --single-version-externally-managed install_data
+[2.237s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+[2.237s]   warnings.warn(msg)
+[2.370s] running egg_info
+[2.384s] writing ../../build/reach_the_goal/reach_the_goal.egg-info/PKG-INFO
+[2.386s] writing dependency_links to ../../build/reach_the_goal/reach_the_goal.egg-info/dependency_links.txt
+[2.386s] writing entry points to ../../build/reach_the_goal/reach_the_goal.egg-info/entry_points.txt
+[2.386s] writing requirements to ../../build/reach_the_goal/reach_the_goal.egg-info/requires.txt
+[2.388s] writing top-level names to ../../build/reach_the_goal/reach_the_goal.egg-info/top_level.txt
+[3.112s] writing manifest file '../../build/reach_the_goal/reach_the_goal.egg-info/SOURCES.txt'
+[3.112s] running build
+[3.113s] running build_py
+[3.114s] copying reach_the_goal/reach_the_goal_without_parameters.py -> /home/sarthak/precise_docking_ws/build/reach_the_goal/build/lib/reach_the_goal
+[3.115s] copying reach_the_goal/reach_the_goal.py -> /home/sarthak/precise_docking_ws/build/reach_the_goal/build/lib/reach_the_goal
+[3.115s] copying reach_the_goal/__init__.py -> /home/sarthak/precise_docking_ws/build/reach_the_goal/build/lib/reach_the_goal
+[3.115s] copying reach_the_goal/reach_the_goal_working.py -> /home/sarthak/precise_docking_ws/build/reach_the_goal/build/lib/reach_the_goal
+[3.116s] running install
+[3.120s] running install_lib
+[3.152s] running install_data
+[3.153s] copying resource/reach_the_goal -> /home/sarthak/precise_docking_ws/install/reach_the_goal/share/ament_index/resource_index/packages
+[3.153s] copying package.xml -> /home/sarthak/precise_docking_ws/install/reach_the_goal/share/reach_the_goal
+[3.153s] running install_egg_info
+[3.198s] removing '/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages/reach_the_goal-0.0.0-py3.10.egg-info' (and everything under it)
+[3.198s] Copying ../../build/reach_the_goal/reach_the_goal.egg-info to /home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages/reach_the_goal-0.0.0-py3.10.egg-info
+[3.200s] running install_scripts
+[3.395s] Installing reach_the_goal_node script to /home/sarthak/precise_docking_ws/install/reach_the_goal/lib/reach_the_goal
+[3.395s] writing list of installed files to '/home/sarthak/precise_docking_ws/build/reach_the_goal/install.log'
+[3.455s] Invoked command in '/home/sarthak/precise_docking_ws/src/reach_the_goal' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/reach_the_goal/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=38 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/reach_the_goal build --build-base /home/sarthak/precise_docking_ws/build/reach_the_goal/build install --record /home/sarthak/precise_docking_ws/build/reach_the_goal/install.log --single-version-externally-managed install_data

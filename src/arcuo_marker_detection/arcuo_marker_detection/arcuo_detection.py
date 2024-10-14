@@ -73,8 +73,8 @@ class arcuo_marker_detection(Node): # Node class
         self.dst = np.array([1e-08, 1e-08, 1e-08, 1e-08, 1e-08], dtype=np.float64)
         # Load the ArUco dictionary
         self.get_logger().info("[INFO] detecting '{}' markers...".format(aruco_dictionary_name))
-        self.this_aruco_dictionary = cv2.aruco.Dictionary_get(ARUCO_DICT[aruco_dictionary_name])
-        self.this_aruco_parameters = cv2.aruco.DetectorParameters_create()
+        self.this_aruco_dictionary = cv2.aruco.getPredefinedDictionary(ARUCO_DICT[aruco_dictionary_name])
+        self.this_aruco_parameters = cv2.aruco.DetectorParameters()
 
         # Initialize the transform broadcaster and TF buffer
         self.tfbroadcaster = tf2_ros.TransformBroadcaster(self)
@@ -96,8 +96,7 @@ class arcuo_marker_detection(Node): # Node class
 
         # Detect ArUco markers in the video frame
         (corners, marker_ids, rejected) = cv2.aruco.detectMarkers(
-        current_frame, self.this_aruco_dictionary, parameters=self.this_aruco_parameters,
-        cameraMatrix=self.mtx, distCoeff=self.dst)
+        current_frame, self.this_aruco_dictionary, parameters=self.this_aruco_parameters)
 
 
          # Check that at least one ArUco marker was detected
@@ -123,7 +122,10 @@ class arcuo_marker_detection(Node): # Node class
             # z-axis points straight ahead away from your eye, out of the camera
             for i, marker_id in enumerate(marker_ids): 
 
-                self.get_logger().info('Publishing')   
+                # self.get_logger().info('Publishing')
+
+                self.get_logger().info(f'Publishing {marker_id}')
+   
       
 
                 # Create the coordinate transform in the camera frame
@@ -150,9 +152,9 @@ class arcuo_marker_detection(Node): # Node class
                 t.transform.rotation.z = quat[2] 
                 t.transform.rotation.w = quat[3] 
 
-                # Log the rotation and translation vectors
-                self.get_logger().info(f'Translation Vector {i}: x={t.transform.translation.x}, y={t.transform.translation.y}, z={t.transform.translation.z}')
-                self.get_logger().info(f'Rotation Vector {i}: x={quat[0]}, y={quat[1]}, z={quat[2]}, w={quat[3]}')
+                # # Log the rotation and translation vectors
+                # self.get_logger().info(f'Translation Vector {i}: x={t.transform.translation.x}, y={t.transform.translation.y}, z={t.transform.translation.z}')
+                # self.get_logger().info(f'Rotation Vector {i}: x={quat[0]}, y={quat[1]}, z={quat[2]}, w={quat[3]}')
 
 
                 # Send the transform
@@ -162,7 +164,7 @@ class arcuo_marker_detection(Node): # Node class
             # Transform to robot base frame using TF lookup
             try:
                 # Lookup the transformation between 'diff_drive/lidar_link' and 'camera_link'
-                transform = self.tf_buffer.lookup_transform('diff_drive/lidar_link', 'camera_link', rclpy.time.Time())
+                transform = self.tf_buffer.lookup_transform('map', 'camera_link', rclpy.time.Time())
                 
                 # Create a PointStamped message to hold the marker position in the camera frame
                 point_in_camera_frame = PointStamped()
@@ -188,7 +190,8 @@ class arcuo_marker_detection(Node): # Node class
 
 
                 # Draw the axes on the marker
-                cv2.aruco.drawAxis(current_frame, self.mtx, self.dst, rvecs[i], tvecs[i], 0.05) 
+                # cv2.aruco.drawAxis(current_frame, self.mtx, self.dst, rvecs[i], tvecs[i], 0.05) 
+                cv2.drawFrameAxes(current_frame, self.mtx, self.dst, rvecs[i], tvecs[i], 0.05) 
 
         # Resize the frame to the desired size
         desired_width = 800

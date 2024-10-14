@@ -1,0 +1,6 @@
+[31mCMake Error at cmake_install.cmake:138 (file):
+  file INSTALL cannot find
+  "/home/sarthak/precise_docking_ws/src/frontend/scripts/pose_graph_odom.py":
+  No such file or directory.
+
+[0m

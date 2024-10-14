@@ -1,0 +1,28 @@
+running egg_info
+creating ../../build/template_ros2/template_ros2.egg-info
+writing ../../build/template_ros2/template_ros2.egg-info/PKG-INFO
+writing dependency_links to ../../build/template_ros2/template_ros2.egg-info/dependency_links.txt
+writing requirements to ../../build/template_ros2/template_ros2.egg-info/requires.txt
+writing top-level names to ../../build/template_ros2/template_ros2.egg-info/top_level.txt
+writing manifest file '../../build/template_ros2/template_ros2.egg-info/SOURCES.txt'
+writing manifest file '../../build/template_ros2/template_ros2.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/sarthak/precise_docking_ws/build/template_ros2/build/lib/template_ros2
+copying template_ros2/__init__.py -> /home/sarthak/precise_docking_ws/build/template_ros2/build/lib/template_ros2
+copying template_ros2/template_sub_pub.py -> /home/sarthak/precise_docking_ws/build/template_ros2/build/lib/template_ros2
+running install
+running install_lib
+creating /home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template_ros2
+copying /home/sarthak/precise_docking_ws/build/template_ros2/build/lib/template_ros2/__init__.py -> /home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template_ros2
+copying /home/sarthak/precise_docking_ws/build/template_ros2/build/lib/template_ros2/template_sub_pub.py -> /home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template_ros2
+byte-compiling /home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template_ros2/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template_ros2/template_sub_pub.py to template_sub_pub.cpython-310.pyc
+running install_data
+creating /home/sarthak/precise_docking_ws/install/template_ros2/share/ament_index/resource_index/packages
+copying resource/template_ros2 -> /home/sarthak/precise_docking_ws/install/template_ros2/share/ament_index/resource_index/packages
+copying package.xml -> /home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2
+running install_egg_info
+Copying ../../build/template_ros2/template_ros2.egg-info to /home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template_ros2-0.0.0-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/sarthak/precise_docking_ws/build/template_ros2/install.log'

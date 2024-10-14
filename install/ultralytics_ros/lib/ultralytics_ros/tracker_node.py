@@ -26,6 +26,7 @@ from sensor_msgs.msg import Image
 from ultralytics import YOLO
 from vision_msgs.msg import Detection2D, Detection2DArray, ObjectHypothesisWithPose
 from ultralytics_ros.msg import YoloResult
+import os 
 
 
 class TrackerNode(Node):
@@ -50,8 +51,19 @@ class TrackerNode(Node):
 
         path = get_package_share_directory("ultralytics_ros")
         yolo_model = self.get_parameter("yolo_model").get_parameter_value().string_value
-        self.model = YOLO(f"{path}/models/{yolo_model}")
+
+        # Check if the provided model path is absolute, otherwise, use the package path
+        if os.path.isabs(yolo_model):
+            model_path = yolo_model
+        else:
+            model_path = f"{path}/models/{yolo_model}"
+
+        # Initialize the YOLO model
+        self.model = YOLO(model_path)
         self.model.fuse()
+
+        # self.model = YOLO(f"{path}/models/{yolo_model}")
+        # self.model.fuse()
 
         self.bridge = cv_bridge.CvBridge()
         self.use_segmentation = yolo_model.endswith("-seg.pt")

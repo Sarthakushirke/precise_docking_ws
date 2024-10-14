@@ -1,0 +1,41 @@
+[0.008s] Invoking command in '/home/sarthak/precise_docking_ws/build/docking_bringup': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/ultralytics_ros:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake /home/sarthak/precise_docking_ws/src/docking_bringup -DCMAKE_INSTALL_PREFIX=/home/sarthak/precise_docking_ws/install/docking_bringup
+[0.091s] -- The C compiler identification is GNU 11.4.0
+[0.148s] -- The CXX compiler identification is GNU 11.4.0
+[0.156s] -- Detecting C compiler ABI info
+[0.228s] -- Detecting C compiler ABI info - done
+[0.234s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.234s] -- Detecting C compile features
+[0.235s] -- Detecting C compile features - done
+[0.237s] -- Detecting CXX compiler ABI info
+[0.322s] -- Detecting CXX compiler ABI info - done
+[0.332s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.332s] -- Detecting CXX compile features
+[0.333s] -- Detecting CXX compile features - done
+[0.339s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.742s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.924s] -- Configuring done
+[0.927s] -- Generating done
+[0.928s] -- Build files have been written to: /home/sarthak/precise_docking_ws/build/docking_bringup
+[0.933s] Invoked command in '/home/sarthak/precise_docking_ws/build/docking_bringup' returned '0': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/ultralytics_ros:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake /home/sarthak/precise_docking_ws/src/docking_bringup -DCMAKE_INSTALL_PREFIX=/home/sarthak/precise_docking_ws/install/docking_bringup
+[0.935s] Invoking command in '/home/sarthak/precise_docking_ws/build/docking_bringup': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/ultralytics_ros:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/docking_bringup -- -j20 -l20
+[0.974s] Invoked command in '/home/sarthak/precise_docking_ws/build/docking_bringup' returned '0': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/ultralytics_ros:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/docking_bringup -- -j20 -l20
+[0.996s] Invoking command in '/home/sarthak/precise_docking_ws/build/docking_bringup': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/ultralytics_ros:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/docking_bringup
+[1.006s] -- Install configuration: ""
+[1.006s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/launch
+[1.006s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/launch/docking.launch.py
+[1.006s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/ament_index/resource_index/package_run_dependencies/docking_bringup
+[1.007s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/ament_index/resource_index/parent_prefix_path/docking_bringup
+[1.007s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/environment/ament_prefix_path.sh
+[1.007s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/environment/ament_prefix_path.dsv
+[1.007s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/environment/path.sh
+[1.007s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/environment/path.dsv
+[1.007s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/local_setup.bash
+[1.008s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/local_setup.sh
+[1.008s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/local_setup.zsh
+[1.008s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/local_setup.dsv
+[1.008s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.dsv
+[1.008s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/ament_index/resource_index/packages/docking_bringup
+[1.008s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/cmake/docking_bringupConfig.cmake
+[1.009s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/cmake/docking_bringupConfig-version.cmake
+[1.009s] -- Installing: /home/sarthak/precise_docking_ws/install/docking_bringup/share/docking_bringup/package.xml
+[1.011s] Invoked command in '/home/sarthak/precise_docking_ws/build/docking_bringup' returned '0': AMENT_PREFIX_PATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/ultralytics_ros:/opt/ros/humble CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble PYTHONPATH=/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/docking_bringup
