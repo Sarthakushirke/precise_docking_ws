@@ -89,17 +89,18 @@ class PointCloudTransformer(Node):
         odom_pose = PoseStamped()
         odom_pose.header = msg.header
         odom_pose.pose = msg.pose.pose  # Use the position and orientation from odom
-
+        
+        print("Odom pose with out transformation",odom_pose.pose )
         # Transform odometry pose to the map frame
         transformed_pose = self.transform_odometry_to_map(odom_pose.pose)
-
+        print("")
         if transformed_pose:
             print("The x and y",transformed_pose.position.x, transformed_pose.position.y)
             # Check if the new point is an outlier based on distance
             if self.is_outlier(transformed_pose.position.x, transformed_pose.position.y):
                 self.get_logger().warn('Outlier detected and discarded')
+                self.robot_path.append((transformed_pose.position.x, transformed_pose.position.y))
             else:
-
                 self.odom_data = transformed_pose
                 self.process_data()
                 # Add the current transformed position to the robot path
@@ -135,29 +136,29 @@ class PointCloudTransformer(Node):
             if self.cmd_velocity.linear.x == 0 and self.cmd_velocity.angular.z == 0:
                 return  # Skip processing if both linear and angular velocities are zero
 
-            odom_pose = self.extract_pose2_from_msg(self.odom_data)
+            odom_pose_extract = self.extract_pose2_from_msg(self.odom_data)
             pose_key = gtsam.symbol('x', self.pose_num)
 
             # Add odometry pose to the list for plotting
-            self.odometry_poses_x.append(odom_pose.x())
-            self.odometry_poses_y.append(odom_pose.y())
+            self.odometry_poses_x.append(odom_pose_extract.x())
+            self.odometry_poses_y.append(odom_pose_extract.y())
             
             # Add factors to the graph
             if self.pose_num > 0:
                 # Add odometry factor
                 prev_pose_key = gtsam.symbol('x', self.pose_num - 1)
                 prev_pose = self.initial_estimates.atPose2(prev_pose_key)
-                odometry_factor = prev_pose.between(odom_pose)
+                odometry_factor = prev_pose.between(odom_pose_extract)
 
                 self.graph.add(gtsam.BetweenFactorPose2(
                     prev_pose_key, pose_key, odometry_factor, self.odometry_noise_model))
             else:
                 # Add prior factor for the first pose
                 prior_noise = gtsam.noiseModel.Diagonal.Variances([1e-6, 1e-6, 1e-8])
-                self.graph.add(gtsam.PriorFactorPose2(pose_key, odom_pose, prior_noise))
+                self.graph.add(gtsam.PriorFactorPose2(pose_key, odom_pose_extract, prior_noise))
 
             # Insert initial guess for this pose
-            self.initial_estimates.insert(pose_key, odom_pose)
+            self.initial_estimates.insert(pose_key, odom_pose_extract)
 
             # Handle landmark observations
             # if self.marker_data is not None:
@@ -183,8 +184,8 @@ class PointCloudTransformer(Node):
 
             
             # Add measurement factor between current pose and landmark
-            bearing = odom_pose.bearing(landmark_pose)
-            range_measurement = odom_pose.range(landmark_pose)
+            bearing = odom_pose_extract.bearing(landmark_pose)
+            range_measurement = odom_pose_extract.range(landmark_pose)
             print(f"Adding Landmark Observation Factor: Between {pose_key} and {landmark_key}")
             self.graph.add(gtsam.BearingRangeFactor2D(
                 pose_key, landmark_key, bearing, range_measurement, self.landmark_noise_model))
@@ -266,6 +267,7 @@ class PointCloudTransformer(Node):
         # Clear previous optimized poses
         self.optimized_poses_x.clear()
         self.optimized_poses_y.clear()
+        
 
         # Plot the entire trajectory
         for i in range(self.pose_num):
@@ -290,7 +292,7 @@ class PointCloudTransformer(Node):
             angle = np.degrees(np.arctan2(eigvecs[1, 0], eigvecs[0, 0]))
 
             # Width and height of the ellipse (scaled by 1 standard deviation)
-            n_std = 3.0
+            n_std = 1.0
             width, height = 2 * n_std * np.sqrt(eigvals)
 
             # Plot the covariance ellipse
@@ -305,7 +307,7 @@ class PointCloudTransformer(Node):
             self.ax.set_ylim([mean[1] - 10, mean[1] + 10])
 
             # Set equal aspect ratio
-            # self.ax.set_aspect('equal', 'box')
+            self.ax.set_aspect('equal', 'box')
 
             # Add title and labels
             # self.ax.set_title(f"Covariance Ellipse at {mean}\nWidth: {width:.3f}, Height: {height:.3f}, Angle: {angle:.2f}°")
@@ -316,10 +318,28 @@ class PointCloudTransformer(Node):
             plt.grid(True)
             plt.legend()
             # plt.show()
-
             # Redraw and pause for real-time update
             plt.draw()
             plt.pause(0.001)
+
+        #Now plot the landmarks' covariances
+        for landmark_id in self.landmark_inserted:
+            landmark_key = gtsam.symbol('L', landmark_id)
+            landmark_pose = result.atPoint2(landmark_key)
+
+            # Get the covariance matrix for the landmark
+            landmark_covariance = marginals.marginalCovariance(landmark_key)
+            landmark_cov_2d = landmark_covariance[:2, :2]  # Only interested in x, y covariance
+            print("The landmark covariance", landmark_cov_2d)
+
+            #Plot the covariance ellipse for the landmark
+            landmark_mean = [-5, 4]
+        #     self.plot_covariance_ellipse(self.ax, landmark_mean, landmark_cov_2d, n_std=2, edgecolor='green', alpha=0.5)
+
+        #     # Also plot the landmark itself
+        #     self.ax.scatter(-5, 4, c='green', label=f'Landmark {landmark_id}', marker='s')
+
+
 
 
 
