@@ -12,6 +12,8 @@ from geometry_msgs.msg import Twist
 import numpy as np
 import gtsam
 import matplotlib.patches as patches
+import gtsam.utils.plot as gtsam_plot
+
 
 class PointCloudTransformer(Node):
 
@@ -42,7 +44,10 @@ class PointCloudTransformer(Node):
             np.array([0.1, 0.1, np.radians(1.0)]))  # [x, y, theta]
         
         self.landmark_noise_model = gtsam.noiseModel.Diagonal.Sigmas(
-            np.array([0.01, 0.01]))  # Noise model for landmark measurements
+            np.array([0.1, 0.00001]))  # Noise model for landmark measurements
+
+        # self.landmark_noise_model = gtsam.noiseModel.Diagonal.Sigmas(
+        #     np.array([0.01, 0.01, np.radians(5.0)]))  # Now includes orientation noise [x, y, theta]
 
         # Create a factor graph
         self.graph = gtsam.NonlinearFactorGraph()
@@ -59,7 +64,7 @@ class PointCloudTransformer(Node):
         self.pose_num = 0
 
         # Set the number of poses after which to trigger optimization
-        self.pose_threshold = 10
+        self.pose_threshold = 5
 
         # Lists to store odometry and optimized poses for plotting
         self.odometry_poses_x = []
@@ -154,7 +159,7 @@ class PointCloudTransformer(Node):
                     prev_pose_key, pose_key, odometry_factor, self.odometry_noise_model))
             else:
                 # Add prior factor for the first pose
-                prior_noise = gtsam.noiseModel.Diagonal.Variances([1e-6, 1e-6, 1e-8])
+                prior_noise = gtsam.noiseModel.Diagonal.Variances([0.5, 0.5, np.radians(1.0)])
                 self.graph.add(gtsam.PriorFactorPose2(pose_key, odom_pose_extract, prior_noise))
 
             # Insert initial guess for this pose
@@ -164,6 +169,7 @@ class PointCloudTransformer(Node):
             # if self.marker_data is not None:
                 # landmark_pose = gtsam.Point2(self.marker_data.x, self.marker_data.y)
             landmark_pose = gtsam.Point2(-5, 4)
+            # landmark_pose = gtsam.Pose2(-5, 4, np.radians(90))  # Example: Landmark at (-5, 4) with 90° orientation
             landmark_id = 0  # Use the actual ID from the ArUco marker
             landmark_key = gtsam.symbol('L', landmark_id)  # Use symbol for landmark key
 
@@ -173,22 +179,36 @@ class PointCloudTransformer(Node):
                 # landmark_pose = gtsam.Point2(self.marker_data.x, self.marker_data.y)
                 print(f"Adding Landmark Node: {landmark_key} -> (-5,4)")
                 landmark_pose = gtsam.Point2(-5, 4)
+                # landmark_pose = gtsam.Pose2(-5, 4, np.radians(90)) 
                 self.initial_estimates.insert(landmark_key, landmark_pose)
                 self.landmark_inserted.add(landmark_id)
 
                 # **Add a prior factor on the landmark with very low covariance**
-                landmark_prior_noise = gtsam.noiseModel.Diagonal.Variances([1e-6, 1e-6])  # Very small variances
+                landmark_prior_noise = gtsam.noiseModel.Diagonal.Variances([0.1, 0.0001])  # Very small variances
                 print(f"Adding Prior Factor for Landmark: {landmark_key}")
                 self.graph.add(gtsam.PriorFactorPoint2(landmark_key, landmark_pose, landmark_prior_noise))
+
+                # landmark_prior_noise = gtsam.noiseModel.Diagonal.Variances([1e-6, 1e-6, 1e-8])
+                # self.graph.add(gtsam.PriorFactorPose2(landmark_key, landmark_pose, landmark_prior_noise))
                 # self.get_logger().info(f"Added prior factor for landmark {landmark_id}")
 
             
             # Add measurement factor between current pose and landmark
             bearing = odom_pose_extract.bearing(landmark_pose)
+            print("Bearing ", bearing)
             range_measurement = odom_pose_extract.range(landmark_pose)
+            print("Range measurement", range_measurement)
             print(f"Adding Landmark Observation Factor: Between {pose_key} and {landmark_key}")
             self.graph.add(gtsam.BearingRangeFactor2D(
                 pose_key, landmark_key, bearing, range_measurement, self.landmark_noise_model))
+
+            # relative_pose = odom_pose_extract.between(landmark_pose)
+
+            # print("Relative pose", relative_pose)
+
+            # print(f"Adding Landmark Observation Factor (with Orientation): Between {pose_key} and {landmark_key}")
+            # self.graph.add(gtsam.BetweenFactorPose2(
+            #     pose_key, landmark_key, relative_pose, self.landmark_noise_model))
 
 
             # Increment pose count
@@ -276,10 +296,13 @@ class PointCloudTransformer(Node):
             self.optimized_poses_x.append(optimized_pose.x())
             self.optimized_poses_y.append(optimized_pose.y())
 
+            # Instead of manually plotting ellipses, use gtsam_plot to plot the pose and covariance
+            # gtsam_plot.plot_pose2(0, optimized_pose, 1, marginals.marginalCovariance(pose_key))
+
             # Get the 2D covariance matrix for the current pose
             covariance = marginals.marginalCovariance(pose_key)
             cov_2d = covariance[:2, :2]  # Extract the (x, y) covariance matrix
-            # print("Here is the covariance", cov_2d)
+            print("Here is the covariance", cov_2d)
 
             # Store the covariance for plotting
             mean = [optimized_pose.x(), optimized_pose.y()]
@@ -327,20 +350,64 @@ class PointCloudTransformer(Node):
             landmark_key = gtsam.symbol('L', landmark_id)
             landmark_pose = result.atPoint2(landmark_key)
 
+            # Plot the landmark using a simple scatter plot
+            plt.scatter(-3, 2, marker='s', color='green', label=f'Landmark {landmark_id}')
+            
+        #     # Optionally, plot the landmark's covariance using gtsam_plot
+        #     gtsam_plot.plot_point2(landmark_key, landmark_pose, marginals.marginalCovariance(landmark_key))
+
+            # landmark_pose = result.atPose2(landmark_key)
+
             # Get the covariance matrix for the landmark
             landmark_covariance = marginals.marginalCovariance(landmark_key)
             landmark_cov_2d = landmark_covariance[:2, :2]  # Only interested in x, y covariance
             print("The landmark covariance", landmark_cov_2d)
 
             #Plot the covariance ellipse for the landmark
-            landmark_mean = [-5, 4]
-        #     self.plot_covariance_ellipse(self.ax, landmark_mean, landmark_cov_2d, n_std=2, edgecolor='green', alpha=0.5)
+            landmark_mean = [-3, 2]
 
-        #     # Also plot the landmark itself
-        #     self.ax.scatter(-5, 4, c='green', label=f'Landmark {landmark_id}', marker='s')
+                        # Eigenvalues and eigenvectors of the covariance matrix
+            eigvals, eigvecs = np.linalg.eigh(landmark_cov_2d)
 
+            # Get the angle of the ellipse
+            angle = np.degrees(np.arctan2(eigvecs[1, 0], eigvecs[0, 0]))
 
+            # Width and height of the ellipse (scaled by 1 standard deviation)
+            n_std = 1.0
+            width, height = 2 * n_std * np.sqrt(eigvals)
 
+            # Plot the covariance ellipse
+            ellipse = patches.Ellipse(landmark_mean, width, height, angle, edgecolor='black', facecolor='none', lw=2)
+            self.ax.add_patch(ellipse)
+
+            # Plot the mean point
+            self.ax.scatter(landmark_mean[0], landmark_mean[1], c='red', label='Mean')
+
+            # # Set plot limits
+            # self.ax.set_xlim([mean[0] - 10, mean[0] + 10])
+            # self.ax.set_ylim([mean[1] - 10, mean[1] + 10])
+
+            # Set equal aspect ratio
+            self.ax.set_aspect('equal', 'box')
+
+            # Add title and labels
+            # self.ax.set_title(f"Covariance Ellipse at {mean}\nWidth: {width:.3f}, Height: {height:.3f}, Angle: {angle:.2f}°")
+            self.ax.set_xlabel("X Position")
+            self.ax.set_ylabel("Y Position")
+
+            # Show the plot
+            plt.grid(True)
+            plt.legend()
+            # plt.show()
+            # Redraw and pause for real-time update
+            plt.draw()
+            plt.pause(0.001)
+
+        # plt.scatter(-5, 4, marker='s', color='green', label=f'Landmark')
+
+        # plt.grid(True)
+        # plt.draw()  # Update the figure
+        # plt.pause(0.001)  # Pause for a moment to update the plot
 
 
         
@@ -362,7 +429,7 @@ class PointCloudTransformer(Node):
 
         # Plot the landmarks
         # if self.landmark_x and self.landmark_y:
-        self.ax.scatter(-5, 4, c='green', label='Landmarks', marker='s')
+        self.ax.scatter(-3, 2, c='green', label='Landmarks', marker='s')
 
 
         # Set titles, labels, and legend
@@ -376,24 +443,7 @@ class PointCloudTransformer(Node):
         plt.draw()
         plt.pause(0.001)
 
-    def plot_covariance_ellipse(self, ax, mean, cov, n_std=3.0, **kwargs):
-        """Plot a covariance ellipse given the mean and covariance matrix."""
-        # Eigenvalues and eigenvectors of the covariance matrix
-        eigvals, eigvecs = np.linalg.eigh(cov)
 
-        # Get the angle of the ellipse
-        angle = np.degrees(np.arctan2(eigvecs[1, 0], eigvecs[0, 0]))
-
-        # Width and height of the ellipse (scaled by the number of standard deviations)
-        width, height = 2 * n_std * np.sqrt(eigvals)
-
-        # Create the ellipse patch
-        ellipse = patches.Ellipse(mean, width, height, angle, **kwargs)
-
-        # Add the ellipse to the axis
-        ax.add_patch(ellipse)
-
-        print(f"Ellipse at {mean} with width {width}, height {height}, angle {angle}°")
 
         
 
