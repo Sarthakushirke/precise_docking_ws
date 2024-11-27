@@ -1712,6 +1712,10 @@ CMakeFiles/tracker_with_cloud_node.dir/src/tracker_with_cloud_node.cpp.o: /home/
   /opt/ros/humble/include/tf2/tf2/LinearMath/MinMax.h \
   /opt/ros/humble/include/tf2/tf2/LinearMath/Quaternion.h \
   /opt/ros/humble/include/tf2/tf2/LinearMath/QuadWord.h \
+  /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/velocity_stamped.hpp \
+  /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/velocity_stamped__struct.hpp \
+  /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/velocity_stamped__builder.hpp \
+  /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/velocity_stamped__traits.hpp \
   /opt/ros/humble/include/tf2/tf2/buffer_core_interface.h \
   /opt/ros/humble/include/tf2/tf2/transform_storage.h \
   /opt/ros/humble/include/tf2/tf2/LinearMath/Vector3.h \
@@ -2500,6 +2504,8 @@ CMakeFiles/tracker_with_cloud_node.dir/src/tracker_with_cloud_node.cpp.o: /home/
 
 /opt/ros/humble/include/tf2/tf2/buffer_core_interface.h:
 
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/velocity_stamped__traits.hpp:
+
 /opt/ros/humble/include/tf2/tf2/LinearMath/QuadWord.h:
 
 /opt/ros/humble/include/tf2/tf2/LinearMath/Scalar.h:
@@ -2579,6 +2585,8 @@ CMakeFiles/tracker_with_cloud_node.dir/src/tracker_with_cloud_node.cpp.o: /home/
 /usr/include/boost/interprocess/sync/detail/common_algorithms.hpp:
 
 /usr/include/boost/date_time/posix_time/posix_time_duration.hpp:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/velocity_stamped__struct.hpp:
 
 /usr/include/boost/date_time/time.hpp:
 
@@ -3692,6 +3700,8 @@ CMakeFiles/tracker_with_cloud_node.dir/src/tracker_with_cloud_node.cpp.o: /home/
 
 /usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:
 
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/velocity_stamped__builder.hpp:
+
 /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/point_stamped.hpp:
 
 /opt/ros/humble/include/rcl/rcl/timer.h:
@@ -3863,6 +3873,8 @@ CMakeFiles/tracker_with_cloud_node.dir/src/tracker_with_cloud_node.cpp.o: /home/
 /usr/include/boost/mpl/arg_fwd.hpp:
 
 /opt/ros/humble/include/rcutils/rcutils/testing/fault_injection.h:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/velocity_stamped.hpp:
 
 /opt/ros/humble/include/rcutils/rcutils/macros.h:
 

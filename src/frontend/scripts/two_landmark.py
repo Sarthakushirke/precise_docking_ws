@@ -103,6 +103,61 @@ class PointCloudTransformer(Node):
                 # Call the plotting function to visualize the odometry path
                 self.plot_odometry_path()
 
+    def is_outlier(self, x, y):
+        """Check if the new odometry point is an outlier based on distance."""
+        if len(self.robot_path) == 0:
+            return False  # No previous point to compare to
+        
+        # Get the last recorded point
+        last_x, last_y = self.robot_path[-1]
+        print("Last x and y", last_x, last_y)
+        print("Current x and y",x,y)
+        
+        # Calculate the Euclidean distance between the last point and the new point
+        distance = math.sqrt((x - last_x) ** 2 + (y - last_y) ** 2)
+
+        # If the distance is greater than the threshold, it's considered an outlier
+        return distance > self.outlier_threshold
+    
+    def extract_pose2_from_msg(self, pose_msg):
+        """Convert geometry_msgs/Pose to gtsam.Pose2 (x, y, yaw)"""
+        x = pose_msg.position.x
+        y = pose_msg.position.y
+        yaw = self.quaternion_to_yaw(pose_msg.orientation)
+        return gtsam.Pose2(x, y, yaw)
+    
+    def quaternion_to_yaw(self, orientation):
+        """Convert quaternion to yaw angle for 2D"""
+        siny_cosp = 2 * (orientation.w * orientation.z + orientation.x * orientation.y)
+        cosy_cosp = 1 - 2 * (orientation.y * orientation.y + orientation.z * orientation.z)
+        return np.arctan2(siny_cosp, cosy_cosp)
+
+    def transform_odometry_to_map(self, odom_pose):
+        try:
+            # Wait for the transform from odom to map with a timeout (e.g., 1 second)
+            if not self.tf_buffer.can_transform('map', 'odom', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
+                self.get_logger().warn('Transform from odom to map is not available yet. Retrying...')
+                return None  # Skip this callback if transform is not available
+
+            # Look up the transformation from odom to map
+            transform_stamped = self.tf_buffer.lookup_transform(
+                'map',  # Target frame
+                'odom',  # Source frame
+                rclpy.time.Time()  # Get the latest available transform
+            )
+
+            # Transform the odometry pose from odom frame to map frame
+            transformed_pose = do_transform_pose(odom_pose, transform_stamped)
+
+            self.get_logger().info(f"Transforming odometry.")
+
+            return transformed_pose
+
+        except TransformException as ex:
+            self.get_logger().warn(f"Could not transform odometry to map frame: {ex}")
+            return None
+
+
 
     def cmd_vel_callback(self, msg):
         """Handles incoming cmd_vel data"""
@@ -153,7 +208,7 @@ class PointCloudTransformer(Node):
                 self.optimize_pose_graph()
 
     def add_landmark_factors(self, odom_pose_extract, pose_key):
-        """Add landmark factors for the landmarks at (-5, 4) and (-3, 2)"""
+        """Add landmark factors for the landmarks at (-5, 4) and (3, -2)"""
 
         # Handle first landmark (-5, 4)
         landmark_pose_1 = gtsam.Point2(-5, 4)
@@ -172,13 +227,13 @@ class PointCloudTransformer(Node):
         self.graph.add(gtsam.BearingRangeFactor2D(
             pose_key, landmark_key_1, bearing_1, range_measurement_1, self.landmark_noise_model))
 
-        # Handle second landmark (-3, 2)
-        landmark_pose_2 = gtsam.Point2(-3, 2)
+        # Handle second landmark (3, -2)
+        landmark_pose_2 = gtsam.Point2(3, -2)
         landmark_id_2 = 1
         landmark_key_2 = gtsam.symbol('L', landmark_id_2)
 
         if landmark_id_2 not in self.landmark_inserted:
-            print(f"Adding Landmark Node: {landmark_key_2} -> (-3,2)")
+            print(f"Adding Landmark Node: {landmark_key_2} -> (3,-2)")
             self.initial_estimates.insert(landmark_key_2, landmark_pose_2)
             self.landmark_inserted.add(landmark_id_2)
             landmark_prior_noise_2 = gtsam.noiseModel.Diagonal.Variances([0.1, 0.0001])
@@ -258,7 +313,7 @@ class PointCloudTransformer(Node):
             landmark_pose = result.atPoint2(landmark_key)
 
             # Plot the landmark using a simple scatter plot
-            landmark_positions = {0: (-5, 4), 1: (-3, 2)}
+            landmark_positions = {0: (-5, 4), 1: (3, -2)}
             landmark_position = landmark_positions.get(landmark_id, (0, 0))
 
             plt.scatter(landmark_position[0], landmark_position[1], marker='s', color='green', label=f'Landmark {landmark_id}')
@@ -308,7 +363,7 @@ class PointCloudTransformer(Node):
 
         # Plot the landmarks
         self.ax.scatter(-5, 4, c='green', label='Landmark (-5, 4)', marker='s')
-        self.ax.scatter(-3, 2, c='green', label='Landmark (-3, 2)', marker='s')
+        self.ax.scatter(3, -2, c='green', label='Landmark (3, -2)', marker='s')
 
         # Set titles, labels, and legend
         self.ax.set_title('Robot Path, Optimized Path, and Landmarks')

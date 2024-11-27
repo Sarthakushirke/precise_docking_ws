@@ -1,0 +1,28 @@
+[1.726s] Invoking command in '/home/sarthak/precise_docking_ws/src/ROS2-FrontierBaseExplorationForAutonomousRobot/autonomous_exploration': PYTHONPATH=/home/sarthak/precise_docking_ws/build/autonomous_exploration/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=4 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../../build/autonomous_exploration build --build-base /home/sarthak/precise_docking_ws/build/autonomous_exploration/build install --record /home/sarthak/precise_docking_ws/build/autonomous_exploration/install.log --single-version-externally-managed install_data
+[1.868s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+[1.868s]   warnings.warn(msg)
+[1.994s] running egg_info
+[2.008s] writing ../../../build/autonomous_exploration/autonomous_exploration.egg-info/PKG-INFO
+[2.009s] writing dependency_links to ../../../build/autonomous_exploration/autonomous_exploration.egg-info/dependency_links.txt
+[2.009s] writing entry points to ../../../build/autonomous_exploration/autonomous_exploration.egg-info/entry_points.txt
+[2.009s] writing requirements to ../../../build/autonomous_exploration/autonomous_exploration.egg-info/requires.txt
+[2.009s] writing top-level names to ../../../build/autonomous_exploration/autonomous_exploration.egg-info/top_level.txt
+[2.079s] writing manifest file '../../../build/autonomous_exploration/autonomous_exploration.egg-info/SOURCES.txt'
+[2.080s] running build
+[2.080s] running build_py
+[2.080s] copying autonomous_exploration/__init__.py -> /home/sarthak/precise_docking_ws/build/autonomous_exploration/build/lib/autonomous_exploration
+[2.080s] copying autonomous_exploration/control.py -> /home/sarthak/precise_docking_ws/build/autonomous_exploration/build/lib/autonomous_exploration
+[2.080s] running install
+[2.083s] running install_lib
+[2.128s] copying /home/sarthak/precise_docking_ws/build/autonomous_exploration/build/lib/autonomous_exploration/control.py -> /home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages/autonomous_exploration
+[2.129s] byte-compiling /home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages/autonomous_exploration/control.py to control.cpython-310.pyc
+[2.134s] running install_data
+[2.134s] copying resource/autonomous_exploration -> /home/sarthak/precise_docking_ws/install/autonomous_exploration/share/ament_index/resource_index/packages
+[2.134s] copying package.xml -> /home/sarthak/precise_docking_ws/install/autonomous_exploration/share/autonomous_exploration
+[2.135s] running install_egg_info
+[2.167s] removing '/home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages/autonomous_exploration-0.0.0-py3.10.egg-info' (and everything under it)
+[2.168s] Copying ../../../build/autonomous_exploration/autonomous_exploration.egg-info to /home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages/autonomous_exploration-0.0.0-py3.10.egg-info
+[2.169s] running install_scripts
+[2.414s] Installing control script to /home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/autonomous_exploration
+[2.414s] writing list of installed files to '/home/sarthak/precise_docking_ws/build/autonomous_exploration/install.log'
+[2.458s] Invoked command in '/home/sarthak/precise_docking_ws/src/ROS2-FrontierBaseExplorationForAutonomousRobot/autonomous_exploration' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/autonomous_exploration/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=4 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../../build/autonomous_exploration build --build-base /home/sarthak/precise_docking_ws/build/autonomous_exploration/build install --record /home/sarthak/precise_docking_ws/build/autonomous_exploration/install.log --single-version-externally-managed install_data

@@ -1,0 +1,15 @@
+[0.604s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/opt/ros/humble ROS_DOMAIN_ID=221 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[1.209s] [  0%] Built target ament_cmake_python_copy_frontend
+[1.209s] [ 25%] [32m[1mLinking CXX executable cpp_executable[0m
+[1.209s] [ 50%] [32mBuilding CXX object CMakeFiles/icp_node.dir/src/icp_node.cpp.o[0m
+[1.210s] [ 75%] Built target cpp_executable
+[1.210s] running egg_info
+[1.210s] writing frontend.egg-info/PKG-INFO
+[1.210s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[1.210s] writing top-level names to frontend.egg-info/top_level.txt
+[2.357s] writing manifest file 'frontend.egg-info/SOURCES.txt'
+[2.373s] In file included from [01m[K/home/sarthak/precise_docking_ws/src/frontend/src/icp_node.cpp:11[m[K:
+[2.373s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[2.373s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[2.373s]       |  [01;35m[K^~~~~~~[m[K
+[2.415s] [ 75%] Built target ament_cmake_python_build_frontend_egg
