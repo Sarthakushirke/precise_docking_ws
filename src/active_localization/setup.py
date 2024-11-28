@@ -20,8 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "active_localization_node = active_localization.local_map:main",
-            "active_node = active_localization.local_map_check:main"
+            "local_map_node = active_localization.local_map:main",
+            "frontier_detection = active_localization.frontier_detection:main"
         ],
     },
 )

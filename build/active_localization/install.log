@@ -1,8 +1,8 @@
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__init__.py
-/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/local_map_check.py
+/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/frontier_detection.py
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/local_map.py
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/__init__.cpython-310.pyc
-/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/local_map_check.cpython-310.pyc
+/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/frontier_detection.cpython-310.pyc
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/local_map.cpython-310.pyc
 /home/sarthak/precise_docking_ws/install/active_localization/share/ament_index/resource_index/packages/active_localization
 /home/sarthak/precise_docking_ws/install/active_localization/share/active_localization/package.xml
@@ -13,5 +13,5 @@
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization-0.0.0-py3.10.egg-info/requires.txt
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization-0.0.0-py3.10.egg-info/PKG-INFO
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization-0.0.0-py3.10.egg-info/dependency_links.txt
-/home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization/active_localization_node
-/home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization/active_node
+/home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization/frontier_detection
+/home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization/local_map_node

@@ -9,8 +9,8 @@ setup.py
 ../../build/active_localization/active_localization.egg-info/top_level.txt
 ../../build/active_localization/active_localization.egg-info/zip-safe
 active_localization/__init__.py
+active_localization/frontier_detection.py
 active_localization/local_map.py
-active_localization/local_map_check.py
 resource/active_localization
 test/test_copyright.py
 test/test_flake8.py

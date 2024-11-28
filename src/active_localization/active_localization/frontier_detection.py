@@ -1,0 +1,218 @@
+import rclpy
+from rclpy.node import Node
+from nav_msgs.msg import OccupancyGrid, Odometry
+from rclpy.qos import QoSProfile
+
+import tf_transformations
+import tf2_ros
+import numpy as np
+from geometry_msgs.msg import Twist, Point
+from sensor_msgs.msg import LaserScan
+from visualization_msgs.msg import Marker, MarkerArray
+
+class OccupancyGridUpdater(Node):
+    def __init__(self):
+        super().__init__('occupancy_grid_updater')
+
+        self.get_logger().info('Node initialized and ready')
+
+        # Subscriptions
+        self.map_sub = self.create_subscription(
+            OccupancyGrid,
+            '/local_map',
+            self.map_callback,
+            10)  # Use default QoS settings
+        self.get_logger().info('Subscribed to /local_map topic with default QoS settings')
+
+        # Odometry subscription (uses default QoS)
+        self.odom_sub = self.create_subscription(
+            Odometry,
+            '/odom',
+            self.odom_callback,
+            10)
+        self.get_logger().info('Subscribed to /odom topic')
+
+        self.lidar_sub = self.create_subscription(LaserScan, '/scan', self.lidar_callback, 10)
+        self.get_logger().info('Subscribed to /scan topic')
+
+        # Publisher for frontier markers
+        self.frontier_pub = self.create_publisher(MarkerArray, '/frontier_markers', 10)
+        self.get_logger().info('Publishing frontier markers on /frontier_markers')
+
+        # TF buffer and listener
+        self.tf_buffer = tf2_ros.Buffer()
+        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
+
+        self.map_data = None
+        self.map_info = None
+        self.expansion_size = 3
+
+    def costmap(self, data, width, height, resolution):
+        data = np.array(data).reshape(height, width)
+        wall = np.where(data == 100)
+        for i in range(-self.expansion_size, self.expansion_size + 1):
+            for j in range(-self.expansion_size, self.expansion_size + 1):
+                if i == 0 and j == 0:
+                    continue
+                x = wall[0] + i
+                y = wall[1] + j
+                x = np.clip(x, 0, height - 1)
+                y = np.clip(y, 0, width - 1)
+                data[x, y] = 100
+        data = data * resolution
+        return data
+
+    def frontierB(self, matrix):
+        for i in range(len(matrix)):
+            for j in range(len(matrix[i])):
+                if matrix[i][j] == 0.0:
+                    if i > 0 and matrix[i - 1][j] < 0:
+                        matrix[i][j] = 2
+                    elif i < len(matrix) - 1 and matrix[i + 1][j] < 0:
+                        matrix[i][j] = 2
+                    elif j > 0 and matrix[i][j - 1] < 0:
+                        matrix[i][j] = 2
+                    elif j < len(matrix[i]) - 1 and matrix[i][j + 1] < 0:
+                        matrix[i][j] = 2
+        return matrix
+
+    def assign_groups(self, matrix):
+        group = 1
+        groups = {}
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == 2:
+                    group = self.dfs_iterative(matrix, i, j, group, groups)
+        return matrix, groups
+
+    def dfs_iterative(self, matrix, i, j, group, groups):
+        stack = [(i, j)]
+        while stack:
+            i, j = stack.pop()
+            if i < 0 or i >= len(matrix) or j < 0 or j >= len(matrix[0]):
+                continue
+            if matrix[i][j] != 2:
+                continue
+            if group in groups:
+                groups[group].append((i, j))
+            else:
+                groups[group] = [(i, j)]
+            matrix[i][j] = 0  # Mark as visited
+            # Add neighboring cells to the stack
+            stack.extend([
+                (i + 1, j),
+                (i - 1, j),
+                (i, j + 1),
+                (i, j - 1),
+                (i + 1, j + 1),
+                (i - 1, j - 1),
+                (i - 1, j + 1),
+                (i + 1, j - 1),
+            ])
+        return group + 1
+
+    def exploration(self, data, width, height, resolution, column, row, originX, originY):
+        data = self.costmap(data, width, height, resolution)  # Expand barriers
+        data[row][column] = 0  # Robot's current location
+        data[data > 5] = 1  # Set obstacles
+        data = self.frontierB(data)  # Find frontier points
+        data, groups = self.assign_groups(data)  # Group frontier points
+
+        # Publish the frontier markers
+        self.publish_frontier_markers(groups, resolution, originX, originY)
+
+        return groups
+
+    def publish_frontier_markers(self, groups, resolution, originX, originY):
+        marker_array = MarkerArray()
+        marker_id = 0
+
+        # Clear previous markers
+        delete_marker = Marker()
+        delete_marker.action = Marker.DELETEALL
+        marker_array.markers.append(delete_marker)
+
+        for group_id, points in groups.items():
+            marker = Marker()
+            marker.header.frame_id = "map"
+            marker.header.stamp = self.get_clock().now().to_msg()
+            marker.ns = "frontiers"
+            marker.id = marker_id
+            marker.type = Marker.POINTS
+            marker.action = Marker.ADD
+            marker.pose.orientation.w = 1.0
+
+            # Set the scale of the marker
+            marker.scale.x = resolution * 1.5  # Adjust as needed
+            marker.scale.y = resolution * 1.5  # Adjust as needed
+
+            # Set a unique color for each group
+            color = self.get_color(group_id)
+            marker.color.r = color[0]
+            marker.color.g = color[1]
+            marker.color.b = color[2]
+            marker.color.a = 1.0
+
+            # Add the points to the marker
+            for (i, j) in points:
+                x = originX + j * resolution
+                y = originY + i * resolution
+
+                point = Point()
+                point.x = x
+                point.y = y
+                point.z = 0.0
+                marker.points.append(point)
+
+            marker_array.markers.append(marker)
+            marker_id += 1
+
+        # Publish the markers
+        self.frontier_pub.publish(marker_array)
+
+    def get_color(self, group_id):
+        # Generate colors based on group_id
+        np.random.seed(group_id)
+        color = np.random.rand(3)
+        return color
+
+    def map_callback(self, msg):
+        self.map_data = msg
+        self.resolution = self.map_data.info.resolution
+        self.originX = self.map_data.info.origin.position.x
+        self.originY = self.map_data.info.origin.position.y
+        self.width = self.map_data.info.width
+        self.height = self.map_data.info.height
+        self.data = self.map_data.data
+
+        # Ensure self.x and self.y are defined
+        if not hasattr(self, 'x') or not hasattr(self, 'y'):
+            self.get_logger().warn('Robot position not yet received.')
+            return
+
+        column = int((self.x - self.originX) / self.resolution)
+        row = int((self.y - self.originY) / self.resolution)
+
+        frontiers = self.exploration(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
+
+        print("Frontiers ", frontiers)
+
+    def odom_callback(self, msg):
+        self.odom_data = msg
+        self.x = msg.pose.pose.position.x
+        self.y = msg.pose.pose.position.y
+        self.get_logger().debug(f'Odom callback triggered, x: {self.x}, y: {self.y}')
+
+    def lidar_callback(self, msg):
+        self.scan_data = msg
+        self.scan = msg.ranges
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = OccupancyGridUpdater()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
