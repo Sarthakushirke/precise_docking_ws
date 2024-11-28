@@ -39,6 +39,9 @@ class OccupancyGridUpdater(Node):
         self.frontier_pub = self.create_publisher(MarkerArray, '/frontier_markers', 10)
         self.get_logger().info('Publishing frontier markers on /frontier_markers')
 
+        self.centroid_pub = self.create_publisher(MarkerArray, '/centroid_markers', 10)
+        self.get_logger().info('Publishing centroid markers on /centroid_markers')
+
         # TF buffer and listener
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
@@ -46,6 +49,7 @@ class OccupancyGridUpdater(Node):
         self.map_data = None
         self.map_info = None
         self.expansion_size = 3
+        self.min_group_size = 50
 
     def costmap(self, data, width, height, resolution):
         data = np.array(data).reshape(height, width)
@@ -110,18 +114,39 @@ class OccupancyGridUpdater(Node):
                 (i + 1, j - 1),
             ])
         return group + 1
+    
+    def calculate_centroid(self, points):
+        """Calculate the centroid (middle point) of a list of points."""
+        if not points:
+            return None
+        x_coords = [p[0] for p in points]
+        y_coords = [p[1] for p in points]
+        mean_x = sum(x_coords) / len(points)
+        mean_y = sum(y_coords) / len(points)
+        return (int(mean_x), int(mean_y))
 
     def exploration(self, data, width, height, resolution, column, row, originX, originY):
-        data = self.costmap(data, width, height, resolution)  # Expand barriers
-        data[row][column] = 0  # Robot's current location
-        data[data > 5] = 1  # Set obstacles
-        data = self.frontierB(data)  # Find frontier points
-        data, groups = self.assign_groups(data)  # Group frontier points
+            data = self.costmap(data, width, height, resolution)  # Expand barriers
+            data[row][column] = 0  # Robot's current location
+            data[data > 5] = 1  # Set obstacles
+            data = self.frontierB(data)  # Find frontier points
+            data, groups = self.assign_groups(data)  # Group frontier points
 
-        # Publish the frontier markers
-        self.publish_frontier_markers(groups, resolution, originX, originY)
+            # Filter out small groups
+            filtered_groups = {gid: points for gid, points in groups.items() if len(points) >= self.min_group_size}
 
-        return groups
+            # Calculate centroids for all valid groups
+            centroids = {}
+            for group_id, points in filtered_groups.items():
+                centroids[group_id] = self.calculate_centroid(points)
+
+            # Publish the frontier markers
+            self.publish_frontier_markers(filtered_groups, resolution, originX, originY)
+
+            # Publish the centroid markers (spheres)
+            self.publish_centroid_markers(centroids, resolution, originX, originY)
+
+            return centroids
 
     def publish_frontier_markers(self, groups, resolution, originX, originY):
         marker_array = MarkerArray()
@@ -170,6 +195,54 @@ class OccupancyGridUpdater(Node):
         # Publish the markers
         self.frontier_pub.publish(marker_array)
 
+
+    def publish_centroid_markers(self, centroids, resolution, originX, originY):
+        """
+        Publish centroid markers as spheres in RViz.
+        """
+        marker_array = MarkerArray()
+        marker_id = 0
+
+        # Clear previous centroid markers
+        delete_marker = Marker()
+        delete_marker.action = Marker.DELETEALL
+        marker_array.markers.append(delete_marker)
+
+        for group_id, centroid in centroids.items():
+            x = originX + centroid[1] * resolution
+            y = originY + centroid[0] * resolution
+
+            marker = Marker()
+            marker.header.frame_id = "map"
+            marker.header.stamp = self.get_clock().now().to_msg()
+            marker.ns = "centroids"
+            marker.id = marker_id
+            marker.type = Marker.SPHERE
+            marker.action = Marker.ADD
+            marker.pose.position.x = x
+            marker.pose.position.y = y
+            marker.pose.position.z = 0.2  # Slightly elevate for better visibility
+            marker.pose.orientation.w = 1.0
+
+            # Set the scale of the marker
+            marker.scale.x = resolution * 2.0  # Adjust size as needed
+            marker.scale.y = resolution * 2.0
+            marker.scale.z = resolution * 2.0
+
+            # Set the color of the centroid marker
+            marker.color.r = 1.0  # Red
+            marker.color.g = 0.0  # Green
+            marker.color.b = 0.0  # Yellow
+            marker.color.a = 1.0  # Fully opaque
+
+            marker_array.markers.append(marker)
+            marker_id += 1
+
+        # Publish the centroid markers
+        self.centroid_pub.publish(marker_array)
+    
+
+
     def get_color(self, group_id):
         # Generate colors based on group_id
         np.random.seed(group_id)
@@ -193,9 +266,9 @@ class OccupancyGridUpdater(Node):
         column = int((self.x - self.originX) / self.resolution)
         row = int((self.y - self.originY) / self.resolution)
 
-        frontiers = self.exploration(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
+        frontiers_middle = self.exploration(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
 
-        print("Frontiers ", frontiers)
+        print("Frontiers ", frontiers_middle)
 
     def odom_callback(self, msg):
         self.odom_data = msg

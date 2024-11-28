@@ -107,7 +107,7 @@ class OccupancyGridUpdater(Node):
                 y += sy
             points.append((x, y))
         return points
-
+    
 
     def lidar_callback(self, msg):
         if self.map_data is None:
@@ -131,8 +131,8 @@ class OccupancyGridUpdater(Node):
         # Replace 'inf' values with max_range
         ranges = np.where(np.isinf(ranges), max_range, ranges)
 
-        safety_margin = 5
-        max_valid_range = max_range - safety_margin
+        # safety_margin = 5
+        # max_valid_range = max_range - safety_margin
 
         # Calculate reachable cells
         reachable = np.zeros_like(self.map_data, dtype=bool)
@@ -145,17 +145,17 @@ class OccupancyGridUpdater(Node):
             transform.transform.rotation.w])[2]
 
         for i, r in enumerate(ranges):
-            
-            if np.isfinite(r) and r < max_valid_range:
+            # and r < max_valid_range
+            if np.isfinite(r) :
                 angle = angle_min + i * angle_increment + yaw
                 x_end = robot_x + r * np.cos(angle)
                 y_end = robot_y + r * np.sin(angle)
 
                 # Convert start and end positions to map grid indices
-                map_x0 = int((robot_x - self.map_info.origin.position.x) / self.map_info.resolution)
-                map_y0 = int((robot_y - self.map_info.origin.position.y) / self.map_info.resolution)
-                map_x1 = int((x_end - self.map_info.origin.position.x) / self.map_info.resolution)
-                map_y1 = int((y_end - self.map_info.origin.position.y) / self.map_info.resolution)
+                map_x0 = int(np.floor((robot_x - self.map_info.origin.position.x) / self.map_info.resolution))
+                map_y0 = int(np.floor((robot_y - self.map_info.origin.position.y) / self.map_info.resolution))
+                map_x1 = int(np.floor((x_end - self.map_info.origin.position.x) / self.map_info.resolution))
+                map_y1 = int(np.floor((y_end - self.map_info.origin.position.y) / self.map_info.resolution))
 
                 # Get all grid cells along the LIDAR beam path
                 line_cells = self.bresenham_line(map_x0, map_y0, map_x1, map_y1)
@@ -187,8 +187,6 @@ class OccupancyGridUpdater(Node):
         # Mark free, unreachable cells as unknown (-1)
         updated_map[free_and_unreachable] = -1
         
-
-
         # Ensure reachable free cells remain as 0
         reachable_free = free_cells & reachable
         updated_map[reachable_free] = 0  # This line may not be necessary but ensures clarity

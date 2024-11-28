@@ -1,0 +1,30 @@
+[0.924s] Invoking command in '/home/sarthak/precise_docking_ws/src/active_localization': PYTHONPATH=/home/sarthak/precise_docking_ws/build/active_localization/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/active_localization build --build-base /home/sarthak/precise_docking_ws/build/active_localization/build install --record /home/sarthak/precise_docking_ws/build/active_localization/install.log --single-version-externally-managed install_data
+[1.089s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+[1.089s]   warnings.warn(msg)
+[1.230s] running egg_info
+[1.248s] writing ../../build/active_localization/active_localization.egg-info/PKG-INFO
+[1.249s] writing dependency_links to ../../build/active_localization/active_localization.egg-info/dependency_links.txt
+[1.249s] writing entry points to ../../build/active_localization/active_localization.egg-info/entry_points.txt
+[1.249s] writing requirements to ../../build/active_localization/active_localization.egg-info/requires.txt
+[1.249s] writing top-level names to ../../build/active_localization/active_localization.egg-info/top_level.txt
+[2.225s] writing manifest file '../../build/active_localization/active_localization.egg-info/SOURCES.txt'
+[2.225s] running build
+[2.225s] running build_py
+[2.225s] copying active_localization/__init__.py -> /home/sarthak/precise_docking_ws/build/active_localization/build/lib/active_localization
+[2.225s] copying active_localization/frontier_detection.py -> /home/sarthak/precise_docking_ws/build/active_localization/build/lib/active_localization
+[2.225s] copying active_localization/local_map.py -> /home/sarthak/precise_docking_ws/build/active_localization/build/lib/active_localization
+[2.226s] running install
+[2.229s] running install_lib
+[2.246s] copying /home/sarthak/precise_docking_ws/build/active_localization/build/lib/active_localization/frontier_detection.py -> /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization
+[2.247s] byte-compiling /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/frontier_detection.py to frontier_detection.cpython-310.pyc
+[2.249s] running install_data
+[2.249s] copying resource/active_localization -> /home/sarthak/precise_docking_ws/install/active_localization/share/ament_index/resource_index/packages
+[2.250s] copying package.xml -> /home/sarthak/precise_docking_ws/install/active_localization/share/active_localization
+[2.250s] running install_egg_info
+[2.275s] removing '/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization-0.0.0-py3.10.egg-info' (and everything under it)
+[2.275s] Copying ../../build/active_localization/active_localization.egg-info to /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization-0.0.0-py3.10.egg-info
+[2.276s] running install_scripts
+[2.421s] Installing frontier_detection script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization
+[2.421s] Installing local_map_node script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization
+[2.422s] writing list of installed files to '/home/sarthak/precise_docking_ws/build/active_localization/install.log'
+[2.482s] Invoked command in '/home/sarthak/precise_docking_ws/src/active_localization' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/active_localization/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/active_localization build --build-base /home/sarthak/precise_docking_ws/build/active_localization/build install --record /home/sarthak/precise_docking_ws/build/active_localization/install.log --single-version-externally-managed install_data
