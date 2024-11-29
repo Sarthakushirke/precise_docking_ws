@@ -154,12 +154,17 @@ class OccupancyGridUpdater(Node):
             data = self.costmap(data, width, height, resolution)  # Expand barriers
             data[row][column] = 0  # Robot's current location
             data[data > 5] = 1  # Set obstacles
-            goal = (0,7)
-            path = self.astar(data, (row,column), goal)
+            # Convert goal coordinates to grid indices
+            goal_x = 7  # Goal x-coordinate in meters
+            goal_y = 0   # Goal y-coordinate in meters
+            goal_column = int((goal_x - originX) / resolution)
+            goal_row = int((goal_y - originY) / resolution)
+            goal_indices = (goal_row, goal_column)
+            path = self.astar(data, (row,column), goal_indices)
             if path:
                 path_coords = [(p[1] * resolution + originX, p[0] * resolution + originY) for p in path]
                 self.publish_path_marker(path_coords)
-                self.publish_test_marker()
+                # self.publish_test_marker()
 
             else:
                 self.get_logger().warn("No path found to the goal!")
@@ -213,9 +218,9 @@ class OccupancyGridUpdater(Node):
         marker.pose.position.z = 0.0
 
         # Set the scale of the marker
-        marker.scale.x = 1.0
-        marker.scale.y = 1.0
-        marker.scale.z = 1.0
+        marker.scale.x = 0.1
+        marker.scale.y = 0.2
+        marker.scale.z = 0.3
 
         # Set the color of the marker
         marker.color.r = 1.0

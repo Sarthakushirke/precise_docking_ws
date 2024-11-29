@@ -1,0 +1,22 @@
+[2.326s] Invoking command in '/home/sarthak/precise_docking_ws/build/teleop_cpp_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=217 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/teleop_cpp_ros2 -- -j20 -l20
+[2.858s] [100%] Built target teleop
+[2.860s] Invoked command in '/home/sarthak/precise_docking_ws/build/teleop_cpp_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=217 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/teleop_cpp_ros2 -- -j20 -l20
+[2.906s] Invoking command in '/home/sarthak/precise_docking_ws/build/teleop_cpp_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=217 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/teleop_cpp_ros2
+[2.919s] -- Install configuration: ""
+[2.920s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/lib/teleop_cpp_ros2/teleop
+[2.920s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/ament_index/resource_index/package_run_dependencies/teleop_cpp_ros2
+[2.920s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/ament_index/resource_index/parent_prefix_path/teleop_cpp_ros2
+[2.920s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/environment/ament_prefix_path.sh
+[2.920s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/environment/ament_prefix_path.dsv
+[2.921s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/environment/path.sh
+[2.921s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/environment/path.dsv
+[2.921s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/local_setup.bash
+[2.921s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/local_setup.sh
+[2.921s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/local_setup.zsh
+[2.921s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/local_setup.dsv
+[2.921s] -- Installing: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/package.dsv
+[2.921s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/ament_index/resource_index/packages/teleop_cpp_ros2
+[2.921s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/cmake/teleop_cpp_ros2Config.cmake
+[2.921s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/cmake/teleop_cpp_ros2Config-version.cmake
+[2.922s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/teleop_cpp_ros2/share/teleop_cpp_ros2/package.xml
+[2.924s] Invoked command in '/home/sarthak/precise_docking_ws/build/teleop_cpp_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=217 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/teleop_cpp_ros2

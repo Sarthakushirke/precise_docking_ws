@@ -297,7 +297,9 @@ def exploration(data,width,height,resolution,column,row,originX,originY):
         data[data > 5] = 1 #(Those with 0 are places that can be visited, those with 100 are definitely obstacles) 0 olanlar gidilebilir yer, 100 olanlar kesin engel
         data = frontierB(data) #Find border points
         data,groups = assign_groups(data) #Group border points
-        groups = fGroups(groups) #Sort the groups from smallest to largest. Take the 5 largest groups
+        min_group_size = 50
+        filtered_groups = {gid: points for gid, points in groups.items() if len(points) >= min_group_size}
+        groups = fGroups(filtered_groups) #Sort the groups from smallest to largest. Take the 5 largest groups
         if len(groups) == 0: #If there is no group, the exploration is complete
             path = -1
         else: #If you have Group, find the closest group
@@ -330,7 +332,7 @@ def localControl(scan):
 class navigationControl(Node):
     def __init__(self):
         super().__init__('Exploration')
-        self.subscription = self.create_subscription(OccupancyGrid,'map',self.map_callback,10)
+        self.subscription = self.create_subscription(OccupancyGrid,'local_map',self.map_callback,10)
         self.subscription = self.create_subscription(Odometry,'odom',self.odom_callback,10)
         self.subscription = self.create_subscription(LaserScan,'scan',self.scan_callback,10)
         self.publisher = self.create_publisher(Twist, 'cmd_vel', 10)
