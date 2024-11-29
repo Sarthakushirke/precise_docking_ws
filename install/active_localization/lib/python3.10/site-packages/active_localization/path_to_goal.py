@@ -1,0 +1,283 @@
+import rclpy
+from rclpy.node import Node
+from nav_msgs.msg import OccupancyGrid, Odometry
+from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy, QoSHistoryPolicy
+
+import tf_transformations
+import tf2_ros
+import numpy as np
+import heapq , math , random , yaml
+from geometry_msgs.msg import Twist, Point
+from sensor_msgs.msg import LaserScan
+from visualization_msgs.msg import Marker, MarkerArray
+
+class OccupancyGridUpdater(Node):
+    def __init__(self):
+        super().__init__('occupancy_grid_updater')
+
+        self.get_logger().info('Node initialized and ready')
+
+
+        # Define a QoS profile that matches the publisher's QoS settings
+        qos_profile = QoSProfile(
+            reliability=QoSReliabilityPolicy.RELIABLE,
+            durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
+            history=QoSHistoryPolicy.KEEP_LAST,
+            depth=1
+        )
+
+        # Subscriptions
+        self.map_sub = self.create_subscription(
+            OccupancyGrid,
+            '/map',
+            self.map_callback,
+            qos_profile)  # Use default QoS settings
+
+        # Odometry subscription (uses default QoS)
+        self.odom_sub = self.create_subscription(
+            Odometry,
+            '/odom',
+            self.odom_callback,
+            10)
+        self.get_logger().info('Subscribed to /odom topic')
+
+        self.lidar_sub = self.create_subscription(LaserScan, '/scan', self.lidar_callback, 10)
+        self.get_logger().info('Subscribed to /scan topic')
+
+        # Publisher for the path marker
+        self.path_pub = self.create_publisher(Marker, '/path_marker', 10)
+        self.get_logger().info('Publishing path markers on /path_marker')
+
+        # TF buffer and listener
+        self.tf_buffer = tf2_ros.Buffer()
+        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
+
+        self.map_data = None
+        self.map_info = None
+        self.expansion_size = 3
+        # Initialize robot position attributes
+        self.x = None
+        self.y = None
+
+    def euler_from_quaternion(self,x,y,z,w):
+        t0 = +2.0 * (w * x + y * z)
+        t1 = +1.0 - 2.0 * (x * x + y * y)
+        roll_x = math.atan2(t0, t1)
+        t2 = +2.0 * (w * y - z * x)
+        t2 = +1.0 if t2 > +1.0 else t2
+        t2 = -1.0 if t2 < -1.0 else t2
+        pitch_y = math.asin(t2)
+        t3 = +2.0 * (w * z + x * y)
+        t4 = +1.0 - 2.0 * (y * y + z * z)
+        yaw_z = math.atan2(t3, t4)
+        return yaw_z
+
+    def costmap(self, data, width, height, resolution):
+        data = np.array(data).reshape(height, width)
+        wall = np.where(data == 100)
+        for i in range(-self.expansion_size, self.expansion_size + 1):
+            for j in range(-self.expansion_size, self.expansion_size + 1):
+                if i == 0 and j == 0:
+                    continue
+                x = wall[0] + i
+                y = wall[1] + j
+                x = np.clip(x, 0, height - 1)
+                y = np.clip(y, 0, width - 1)
+                data[x, y] = 100
+        data = data * resolution
+        return data
+
+
+    def heuristic(self,a, b):
+        return np.sqrt((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2)
+
+    def astar(self,array, start, goal):
+        neighbors = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1)]
+        close_set = set()
+        came_from = {}
+        gscore = {start:0}
+        fscore = {start:self.heuristic(start, goal)}
+        oheap = []
+        heapq.heappush(oheap, (fscore[start], start))
+        while oheap:
+            current = heapq.heappop(oheap)[1]
+            if current == goal:
+                data = []
+                while current in came_from:
+                    data.append(current)
+                    current = came_from[current]
+                data = data + [start]
+                data = data[::-1]
+                return data
+            close_set.add(current)
+            for i, j in neighbors:
+                neighbor = current[0] + i, current[1] + j
+                tentative_g_score = gscore[current] + self.heuristic(current, neighbor)
+                if 0 <= neighbor[0] < array.shape[0]:
+                    if 0 <= neighbor[1] < array.shape[1]:                
+                        if array[neighbor[0]][neighbor[1]] == 1:
+                            continue
+                    else:
+                        # array bound y walls
+                        continue
+                else:
+                    # array bound x walls
+                    continue
+                if neighbor in close_set and tentative_g_score >= gscore.get(neighbor, 0):
+                    continue
+                if  tentative_g_score < gscore.get(neighbor, 0) or neighbor not in [i[1]for i in oheap]:
+                    came_from[neighbor] = current
+                    gscore[neighbor] = tentative_g_score
+                    fscore[neighbor] = tentative_g_score + self.heuristic(neighbor, goal)
+                    heapq.heappush(oheap, (fscore[neighbor], neighbor))
+        # If no path to goal was found, return closest path to goal
+        if goal not in came_from:
+            closest_node = None
+            closest_dist = float('inf')
+            for node in close_set:
+                dist = self.heuristic(node, goal)
+                if dist < closest_dist:
+                    closest_node = node
+                    closest_dist = dist
+            if closest_node is not None:
+                data = []
+                while closest_node in came_from:
+                    data.append(closest_node)
+                    closest_node = came_from[closest_node]
+                data = data + [start]
+                data = data[::-1]
+                return data
+        return False
+
+
+    def path_to_destination(self, data, width, height, resolution, column, row, originX, originY):
+            data = self.costmap(data, width, height, resolution)  # Expand barriers
+            data[row][column] = 0  # Robot's current location
+            data[data > 5] = 1  # Set obstacles
+            goal = (0,7)
+            path = self.astar(data, (row,column), goal)
+            if path:
+                path_coords = [(p[1] * resolution + originX, p[0] * resolution + originY) for p in path]
+                self.publish_path_marker(path_coords)
+                self.publish_test_marker()
+
+            else:
+                self.get_logger().warn("No path found to the goal!")
+
+            return path
+    
+
+    def publish_path_marker(self, path_coords):
+        marker = Marker()
+        marker.header.frame_id = "map"
+        marker.header.stamp = self.get_clock().now().to_msg()
+        marker.ns = "path"
+        marker.id = 0
+        marker.type = Marker.LINE_STRIP
+        marker.action = Marker.ADD
+
+        # Set the scale of the marker
+        marker.scale.x = 0.05  # Line thickness
+
+        # Set the color of the marker
+        marker.color.r = 0.0
+        marker.color.g = 1.0
+        marker.color.b = 0.0
+        marker.color.a = 1.0
+
+        # Add the path points to the marker
+        for x, y in path_coords:
+            point = Point()
+            point.x = x
+            point.y = y
+            point.z = 0.0
+            marker.points.append(point)
+
+        # Publish the marker
+        self.path_pub.publish(marker)
+        self.get_logger().info("Path marker published!")
+
+
+    def publish_test_marker(self):
+        marker = Marker()
+        marker.header.frame_id = "map"
+        marker.header.stamp = self.get_clock().now().to_msg()
+        marker.ns = "test_marker"
+        marker.id = 1
+        marker.type = Marker.SPHERE
+        marker.action = Marker.ADD
+
+        # Set the position of the marker
+        marker.pose.position.x = 0.0
+        marker.pose.position.y = 0.0
+        marker.pose.position.z = 0.0
+
+        # Set the scale of the marker
+        marker.scale.x = 1.0
+        marker.scale.y = 1.0
+        marker.scale.z = 1.0
+
+        # Set the color of the marker
+        marker.color.r = 1.0
+        marker.color.g = 0.0
+        marker.color.b = 0.0
+        marker.color.a = 1.0
+
+        # Set the lifetime to infinite
+        marker.lifetime = rclpy.duration.Duration(seconds=0).to_msg()
+
+        # Publish the marker
+        self.path_pub.publish(marker)
+        self.get_logger().info("Test marker published!")
+
+
+    
+
+    def map_callback(self, msg):
+            
+            self.map_data = msg
+            self.resolution = self.map_data.info.resolution
+            self.originX = self.map_data.info.origin.position.x
+            self.originY = self.map_data.info.origin.position.y
+            self.width = self.map_data.info.width
+            self.height = self.map_data.info.height
+            self.data = self.map_data.data
+
+            # Ensure self.x and self.y are defined
+            if not hasattr(self, 'x') or not hasattr(self, 'y'):
+                self.get_logger().warn('Robot position not yet received.')
+                return
+            
+            self.x = -8
+            self.y = 5
+
+            column = int((self.x - self.originX) / self.resolution)
+            row = int((self.y - self.originY) / self.resolution)
+
+            path = self.path_to_destination(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
+
+            print(path)
+
+
+    def lidar_callback(self, msg):
+        self.scan_data = msg
+        self.scan = msg.ranges
+
+    def odom_callback(self,msg):
+        self.odom_data = msg
+        self.x = msg.pose.pose.position.x
+        self.y = msg.pose.pose.position.y
+        
+        
+        self.yaw = self.euler_from_quaternion(msg.pose.pose.orientation.x,msg.pose.pose.orientation.y,
+        msg.pose.pose.orientation.z,msg.pose.pose.orientation.w)
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = OccupancyGridUpdater()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main() 

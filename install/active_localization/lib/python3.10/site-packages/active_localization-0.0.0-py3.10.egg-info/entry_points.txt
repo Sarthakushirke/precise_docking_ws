@@ -1,3 +1,4 @@
 [console_scripts]
 frontier_detection = active_localization.frontier_detection:main
 local_map_node = active_localization.local_map:main
+path_to_goal = active_localization.path_to_goal:main

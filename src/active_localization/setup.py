@@ -21,7 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             "local_map_node = active_localization.local_map:main",
-            "frontier_detection = active_localization.frontier_detection:main"
+            "frontier_detection = active_localization.frontier_detection:main",
+            "path_to_goal = active_localization.path_to_goal:main"
         ],
     },
 )
