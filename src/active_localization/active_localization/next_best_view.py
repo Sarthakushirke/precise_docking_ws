@@ -1,0 +1,1 @@
+#Takes the frontier points and checks in the map which features are close to it within a 10 m range.
