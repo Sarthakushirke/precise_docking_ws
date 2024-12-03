@@ -280,12 +280,21 @@ class OccupancyGridUpdater(Node):
         if self.map_data is None:
             self.get_logger().warn("Map data not yet received.")
             return
+        
+        if self.x is None or self.y is None:
+            self.get_logger().warn("Robot position not yet received.")
+            return
 
         # Prepare the occupancy grid
         data = self.map_data.data
         data = self.costmap(data, self.width, self.height, self.resolution)
         data[data > 5] = 1  # Set obstacles
         data[data <= 5] = 0  # Set free space
+
+        # Convert robot position to grid indices
+        robot_column = int((self.x - self.originX) / self.resolution)
+        robot_row = int((self.y - self.originY) / self.resolution)
+        robot_indices = (robot_row, robot_column)
 
         # Convert goal position to grid indices
         goal_x = 7  # Goal x-coordinate in meters
@@ -331,7 +340,8 @@ class OccupancyGridUpdater(Node):
                     'path': path,
                     'path_length': path_length,
                     'visible_objects': visible_objects,
-                    'num_visible_objects': num_visible_objects
+                    'num_visible_objects': num_visible_objects,
+                    'centroid_indices': centroid_indices
                 })
             else:
                 self.get_logger().warn(f"No path found from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal.")
@@ -364,13 +374,22 @@ class OccupancyGridUpdater(Node):
                 best_centroid_info = info
 
 
-        
+
         if best_centroid_info is not None:
             self.get_logger().info(f"Best centroid is at ({best_centroid_info['centroid_x']:.2f}, {best_centroid_info['centroid_y']:.2f}) with utility {best_centroid_info['utility']:.2f}")
-            # Convert path indices to coordinates
-            path_coords = [(p[1] * self.resolution + self.originX, p[0] * self.resolution + self.originY) for p in best_centroid_info['path']]
-            # Publish the best path
-            self.publish_path_marker(path_coords)
+            
+            # Compute path from robot to best centroid
+            best_centroid_indices = best_centroid_info['centroid_indices']
+            
+            path_robot_to_centroid = self.astar(data, robot_indices, best_centroid_indices)
+            
+            if path_robot_to_centroid:
+                # Convert path indices to coordinates
+                path_coords = [(p[1] * self.resolution + self.originX, p[0] * self.resolution + self.originY) for p in path_robot_to_centroid]
+                # Publish the path
+                self.publish_path_marker(path_coords)
+            else:
+                self.get_logger().warn("No path found from robot to best centroid.")
         else:
             self.get_logger().warn("No valid paths found from any centroid to the goal.")
 

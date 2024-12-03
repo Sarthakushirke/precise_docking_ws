@@ -1,13 +1,11 @@
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__init__.py
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/frontier_detection.py
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/path_to_goal.py
-/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/utility_function.py
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/local_map.py
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/next_best_view.py
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/__init__.cpython-310.pyc
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/frontier_detection.cpython-310.pyc
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/path_to_goal.cpython-310.pyc
-/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/utility_function.cpython-310.pyc
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/local_map.cpython-310.pyc
 /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization/__pycache__/next_best_view.cpython-310.pyc
 /home/sarthak/precise_docking_ws/install/active_localization/share/ament_index/resource_index/packages/active_localization
