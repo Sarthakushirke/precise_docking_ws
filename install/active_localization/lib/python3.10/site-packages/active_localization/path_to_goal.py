@@ -2,6 +2,8 @@ import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import OccupancyGrid, Odometry
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy, QoSHistoryPolicy
+from .next_best_view import check_visible_objects_from_centroid_simple
+from geometry_msgs.msg import PoseArray, Pose
 
 import tf_transformations
 import tf2_ros
@@ -44,17 +46,25 @@ class OccupancyGridUpdater(Node):
         self.lidar_sub = self.create_subscription(LaserScan, '/scan', self.lidar_callback, 10)
         self.get_logger().info('Subscribed to /scan topic')
 
+        # Subscribe to frontier centroids
+        self.centroids_sub = self.create_subscription(
+            PoseArray,
+            '/frontier_centroids',
+            self.frontier_centroids_callback,
+            10)
+        self.get_logger().info('Subscribed to /frontier_centroids topic')
+
         # Publisher for the path marker
         self.path_pub = self.create_publisher(Marker, '/path_marker', 10)
         self.get_logger().info('Publishing path markers on /path_marker')
 
-        # TF buffer and listener
+        # TF buffer and listener  
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
 
         self.map_data = None
         self.map_info = None
-        self.expansion_size = 3
+        self.expansion_size = 5
         # Initialize robot position attributes
         self.x = None
         self.y = None
@@ -259,9 +269,112 @@ class OccupancyGridUpdater(Node):
             column = int((self.x - self.originX) / self.resolution)
             row = int((self.y - self.originY) / self.resolution)
 
-            path = self.path_to_destination(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
+            # path = self.path_to_destination(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
 
-            print(path)
+            # print(path)
+
+    def frontier_centroids_callback(self, msg):
+
+        centroids_info = []
+
+        if self.map_data is None:
+            self.get_logger().warn("Map data not yet received.")
+            return
+
+        # Prepare the occupancy grid
+        data = self.map_data.data
+        data = self.costmap(data, self.width, self.height, self.resolution)
+        data[data > 5] = 1  # Set obstacles
+        data[data <= 5] = 0  # Set free space
+
+        # Convert goal position to grid indices
+        goal_x = 7  # Goal x-coordinate in meters
+        goal_y = 0  # Goal y-coordinate in meters
+        goal_column = int((goal_x - self.originX) / self.resolution)
+        goal_row = int((goal_y - self.originY) / self.resolution)
+        goal_indices = (goal_row, goal_column)
+
+        # Initialize variables to store the best centroid
+        shortest_path_length = float('inf')
+        best_centroid = None
+        best_path = None
+
+        # Process each centroid
+        for pose in msg.poses:
+            centroid_x = pose.position.x
+            centroid_y = pose.position.y
+
+            centroid_column = int((centroid_x - self.originX) / self.resolution)
+            centroid_row = int((centroid_y - self.originY) / self.resolution)
+            centroid_indices = (centroid_row, centroid_column)
+
+            # Compute the path from centroid to goal
+            path = self.astar(data, centroid_indices, goal_indices)
+
+            # Calculate visible objects from this centroid
+            visible_objects = check_visible_objects_from_centroid_simple(centroid_x, centroid_y)
+            num_visible_objects = len(visible_objects)
+
+            if path:
+                path_length = len(path) * self.resolution
+                self.get_logger().info(f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}")
+
+                # if path_length < shortest_path_length:
+                #     shortest_path_length = path_length
+                #     best_centroid = (centroid_x, centroid_y)
+                #     best_path = path
+
+                        # Store information for utility calculation
+                centroids_info.append({
+                    'centroid_x': centroid_x,
+                    'centroid_y': centroid_y,
+                    'path': path,
+                    'path_length': path_length,
+                    'visible_objects': visible_objects,
+                    'num_visible_objects': num_visible_objects
+                })
+            else:
+                self.get_logger().warn(f"No path found from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal.")
+
+
+        # Weights for utility calculation
+        weight_info_gain = 1.0
+        weight_path_length = 1.0
+
+        # Initialize variables to store the best centroid based on utility
+        best_centroid_info = None
+        highest_utility = -float('inf')
+
+        # Calculate utility for each centroid
+        for info in centroids_info:
+            information_gain = info['num_visible_objects']
+            path_length = info['path_length']
+
+            # Compute utility
+            utility_value = (weight_info_gain * information_gain) - (weight_path_length * path_length)
+
+            # Store utility in the info dictionary
+            info['utility'] = utility_value
+
+            self.get_logger().info(f"Centroid at ({info['centroid_x']:.2f}, {info['centroid_y']:.2f}): Utility = {utility_value:.2f}")
+
+            # Determine if this centroid has the highest utility so far
+            if utility_value > highest_utility:
+                highest_utility = utility_value
+                best_centroid_info = info
+
+
+        
+        if best_centroid_info is not None:
+            self.get_logger().info(f"Best centroid is at ({best_centroid_info['centroid_x']:.2f}, {best_centroid_info['centroid_y']:.2f}) with utility {best_centroid_info['utility']:.2f}")
+            # Convert path indices to coordinates
+            path_coords = [(p[1] * self.resolution + self.originX, p[0] * self.resolution + self.originY) for p in best_centroid_info['path']]
+            # Publish the best path
+            self.publish_path_marker(path_coords)
+        else:
+            self.get_logger().warn("No valid paths found from any centroid to the goal.")
+
+
 
 
     def lidar_callback(self, msg):

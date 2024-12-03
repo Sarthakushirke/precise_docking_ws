@@ -2,6 +2,8 @@ import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import OccupancyGrid, Odometry
 from rclpy.qos import QoSProfile
+from geometry_msgs.msg import PoseArray, Pose
+
 
 import tf_transformations
 import tf2_ros
@@ -41,6 +43,11 @@ class OccupancyGridUpdater(Node):
 
         self.centroid_pub = self.create_publisher(MarkerArray, '/centroid_markers', 10)
         self.get_logger().info('Publishing centroid markers on /centroid_markers')
+
+
+        # Publisher for centroids
+        self.centroids_pub = self.create_publisher(PoseArray, '/frontier_centroids', 10)
+        self.get_logger().info('Publishing centroids on /frontier_centroids')
 
         # TF buffer and listener
         self.tf_buffer = tf2_ros.Buffer()
@@ -137,8 +144,10 @@ class OccupancyGridUpdater(Node):
 
             # Calculate centroids for all valid groups
             centroids = {}
+
             for group_id, points in filtered_groups.items():
-                centroids[group_id] = self.calculate_centroid(points)
+                centroid = self.calculate_centroid(points)
+                centroids[group_id] = centroid
 
             # Publish the frontier markers
             self.publish_frontier_markers(filtered_groups, resolution, originX, originY)
@@ -146,7 +155,33 @@ class OccupancyGridUpdater(Node):
             # Publish the centroid markers (spheres)
             self.publish_centroid_markers(centroids, resolution, originX, originY)
 
+            # Publish the centroids to a topic
+            self.publish_centroids(centroids, resolution, originX, originY)
+
             return centroids
+    
+    def publish_centroids(self, centroids, resolution, originX, originY):
+        pose_array = PoseArray()
+        pose_array.header.frame_id = "map"  # Set to your map frame
+        pose_array.header.stamp = self.get_clock().now().to_msg()
+
+        for centroid in centroids.values():
+            # Convert grid indices to world coordinates
+            x = originX + centroid[1] * resolution + resolution / 2
+            y = originY + centroid[0] * resolution + resolution / 2
+
+            pose = Pose()
+            pose.position.x = x
+            pose.position.y = y
+            pose.position.z = 0.0  # Assuming a flat ground
+            pose.orientation.w = 1.0  # Neutral orientation (no rotation)
+
+            pose_array.poses.append(pose)
+
+        # Publish the centroids
+        self.centroids_pub.publish(pose_array)
+        self.get_logger().info(f"Published {len(pose_array.poses)} centroids to /frontier_centroids")
+
 
     def publish_frontier_markers(self, groups, resolution, originX, originY):
         marker_array = MarkerArray()
@@ -265,6 +300,8 @@ class OccupancyGridUpdater(Node):
 
         column = int((self.x - self.originX) / self.resolution)
         row = int((self.y - self.originY) / self.resolution)
+
+
 
         frontiers_middle = self.exploration(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
 
