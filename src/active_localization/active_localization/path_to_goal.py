@@ -4,6 +4,9 @@ from nav_msgs.msg import OccupancyGrid, Odometry
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy, QoSHistoryPolicy
 from .next_best_view import check_visible_objects_from_centroid_simple
 from geometry_msgs.msg import PoseArray, Pose
+import time
+from threading import Thread
+from geometry_msgs.msg import Twist
 
 import tf_transformations
 import tf2_ros
@@ -12,6 +15,11 @@ import heapq , math , random , yaml
 from geometry_msgs.msg import Twist, Point
 from sensor_msgs.msg import LaserScan
 from visualization_msgs.msg import Marker, MarkerArray
+
+speed = 0.2  # Linear speed (m/s)
+lookahead_distance = 0.5  # Lookahead distance for pure pursuit (meters)
+robot_r = 0.5  # Robot radius for obstacle detection (meters)
+target_error = 0.1  # Acceptable error to consider goal reached (meters)
 
 class OccupancyGridUpdater(Node):
     def __init__(self):
@@ -58,6 +66,9 @@ class OccupancyGridUpdater(Node):
         self.path_pub = self.create_publisher(Marker, '/path_marker', 10)
         self.get_logger().info('Publishing path markers on /path_marker')
 
+        self.velocity_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.get_logger().info('Publishing velocity commands on /cmd_vel')
+
         # TF buffer and listener  
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
@@ -68,6 +79,17 @@ class OccupancyGridUpdater(Node):
         # Initialize robot position attributes
         self.x = None
         self.y = None
+
+        self.path = None  # Path to follow
+        self.control_thread = None  # Thread for control loop
+        self.control_active = False  # Flag to control the thread
+        self.i = 0  # Index for pure pursuit
+        self.scan_data = None  # Latest laser scan data
+
+        self.final_goal_reached = False  # Flag to indicate if the final goal has been reached
+
+
+
 
     def euler_from_quaternion(self,x,y,z,w):
         t0 = +2.0 * (w * x + y * z)
@@ -160,26 +182,26 @@ class OccupancyGridUpdater(Node):
         return False
 
 
-    def path_to_destination(self, data, width, height, resolution, column, row, originX, originY):
-            data = self.costmap(data, width, height, resolution)  # Expand barriers
-            data[row][column] = 0  # Robot's current location
-            data[data > 5] = 1  # Set obstacles
-            # Convert goal coordinates to grid indices
-            goal_x = 7  # Goal x-coordinate in meters
-            goal_y = 0   # Goal y-coordinate in meters
-            goal_column = int((goal_x - originX) / resolution)
-            goal_row = int((goal_y - originY) / resolution)
-            goal_indices = (goal_row, goal_column)
-            path = self.astar(data, (row,column), goal_indices)
-            if path:
-                path_coords = [(p[1] * resolution + originX, p[0] * resolution + originY) for p in path]
-                self.publish_path_marker(path_coords)
-                # self.publish_test_marker()
+    # def path_to_destination(self, data, width, height, resolution, column, row, originX, originY):
+    #         data = self.costmap(data, width, height, resolution)  # Expand barriers
+    #         data[row][column] = 0  # Robot's current location
+    #         data[data > 5] = 1  # Set obstacles
+    #         # Convert goal coordinates to grid indices
+    #         goal_x = 7  # Goal x-coordinate in meters
+    #         goal_y = 0   # Goal y-coordinate in meters
+    #         goal_column = int((goal_x - originX) / resolution)
+    #         goal_row = int((goal_y - originY) / resolution)
+    #         goal_indices = (goal_row, goal_column)
+    #         path = self.astar(data, (row,column), goal_indices)
+    #         if path:
+    #             path_coords = [(p[1] * resolution + originX, p[0] * resolution + originY) for p in path]
+    #             self.publish_path_marker(path_coords)
+    #             # self.publish_test_marker()
 
-            else:
-                self.get_logger().warn("No path found to the goal!")
+    #         else:
+    #             self.get_logger().warn("No path found to the goal!")
 
-            return path
+    #         return path
     
 
     def publish_path_marker(self, path_coords):
@@ -275,6 +297,17 @@ class OccupancyGridUpdater(Node):
 
     def frontier_centroids_callback(self, msg):
 
+            # If the robot is currently moving towards a goal, skip computation
+        if self.control_active:
+            self.get_logger().info("Robot is moving towards a goal, skipping computation.")
+            return
+
+        # Proceed with computation and planning
+        self.compute_and_plan(msg)
+
+
+    def compute_and_plan(self, msg):
+
         centroids_info = []
 
         if self.map_data is None:
@@ -288,8 +321,8 @@ class OccupancyGridUpdater(Node):
         # Prepare the occupancy grid
         data = self.map_data.data
         data = self.costmap(data, self.width, self.height, self.resolution)
-        data[data > 5] = 1  # Set obstacles
-        data[data <= 5] = 0  # Set free space
+        data[data > 6] = 1  # Set obstacles
+        data[data <= 6] = 0  # Set free space
 
         # Convert robot position to grid indices
         robot_column = int((self.x - self.originX) / self.resolution)
@@ -384,15 +417,92 @@ class OccupancyGridUpdater(Node):
             
             if path_robot_to_centroid:
                 # Convert path indices to coordinates
-                path_coords = [(p[1] * self.resolution + self.originX, p[0] * self.resolution + self.originY) for p in path_robot_to_centroid]
+                self.path = [(p[1] * self.resolution + self.originX, p[0] * self.resolution + self.originY) for p in path_robot_to_centroid]
                 # Publish the path
-                self.publish_path_marker(path_coords)
+                self.publish_path_marker(self.path)
+
+                # Start the control thread
+                if not self.control_active:
+                    self.control_active = True
+                    self.control_thread = Thread(target=self.control_loop)
+                    self.control_thread.start()
+
+
             else:
                 self.get_logger().warn("No path found from robot to best centroid.")
         else:
             self.get_logger().warn("No valid paths found from any centroid to the goal.")
 
 
+
+    def control_loop(self):
+        self.get_logger().info("Control loop started.")
+        twist = Twist()
+        while self.control_active:
+            v, w = self.local_control()
+            if v is None:
+                v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, self.path, self.i)
+            # Check if goal is reached
+            if self.i >= len(self.path) - 1 and self.distance_to_point(self.x, self.y, self.path[-1][0], self.path[-1][1]) < target_error:
+                v = 0.0
+                w = 0.0
+                self.control_active = False
+                self.get_logger().info("Goal reached.")
+            twist.linear.x = v
+            twist.angular.z = w
+            self.velocity_pub.publish(twist)
+            time.sleep(0.1)  # Control loop rate (10 Hz)
+        self.get_logger().info("Control loop ended.")
+
+
+    def local_control(self):
+        v = None
+        w = None
+        if self.scan_data is None:
+            return v, w  # No scan data available
+        # Convert LaserScan ranges to numpy array
+        scan_ranges = np.array(self.scan_data.ranges)
+        # Check front area for obstacles
+        front_angles = np.concatenate((scan_ranges[:30], scan_ranges[-30:]))  # Front 60 degrees
+        if np.any(front_angles < robot_r):
+            v = 0.0
+            w = -math.pi / 4
+        else:
+            # Check right side
+            right_angles = scan_ranges[300:360]  # Right 60 degrees
+            if np.any(right_angles < robot_r):
+                v = 0.0
+                w = math.pi / 4
+        return v, w
+    
+
+    def pure_pursuit(self, current_x, current_y, current_heading, path, index):
+        closest_point = None
+        v = speed
+        for i in range(index, len(path)):
+            x = path[i][0]
+            y = path[i][1]
+            distance = self.distance_to_point(current_x, current_y, x, y)
+            if distance >= lookahead_distance:
+                closest_point = (x, y)
+                index = i
+                break
+        if closest_point is not None:
+            target_heading = math.atan2(closest_point[1] - current_y, closest_point[0] - current_x)
+        else:
+            target_heading = math.atan2(path[-1][1] - current_y, path[-1][0] - current_x)
+            index = len(path) - 1
+        desired_steering_angle = target_heading - current_heading
+        desired_steering_angle = (desired_steering_angle + math.pi) % (2 * math.pi) - math.pi  # Normalize to [-pi, pi]
+        # Limit the steering angle
+        if abs(desired_steering_angle) > math.pi / 6:
+            v = 0.0
+            desired_steering_angle = math.copysign(math.pi / 6, desired_steering_angle)
+        return v, desired_steering_angle, index
+    
+
+    def distance_to_point(self, x1, y1, x2, y2):
+        return math.hypot(x2 - x1, y2 - y1)
 
 
     def lidar_callback(self, msg):
@@ -407,6 +517,15 @@ class OccupancyGridUpdater(Node):
         
         self.yaw = self.euler_from_quaternion(msg.pose.pose.orientation.x,msg.pose.pose.orientation.y,
         msg.pose.pose.orientation.z,msg.pose.pose.orientation.w)
+
+    def destroy_node(self):
+    # Stop the control thread if active
+        if self.control_active:
+            self.control_active = False
+            if self.control_thread is not None:
+                self.control_thread.join()
+        super().destroy_node()
+
 
 def main(args=None):
     rclpy.init(args=args)
