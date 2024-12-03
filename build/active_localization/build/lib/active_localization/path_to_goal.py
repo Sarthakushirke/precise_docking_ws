@@ -69,7 +69,6 @@ class OccupancyGridUpdater(Node):
         self.velocity_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.get_logger().info('Publishing velocity commands on /cmd_vel')
 
-
         # TF buffer and listener  
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
@@ -81,14 +80,20 @@ class OccupancyGridUpdater(Node):
         self.x = None
         self.y = None
 
+        # Final goal position
+        self.final_goal_x = 7.0  # Final goal x-coordinate in meters
+        self.final_goal_y = 0.0  # Final goal y-coordinate in meters
+
         self.path = None  # Path to follow
         self.control_thread = None  # Thread for control loop
         self.control_active = False  # Flag to control the thread
         self.i = 0  # Index for pure pursuit
         self.scan_data = None  # Latest laser scan data
 
+        self.final_goal_reached = False  # Flag to indicate if the final goal has been reached
 
-
+        # Goal tolerance
+        self.goal_tolerance = 0.1  # Acceptable error to consider goal reached (meters)
 
     def euler_from_quaternion(self,x,y,z,w):
         t0 = +2.0 * (w * x + y * z)
@@ -296,7 +301,11 @@ class OccupancyGridUpdater(Node):
 
     def frontier_centroids_callback(self, msg):
 
-            # If the robot is currently moving towards a goal, skip computation
+        if self.final_goal_reached:
+            self.get_logger().info("Final goal reached. Ignoring new centroids.")
+            return
+
+        # If the robot is currently moving towards a goal, skip computation
         if self.control_active:
             self.get_logger().info("Robot is moving towards a goal, skipping computation.")
             return
@@ -306,6 +315,10 @@ class OccupancyGridUpdater(Node):
 
 
     def compute_and_plan(self, msg):
+
+        if self.final_goal_reached:
+            self.get_logger().info("Final goal reached. No further planning will occur.")
+            return
 
         centroids_info = []
 
@@ -320,8 +333,8 @@ class OccupancyGridUpdater(Node):
         # Prepare the occupancy grid
         data = self.map_data.data
         data = self.costmap(data, self.width, self.height, self.resolution)
-        data[data > 5] = 1  # Set obstacles
-        data[data <= 5] = 0  # Set free space
+        data[data > 6] = 1  # Set obstacles
+        data[data <= 6] = 0  # Set free space
 
         # Convert robot position to grid indices
         robot_column = int((self.x - self.originX) / self.resolution)
@@ -329,8 +342,11 @@ class OccupancyGridUpdater(Node):
         robot_indices = (robot_row, robot_column)
 
         # Convert goal position to grid indices
-        goal_x = 7  # Goal x-coordinate in meters
-        goal_y = 0  # Goal y-coordinate in meters
+        goal_x = 7.0  # Goal x-coordinate in meters
+        goal_y = 0.0  # Goal y-coordinate in meters
+
+        
+
         goal_column = int((goal_x - self.originX) / self.resolution)
         goal_row = int((goal_y - self.originY) / self.resolution)
         goal_indices = (goal_row, goal_column)
@@ -516,6 +532,22 @@ class OccupancyGridUpdater(Node):
         
         self.yaw = self.euler_from_quaternion(msg.pose.pose.orientation.x,msg.pose.pose.orientation.y,
         msg.pose.pose.orientation.z,msg.pose.pose.orientation.w)
+
+
+        # Check if robot has reached the final goal
+        if not self.final_goal_reached:
+            distance_to_goal = self.distance_to_point(self.x, self.y, self.final_goal_x, self.final_goal_y)
+            if distance_to_goal <= self.goal_tolerance:
+                self.get_logger().info("Final goal reached. Robot will stop.")
+                self.final_goal_reached = True
+                # Stop the robot
+                twist = Twist()
+                twist.linear.x = 0.0
+                twist.angular.z = 0.0
+                self.velocity_pub.publish(twist)
+                # Stop any ongoing control loop
+                if self.control_active:
+                    self.control_active = False
 
     def destroy_node(self):
     # Stop the control thread if active
