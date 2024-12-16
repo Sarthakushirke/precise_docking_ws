@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "rosidl_generator_cpp/ultralytics_ros/msg/detail/yolo_result__builder.hpp"
   "rosidl_generator_cpp/ultralytics_ros/msg/detail/yolo_result__struct.hpp"
   "rosidl_generator_cpp/ultralytics_ros/msg/detail/yolo_result__traits.hpp"
+  "rosidl_generator_cpp/ultralytics_ros/msg/detail/yolo_result__type_support.hpp"
   "rosidl_generator_cpp/ultralytics_ros/msg/yolo_result.hpp"
 )
 

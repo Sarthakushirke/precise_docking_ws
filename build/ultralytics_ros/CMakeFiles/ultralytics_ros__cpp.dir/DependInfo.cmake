@@ -15,6 +15,7 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/sarthak/precise_docking_ws/build/ultralytics_ros/rosidl_generator_cpp/ultralytics_ros/msg/detail/yolo_result__builder.hpp" "/home/sarthak/precise_docking_ws/build/ultralytics_ros/rosidl_generator_cpp/ultralytics_ros/msg/yolo_result.hpp"
   "/home/sarthak/precise_docking_ws/build/ultralytics_ros/rosidl_generator_cpp/ultralytics_ros/msg/detail/yolo_result__struct.hpp" "/home/sarthak/precise_docking_ws/build/ultralytics_ros/rosidl_generator_cpp/ultralytics_ros/msg/yolo_result.hpp"
   "/home/sarthak/precise_docking_ws/build/ultralytics_ros/rosidl_generator_cpp/ultralytics_ros/msg/detail/yolo_result__traits.hpp" "/home/sarthak/precise_docking_ws/build/ultralytics_ros/rosidl_generator_cpp/ultralytics_ros/msg/yolo_result.hpp"
+  "/home/sarthak/precise_docking_ws/build/ultralytics_ros/rosidl_generator_cpp/ultralytics_ros/msg/detail/yolo_result__type_support.hpp" "/home/sarthak/precise_docking_ws/build/ultralytics_ros/rosidl_generator_cpp/ultralytics_ros/msg/yolo_result.hpp"
   )
 
 

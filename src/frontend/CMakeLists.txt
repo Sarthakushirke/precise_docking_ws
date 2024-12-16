@@ -103,5 +103,10 @@ install(PROGRAMS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(PROGRAMS
+  scripts/localize_with_arcuo.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 
 ament_package()

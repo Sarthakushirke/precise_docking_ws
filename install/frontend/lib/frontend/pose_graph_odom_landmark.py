@@ -52,6 +52,8 @@ class PoseGraphOptimization(Node):
         # Track the pose number (start from pose 0)
         self.pose_num = 0
 
+        self.marker_data = None
+
         # Track which landmarks have already been inserted
         self.landmark_inserted = set()  # Track inserted landmark keys
 
@@ -88,7 +90,6 @@ class PoseGraphOptimization(Node):
         """Handles incoming ArUco marker pose data"""
         self.marker_data = msg.point  # Store the marker's pose
         # print("This is the data",msg.point)
-        self.process_data()
 
     def cmd_vel_callback(self, msg):
         """Handles incoming cmd_vel data"""
@@ -147,6 +148,7 @@ class PoseGraphOptimization(Node):
             # Handle landmark observations
             if self.marker_data is not None:
                 landmark_pose = gtsam.Point2(self.marker_data.x, self.marker_data.y)
+                print(landmark_pose)
                 landmark_id = 0  # Use the actual ID from the ArUco marker
                 landmark_key = gtsam.symbol('L', landmark_id)  # Use symbol for landmark key
 
@@ -185,11 +187,11 @@ class PoseGraphOptimization(Node):
 
     def transform_odometry_to_lidar(self, odom_pose):
         try:
-            if not self.tf_buffer.can_transform('odom', 'diff_drive/lidar_link', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
+            if not self.tf_buffer.can_transform('map', 'odom', rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=1)):
                 return  # Skip if transformation not available
 
             transform_stamped = self.tf_buffer.lookup_transform(
-                'diff_drive/lidar_link', 'odom', rclpy.time.Time())
+                'map', 'odom', rclpy.time.Time())
             return do_transform_pose(odom_pose, transform_stamped)
         except TransformException as ex:
             self.get_logger().warn(f"Could not transform odometry to lidar frame: {ex}")
@@ -212,6 +214,8 @@ class PoseGraphOptimization(Node):
         """Optimize the factor graph using Levenberg-Marquardt"""
         optimizer = gtsam.LevenbergMarquardtOptimizer(self.graph, self.initial_estimates)
         result = optimizer.optimize()
+
+        print("\nFinal Result:\n{}".format(result))
 
         # Compute marginals
         marginals = gtsam.Marginals(self.graph, result)
@@ -237,7 +241,7 @@ class PoseGraphOptimization(Node):
         self.ax.cla()
 
         # Plot the odometry and optimized trajectories
-        print("Odometry values", self.odometry_poses_x, self.odometry_poses_y)
+        # print("Odometry values", self.odometry_poses_x, self.odometry_poses_y)
         self.ax.plot(self.odometry_poses_x, self.odometry_poses_y, 'r--', label='Odometry Trajectory')
 
         print("Optimized values", self.optimized_poses_x, self.optimized_poses_y)
@@ -247,6 +251,7 @@ class PoseGraphOptimization(Node):
         for landmark_id in self.landmark_inserted:
             landmark_key = gtsam.symbol('L', landmark_id)
             optimized_landmark = self.initial_estimates.atPoint2(landmark_key)
+            print(optimized_landmark[0], optimized_landmark[1])
             self.ax.plot(optimized_landmark[0], optimized_landmark[1], 'go', label='Landmark' if landmark_id == 0 else '')
 
         # Set labels and title
@@ -257,9 +262,9 @@ class PoseGraphOptimization(Node):
         self.ax.legend()
 
         # Draw and pause for real-time update
-        # plt.draw()
-        # plt.pause(0.001)
-        plt.show()
+        plt.draw()
+        plt.pause(0.001)
+        # plt.show()
 
 
 

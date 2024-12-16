@@ -19,6 +19,7 @@
 /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/pose_graph_odom_landmark.py
 /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/plot_odom.py
 /home/sarthak/precise_docking_ws/install/frontend/lib/frontend/two_landmark.py
+/home/sarthak/precise_docking_ws/install/frontend/lib/frontend/localize_with_arcuo.py
 /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/package_run_dependencies/frontend
 /home/sarthak/precise_docking_ws/install/frontend/share/ament_index/resource_index/parent_prefix_path/frontend
 /home/sarthak/precise_docking_ws/install/frontend/share/frontend/environment/ament_prefix_path.sh

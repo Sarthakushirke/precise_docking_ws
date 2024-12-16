@@ -1,0 +1,9 @@
+[ 50%] [32mBuilding CXX object CMakeFiles/cpp_executable.dir/src/cpp_node.cpp.o[0m
+[ 50%] Built target ament_cmake_python_copy_localization_amcl
+running egg_info
+writing localization_amcl.egg-info/PKG-INFO
+writing dependency_links to localization_amcl.egg-info/dependency_links.txt
+writing top-level names to localization_amcl.egg-info/top_level.txt
+reading manifest file 'localization_amcl.egg-info/SOURCES.txt'
+writing manifest file 'localization_amcl.egg-info/SOURCES.txt'
+[ 50%] Built target ament_cmake_python_build_localization_amcl_egg

@@ -289,11 +289,11 @@ class OccupancyGridUpdater(Node):
                 self.get_logger().warn('Robot position not yet received.')
                 return
             
-            self.x = -8
-            self.y = 5
+            # self.x = -8
+            # self.y = 5
 
-            column = int((self.x - self.originX) / self.resolution)
-            row = int((self.y - self.originY) / self.resolution)
+            # column = int((self.x - self.originX) / self.resolution)
+            # row = int((self.y - self.originY) / self.resolution)
 
             # path = self.path_to_destination(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
 

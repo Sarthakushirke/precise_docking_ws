@@ -289,11 +289,11 @@ class OccupancyGridUpdater(Node):
                 self.get_logger().warn('Robot position not yet received.')
                 return
             
-            self.x = -8
-            self.y = 5
+            # self.x = -8
+            # self.y = 5
 
-            column = int((self.x - self.originX) / self.resolution)
-            row = int((self.y - self.originY) / self.resolution)
+            # column = int((self.x - self.originX) / self.resolution)
+            # row = int((self.y - self.originY) / self.resolution)
 
             # path = self.path_to_destination(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
 
@@ -344,6 +344,8 @@ class OccupancyGridUpdater(Node):
         # Convert goal position to grid indices
         goal_x = 7.0  # Goal x-coordinate in meters
         goal_y = 0.0  # Goal y-coordinate in meters
+
+        
 
         goal_column = int((goal_x - self.originX) / self.resolution)
         goal_row = int((goal_y - self.originY) / self.resolution)
@@ -439,6 +441,7 @@ class OccupancyGridUpdater(Node):
                     self.control_active = True
                     self.control_thread = Thread(target=self.control_loop)
                     self.control_thread.start()
+
 
             else:
                 self.get_logger().warn("No path found from robot to best centroid.")

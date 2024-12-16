@@ -301,8 +301,6 @@ class OccupancyGridUpdater(Node):
         column = int((self.x - self.originX) / self.resolution)
         row = int((self.y - self.originY) / self.resolution)
 
-
-
         frontiers_middle = self.exploration(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
 
         print("Frontiers ", frontiers_middle)
