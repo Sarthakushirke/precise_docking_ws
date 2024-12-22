@@ -139,7 +139,6 @@ class arcuo_marker_detection(Node): # Node class
                 t.transform.translation.y = tvecs[i][0][1]
                 t.transform.translation.z = tvecs[i][0][2]
 
-                
                 # Store the rotation information
                 rotation_matrix = np.eye(4)
                 rotation_matrix[0:3, 0:3] = cv2.Rodrigues(np.array(rvecs[i][0]))[0]
