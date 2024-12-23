@@ -20,7 +20,7 @@ class MultiLocationMarkerNode(Node):
             0: [
                 (3.0, -1.0, 0.0),
                 (-6.0, 5.0, 0.0),
-                (-3.0,4.0,0.0),
+                (-3.0,-4.0,0.0),
             ],
         }
 
@@ -32,7 +32,7 @@ class MultiLocationMarkerNode(Node):
             10
         )
 
-                # Define a QoS profile that matches the publisher's QoS settings
+        # Define a QoS profile that matches the publisher's QoS settings
         qos_profile = QoSProfile(
             reliability=QoSReliabilityPolicy.RELIABLE,
             durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
@@ -126,7 +126,7 @@ class MultiLocationMarkerNode(Node):
         # For demonstration, let's just assume a fixed distance=2
         distance = 2.0
 
-        self.expansion_size = 3
+        self.expansion_size = 2
         self.min_group_size = 40
 
         # We assume zero relative orientation
