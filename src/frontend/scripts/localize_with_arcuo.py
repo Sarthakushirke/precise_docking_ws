@@ -5,7 +5,7 @@ from rclpy.node import Node
 import math
 import numpy as np
 
-from geometry_msgs.msg import PointStamped, PoseArray, Pose
+from geometry_msgs.msg import PointStamped, PoseArray, Pose, Point
 from tf_transformations import quaternion_from_euler
 from visualization_msgs.msg import Marker, MarkerArray
 from nav_msgs.msg import OccupancyGrid, Odometry
@@ -18,8 +18,9 @@ class MultiLocationMarkerNode(Node):
         # marker_map[marker_id] => list of (x_map, y_map, theta_map)
         self.marker_map = {
             0: [
-                # (3.0, -1.0, 0.0),
+                (3.0, -1.0, 0.0),
                 (-6.0, 5.0, 0.0),
+                (-3.0,4.0,0.0),
             ],
         }
 
@@ -68,8 +69,13 @@ class MultiLocationMarkerNode(Node):
             10
         )
 
+        self.frontier_pub = self.create_publisher(MarkerArray, '/frontier_markers', 10)
+        self.get_logger().info('Publishing frontier markers on /frontier_markers')
+
         self.map_data = None
         self.map_info = None
+        self.column = None
+        self.row = None
         # self.resolution = None
         # self.originX = None
         # self.originY = None
@@ -89,10 +95,14 @@ class MultiLocationMarkerNode(Node):
             self.get_logger().warn('Robot position not yet received.')
             return
 
-        # column = int((self.x - self.originX) / self.resolution)
-        # row = int((self.y - self.originY) / self.resolution)
+        self.column = int((self.x - self.originX) / self.resolution)
+        self.row = int((self.y - self.originY) / self.resolution)
 
-
+    def get_color(self, group_id):
+        # Generate colors based on group_id
+        np.random.seed(group_id)
+        color = np.random.rand(3)
+        return color
 
     def marker_callback(self, msg: PointStamped):
         """
@@ -115,6 +125,9 @@ class MultiLocationMarkerNode(Node):
 
         # For demonstration, let's just assume a fixed distance=2
         distance = 2.0
+
+        self.expansion_size = 3
+        self.min_group_size = 40
 
         # We assume zero relative orientation
         phi_marker_relative = 0.0
@@ -155,51 +168,167 @@ class MultiLocationMarkerNode(Node):
         start_angle = -3.14
         max_range = 10
 
-        reachable = np.zeros_like(self.map_data, dtype=bool)
+        # reachable = np.zeros_like(self.map_data, dtype=bool)
 
         for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
+
+            # Re-init arrays for each hypothesis
+            reachable = np.zeros_like(self.map_data, dtype=bool)
+            updated_map = self.map_data.copy()
             for i in range(num_beams):
                 beam_angle = start_angle + i * angle_increment
                 reachable = self.get_ray_distance_bresenham(x_r, y_r, beam_angle, max_range,reachable)
                 # scan_ranges.append(dist)
 
-        # print("Reachable:", np.array2string(reachable, threshold=np.inf))
-        # Update the map
-        updated_map = self.map_data.copy()
+            # print("Reachable:", np.array2string(reachable, threshold=np.inf))
+            # Update the map
+            updated_map = self.map_data.copy()
 
-        # Identify free cells in the map
-        free_cells = (updated_map == 0)
-
-    
-        # Identify unreachable cells
-        unreachable = ~reachable
-
-
-        # Identify free and unreachable cells
-        free_and_unreachable = free_cells & unreachable
-
-        # Mark free, unreachable cells as unknown (-1)
-        updated_map[free_and_unreachable] = -1
+            # Identify free cells in the map
+            free_cells = (updated_map == 0)
         
-        # Ensure reachable free cells remain as 0
-        reachable_free = free_cells & reachable
-        updated_map[reachable_free] = 0  # This line may not be necessary but ensures clarity
+            # Identify unreachable cells
+            unreachable = ~reachable
 
-        # print("Updated map",updated_map)
 
-        # Log the number of free cells after update
-        # num_free_after = np.count_nonzero(updated_map == 0)
-        # self.get_logger().info(f"Number of free cells after update: {num_free_after}")
+            # Identify free and unreachable cells
+            free_and_unreachable = free_cells & unreachable
 
-        # Publish the updated map
-        updated_occupancy_grid = OccupancyGrid()
-        updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
-        updated_occupancy_grid.header.frame_id = "map"
-        updated_occupancy_grid.info = self.map_info
-        updated_occupancy_grid.data = updated_map.flatten().tolist()
-        self.map_pub.publish(updated_occupancy_grid)
-
+            # Mark free, unreachable cells as unknown (-1)
+            updated_map[free_and_unreachable] = -1
             
+            # Ensure reachable free cells remain as 0
+            reachable_free = free_cells & reachable
+            updated_map[reachable_free] = 0  # This line may not be necessary but ensures clarity
+
+            origin_x = self.map_info.origin.position.x
+            origin_y = self.map_info.origin.position.y
+            resolution = self.map_info.resolution
+
+            self.column = int((x_r - origin_x) / resolution)
+            self.row = int((y_r - origin_y) / resolution)
+
+            frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
+
+            print("Frontiers ", frontiers_middle)
+            # print("Updated map",updated_map)
+
+            # Log the number of free cells after update
+            # num_free_after = np.count_nonzero(updated_map == 0)
+            # self.get_logger().info(f"Number of free cells after update: {num_free_after}")
+
+            # Publish the updated map
+            updated_occupancy_grid = OccupancyGrid()
+            updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
+            updated_occupancy_grid.header.frame_id = "map"
+            updated_occupancy_grid.info = self.map_info
+            updated_occupancy_grid.data = updated_map.flatten().tolist()
+            self.map_pub.publish(updated_occupancy_grid)
+
+
+    def exploration(self, data, width, height, resolution, column, row, originX, originY):
+        data = self.costmap(data, width, height, resolution)  # Expand barriers
+        data[row][column] = 0  # Robot's current location
+        data[data > 5] = 1  # Set obstacles
+        data = self.frontierB(data)  # Find frontier points
+        data, groups = self.assign_groups(data)  # Group frontier points
+
+        # Filter out small groups
+        filtered_groups = {gid: points for gid, points in groups.items() if len(points) >= self.min_group_size}
+
+        # Calculate centroids for all valid groups
+        centroids = {}
+
+        for group_id, points in filtered_groups.items():
+            centroid = self.calculate_centroid(points)
+            centroids[group_id] = centroid
+
+        # Publish the frontier markers
+        self.publish_frontier_markers(filtered_groups, resolution, originX, originY)
+
+        # Publish the centroid markers (spheres)
+        # self.publish_centroid_markers(centroids, resolution, originX, originY)
+
+        # # Publish the centroids to a topic
+        # self.publish_centroids(centroids, resolution, originX, originY)
+
+        return centroids
+    
+    def costmap(self, data, width, height, resolution):
+        data = np.array(data).reshape(height, width)
+        wall = np.where(data == 100)
+        for i in range(-self.expansion_size, self.expansion_size + 1):
+            for j in range(-self.expansion_size, self.expansion_size + 1):
+                if i == 0 and j == 0:
+                    continue
+                x = wall[0] + i
+                y = wall[1] + j
+                x = np.clip(x, 0, height - 1)
+                y = np.clip(y, 0, width - 1)
+                data[x, y] = 100
+        data = data * resolution
+        return data
+
+    def frontierB(self, matrix):
+        for i in range(len(matrix)):
+            for j in range(len(matrix[i])):
+                if matrix[i][j] == 0.0:
+                    if i > 0 and matrix[i - 1][j] < 0:
+                        matrix[i][j] = 2
+                    elif i < len(matrix) - 1 and matrix[i + 1][j] < 0:
+                        matrix[i][j] = 2
+                    elif j > 0 and matrix[i][j - 1] < 0:
+                        matrix[i][j] = 2
+                    elif j < len(matrix[i]) - 1 and matrix[i][j + 1] < 0:
+                        matrix[i][j] = 2
+        return matrix
+
+    def assign_groups(self, matrix):
+        group = 1
+        groups = {}
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == 2:
+                    group = self.dfs_iterative(matrix, i, j, group, groups)
+        return matrix, groups      
+    
+
+    def dfs_iterative(self, matrix, i, j, group, groups):
+        stack = [(i, j)]
+        while stack:
+            i, j = stack.pop()
+            if i < 0 or i >= len(matrix) or j < 0 or j >= len(matrix[0]):
+                continue
+            if matrix[i][j] != 2:
+                continue
+            if group in groups:
+                groups[group].append((i, j))
+            else:
+                groups[group] = [(i, j)]
+            matrix[i][j] = 0  # Mark as visited
+            # Add neighboring cells to the stack
+            stack.extend([
+                (i + 1, j),
+                (i - 1, j),
+                (i, j + 1),
+                (i, j - 1),
+                (i + 1, j + 1),
+                (i - 1, j - 1),
+                (i - 1, j + 1),
+                (i + 1, j - 1),
+            ])
+        return group + 1
+    
+
+    def calculate_centroid(self, points):
+        """Calculate the centroid (middle point) of a list of points."""
+        if not points:
+            return None
+        x_coords = [p[0] for p in points]
+        y_coords = [p[1] for p in points]
+        mean_x = sum(x_coords) / len(points)
+        mean_y = sum(y_coords) / len(points)
+        return (int(mean_x), int(mean_y))
 
 
     def get_ray_distance_bresenham(self,robot_x, robot_y, angle, max_range,reachable):
@@ -227,6 +356,9 @@ class MultiLocationMarkerNode(Node):
         map_x1 = int((x_end   - origin_x) / resolution)
         map_y1 = int((y_end   - origin_y) / resolution)
 
+
+   
+
         # 3) Run Bresenham
         line_cells = self.bresenham_line(map_x0, map_y0, map_x1, map_y1)
 
@@ -235,9 +367,24 @@ class MultiLocationMarkerNode(Node):
         for map_x, map_y in line_cells:
             # Ensure map_x and map_y are within the grid boundaries
             if 0 <= map_x < self.map_info.width and 0 <= map_y < self.map_info.height:
-                reachable[map_y, map_x] = True
-            else:
-                self.get_logger().debug(f"Computed cell ({map_x}, {map_y}) is out of bounds.")
+
+                cell_value = self.map_data[map_y, map_x]
+                # If the cell is occupied (e.g., 100 or >= 50) or unknown (-1),
+                # stop the ray right here, so it doesn't go beyond.
+                if cell_value == 100:
+                    # Optional: you might also treat -1 as blocking:
+                    # if cell_value == 100 or cell_value == -1:
+                    break
+                
+                # Mark as reachable if it's free (0)
+                if cell_value == 0:
+                    reachable[map_y, map_x] = True
+
+
+
+            #     reachable[map_y, map_x] = True
+            # else:
+            #     self.get_logger().debug(f"Computed cell ({map_x}, {map_y}) is out of bounds.")
 
 
         return reachable
@@ -387,6 +534,54 @@ class MultiLocationMarkerNode(Node):
             marker_array.markers.append(marker)
 
         self.marker_array_pub.publish(marker_array)
+
+
+    def publish_frontier_markers(self, groups, resolution, originX, originY):
+        marker_array = MarkerArray()
+        marker_id = 0
+
+        # Clear previous markers
+        delete_marker = Marker()
+        delete_marker.action = Marker.DELETEALL
+        marker_array.markers.append(delete_marker)
+
+        for group_id, points in groups.items():
+            marker = Marker()
+            marker.header.frame_id = "map"
+            marker.header.stamp = self.get_clock().now().to_msg()
+            marker.ns = "frontiers"
+            marker.id = marker_id
+            marker.type = Marker.POINTS
+            marker.action = Marker.ADD
+            marker.pose.orientation.w = 1.0
+
+            # Set the scale of the marker
+            marker.scale.x = resolution * 1.5  # Adjust as needed
+            marker.scale.y = resolution * 1.5  # Adjust as needed
+
+            # Set a unique color for each group
+            color = self.get_color(group_id)
+            marker.color.r = color[0]
+            marker.color.g = color[1]
+            marker.color.b = color[2]
+            marker.color.a = 1.0
+
+            # Add the points to the marker
+            for (i, j) in points:
+                x = originX + j * resolution
+                y = originY + i * resolution
+
+                point = Point()
+                point.x = x
+                point.y = y
+                point.z = 0.0
+                marker.points.append(point)
+
+            marker_array.markers.append(marker)
+            marker_id += 1
+
+        # Publish the markers
+        self.frontier_pub.publish(marker_array)
 
 
 def main(args=None):
