@@ -14,6 +14,7 @@ from scipy.spatial.transform import Rotation as R
 import tf2_ros
 import tf2_geometry_msgs
 from geometry_msgs.msg import PointStamped
+import math
 
 
 # The different ArUco dictionaries built into the OpenCV library. 
@@ -126,8 +127,6 @@ class arcuo_marker_detection(Node): # Node class
 
                 self.get_logger().info(f'Publishing {marker_id}')
    
-      
-
                 # Create the coordinate transform in the camera frame
                 t = TransformStamped()
                 t.header.stamp = self.get_clock().now().to_msg()
@@ -178,8 +177,28 @@ class arcuo_marker_detection(Node): # Node class
                 # Perform the transformation to the robot's frame
                 marker_in_robot_frame = tf2_geometry_msgs.do_transform_point(point_in_camera_frame, transform)
 
+                # Extract x,y,z in robot/base frame
+                x_robot = marker_in_robot_frame.point.x
+                y_robot = marker_in_robot_frame.point.y
+                z_robot = marker_in_robot_frame.point.z
+
+                # # ========== COMPUTE DISTANCE AND ANGLE ==========
+                # # 2D distance in the robot's XY-plane
+                # distance = math.sqrt(x_robot**2 + y_robot**2)
+
+                # # Angle (yaw) around Z, in degrees (optional: in radians)
+                # # If you only care about angle in the horizontal plane:
+                # angle = math.degrees(math.atan2(y_robot, x_robot))
+
+                # # Log or publish the distance and angle
+                # self.get_logger().info(
+                #     f"Marker {marker_id} in robot frame => "
+                #     f"x={x_robot:.3f}, y={y_robot:.3f}, z={z_robot:.3f} | "
+                #     f"distance={distance:.3f} m, angle={angle:.1f} deg"
+                # )
+
                 # Log the transformed position in the robot's frame
-                self.get_logger().info(f'Marker position in robot frame: x={marker_in_robot_frame.point.x}, y={marker_in_robot_frame.point.y}, z={marker_in_robot_frame.point.z}')
+                # self.get_logger().info(f'Marker position in robot frame: x={marker_in_robot_frame.point.x}, y={marker_in_robot_frame.point.y}, z={marker_in_robot_frame.point.z}')
             
             
 

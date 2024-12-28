@@ -4,12 +4,15 @@ import rclpy
 from rclpy.node import Node
 import math
 import numpy as np
+import heapq , math , random , yaml
 
 from geometry_msgs.msg import PointStamped, PoseArray, Pose, Point
 from tf_transformations import quaternion_from_euler
 from visualization_msgs.msg import Marker, MarkerArray
 from nav_msgs.msg import OccupancyGrid, Odometry
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy, QoSHistoryPolicy
+from active_localization.next_best_view import check_visible_objects_from_centroid_simple
+
 
 class MultiLocationMarkerNode(Node):
     def __init__(self):
@@ -76,11 +79,15 @@ class MultiLocationMarkerNode(Node):
         self.map_info = None
         self.column = None
         self.row = None
-        # self.resolution = None
-        # self.originX = None
-        # self.originY = None
-        # self.width = None
-        # self.height = None
+        self.goal_column = None
+        self.goal_row = None
+        self.global_centroid = []
+
+        self.goal_x = 7.0  # Goal x-coordinate in meters
+        self.goal_y = 0.0  # Goal y-coordinate in meters
+
+
+        
 
         self.get_logger().info('MultiLocationMarkerNode started.')
 
@@ -89,14 +96,17 @@ class MultiLocationMarkerNode(Node):
         self.map_info = msg.info
 
         self.map_data = np.array(msg.data, dtype=np.int8).reshape((self.map_info.height, self.map_info.width))
+        
 
         # Ensure self.x and self.y are defined
         if not hasattr(self, 'x') or not hasattr(self, 'y'):
             self.get_logger().warn('Robot position not yet received.')
             return
 
-        self.column = int((self.x - self.originX) / self.resolution)
-        self.row = int((self.y - self.originY) / self.resolution)
+        # self.column = int((self.x - self.originX) / self.resolution)
+        # self.row = int((self.y - self.originY) / self.resolution)
+
+
 
     def get_color(self, group_id):
         # Generate colors based on group_id
@@ -135,6 +145,8 @@ class MultiLocationMarkerNode(Node):
         # Retrieve the list of known marker positions/orientations in the map
         marker_locations = self.marker_map[marker_id]
         new_hypotheses = []
+        # Filter hypotheses based on the frontier condition
+        filtered_hypotheses = []
 
         for (x_m, y_m, theta_m) in marker_locations:
             # Robot orientation in map
@@ -156,11 +168,11 @@ class MultiLocationMarkerNode(Node):
                 f"x={x_r:.2f}, y={y_r:.2f}, theta={theta_r:.2f}"
             )
 
-        # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
-        self.publish_pose_array(new_hypotheses)
+        # # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+        # self.publish_pose_array(new_hypotheses)
 
-        # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
-        self.publish_square_markers(new_hypotheses)
+        # # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+        # self.publish_square_markers(new_hypotheses)
 
         num_beams = 16000
         angle_increment = 0.0003927233046852052
@@ -208,9 +220,115 @@ class MultiLocationMarkerNode(Node):
             self.column = int((x_r - origin_x) / resolution)
             self.row = int((y_r - origin_y) / resolution)
 
+            # Convert goal position to grid indices
+            self.goal_column = int((self.goal_x - origin_x) / resolution)
+            self.goal_row = int((self.goal_y - origin_y) / resolution)
+            self.goal_indices = (self.goal_row, self.goal_column)
+
             frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
 
             print("Frontiers ", frontiers_middle)
+
+            ######################
+
+            # Initialize variables to store the best centroid
+            shortest_path_length = float('inf')
+            best_centroid = None
+            best_path = None
+
+            centroids_info = []
+
+
+            orginal_scan_centroids = 3
+          
+            for frontier_id, (centroid_x, centroid_y) in frontiers_middle.items():
+
+                # print("Length of frontiers",len(frontiers_middle))
+
+                if orginal_scan_centroids == len(frontiers_middle):
+
+                    filtered_hypotheses.append((x_r, y_r, theta_r))
+
+                    # Update the hypotheses with the filtered list
+                    new_hypotheses = filtered_hypotheses
+
+                    centroid_column = int((centroid_x - origin_x) / resolution)
+                    centroid_row = int((centroid_y - origin_y) / resolution)
+                    centroid_indices = (centroid_row, centroid_column)
+
+                    # Compute the path from centroid to goal
+                    path = self.astar(self.map_data, centroid_indices, self.goal_indices)
+
+                    # Calculate visible objects from this centroid
+                    visible_objects = check_visible_objects_from_centroid_simple(centroid_x, centroid_y)
+                    num_visible_objects = len(visible_objects)
+
+                    if path:
+                        path_length = len(path) * resolution
+                        self.get_logger().info(f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}")
+
+                    
+                        # Store information for utility calculation
+                        centroids_info.append({
+                            'centroid_x': centroid_x,
+                            'centroid_y': centroid_y,
+                            'path': path,
+                            'path_length': path_length,
+                            'visible_objects': visible_objects,
+                            'num_visible_objects': num_visible_objects,
+                            'centroid_indices': centroid_indices
+                        })
+                    else:
+                        self.get_logger().warn(f"No path found from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal.")
+
+                
+
+            # Weights for utility calculation
+            weight_info_gain = 1.0
+            weight_path_length = 1.0
+
+            # Initialize variables to store the best centroid based on utility
+            best_centroid_info = None
+            highest_utility = -float('inf')
+
+            # Calculate utility for each centroid
+            for info in centroids_info:
+                information_gain = info['num_visible_objects']
+                path_length = info['path_length']
+
+                # Compute utility
+                utility_value = (weight_info_gain * information_gain) - (weight_path_length * path_length)
+
+                # Store utility in the info dictionary
+                info['utility'] = utility_value
+
+                self.get_logger().info(f"Centroid at ({info['centroid_x']:.2f}, {info['centroid_y']:.2f}): Utility = {utility_value:.2f}")
+
+                # Determine if this centroid has the highest utility so far
+                if utility_value > highest_utility:
+                    highest_utility = utility_value
+                    best_centroid_info = info
+
+
+            if best_centroid_info is not None:
+                self.get_logger().info(f"Best centroid is at ({best_centroid_info['centroid_x']:.2f}, {best_centroid_info['centroid_y']:.2f}) with utility {best_centroid_info['utility']:.2f}")
+                
+                # Compute path from robot to best centroid
+                best_centroid_indices = best_centroid_info['centroid_indices']
+
+                self.global_centroid.append(best_centroid_indices)
+                
+                # path_robot_to_centroid = self.astar(self.map_data, robot_indices, best_centroid_indices)
+
+
+            print("GLobal centroids", self.global_centroid)
+ #####################################
+            # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+            self.publish_pose_array(new_hypotheses)
+
+            # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+            self.publish_square_markers(new_hypotheses)
+
             # print("Updated map",updated_map)
 
             # Log the number of free cells after update
@@ -242,6 +360,7 @@ class MultiLocationMarkerNode(Node):
         for group_id, points in filtered_groups.items():
             centroid = self.calculate_centroid(points)
             centroids[group_id] = centroid
+
 
         # Publish the frontier markers
         self.publish_frontier_markers(filtered_groups, resolution, originX, originY)
@@ -329,7 +448,67 @@ class MultiLocationMarkerNode(Node):
         mean_x = sum(x_coords) / len(points)
         mean_y = sum(y_coords) / len(points)
         return (int(mean_x), int(mean_y))
+    
+    def astar(self,array, start, goal):
+        neighbors = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1)]
+        close_set = set()
+        came_from = {}
+        gscore = {start:0}
+        fscore = {start:self.heuristic(start, goal)}
+        oheap = []
+        heapq.heappush(oheap, (fscore[start], start))
+        while oheap:
+            current = heapq.heappop(oheap)[1]
+            if current == goal:
+                data = []
+                while current in came_from:
+                    data.append(current)
+                    current = came_from[current]
+                data = data + [start]
+                data = data[::-1]
+                return data
+            close_set.add(current)
+            for i, j in neighbors:
+                neighbor = current[0] + i, current[1] + j
+                tentative_g_score = gscore[current] + self.heuristic(current, neighbor)
+                if 0 <= neighbor[0] < array.shape[0]:
+                    if 0 <= neighbor[1] < array.shape[1]:                
+                        if array[neighbor[0]][neighbor[1]] == 1:
+                            continue
+                    else:
+                        # array bound y walls
+                        continue
+                else:
+                    # array bound x walls
+                    continue
+                if neighbor in close_set and tentative_g_score >= gscore.get(neighbor, 0):
+                    continue
+                if  tentative_g_score < gscore.get(neighbor, 0) or neighbor not in [i[1]for i in oheap]:
+                    came_from[neighbor] = current
+                    gscore[neighbor] = tentative_g_score
+                    fscore[neighbor] = tentative_g_score + self.heuristic(neighbor, goal)
+                    heapq.heappush(oheap, (fscore[neighbor], neighbor))
+        # If no path to goal was found, return closest path to goal
+        if goal not in came_from:
+            closest_node = None
+            closest_dist = float('inf')
+            for node in close_set:
+                dist = self.heuristic(node, goal)
+                if dist < closest_dist:
+                    closest_node = node
+                    closest_dist = dist
+            if closest_node is not None:
+                data = []
+                while closest_node in came_from:
+                    data.append(closest_node)
+                    closest_node = came_from[closest_node]
+                data = data + [start]
+                data = data[::-1]
+                return data
+        return False
 
+    def heuristic(self,a, b):
+        return np.sqrt((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2)
 
     def get_ray_distance_bresenham(self,robot_x, robot_y, angle, max_range,reachable):
         """
@@ -381,36 +560,9 @@ class MultiLocationMarkerNode(Node):
                     reachable[map_y, map_x] = True
 
 
-
-            #     reachable[map_y, map_x] = True
-            # else:
-            #     self.get_logger().debug(f"Computed cell ({map_x}, {map_y}) is out of bounds.")
-
-
         return reachable
         
-        # # 4) Traverse cells
-        # for (cx, cy) in line_cells:
-        #     # Check if (cx, cy) is within map bounds
-        #     if (cx < 0 or cx >= map_info.width or cy < 0 or cy >= map_info.height):
-        #         # we've left the map; means no obstacle found within the map
-        #         # => distance = max_range
-        #         return max_range
-            
-        #     # Check occupancy
-        #     if occupancy_grid[cy][cx] == 1:  # or > 50 for probability
-        #         # obstacle found
-        #         # compute distance from (robot_x, robot_y) to center of (cx, cy)
-        #         # or optionally to the boundary
-        #         obstacle_world_x = origin_x + (cx + 0.5) * resolution
-        #         obstacle_world_y = origin_y + (cy + 0.5) * resolution
 
-        #         dist = math.sqrt((obstacle_world_x - robot_x)**2 + 
-        #                         (obstacle_world_y - robot_y)**2)
-        #         return min(dist, max_range)
-        
-        # # If we never found an obstacle in the entire line, then distance = max_range
-        # return max_range
 
 
 
