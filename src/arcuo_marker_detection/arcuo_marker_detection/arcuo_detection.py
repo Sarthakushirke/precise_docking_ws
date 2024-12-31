@@ -130,7 +130,7 @@ class arcuo_marker_detection(Node): # Node class
                 # Create the coordinate transform in the camera frame
                 t = TransformStamped()
                 t.header.stamp = self.get_clock().now().to_msg()
-                t.header.frame_id = 'camera_link'
+                t.header.frame_id = 'diff_drive/cam_link/camera1'
                 t.child_frame_id = self.aruco_marker_name
             
                 # Store the translation (i.e. position) information
@@ -155,6 +155,16 @@ class arcuo_marker_detection(Node): # Node class
                 # self.get_logger().info(f'Rotation Vector {i}: x={quat[0]}, y={quat[1]}, z={quat[2]}, w={quat[3]}')
 
 
+                # origin_x = -9.07
+                # origin_y = -9.08
+                # resolution = 0.05
+                # centroid_column = int((t.transform.translation.x - origin_x) / resolution)
+                # centroid_row = int((t.transform.translation.y - origin_y) / resolution)
+
+                # x_coordinate = centroid_column * resolution + origin_x
+                # y_coordinate = centroid_row * resolution + origin_y
+
+                # print(x_coordinate, y_coordinate)
                 # Send the transform
                 # self.tfbroadcaster.sendTransform(t)    
                 
@@ -162,12 +172,12 @@ class arcuo_marker_detection(Node): # Node class
             # Transform to robot base frame using TF lookup
             try:
                 # Lookup the transformation between 'diff_drive/lidar_link' and 'camera_link'
-                transform = self.tf_buffer.lookup_transform('map', 'camera_link', rclpy.time.Time())
+                transform = self.tf_buffer.lookup_transform('map', 'diff_drive/cam_link/camera1', rclpy.time.Time())
                 
                 # Create a PointStamped message to hold the marker position in the camera frame
                 point_in_camera_frame = PointStamped()
                 point_in_camera_frame.header.stamp = self.get_clock().now().to_msg()
-                point_in_camera_frame.header.frame_id = 'camera_link'
+                point_in_camera_frame.header.frame_id = 'diff_drive/cam_link/camera1'
                 
                 # Set the marker's position in the camera frame
                 point_in_camera_frame.point.x = t.transform.translation.x
@@ -198,7 +208,7 @@ class arcuo_marker_detection(Node): # Node class
                 # )
 
                 # Log the transformed position in the robot's frame
-                # self.get_logger().info(f'Marker position in robot frame: x={marker_in_robot_frame.point.x}, y={marker_in_robot_frame.point.y}, z={marker_in_robot_frame.point.z}')
+                self.get_logger().info(f'Marker position in robot frame: x={marker_in_robot_frame.point.x}, y={marker_in_robot_frame.point.y}, z={marker_in_robot_frame.point.z}')
             
             
 

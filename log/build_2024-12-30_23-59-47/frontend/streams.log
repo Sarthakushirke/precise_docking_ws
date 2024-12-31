@@ -1,0 +1,13 @@
+[0.031s] Invoking command in '/home/sarthak/precise_docking_ws/build/frontend': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20
+[0.134s] [ 50%] Built target cpp_executable
+[0.142s] [ 50%] Built target ament_cmake_python_copy_frontend
+[0.153s] [100%] Built target icp_node
+[0.541s] running egg_info
+[0.571s] writing frontend.egg-info/PKG-INFO
+[0.572s] writing dependency_links to frontend.egg-info/dependency_links.txt
+[0.572s] writing top-level names to frontend.egg-info/top_level.txt
+[1.536s] interrupted
+[1.651s] gmake[2]: *** [CMakeFiles/ament_cmake_python_build_frontend_egg.dir/build.make:70: CMakeFiles/ament_cmake_python_build_frontend_egg] Interrupt
+[1.651s] gmake[1]: *** [CMakeFiles/Makefile2:220: CMakeFiles/ament_cmake_python_build_frontend_egg.dir/all] Interrupt
+[1.652s] gmake: *** [Makefile:146: all] Interrupt
+[1.657s] Invoked command in '/home/sarthak/precise_docking_ws/build/frontend' returned '-2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/frontend -- -j20 -l20

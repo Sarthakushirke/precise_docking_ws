@@ -5,14 +5,22 @@ from rclpy.node import Node
 import math
 import numpy as np
 import heapq , math , random , yaml
+import time
 
-from geometry_msgs.msg import PointStamped, PoseArray, Pose, Point
+from threading import Thread
+from geometry_msgs.msg import PointStamped, PoseArray, Pose, Point, Twist
 from tf_transformations import quaternion_from_euler
 from visualization_msgs.msg import Marker, MarkerArray
 from nav_msgs.msg import OccupancyGrid, Odometry
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy, QoSHistoryPolicy
 from active_localization.next_best_view import check_visible_objects_from_centroid_simple
+from sensor_msgs.msg import LaserScan
 
+
+speed = 0.2  # Linear speed (m/s)
+lookahead_distance = 0.5  # Lookahead distance for pure pursuit (meters)
+robot_r = 0.5  # Robot radius for obstacle detection (meters)
+target_error = 0.1  # Acceptable error to consider goal reached (meters)
 
 class MultiLocationMarkerNode(Node):
     def __init__(self):
@@ -27,6 +35,13 @@ class MultiLocationMarkerNode(Node):
             ],
         }
 
+        self.hypothesis_weights = {}
+        for marker_id, poses_list in self.marker_map.items():
+            n_hypotheses = len(poses_list)
+            prior = 1.0 / n_hypotheses
+            self.hypothesis_weights[marker_id] = [prior] * n_hypotheses
+
+            
         # Subscribe to a topic that just gives a PointStamped in the robot frame
         self.marker_sub = self.create_subscription(
             PointStamped,
@@ -50,7 +65,25 @@ class MultiLocationMarkerNode(Node):
             self.map_callback,
             qos_profile)
         
+        # Odometry subscription (uses default QoS)
+        self.odom_sub = self.create_subscription(
+            Odometry,
+            '/odom',
+            self.odom_callback,
+            10)
+        self.get_logger().info('Subscribed to /odom topic')
+        
+        self.lidar_sub = self.create_subscription(LaserScan, '/scan', self.lidar_callback, 10)
+        self.get_logger().info('Subscribed to /scan topic')
+        
         self.map_pub = self.create_publisher(OccupancyGrid, '/hypothesis_map', 10)
+
+        self.velocity_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.get_logger().info('Publishing velocity commands on /cmd_vel')
+
+        # Publisher for the path marker
+        self.path_pub = self.create_publisher(Marker, '/path_marker', 10)
+        self.get_logger().info('Publishing path markers on /path_marker')
 
         # Store current hypotheses (marker_id => list of (x_r, y_r, theta_r))
         self.hypotheses_dict = {}
@@ -82,12 +115,20 @@ class MultiLocationMarkerNode(Node):
         self.goal_column = None
         self.goal_row = None
         self.global_centroid = []
+        self.all_frontiers_info = {}  # dict of i -> list of frontier dicts
 
         self.goal_x = 7.0  # Goal x-coordinate in meters
         self.goal_y = 0.0  # Goal y-coordinate in meters
 
+        self.path = None  # Path to follow
+        self.control_thread = None  # Thread for control loop
+        self.control_active = False  # Flag to control the thread
+        self.i = 0  # Index for pure pursuit
+        self.scan_data = None  # Latest laser scan data
 
-        
+        # Initialize robot position attributes
+        self.x = None
+        self.y = None
 
         self.get_logger().info('MultiLocationMarkerNode started.')
 
@@ -122,6 +163,10 @@ class MultiLocationMarkerNode(Node):
 
         if self.map_data is None:
             self.get_logger().warn('Map data not available yet')
+            return
+        
+        if self.x is None or self.y is None:
+            self.get_logger().warn("Robot position not yet received.")
             return
 
         # Hardcode the marker ID in this example
@@ -162,11 +207,11 @@ class MultiLocationMarkerNode(Node):
         self.hypotheses_dict[marker_id] = new_hypotheses
 
         # Log them
-        for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
-            self.get_logger().info(
-                f"Marker {marker_id} - Hypothesis #{i}: "
-                f"x={x_r:.2f}, y={y_r:.2f}, theta={theta_r:.2f}"
-            )
+        # for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
+        #     self.get_logger().info(
+        #         f"Marker {marker_id} - Hypothesis #{i}: "
+        #         f"x={x_r:.2f}, y={y_r:.2f}, theta={theta_r:.2f}"
+        #     )
 
         # # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
         # self.publish_pose_array(new_hypotheses)
@@ -181,8 +226,11 @@ class MultiLocationMarkerNode(Node):
         max_range = 10
 
         # reachable = np.zeros_like(self.map_data, dtype=bool)
+        self.all_frontiers_info = {}
 
-        for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
+        for h, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
+
+            print(h)
 
             # Re-init arrays for each hypothesis
             reachable = np.zeros_like(self.map_data, dtype=bool)
@@ -265,83 +313,340 @@ class MultiLocationMarkerNode(Node):
 
                     if path:
                         path_length = len(path) * resolution
-                        self.get_logger().info(f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}")
+                        
 
-                    
+                        # Weights for utility calculation
+                        weight_info_gain = 1.0
+                        weight_path_length = 1.0
+
+                        # Compute utility
+                        utility_value = (weight_info_gain * num_visible_objects) - (weight_path_length * path_length)
+
+                        self.get_logger().info(
+                            f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}, "
+                            f"utility is {utility_value:.2f}")
+
                         # Store information for utility calculation
                         centroids_info.append({
                             'centroid_x': centroid_x,
                             'centroid_y': centroid_y,
                             'path': path,
                             'path_length': path_length,
-                            'visible_objects': visible_objects,
+                            'utility': utility_value,
                             'num_visible_objects': num_visible_objects,
                             'centroid_indices': centroid_indices
                         })
                     else:
                         self.get_logger().warn(f"No path found from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal.")
 
-                
-
-            # Weights for utility calculation
-            weight_info_gain = 1.0
-            weight_path_length = 1.0
-
-            # Initialize variables to store the best centroid based on utility
-            best_centroid_info = None
-            highest_utility = -float('inf')
-
-            # Calculate utility for each centroid
-            for info in centroids_info:
-                information_gain = info['num_visible_objects']
-                path_length = info['path_length']
-
-                # Compute utility
-                utility_value = (weight_info_gain * information_gain) - (weight_path_length * path_length)
-
-                # Store utility in the info dictionary
-                info['utility'] = utility_value
-
-                self.get_logger().info(f"Centroid at ({info['centroid_x']:.2f}, {info['centroid_y']:.2f}): Utility = {utility_value:.2f}")
-
-                # Determine if this centroid has the highest utility so far
-                if utility_value > highest_utility:
-                    highest_utility = utility_value
-                    best_centroid_info = info
+            # store list of frontiers for hypothesis i
+            self.all_frontiers_info[h] = centroids_info  
 
 
-            if best_centroid_info is not None:
-                self.get_logger().info(f"Best centroid is at ({best_centroid_info['centroid_x']:.2f}, {best_centroid_info['centroid_y']:.2f}) with utility {best_centroid_info['utility']:.2f}")
-                
-                # Compute path from robot to best centroid
-                best_centroid_indices = best_centroid_info['centroid_indices']
+        #Pick one hypothesis and one path (TO DO) #OUTPUT: 1 hypothses which might not be the real one and the path to that 
+        # hypotheses best centroid.
+        # AFTER processing all hypotheses, pick best overall
+        best_global_utility = -float('inf')
+        best_global_hypothesis = None
+        best_global_frontier_info = None
 
-                self.global_centroid.append(best_centroid_indices)
-                
-                # path_robot_to_centroid = self.astar(self.map_data, robot_indices, best_centroid_indices)
+        for hyp_idx, flist in self.all_frontiers_info.items():
+            for f_info in flist:
+                if f_info['utility'] > best_global_utility:
+                    best_global_utility = f_info['utility']
+                    best_global_hypothesis = hyp_idx
+                    best_global_frontier_info = f_info
+
+        if best_global_frontier_info:
+            # We have the best frontier and which hypothesis it belongs to
+            self.get_logger().info(
+                f"BEST => Hyp #{best_global_hypothesis}, frontier=({best_global_frontier_info['centroid_x']:.2f}, "
+                f"{best_global_frontier_info['centroid_y']:.2f}) utility={best_global_utility:.2f}"
+            )
+
+        best_global_frontier_column = 196.00
+        # ?best_global_frontier_info['centroid_x'] 
+        best_global_frontier_row = 149.00
+        # best_global_frontier_info['centroid_y'] 
+
+        # best_global_frontier_column = int((best_global_frontier_info['centroid_x'] - origin_x) / resolution)
+        # best_global_frontier_row = int((best_global_frontier_info['centroid_y'] - origin_y) / resolution)
+        best_global_frontier_indices = (best_global_frontier_row, best_global_frontier_column)
 
 
-            print("GLobal centroids", self.global_centroid)
- #####################################
-            # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
-            self.publish_pose_array(new_hypotheses)
+        robot_column = int((self.x - origin_x) / resolution)
+        robot_row = int((self.y - origin_y) / resolution)
+        robot_indices = (robot_row, robot_column) #This should be one of the hypothesis
+        #Also the best_centroid_indices should that particular hypothesis centroid.
 
-            # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
-            self.publish_square_markers(new_hypotheses)
+        path_robot_to_centroid = self.astar(self.map_data, robot_indices, best_global_frontier_indices)
 
-            # print("Updated map",updated_map)
 
-            # Log the number of free cells after update
-            # num_free_after = np.count_nonzero(updated_map == 0)
-            # self.get_logger().info(f"Number of free cells after update: {num_free_after}")
+        if path_robot_to_centroid:
+                # Convert path indices to coordinates
+                self.path = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in path_robot_to_centroid]
+                # Publish the path
+                self.publish_path_marker(self.path)
 
-            # Publish the updated map
-            updated_occupancy_grid = OccupancyGrid()
-            updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
-            updated_occupancy_grid.header.frame_id = "map"
-            updated_occupancy_grid.info = self.map_info
-            updated_occupancy_grid.data = updated_map.flatten().tolist()
-            self.map_pub.publish(updated_occupancy_grid)
+
+
+        #         # Start the control thread
+        #         if not self.control_active:
+        #             self.control_active = True
+        #             self.control_thread = Thread(target=self.control_loop)
+        #             self.control_thread.start()
+
+
+        # else:
+        #     self.get_logger().warn("No path found from robot to best centroid.")
+
+        #####################################
+        # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+        self.publish_pose_array(new_hypotheses)
+
+        # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+        self.publish_square_markers(new_hypotheses)
+
+        # print("Updated map",updated_map)
+
+        # Log the number of free cells after update
+        # num_free_after = np.count_nonzero(updated_map == 0)
+        # self.get_logger().info(f"Number of free cells after update: {num_free_after}")
+
+        # Publish the updated map
+        updated_occupancy_grid = OccupancyGrid()
+        updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
+        updated_occupancy_grid.header.frame_id = "map"
+        updated_occupancy_grid.info = self.map_info
+        updated_occupancy_grid.data = updated_map.flatten().tolist()
+        self.map_pub.publish(updated_occupancy_grid)
+
+    def odom_callback(self,msg):
+        self.odom_data = msg
+        self.x = msg.pose.pose.position.x
+        self.y = msg.pose.pose.position.y
+
+
+    def publish_path_marker(self, path_coords):
+        marker = Marker()
+        marker.header.frame_id = "map"
+        marker.header.stamp = self.get_clock().now().to_msg()
+        marker.ns = "path"
+        marker.id = 0
+        marker.type = Marker.LINE_STRIP
+        marker.action = Marker.ADD
+
+        # Set the scale of the marker
+        marker.scale.x = 0.05  # Line thickness
+
+        # Set the color of the marker
+        marker.color.r = 0.0
+        marker.color.g = 1.0
+        marker.color.b = 0.0
+        marker.color.a = 1.0
+
+        # Add the path points to the marker
+        for x, y in path_coords:
+            point = Point()
+            point.x = x
+            point.y = y
+            point.z = 0.0
+            marker.points.append(point)
+
+        # Publish the marker
+        self.path_pub.publish(marker)
+        self.get_logger().info("Path marker published!")
+
+
+    def control_loop(self):
+        self.get_logger().info("Control loop started.")
+        twist = Twist()
+        dt = 0.1  # your loop rate is time.sleep(0.1)
+        while self.control_active:
+            v, w = self.local_control()
+            if v is None:
+                v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, self.path, self.i)
+            # Check if goal is reached
+            if self.i >= len(self.path) - 1 and self.distance_to_point(self.x, self.y, self.path[-1][0], self.path[-1][1]) < target_error:
+                v = 0.0
+                w = 0.0
+                self.control_active = False
+                self.get_logger().info("Goal reached.")
+            twist.linear.x = v
+            twist.angular.z = w
+            self.velocity_pub.publish(twist)
+
+            # -- APPLY THE SAME MOTION TO YOUR HYPOTHESES --
+            # self.apply_motion_to_hypotheses(v, w, dt)
+
+            # Suppose we detect marker_id=0, we compute a likelihood for each hypothesis i
+            likelihoods = self.compute_likelihood()
+
+            # Multiply old weight by likelihood
+            # updated_weights = []
+            # for i in range(len(self.marker_map[0])):
+            #     old_w = self.hypothesis_weights[0][i]
+            #     new_w = old_w * likelihoods[i]
+            #     updated_weights.append(new_w)
+
+            # # Normalize
+            # w_sum = sum(updated_weights)
+            # if w_sum > 1e-9:
+            #     updated_weights = [w / w_sum for w in updated_weights]
+
+            # # Store them back
+            # self.hypothesis_weights[0] = updated_weights
+
+            time.sleep(0.1)  # Control loop rate (10 Hz)
+        self.get_logger().info("Control loop ended.")
+
+
+    def apply_motion_to_hypotheses(self, v, w, dt):
+        """
+        Apply the same (v, w) motion to each hypothesis for time dt.
+        """
+        new_hypotheses = []
+        for (pose, weight) in self.hypotheses:
+            x, y, theta = pose
+
+            # Compute new pose with simple 2D kinematics
+            x_new = x + v * math.cos(theta) * dt
+            y_new = y + v * math.sin(theta) * dt
+            theta_new = theta + w * dt
+
+            # Optionally wrap theta to [-pi, pi] or [0, 2*pi]
+            theta_new = (theta_new + math.pi) % (2*math.pi) - math.pi
+
+            new_hypotheses.append(((x_new, y_new, theta_new), weight))
+
+        # Update self.hypotheses in place
+        self.hypotheses = new_hypotheses
+
+
+
+    def local_control(self):
+        v = None
+        w = None
+        if self.scan_data is None:
+            return v, w  # No scan data available
+        # Convert LaserScan ranges to numpy array
+        scan_ranges = np.array(self.scan_data.ranges)
+        # Check front area for obstacles
+        front_angles = np.concatenate((scan_ranges[:30], scan_ranges[-30:]))  # Front 60 degrees
+        if np.any(front_angles < robot_r):
+            v = 0.0
+            w = -math.pi / 4
+        else:
+            # Check right side
+            right_angles = scan_ranges[300:360]  # Right 60 degrees
+            if np.any(right_angles < robot_r):
+                v = 0.0
+                w = math.pi / 4
+        return v, w
+    
+
+    def pure_pursuit(self, current_x, current_y, current_heading, path, index):
+        closest_point = None
+        v = speed
+        for i in range(index, len(path)):
+            x = path[i][0]
+            y = path[i][1]
+            distance = self.distance_to_point(current_x, current_y, x, y)
+            if distance >= lookahead_distance:
+                closest_point = (x, y)
+                index = i
+                break
+        if closest_point is not None:
+            target_heading = math.atan2(closest_point[1] - current_y, closest_point[0] - current_x)
+        else:
+            target_heading = math.atan2(path[-1][1] - current_y, path[-1][0] - current_x)
+            index = len(path) - 1
+        desired_steering_angle = target_heading - current_heading
+        desired_steering_angle = (desired_steering_angle + math.pi) % (2 * math.pi) - math.pi  # Normalize to [-pi, pi]
+        # Limit the steering angle
+        if abs(desired_steering_angle) > math.pi / 6:
+            v = 0.0
+            desired_steering_angle = math.copysign(math.pi / 6, desired_steering_angle)
+        return v, desired_steering_angle, index
+    
+    def distance_to_point(self, x1, y1, x2, y2):
+        return math.hypot(x2 - x1, y2 - y1)
+    
+    def lidar_callback(self, msg):
+        self.scan_data = msg
+        self.scan = msg.ranges
+
+    def compute_likelihood(self,
+        distance_measured: float,
+        orientation_measured: float,
+        distance_expected: float,
+        orientation_expected: float,
+        sigma_distance: float,
+        sigma_orientation: float
+    ) -> float:
+        """
+        Computes the likelihood of a measurement given the predicted measurement
+        using a simple Gaussian sensor model in distance and orientation.
+        
+        :param distance_measured:   The distance observed by the sensor (e.g. from robot to marker)
+        :param orientation_measured:The orientation or bearing observed by the sensor (radians)
+        :param distance_expected:   The distance we expect if this hypothesis is correct
+        :param orientation_expected:The orientation/bearing we expect if this hypothesis is correct
+        :param sigma_distance:      Std dev for distance measurement noise
+        :param sigma_orientation:   Std dev for orientation measurement noise
+        :return: A likelihood value in [0, 1].
+        """
+
+        # 1) Compute errors
+        error_d = distance_measured - distance_expected
+        error_theta = orientation_measured - orientation_expected
+
+        # Optional: wrap orientation error to [-pi, pi]
+        error_theta = (error_theta + math.pi) % (2 * math.pi) - math.pi
+
+        # 2) Compute Gaussian likelihood for distance
+        # L_d = exp(-(error_d^2) / (2*sigma_distance^2))
+        if sigma_distance <= 0:
+            # Avoid division by zero or negative
+            likelihood_distance = 1.0 if abs(error_d) < 1e-9 else 0.0
+        else:
+            likelihood_distance = math.exp(-(error_d**2) / (2.0 * sigma_distance**2))
+
+        # 3) Compute Gaussian likelihood for orientation
+        # L_theta = exp(-(error_theta^2) / (2*sigma_orientation^2))
+        if sigma_orientation <= 0:
+            likelihood_orientation = 1.0 if abs(error_theta) < 1e-9 else 0.0
+        else:
+            likelihood_orientation = math.exp(-(error_theta**2) / (2.0 * sigma_orientation**2))
+
+        # 4) Combine (assuming independence => multiply)
+        L = likelihood_distance * likelihood_orientation
+
+        return L
+
+    def predict_marker_measurement(hyp_pose, marker_pose):
+        """
+        Predict the (distance, bearing) you'd see for 'marker_pose'
+        from the robot's hypothesized pose 'hyp_pose' in a 2D map.
+
+        :param hyp_pose: (x_r, y_r, theta_r)
+        :param marker_pose: (x_m, y_m)
+        :return: (dist_pred, bearing_pred)
+        """
+        x_r, y_r, theta_r = hyp_pose
+        x_m, y_m = marker_pose
+
+        dx = x_m - x_r
+        dy = y_m - y_r
+
+        dist_pred = math.sqrt(dx*dx + dy*dy)
+        angle_global = math.atan2(dy, dx)
+        bearing_pred = angle_global - theta_r
+
+        # Wrap bearing to [-pi, +pi], optional
+        bearing_pred = (bearing_pred + math.pi) % (2*math.pi) - math.pi
+
+        return dist_pred, bearing_pred
 
 
     def exploration(self, data, width, height, resolution, column, row, originX, originY):
@@ -734,6 +1039,7 @@ class MultiLocationMarkerNode(Node):
 
         # Publish the markers
         self.frontier_pub.publish(marker_array)
+
 
 
 def main(args=None):
