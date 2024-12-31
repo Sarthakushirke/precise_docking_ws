@@ -235,8 +235,6 @@ class MultiLocationMarkerNode(Node):
 
         for h, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
 
-            print(h)
-
             # Re-init arrays for each hypothesis
             reachable = np.zeros_like(self.map_data, dtype=bool)
             updated_map = self.map_data.copy()
@@ -406,11 +404,7 @@ class MultiLocationMarkerNode(Node):
         #     self.get_logger().warn("No path found from robot to best centroid.")
 
         #####################################
-        # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
-        self.publish_pose_array(new_hypotheses)
 
-        # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
-        self.publish_square_markers(new_hypotheses)
 
         # print("Updated map",updated_map)
 
@@ -486,7 +480,13 @@ class MultiLocationMarkerNode(Node):
 
 
             # -- APPLY THE SAME MOTION TO YOUR HYPOTHESES --
-            # self.apply_motion_to_hypotheses(v, w, dt)
+            self.hypotheses_dict = self.apply_motion_to_hypotheses(v, w, dt)
+
+            # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+            self.publish_pose_array(self.hypotheses_dict)
+
+            # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+            self.publish_square_markers(self.hypotheses_dict)
 
             # Suppose we detect marker_id=0, we compute a likelihood for each hypothesis i
             # likelihoods = self.compute_likelihood()
@@ -514,23 +514,31 @@ class MultiLocationMarkerNode(Node):
         """
         Apply the same (v, w) motion to each hypothesis for time dt.
         """
-        new_hypotheses = []
-        for (pose, weight) in self.hypotheses:
-            x, y, theta = pose
 
-            # Compute new pose with simple 2D kinematics
-            x_new = x + v * math.cos(theta) * dt
-            y_new = y + v * math.sin(theta) * dt
-            theta_new = theta + w * dt
+        new_hypotheses_dict = {}
 
-            # Optionally wrap theta to [-pi, pi] or [0, 2*pi]
-            theta_new = (theta_new + math.pi) % (2*math.pi) - math.pi
+        for marker_id, hypotheses in self.hypotheses_dict.items():
+            hypotheses_motion_new = []
+            for h in hypotheses:
+                x, y, theta = h
 
-            new_hypotheses.append(((x_new, y_new, theta_new), weight))
+                # Compute new pose with simple 2D kinematics
+                x_new = x + v * math.cos(theta) * dt
+                y_new = y + v * math.sin(theta) * dt
+                theta_new = theta + w * dt
 
-        # Update self.hypotheses in place
-        self.hypotheses = new_hypotheses
+                # Wrap theta to [-pi, pi]
+                theta_new = (theta_new + math.pi) % (2 * math.pi) - math.pi
 
+                hypotheses_motion_new.append((x_new, y_new, theta_new))
+
+            # Update each marker's hypotheses in the new dictionary
+            new_hypotheses_dict[marker_id] = hypotheses_motion_new
+
+        # Update the original dictionary in place
+        self.hypotheses_dict = new_hypotheses_dict
+
+        return self.hypotheses_dict
 
 
     def local_control(self):
@@ -889,12 +897,6 @@ class MultiLocationMarkerNode(Node):
 
         return reachable
         
-
-
-
-
-
-
     def bresenham_line(self,x0, y0, x1, y1):
         """Bresenham's Line Algorithm.
         Produces a list of tuples from start and end.
@@ -938,7 +940,7 @@ class MultiLocationMarkerNode(Node):
 
 
 
-    def publish_pose_array(self, hypotheses):
+    def publish_pose_array(self, hypotheses_dict):
         """
         Publishes a PoseArray where each pose corresponds to one hypothesis.
         These will appear as arrows in RViz if you add a 'PoseArray' display.
@@ -947,25 +949,29 @@ class MultiLocationMarkerNode(Node):
         pose_array_msg.header.stamp = self.get_clock().now().to_msg()
         pose_array_msg.header.frame_id = "map"  # Hypotheses are in the 'map' frame
 
-        for (x_r, y_r, theta_r) in hypotheses:
-            pose = Pose()
-            pose.position.x = x_r
-            pose.position.y = y_r
-            pose.position.z = 0.0
+        for marker_id, hypotheses in hypotheses_dict.items():
+            
+            for hypothesis in hypotheses:
 
-            # Convert theta_r (yaw) to quaternion
-            quat = quaternion_from_euler(0.0, 0.0, theta_r)
-            pose.orientation.x = quat[0]
-            pose.orientation.y = quat[1]
-            pose.orientation.z = quat[2]
-            pose.orientation.w = quat[3]
+                x_r, y_r, theta_r = hypothesis
+                pose = Pose()
+                pose.position.x = x_r
+                pose.position.y = y_r
+                pose.position.z = 0.0
 
-            pose_array_msg.poses.append(pose)
+                # Convert theta_r (yaw) to quaternion
+                quat = quaternion_from_euler(0.0, 0.0, theta_r)
+                pose.orientation.x = quat[0]
+                pose.orientation.y = quat[1]
+                pose.orientation.z = quat[2]
+                pose.orientation.w = quat[3]
+
+                pose_array_msg.poses.append(pose)
 
         self.pose_array_pub.publish(pose_array_msg)
 
 
-    def publish_square_markers(self, hypotheses):
+    def publish_square_markers(self, hypotheses_dict):
         """
         Publishes a MarkerArray with squares (cubes) to represent each hypothesis.
         Each marker is a small, flat cube.
@@ -973,44 +979,49 @@ class MultiLocationMarkerNode(Node):
         marker_array = MarkerArray()
         timestamp = self.get_clock().now().to_msg()
 
-        for i, (x_r, y_r, theta_r) in enumerate(hypotheses):
-            marker = Marker()
-            marker.header.stamp = timestamp
-            marker.header.frame_id = "map"  # same as the pose array
-            marker.ns = "hypothesis_squares"
-            marker.id = i  # unique ID for each marker
 
-            marker.type = Marker.CUBE
-            marker.action = Marker.ADD
+        for marker_id, hypotheses in hypotheses_dict.items():
 
-            # Position
-            marker.pose.position.x = x_r
-            marker.pose.position.y = y_r
-            marker.pose.position.z = 0.0
+            for i, hypothesis in enumerate(hypotheses):
 
-            # Orientation (convert yaw to quaternion)
-            quat = quaternion_from_euler(0.0, 0.0, theta_r)
-            marker.pose.orientation.x = quat[0]
-            marker.pose.orientation.y = quat[1]
-            marker.pose.orientation.z = quat[2]
-            marker.pose.orientation.w = quat[3]
+                x_r, y_r, theta_r = hypothesis
+                marker = Marker()
+                marker.header.stamp = timestamp
+                marker.header.frame_id = "map"  # same as the pose array
+                marker.ns = "hypothesis_squares"
+                marker.id = i  # unique ID for each marker
 
-            # Scale (make it look like a 2D square, e.g. 0.5 x 0.5 x 0.01)
-            marker.scale.x = 0.3
-            marker.scale.y = 0.3
-            marker.scale.z = 0.1
+                marker.type = Marker.CUBE
+                marker.action = Marker.ADD
 
-            # Color (e.g. green squares)
-            marker.color.r = 1.0  # Adjust for lighter or darker grey (0.5 is medium grey)
-            marker.color.g = 1.0
-            marker.color.b = 0.0
-            marker.color.a = 1.0  # Fully opaque
+                # Position
+                marker.pose.position.x = x_r
+                marker.pose.position.y = y_r
+                marker.pose.position.z = 0.0
+
+                # Orientation (convert yaw to quaternion)
+                quat = quaternion_from_euler(0.0, 0.0, theta_r)
+                marker.pose.orientation.x = quat[0]
+                marker.pose.orientation.y = quat[1]
+                marker.pose.orientation.z = quat[2]
+                marker.pose.orientation.w = quat[3]
+
+                # Scale (make it look like a 2D square, e.g. 0.5 x 0.5 x 0.01)
+                marker.scale.x = 0.3
+                marker.scale.y = 0.3
+                marker.scale.z = 0.1
+
+                # Color (e.g. green squares)
+                marker.color.r = 1.0  # Adjust for lighter or darker grey (0.5 is medium grey)
+                marker.color.g = 1.0
+                marker.color.b = 0.0
+                marker.color.a = 1.0  # Fully opaque
 
 
-            # Lifetime (0 = forever)
-            marker.lifetime = rclpy.duration.Duration(seconds=0).to_msg()
+                # Lifetime (0 = forever)
+                marker.lifetime = rclpy.duration.Duration(seconds=0).to_msg()
 
-            marker_array.markers.append(marker)
+                marker_array.markers.append(marker)
 
         self.marker_array_pub.publish(marker_array)
 
