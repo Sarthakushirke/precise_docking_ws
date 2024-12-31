@@ -168,6 +168,11 @@ class MultiLocationMarkerNode(Node):
         if self.x is None or self.y is None:
             self.get_logger().warn("Robot position not yet received.")
             return
+        
+        # If the robot is currently moving towards a goal, skip computation
+        if self.control_active:
+            self.get_logger().info("Robot is moving towards a goal, skipping computation.")
+            return
 
         # Hardcode the marker ID in this example
         marker_id = self.current_marker_id
@@ -364,10 +369,10 @@ class MultiLocationMarkerNode(Node):
                 f"{best_global_frontier_info['centroid_y']:.2f}) utility={best_global_utility:.2f}"
             )
 
-        best_global_frontier_column = 196.00
-        # ?best_global_frontier_info['centroid_x'] 
-        best_global_frontier_row = 149.00
-        # best_global_frontier_info['centroid_y'] 
+        # best_global_frontier_column = 196.00
+        best_global_frontier_column =  best_global_frontier_info['centroid_x'] 
+        # best_global_frontier_row = 149.00
+        best_global_frontier_row = best_global_frontier_info['centroid_y'] 
 
         # best_global_frontier_column = int((best_global_frontier_info['centroid_x'] - origin_x) / resolution)
         # best_global_frontier_row = int((best_global_frontier_info['centroid_y'] - origin_y) / resolution)
@@ -390,11 +395,11 @@ class MultiLocationMarkerNode(Node):
 
 
 
-        #         # Start the control thread
-        #         if not self.control_active:
-        #             self.control_active = True
-        #             self.control_thread = Thread(target=self.control_loop)
-        #             self.control_thread.start()
+                # Start the control thread
+                if not self.control_active:
+                    self.control_active = True
+                    self.control_thread = Thread(target=self.control_loop)
+                    self.control_thread.start()
 
 
         # else:
@@ -425,6 +430,9 @@ class MultiLocationMarkerNode(Node):
         self.odom_data = msg
         self.x = msg.pose.pose.position.x
         self.y = msg.pose.pose.position.y
+
+        self.yaw = self.euler_from_quaternion(msg.pose.pose.orientation.x,msg.pose.pose.orientation.y,
+        msg.pose.pose.orientation.z,msg.pose.pose.orientation.w)
 
 
     def publish_path_marker(self, path_coords):
@@ -476,11 +484,12 @@ class MultiLocationMarkerNode(Node):
             twist.angular.z = w
             self.velocity_pub.publish(twist)
 
+
             # -- APPLY THE SAME MOTION TO YOUR HYPOTHESES --
             # self.apply_motion_to_hypotheses(v, w, dt)
 
             # Suppose we detect marker_id=0, we compute a likelihood for each hypothesis i
-            likelihoods = self.compute_likelihood()
+            # likelihoods = self.compute_likelihood()
 
             # Multiply old weight by likelihood
             # updated_weights = []
@@ -677,6 +686,19 @@ class MultiLocationMarkerNode(Node):
         # self.publish_centroids(centroids, resolution, originX, originY)
 
         return centroids
+    
+    def euler_from_quaternion(self,x,y,z,w):
+        t0 = +2.0 * (w * x + y * z)
+        t1 = +1.0 - 2.0 * (x * x + y * y)
+        roll_x = math.atan2(t0, t1)
+        t2 = +2.0 * (w * y - z * x)
+        t2 = +1.0 if t2 > +1.0 else t2
+        t2 = -1.0 if t2 < -1.0 else t2
+        pitch_y = math.asin(t2)
+        t3 = +2.0 * (w * z + x * y)
+        t4 = +1.0 - 2.0 * (y * y + z * z)
+        yaw_z = math.atan2(t3, t4)
+        return yaw_z
     
     def costmap(self, data, width, height, resolution):
         data = np.array(data).reshape(height, width)
