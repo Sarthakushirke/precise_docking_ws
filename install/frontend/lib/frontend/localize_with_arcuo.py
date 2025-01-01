@@ -6,6 +6,7 @@ import math
 import numpy as np
 import heapq , math , random , yaml
 import time
+from rclpy.clock import Clock
 
 from threading import Thread
 from geometry_msgs.msg import PointStamped, PoseArray, Pose, Point, Twist
@@ -106,7 +107,7 @@ class MultiLocationMarkerNode(Node):
         )
 
         self.frontier_pub = self.create_publisher(MarkerArray, '/frontier_markers', 10)
-        self.get_logger().info('Publishing frontier markers on /frontier_markers')
+        # self.get_logger().info('Publishing frontier markers on /frontier_markers')
 
         self.map_data = None
         self.map_info = None
@@ -278,7 +279,7 @@ class MultiLocationMarkerNode(Node):
 
             frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
 
-            print("Frontiers ", frontiers_middle)
+            # print("Frontiers ", frontiers_middle)
 
             ######################
 
@@ -325,9 +326,9 @@ class MultiLocationMarkerNode(Node):
                         # Compute utility
                         utility_value = (weight_info_gain * num_visible_objects) - (weight_path_length * path_length)
 
-                        self.get_logger().info(
-                            f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}, "
-                            f"utility is {utility_value:.2f}")
+                        # self.get_logger().info(
+                        #     f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}, "
+                        #     f"utility is {utility_value:.2f}")
 
                         # Store information for utility calculation
                         centroids_info.append({
@@ -360,12 +361,12 @@ class MultiLocationMarkerNode(Node):
                     best_global_hypothesis = hyp_idx
                     best_global_frontier_info = f_info
 
-        if best_global_frontier_info:
-            # We have the best frontier and which hypothesis it belongs to
-            self.get_logger().info(
-                f"BEST => Hyp #{best_global_hypothesis}, frontier=({best_global_frontier_info['centroid_x']:.2f}, "
-                f"{best_global_frontier_info['centroid_y']:.2f}) utility={best_global_utility:.2f}"
-            )
+        # if best_global_frontier_info:
+        #     # We have the best frontier and which hypothesis it belongs to
+        #     self.get_logger().info(
+        #         f"BEST => Hyp #{best_global_hypothesis}, frontier=({best_global_frontier_info['centroid_x']:.2f}, "
+        #         f"{best_global_frontier_info['centroid_y']:.2f}) utility={best_global_utility:.2f}"
+        #     )
 
         # best_global_frontier_column = 196.00
         best_global_frontier_column =  best_global_frontier_info['centroid_x'] 
@@ -457,20 +458,35 @@ class MultiLocationMarkerNode(Node):
 
         # Publish the marker
         self.path_pub.publish(marker)
-        self.get_logger().info("Path marker published!")
+        # self.get_logger().info("Path marker published!")
 
 
     def control_loop(self):
-        self.get_logger().info("Control loop started.")
+        # Keep track of old pose
+        old_x, old_y, old_theta = self.x, self.y ,self.yaw
+
+        # self.get_logger().info("Control loop started.")
+        
         twist = Twist()
-        dt = 0.1  # your loop rate is time.sleep(0.1)
+        # dt = 0.09  # your loop rate is time.sleep(0.1)
         while self.control_active:
+            # 1) get updated real robot pose in map frame
+            new_x, new_y, new_theta = self.x, self.y ,self.yaw
+
+            # 2) compute difference
+            dx = new_x - old_x
+            dy = new_y - old_y
+            dtheta = new_theta - old_theta
+
+            # update old pose
+            old_x, old_y, old_theta = new_x, new_y, new_theta
+
             v, w = self.local_control()
             if v is None:
                 v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, self.path, self.i)
             # Check if goal is reached
             if self.i >= len(self.path) - 1 and self.distance_to_point(self.x, self.y, self.path[-1][0], self.path[-1][1]) < target_error:
-                v = 0.0
+                v = 0.0 
                 w = 0.0
                 self.control_active = False
                 self.get_logger().info("Goal reached.")
@@ -478,9 +494,12 @@ class MultiLocationMarkerNode(Node):
             twist.angular.z = w
             self.velocity_pub.publish(twist)
 
+            self.apply_pose_diff_to_hypotheses(dx, dy, dtheta)
 
             # -- APPLY THE SAME MOTION TO YOUR HYPOTHESES --
-            self.hypotheses_dict = self.apply_motion_to_hypotheses(v, w, dt)
+            # self.hypotheses_dict = self.apply_motion_to_hypotheses(v, w, dt)
+
+            # self.hypotheses_dict = self.apply_ackermann_motion_to_hypotheses(v,w,dt,0.12)
 
             # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
             self.publish_pose_array(self.hypotheses_dict)
@@ -510,6 +529,21 @@ class MultiLocationMarkerNode(Node):
         self.get_logger().info("Control loop ended.")
 
 
+    def apply_pose_diff_to_hypotheses(self, dx, dy, dtheta):
+        new_hypotheses_dict = {}
+        for marker_id, hypotheses in self.hypotheses_dict.items():
+            updated_list = []
+            for (hx, hy, htheta) in hypotheses:
+                hx_new = hx + dx
+                hy_new = hy + dy
+                htheta_new = htheta + dtheta
+                # wrap heading
+                htheta_new = (htheta_new + math.pi) % (2 * math.pi) - math.pi
+                updated_list.append((hx_new, hy_new, htheta_new))
+            new_hypotheses_dict[marker_id] = updated_list
+
+        self.hypotheses_dict = new_hypotheses_dict
+
     def apply_motion_to_hypotheses(self, v, w, dt):
         """
         Apply the same (v, w) motion to each hypothesis for time dt.
@@ -527,6 +561,9 @@ class MultiLocationMarkerNode(Node):
                 y_new = y + v * math.sin(theta) * dt
                 theta_new = theta + w * dt
 
+                # x_new = x + v * math.cos(theta) 
+                # y_new = y + v * math.sin(theta) 
+                # theta_new = theta + w 
                 # Wrap theta to [-pi, pi]
                 theta_new = (theta_new + math.pi) % (2 * math.pi) - math.pi
 
@@ -539,6 +576,41 @@ class MultiLocationMarkerNode(Node):
         self.hypotheses_dict = new_hypotheses_dict
 
         return self.hypotheses_dict
+    
+    def apply_ackermann_motion_to_hypotheses(self, v, delta, dt, wheelbase):
+        """
+        Apply an Ackermann motion model (v, steering angle = delta) to each hypothesis for time dt.
+        wheelbase = L (distance between rear and front axle).
+        """
+
+        new_hypotheses_dict = {}
+
+        for marker_id, hypotheses in self.hypotheses_dict.items():
+            hypotheses_motion_new = []
+            for h in hypotheses:
+                x, y, theta = h
+
+                # 1) x_new = x + v*cos(theta)*dt
+                x_new = x + v * math.cos(theta) * dt
+
+                # 2) y_new = y + v*sin(theta)*dt
+                y_new = y + v * math.sin(theta) * dt
+
+                # 3) theta_new = theta + (v/L)*tan(delta)*dt
+                theta_new = theta + (v / wheelbase) * math.tan(delta) * dt
+
+                # Normalize heading to [-pi, pi]
+                # theta_new = (theta_new + math.pi) % (2*math.pi) - math.pi
+
+                hypotheses_motion_new.append((x_new, y_new, theta_new))
+
+            # Update each marker's hypotheses
+            new_hypotheses_dict[marker_id] = hypotheses_motion_new
+
+        # Replace the old dictionary with the new one
+        self.hypotheses_dict = new_hypotheses_dict
+        return self.hypotheses_dict
+
 
 
     def local_control(self):
