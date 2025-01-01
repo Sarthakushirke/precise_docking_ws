@@ -380,6 +380,9 @@ class MultiLocationMarkerNode(Node):
 
         robot_column = int((self.x - origin_x) / resolution)
         robot_row = int((self.y - origin_y) / resolution)
+        #Example for other hypothesis 
+        # robot_column = int((1 - origin_x) / resolution)
+        # robot_row = int((-1 - origin_y) / resolution)
         robot_indices = (robot_row, robot_column) #This should be one of the hypothesis
         #Also the best_centroid_indices should that particular hypothesis centroid.
 
@@ -466,7 +469,10 @@ class MultiLocationMarkerNode(Node):
         old_x, old_y, old_theta = self.x, self.y ,self.yaw
 
         # self.get_logger().info("Control loop started.")
-        
+        #Example for other hypothesis 
+        # hyp_pose_x = 1
+        # hyp_pose_y = -1
+        # hyp_pose_theta = 0
         twist = Twist()
         # dt = 0.09  # your loop rate is time.sleep(0.1)
         while self.control_active:
@@ -482,10 +488,20 @@ class MultiLocationMarkerNode(Node):
             old_x, old_y, old_theta = new_x, new_y, new_theta
 
             v, w = self.local_control()
+            #Example for other hypothesis 
+            # hyp_pose_x = hyp_pose_x + dx
+            # hyp_pose_y = hyp_pose_y + dy
+            # hyp_pose_theta = hyp_pose_theta + dtheta
+            # wrap heading
+            # hyp_pose_theta = (hyp_pose_theta + math.pi) % (2 * math.pi) - math.pi
             if v is None:
                 v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, self.path, self.i)
+                #Example for other hypothesis 
+                # v, w, self.i = self.pure_pursuit(hyp_pose_x, hyp_pose_y, hyp_pose_theta, self.path, self.i)
             # Check if goal is reached
             if self.i >= len(self.path) - 1 and self.distance_to_point(self.x, self.y, self.path[-1][0], self.path[-1][1]) < target_error:
+            #Example for other hypothesis 
+            # if self.i >= len(self.path) - 1 and self.distance_to_point(hyp_pose_x, hyp_pose_y, self.path[-1][0], self.path[-1][1]) < target_error:
                 v = 0.0 
                 w = 0.0
                 self.control_active = False
@@ -544,75 +560,9 @@ class MultiLocationMarkerNode(Node):
 
         self.hypotheses_dict = new_hypotheses_dict
 
-    def apply_motion_to_hypotheses(self, v, w, dt):
-        """
-        Apply the same (v, w) motion to each hypothesis for time dt.
-        """
 
-        new_hypotheses_dict = {}
-
-        for marker_id, hypotheses in self.hypotheses_dict.items():
-            hypotheses_motion_new = []
-            for h in hypotheses:
-                x, y, theta = h
-
-                # Compute new pose with simple 2D kinematics
-                x_new = x + v * math.cos(theta) * dt
-                y_new = y + v * math.sin(theta) * dt
-                theta_new = theta + w * dt
-
-                # x_new = x + v * math.cos(theta) 
-                # y_new = y + v * math.sin(theta) 
-                # theta_new = theta + w 
-                # Wrap theta to [-pi, pi]
-                theta_new = (theta_new + math.pi) % (2 * math.pi) - math.pi
-
-                hypotheses_motion_new.append((x_new, y_new, theta_new))
-
-            # Update each marker's hypotheses in the new dictionary
-            new_hypotheses_dict[marker_id] = hypotheses_motion_new
-
-        # Update the original dictionary in place
-        self.hypotheses_dict = new_hypotheses_dict
-
-        return self.hypotheses_dict
     
-    def apply_ackermann_motion_to_hypotheses(self, v, delta, dt, wheelbase):
-        """
-        Apply an Ackermann motion model (v, steering angle = delta) to each hypothesis for time dt.
-        wheelbase = L (distance between rear and front axle).
-        """
-
-        new_hypotheses_dict = {}
-
-        for marker_id, hypotheses in self.hypotheses_dict.items():
-            hypotheses_motion_new = []
-            for h in hypotheses:
-                x, y, theta = h
-
-                # 1) x_new = x + v*cos(theta)*dt
-                x_new = x + v * math.cos(theta) * dt
-
-                # 2) y_new = y + v*sin(theta)*dt
-                y_new = y + v * math.sin(theta) * dt
-
-                # 3) theta_new = theta + (v/L)*tan(delta)*dt
-                theta_new = theta + (v / wheelbase) * math.tan(delta) * dt
-
-                # Normalize heading to [-pi, pi]
-                # theta_new = (theta_new + math.pi) % (2*math.pi) - math.pi
-
-                hypotheses_motion_new.append((x_new, y_new, theta_new))
-
-            # Update each marker's hypotheses
-            new_hypotheses_dict[marker_id] = hypotheses_motion_new
-
-        # Replace the old dictionary with the new one
-        self.hypotheses_dict = new_hypotheses_dict
-        return self.hypotheses_dict
-
-
-
+    
     def local_control(self):
         v = None
         w = None
@@ -1160,3 +1110,40 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
+
+
+
+
+    # def apply_motion_to_hypotheses(self, v, w, dt):
+    #     """
+    #     Apply the same (v, w) motion to each hypothesis for time dt.
+    #     """
+
+    #     new_hypotheses_dict = {}
+
+    #     for marker_id, hypotheses in self.hypotheses_dict.items():
+    #         hypotheses_motion_new = []
+    #         for h in hypotheses:
+    #             x, y, theta = h
+
+    #             # Compute new pose with simple 2D kinematics
+    #             x_new = x + v * math.cos(theta) * dt
+    #             y_new = y + v * math.sin(theta) * dt
+    #             theta_new = theta + w * dt
+
+    #             # x_new = x + v * math.cos(theta) 
+    #             # y_new = y + v * math.sin(theta) 
+    #             # theta_new = theta + w 
+    #             # Wrap theta to [-pi, pi]
+    #             theta_new = (theta_new + math.pi) % (2 * math.pi) - math.pi
+
+    #             hypotheses_motion_new.append((x_new, y_new, theta_new))
+
+    #         # Update each marker's hypotheses in the new dictionary
+    #         new_hypotheses_dict[marker_id] = hypotheses_motion_new
+
+    #     # Update the original dictionary in place
+    #     self.hypotheses_dict = new_hypotheses_dict
+
+    #     return self.hypotheses_dict
