@@ -82,9 +82,16 @@ class MultiLocationMarkerNode(Node):
         self.velocity_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.get_logger().info('Publishing velocity commands on /cmd_vel')
 
+        self.centroid_pub = self.create_publisher(MarkerArray, '/centroid_markers', 10)
+        self.get_logger().info('Publishing centroid markers on /centroid_markers')
+
         # Publisher for the path marker
         self.path_pub = self.create_publisher(Marker, '/path_marker', 10)
         self.get_logger().info('Publishing path markers on /path_marker')
+
+        # Publisher for centroids
+        self.centroids_pub = self.create_publisher(PoseArray, '/frontier_centroids', 10)
+        self.get_logger().info('Publishing centroids on /frontier_centroids')
 
         # Store current hypotheses (marker_id => list of (x_r, y_r, theta_r))
         self.hypotheses_dict = {}
@@ -126,6 +133,7 @@ class MultiLocationMarkerNode(Node):
         self.control_active = False  # Flag to control the thread
         self.i = 0  # Index for pure pursuit
         self.scan_data = None  # Latest laser scan data
+        self.centroid_goal_path = None
 
         # Initialize robot position attributes
         self.x = None
@@ -279,14 +287,9 @@ class MultiLocationMarkerNode(Node):
 
             frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
 
-            # print("Frontiers ", frontiers_middle)
+            print("Frontiers ", frontiers_middle)
 
             ######################
-
-            # Initialize variables to store the best centroid
-            shortest_path_length = float('inf')
-            best_centroid = None
-            best_path = None
 
             centroids_info = []
 
@@ -304,9 +307,10 @@ class MultiLocationMarkerNode(Node):
                     # Update the hypotheses with the filtered list
                     new_hypotheses = filtered_hypotheses
 
-                    centroid_column = int((centroid_x - origin_x) / resolution)
-                    centroid_row = int((centroid_y - origin_y) / resolution)
-                    centroid_indices = (centroid_row, centroid_column)
+                    # centroid_column = int((centroid_x - origin_x) / resolution)
+                    # centroid_row = int((centroid_y - origin_y) / resolution)
+                    # centroid_indices = (centroid_row, centroid_column)
+                    centroid_indices = (centroid_x, centroid_y)
 
                     # Compute the path from centroid to goal
                     path = self.astar(self.map_data, centroid_indices, self.goal_indices)
@@ -316,8 +320,14 @@ class MultiLocationMarkerNode(Node):
                     num_visible_objects = len(visible_objects)
 
                     if path:
-                        path_length = len(path) * resolution
-                        
+                        # path_length = len(path) * resolution
+
+                        self.centroid_goal_path = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in path] 
+
+                        self.publish_path_marker( self.centroid_goal_path)
+
+                        # print("The centroild to goal path", self.centroid_goal_path)
+                        path_length = self.pathLength(self.centroid_goal_path)
 
                         # Weights for utility calculation
                         weight_info_gain = 1.0
@@ -326,9 +336,10 @@ class MultiLocationMarkerNode(Node):
                         # Compute utility
                         utility_value = (weight_info_gain * num_visible_objects) - (weight_path_length * path_length)
 
-                        # self.get_logger().info(
-                        #     f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}, "
-                        #     f"utility is {utility_value:.2f}")
+                        self.get_logger().info(
+                            f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}, "
+                            f"utility is {utility_value:.2f},"
+                            f"Num of visible objects is {num_visible_objects:.2f},")
 
                         # Store information for utility calculation
                         centroids_info.append({
@@ -361,12 +372,12 @@ class MultiLocationMarkerNode(Node):
                     best_global_hypothesis = hyp_idx
                     best_global_frontier_info = f_info
 
-        # if best_global_frontier_info:
-        #     # We have the best frontier and which hypothesis it belongs to
-        #     self.get_logger().info(
-        #         f"BEST => Hyp #{best_global_hypothesis}, frontier=({best_global_frontier_info['centroid_x']:.2f}, "
-        #         f"{best_global_frontier_info['centroid_y']:.2f}) utility={best_global_utility:.2f}"
-        #     )
+        if best_global_frontier_info:
+            # We have the best frontier and which hypothesis it belongs to
+            self.get_logger().info(
+                f"BEST => Hyp #{best_global_hypothesis}, frontier=({best_global_frontier_info['centroid_x']:.2f}, "
+                f"{best_global_frontier_info['centroid_y']:.2f}) utility={best_global_utility:.2f}"
+            )
 
         # best_global_frontier_column = 196.00
         best_global_frontier_column =  best_global_frontier_info['centroid_x'] 
@@ -392,10 +403,10 @@ class MultiLocationMarkerNode(Node):
         if path_robot_to_centroid:
                 # Convert path indices to coordinates
                 self.path = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in path_robot_to_centroid]
+
+                # print("Path robot to the centroid", self.path)
                 # Publish the path
                 self.publish_path_marker(self.path)
-
-
 
                 # Start the control thread
                 if not self.control_active:
@@ -611,6 +622,15 @@ class MultiLocationMarkerNode(Node):
     def distance_to_point(self, x1, y1, x2, y2):
         return math.hypot(x2 - x1, y2 - y1)
     
+    def pathLength(self,path):
+        for i in range(len(path)):
+            path[i] = (path[i][0],path[i][1])
+            points = np.array(path)
+        differences = np.diff(points, axis=0)
+        distances = np.hypot(differences[:,0], differences[:,1])
+        total_distance = np.sum(distances)
+        return total_distance
+    
     def lidar_callback(self, msg):
         self.scan_data = msg
         self.scan = msg.ranges
@@ -710,10 +730,10 @@ class MultiLocationMarkerNode(Node):
         self.publish_frontier_markers(filtered_groups, resolution, originX, originY)
 
         # Publish the centroid markers (spheres)
-        # self.publish_centroid_markers(centroids, resolution, originX, originY)
+        self.publish_centroid_markers(centroids, resolution, originX, originY)
 
         # # Publish the centroids to a topic
-        # self.publish_centroids(centroids, resolution, originX, originY)
+        self.publish_centroids(centroids, resolution, originX, originY)
 
         return centroids
     
@@ -1095,6 +1115,81 @@ class MultiLocationMarkerNode(Node):
         # Publish the markers
         self.frontier_pub.publish(marker_array)
 
+    def publish_centroid_markers(self, centroids, resolution, originX, originY):
+        """
+        Publish centroid markers as spheres in RViz.
+        """
+        marker_array = MarkerArray()
+        marker_id = 0
+
+        # Clear previous centroid markers
+        delete_marker = Marker()
+        delete_marker.action = Marker.DELETEALL
+        marker_array.markers.append(delete_marker)
+
+        for group_id, centroid in centroids.items():
+            x = originX + centroid[1] * resolution
+            y = originY + centroid[0] * resolution
+
+            marker = Marker()
+            marker.header.frame_id = "map"
+            marker.header.stamp = self.get_clock().now().to_msg()
+            marker.ns = "centroids"
+            marker.id = marker_id
+            marker.type = Marker.SPHERE
+            marker.action = Marker.ADD
+            marker.pose.position.x = x
+            marker.pose.position.y = y
+            marker.pose.position.z = 0.2  # Slightly elevate for better visibility
+            marker.pose.orientation.w = 1.0
+
+            # Set the scale of the marker
+            marker.scale.x = resolution * 2.0  # Adjust size as needed
+            marker.scale.y = resolution * 2.0
+            marker.scale.z = resolution * 2.0
+
+            # Set the color of the centroid marker
+            marker.color.r = 1.0  # Red
+            marker.color.g = 0.0  # Green
+            marker.color.b = 0.0  # Yellow
+            marker.color.a = 1.0  # Fully opaque
+
+            marker_array.markers.append(marker)
+            marker_id += 1
+
+        # Publish the centroid markers
+        self.centroid_pub.publish(marker_array)
+
+
+    def publish_centroids(self, centroids, resolution, originX, originY):
+        pose_array = PoseArray()
+        pose_array.header.frame_id = "map"  # Set to your map frame
+        pose_array.header.stamp = self.get_clock().now().to_msg()
+
+        for centroid in centroids.values():
+            # Convert grid indices to world coordinates
+            x = originX + centroid[1] * resolution + resolution / 2
+            y = originY + centroid[0] * resolution + resolution / 2
+
+            pose = Pose()
+            pose.position.x = x
+            pose.position.y = y
+            pose.position.z = 0.0  # Assuming a flat ground
+            pose.orientation.w = 1.0  # Neutral orientation (no rotation)
+
+            pose_array.poses.append(pose)
+
+        # print("Pose array", pose_array)
+        self.get_logger().info("Publishing centroids PoseArray:")
+        for i, p in enumerate(pose_array.poses, start=1):
+            self.get_logger().info(
+                f" - Pose #{i}: x={p.position.x:.2f}, y={p.position.y:.2f}, "
+                f"qw={p.orientation.w:.2f}"
+        )
+
+        # Publish the centroids
+        self.centroids_pub.publish(pose_array)
+        self.get_logger().info(f"Published {len(pose_array.poses)} centroids to /frontier_centroids")
 
 
 def main(args=None):
