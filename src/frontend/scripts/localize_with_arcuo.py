@@ -307,16 +307,18 @@ class MultiLocationMarkerNode(Node):
                     # Update the hypotheses with the filtered list
                     new_hypotheses = filtered_hypotheses
 
-                    # centroid_column = int((centroid_x - origin_x) / resolution)
-                    # centroid_row = int((centroid_y - origin_y) / resolution)
-                    # centroid_indices = (centroid_row, centroid_column)
+
                     centroid_indices = (centroid_x, centroid_y)
 
                     # Compute the path from centroid to goal
                     path = self.astar(self.map_data, centroid_indices, self.goal_indices)
 
                     # Calculate visible objects from this centroid
-                    visible_objects = check_visible_objects_from_centroid_simple(centroid_x, centroid_y)
+
+                    centroid_visible_x = centroid_x * resolution + origin_x
+                    centroid_visible_y = centroid_y * resolution + origin_y
+                    print("Coordinates of the centroild in ",centroid_visible_y,centroid_visible_x)
+                    visible_objects = check_visible_objects_from_centroid_simple( centroid_visible_y, centroid_visible_x)
                     num_visible_objects = len(visible_objects)
 
                     if path:

@@ -381,7 +381,7 @@ class OccupancyGridUpdater(Node):
                 #     best_centroid = (centroid_x, centroid_y)
                 #     best_path = path
 
-                        # Store information for utility calculation
+                # Store information for utility calculation
                 centroids_info.append({
                     'centroid_x': centroid_x,
                     'centroid_y': centroid_y,

@@ -1,0 +1,204 @@
+[0.000000] (-) TimerEvent: {}
+[0.001292] (-) JobUnselected: {'identifier': 'arcuo_marker_detection'}
+[0.002116] (-) JobUnselected: {'identifier': 'autonomous_exploration'}
+[0.002467] (-) JobUnselected: {'identifier': 'docking_bringup'}
+[0.002560] (-) JobUnselected: {'identifier': 'frontend'}
+[0.002614] (-) JobUnselected: {'identifier': 'localization_amcl'}
+[0.002660] (-) JobUnselected: {'identifier': 'localization_node'}
+[0.002741] (-) JobUnselected: {'identifier': 'reach_the_goal'}
+[0.002783] (-) JobUnselected: {'identifier': 'teleop_cpp_ros2'}
+[0.002859] (-) JobUnselected: {'identifier': 'template_ros2'}
+[0.002906] (-) JobUnselected: {'identifier': 'ultralytics_ros'}
+[0.002944] (active_localization) JobQueued: {'identifier': 'active_localization', 'dependencies': OrderedDict()}
+[0.002966] (active_localization) JobStarted: {'identifier': 'active_localization'}
+[0.098497] (-) TimerEvent: {}
+[0.198972] (-) TimerEvent: {}
+[0.299510] (-) TimerEvent: {}
+[0.400017] (-) TimerEvent: {}
+[0.500494] (-) TimerEvent: {}
+[0.600977] (-) TimerEvent: {}
+[0.701471] (-) TimerEvent: {}
+[0.801981] (-) TimerEvent: {}
+[0.902567] (-) TimerEvent: {}
+[1.004577] (-) TimerEvent: {}
+[1.106206] (-) TimerEvent: {}
+[1.208442] (-) TimerEvent: {}
+[1.308904] (-) TimerEvent: {}
+[1.409578] (-) TimerEvent: {}
+[1.510030] (-) TimerEvent: {}
+[1.610409] (-) TimerEvent: {}
+[1.710814] (-) TimerEvent: {}
+[1.811454] (-) TimerEvent: {}
+[1.911939] (-) TimerEvent: {}
+[2.013745] (-) TimerEvent: {}
+[2.115057] (-) TimerEvent: {}
+[2.222789] (-) TimerEvent: {}
+[2.333227] (-) TimerEvent: {}
+[2.451307] (-) TimerEvent: {}
+[2.559760] (-) TimerEvent: {}
+[2.660794] (-) TimerEvent: {}
+[2.762414] (-) TimerEvent: {}
+[2.867018] (-) TimerEvent: {}
+[2.969094] (-) TimerEvent: {}
+[3.070558] (-) TimerEvent: {}
+[3.170947] (-) TimerEvent: {}
+[3.271299] (-) TimerEvent: {}
+[3.372277] (-) TimerEvent: {}
+[3.476651] (-) TimerEvent: {}
+[3.578306] (-) TimerEvent: {}
+[3.683555] (-) TimerEvent: {}
+[3.788890] (-) TimerEvent: {}
+[3.892294] (-) TimerEvent: {}
+[3.993878] (-) TimerEvent: {}
+[4.098716] (-) TimerEvent: {}
+[4.199258] (-) TimerEvent: {}
+[4.300962] (-) TimerEvent: {}
+[4.409151] (-) TimerEvent: {}
+[4.514508] (-) TimerEvent: {}
+[4.618598] (-) TimerEvent: {}
+[4.720981] (-) TimerEvent: {}
+[4.823007] (-) TimerEvent: {}
+[4.923388] (-) TimerEvent: {}
+[5.024750] (-) TimerEvent: {}
+[5.080371] (active_localization) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/active_localization', 'build', '--build-base', '/home/sarthak/precise_docking_ws/build/active_localization/build', 'install', '--record', '/home/sarthak/precise_docking_ws/build/active_localization/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/sarthak/precise_docking_ws/src/active_localization', 'env': {'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'sarthak', 'LC_TIME': 'nl_NL.UTF-8', 'XDG_SESSION_TYPE': 'x11', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib:/home/sarthak/precise_docking_ws/install/nav2_amcl/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/sarthak', 'OLDPWD': '/home/sarthak', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/terminator.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'LC_MONETARY': 'nl_NL.UTF-8', 'MANAGERPID': '2646', 'SYSTEMD_EXEC_PID': '3256', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'TERMINATOR_DBUS_NAME': 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '33171', 'COLCON_PREFIX_PATH': '/home/sarthak/precise_docking_ws/install', 'ROS_DISTRO': 'humble', 'GTK_IM_MODULE': 'ibus', 'LOGNAME': 'sarthak', 'JOURNAL_STREAM': '8:32786', '_': '/home/sarthak/.local/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'sarthak', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'WINDOWPATH': '2', 'PATH': '/opt/ros/humble/bin:/home/sarthak/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/sarthak-Inspiron-14-Plus-7430:@/tmp/.ICE-unix/3223,unix/sarthak-Inspiron-14-Plus-7430:/tmp/.ICE-unix/3223', 'INVOCATION_ID': '3a407d692bad43b8a66541a1ca076e1c', 'XDG_MENU_PREFIX': 'gnome-', 'LC_ADDRESS': 'nl_NL.UTF-8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':1', 'TERMINATOR_DBUS_PATH': '/net/tenshu/Terminator2', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'IBUS_DISABLE_SNOOPER': '1', 'LC_TELEPHONE': 'nl_NL.UTF-8', 'RMW_IMPLEMENTATION': 'rmw_cyclonedds_cpp', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/sarthak/precise_docking_ws/install/ultralytics_ros:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/teleop_cpp_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/nav2_amcl:/home/sarthak/precise_docking_ws/install/localization_node:/home/sarthak/precise_docking_ws/install/localization_amcl:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble', 'ROS_DOMAIN_ID': '4', 'SHELL': '/bin/bash', 'LC_NAME': 'nl_NL.UTF-8', 'TERMINATOR_UUID': 'urn:uuid:d58c5d38-ddba-47ff-842f-c6dd4420c645', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LC_MEASUREMENT': 'nl_NL.UTF-8', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'GJS_DEBUG_OUTPUT': 'stderr', 'LC_IDENTIFICATION': 'nl_NL.UTF-8', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/sarthak/precise_docking_ws/build/active_localization', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/sarthak/precise_docking_ws/build/active_localization/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/reach_the_goal/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/frontend/local/lib/python3.10/dist-packages:/home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'LC_NUMERIC': 'nl_NL.UTF-8', 'LC_PAPER': 'nl_NL.UTF-8', 'COLCON': '1', 'VTE_VERSION': '6800', 'CMAKE_PREFIX_PATH': '/home/sarthak/precise_docking_ws/install/ultralytics_ros:/home/sarthak/precise_docking_ws/install/teleop_cpp_ros2:/home/sarthak/precise_docking_ws/install/nav2_amcl:/home/sarthak/precise_docking_ws/install/localization_node:/home/sarthak/precise_docking_ws/install/localization_amcl:/home/sarthak/precise_docking_ws/install/frontend:/home/sarthak/precise_docking_ws/install/docking_bringup'}, 'shell': False}
+[5.124901] (-) TimerEvent: {}
+[5.227276] (-) TimerEvent: {}
+[5.327753] (-) TimerEvent: {}
+[5.431902] (-) TimerEvent: {}
+[5.532752] (-) TimerEvent: {}
+[5.634442] (-) TimerEvent: {}
+[5.737345] (-) TimerEvent: {}
+[5.837850] (-) TimerEvent: {}
+[5.943760] (-) TimerEvent: {}
+[6.049962] (-) TimerEvent: {}
+[6.154491] (-) TimerEvent: {}
+[6.226428] (active_localization) StderrLine: {'line': b"/home/sarthak/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'\n"}
+[6.227763] (active_localization) StderrLine: {'line': b'  warnings.warn(msg)\n'}
+[6.253896] (-) TimerEvent: {}
+[6.355270] (-) TimerEvent: {}
+[6.458105] (-) TimerEvent: {}
+[6.558774] (-) TimerEvent: {}
+[6.659153] (-) TimerEvent: {}
+[6.759667] (-) TimerEvent: {}
+[6.861492] (-) TimerEvent: {}
+[6.960475] (active_localization) StdoutLine: {'line': b'running egg_info\n'}
+[6.961550] (-) TimerEvent: {}
+[6.982697] (active_localization) StdoutLine: {'line': b'writing ../../build/active_localization/active_localization.egg-info/PKG-INFO\n'}
+[6.985399] (active_localization) StdoutLine: {'line': b'writing dependency_links to ../../build/active_localization/active_localization.egg-info/dependency_links.txt\n'}
+[6.986329] (active_localization) StdoutLine: {'line': b'writing entry points to ../../build/active_localization/active_localization.egg-info/entry_points.txt\n'}
+[6.986597] (active_localization) StdoutLine: {'line': b'writing requirements to ../../build/active_localization/active_localization.egg-info/requires.txt\n'}
+[6.986861] (active_localization) StdoutLine: {'line': b'writing top-level names to ../../build/active_localization/active_localization.egg-info/top_level.txt\n'}
+[7.061680] (-) TimerEvent: {}
+[7.164554] (-) TimerEvent: {}
+[7.268680] (-) TimerEvent: {}
+[7.372416] (-) TimerEvent: {}
+[7.485132] (-) TimerEvent: {}
+[7.591292] (-) TimerEvent: {}
+[7.692738] (-) TimerEvent: {}
+[7.794482] (-) TimerEvent: {}
+[7.895119] (-) TimerEvent: {}
+[7.997486] (-) TimerEvent: {}
+[8.108267] (-) TimerEvent: {}
+[8.241779] (-) TimerEvent: {}
+[8.348459] (-) TimerEvent: {}
+[8.450120] (-) TimerEvent: {}
+[8.552778] (-) TimerEvent: {}
+[8.653167] (-) TimerEvent: {}
+[8.754073] (-) TimerEvent: {}
+[8.854503] (-) TimerEvent: {}
+[8.961259] (-) TimerEvent: {}
+[9.061812] (-) TimerEvent: {}
+[9.164273] (-) TimerEvent: {}
+[9.269307] (-) TimerEvent: {}
+[9.384191] (-) TimerEvent: {}
+[9.489135] (-) TimerEvent: {}
+[9.590439] (-) TimerEvent: {}
+[9.696354] (-) TimerEvent: {}
+[9.797853] (-) TimerEvent: {}
+[9.900509] (-) TimerEvent: {}
+[10.033234] (-) TimerEvent: {}
+[10.321756] (-) TimerEvent: {}
+[10.430928] (-) TimerEvent: {}
+[10.543976] (-) TimerEvent: {}
+[10.662821] (-) TimerEvent: {}
+[10.771559] (-) TimerEvent: {}
+[10.953797] (-) TimerEvent: {}
+[11.055459] (-) TimerEvent: {}
+[11.165852] (-) TimerEvent: {}
+[11.284479] (-) TimerEvent: {}
+[11.393770] (-) TimerEvent: {}
+[11.505827] (-) TimerEvent: {}
+[11.626214] (-) TimerEvent: {}
+[11.772200] (-) TimerEvent: {}
+[11.881673] (-) TimerEvent: {}
+[11.988729] (-) TimerEvent: {}
+[12.091793] (-) TimerEvent: {}
+[12.195719] (-) TimerEvent: {}
+[12.298146] (-) TimerEvent: {}
+[12.404968] (-) TimerEvent: {}
+[12.508602] (-) TimerEvent: {}
+[12.615094] (-) TimerEvent: {}
+[12.721075] (-) TimerEvent: {}
+[12.825825] (-) TimerEvent: {}
+[12.929088] (-) TimerEvent: {}
+[13.033355] (-) TimerEvent: {}
+[13.140785] (-) TimerEvent: {}
+[13.246784] (-) TimerEvent: {}
+[13.350592] (-) TimerEvent: {}
+[13.462251] (-) TimerEvent: {}
+[13.570479] (-) TimerEvent: {}
+[13.676557] (-) TimerEvent: {}
+[13.784446] (-) TimerEvent: {}
+[13.899622] (-) TimerEvent: {}
+[14.005668] (-) TimerEvent: {}
+[14.112750] (-) TimerEvent: {}
+[14.221458] (-) TimerEvent: {}
+[14.239061] (active_localization) StdoutLine: {'line': b"writing manifest file '../../build/active_localization/active_localization.egg-info/SOURCES.txt'\n"}
+[14.240887] (active_localization) StdoutLine: {'line': b'running build\n'}
+[14.240990] (active_localization) StdoutLine: {'line': b'running build_py\n'}
+[14.241238] (active_localization) StdoutLine: {'line': b'copying active_localization/__init__.py -> /home/sarthak/precise_docking_ws/build/active_localization/build/lib/active_localization\n'}
+[14.241740] (active_localization) StdoutLine: {'line': b'copying active_localization/frontier_detection.py -> /home/sarthak/precise_docking_ws/build/active_localization/build/lib/active_localization\n'}
+[14.242085] (active_localization) StdoutLine: {'line': b'copying active_localization/path_to_goal.py -> /home/sarthak/precise_docking_ws/build/active_localization/build/lib/active_localization\n'}
+[14.242922] (active_localization) StdoutLine: {'line': b'copying active_localization/local_map.py -> /home/sarthak/precise_docking_ws/build/active_localization/build/lib/active_localization\n'}
+[14.243629] (active_localization) StdoutLine: {'line': b'copying active_localization/next_best_view.py -> /home/sarthak/precise_docking_ws/build/active_localization/build/lib/active_localization\n'}
+[14.244609] (active_localization) StdoutLine: {'line': b'running install\n'}
+[14.251159] (active_localization) StdoutLine: {'line': b'running install_lib\n'}
+[14.321997] (-) TimerEvent: {}
+[14.427710] (-) TimerEvent: {}
+[14.531081] (-) TimerEvent: {}
+[14.638954] (-) TimerEvent: {}
+[14.675173] (active_localization) StdoutLine: {'line': b'running install_data\n'}
+[14.677045] (active_localization) StdoutLine: {'line': b'copying resource/active_localization -> /home/sarthak/precise_docking_ws/install/active_localization/share/ament_index/resource_index/packages\n'}
+[14.677435] (active_localization) StdoutLine: {'line': b'copying package.xml -> /home/sarthak/precise_docking_ws/install/active_localization/share/active_localization\n'}
+[14.678064] (active_localization) StdoutLine: {'line': b'running install_egg_info\n'}
+[14.738511] (-) TimerEvent: {}
+[14.757091] (active_localization) StdoutLine: {'line': b"removing '/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[14.759126] (active_localization) StdoutLine: {'line': b'Copying ../../build/active_localization/active_localization.egg-info to /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active_localization-0.0.0-py3.10.egg-info\n'}
+[14.763799] (active_localization) StdoutLine: {'line': b'running install_scripts\n'}
+[14.838633] (-) TimerEvent: {}
+[14.940612] (-) TimerEvent: {}
+[15.043077] (-) TimerEvent: {}
+[15.147219] (-) TimerEvent: {}
+[15.257456] (-) TimerEvent: {}
+[15.366929] (-) TimerEvent: {}
+[15.477717] (-) TimerEvent: {}
+[15.581378] (-) TimerEvent: {}
+[15.682800] (-) TimerEvent: {}
+[15.785420] (-) TimerEvent: {}
+[15.887393] (-) TimerEvent: {}
+[15.987807] (-) TimerEvent: {}
+[16.088197] (-) TimerEvent: {}
+[16.188569] (-) TimerEvent: {}
+[16.288956] (-) TimerEvent: {}
+[16.390897] (-) TimerEvent: {}
+[16.502766] (-) TimerEvent: {}
+[16.510376] (active_localization) StdoutLine: {'line': b'Installing frontier_detection script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization\n'}
+[16.513974] (active_localization) StdoutLine: {'line': b'Installing local_map_node script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization\n'}
+[16.514339] (active_localization) StdoutLine: {'line': b'Installing localization script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization\n'}
+[16.515214] (active_localization) StdoutLine: {'line': b'Installing path_to_goal script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization\n'}
+[16.520893] (active_localization) StdoutLine: {'line': b"writing list of installed files to '/home/sarthak/precise_docking_ws/build/active_localization/install.log'\n"}
+[16.603965] (-) TimerEvent: {}
+[16.710084] (active_localization) CommandEnded: {'returncode': 0}
+[16.714166] (-) TimerEvent: {}
+[16.788275] (active_localization) JobEnded: {'identifier': 'active_localization', 'rc': 0}
+[16.793608] (-) EventReactorShutdown: {}

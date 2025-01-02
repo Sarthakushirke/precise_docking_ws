@@ -4,13 +4,13 @@ import math  # Import at the beginning of your script
 
 
 def check_visible_objects_from_centroid_simple(centroid_x, centroid_y):
-    import math
+    
 
     # Define the forward direction (e.g., along positive X-axis)
     forward_angle = 0.0  # radians
 
     # Field of view from -75 to +75 degrees (total 150 degrees)
-    fov_angle = math.radians(150)  # Convert degrees to radians
+    fov_angle = math.radians(170)  # Convert degrees to radians
 
     # Sensor range
     sensor_range = 10.0  # meters

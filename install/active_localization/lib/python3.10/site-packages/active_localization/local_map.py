@@ -195,8 +195,6 @@ class OccupancyGridUpdater(Node):
         # num_free_after = np.count_nonzero(updated_map == 0)
         # self.get_logger().info(f"Number of free cells after update: {num_free_after}")
 
-
-
         # Publish the updated map
         updated_occupancy_grid = OccupancyGrid()
         updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
