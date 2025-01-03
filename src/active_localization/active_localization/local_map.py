@@ -51,7 +51,7 @@ class OccupancyGridUpdater(Node):
 
         self.map_data = None
         self.map_info = None
-        
+        self.local_map_data = None
 
     def map_callback(self, msg):
         self.map_info = msg.info
@@ -108,6 +108,39 @@ class OccupancyGridUpdater(Node):
                 y += sy
             points.append((x, y))
         return points
+    
+    def merge_cell(self,old_val, new_val):
+        """
+        Example rules for merging one cell from local_map_data (old_val)
+        with updated_map (new_val).
+        Return the merged value.
+        """
+        # If the new cell is -1 => unknown, keep old value (unless old was also -1).
+        if new_val == -1:
+            # For example, keep the old_val if it is known
+            return old_val  
+
+        # If new cell is free (0) and old_val was unknown (-1) => now it's discovered free
+        if new_val == 0:
+            if old_val == -1:
+                return 0  # we discovered it is free
+            # If old_val is 0 or 100, you can decide how to handle:
+            # e.g., if old_val was 100 but new says 0 => conflict, pick a policy
+            # For now, let's trust new_val if old_val != 100
+            if old_val == 100:
+                # conflict; do we trust old or new? 
+                # let's suppose we trust old if we previously had it as occupied
+                return 100
+            return 0
+
+        # If new cell is 100 => discovered occupied
+        if new_val == 100:
+            # If old was -1 or 0, override with 100
+            return 100
+
+        # Otherwise, fallback
+        return new_val
+
     
 
     def lidar_callback(self, msg):
@@ -196,14 +229,35 @@ class OccupancyGridUpdater(Node):
         # num_free_after = np.count_nonzero(updated_map == 0)
         # self.get_logger().info(f"Number of free cells after update: {num_free_after}")
 
+
+
+        if self.local_map_data is None:
+        # if first time, or no local map yet
+            self.local_map_data = updated_map
+        else:
+            # cell-by-cell merge
+            height, width = self.local_map_data.shape
+            for r in range(height):
+                for c in range(width):
+                    old_val = self.local_map_data[r, c]
+                    new_val = updated_map[r, c]
+                    merged = self.merge_cell(old_val, new_val)
+                    self.local_map_data[r, c] = merged
         # Publish the updated map
-        updated_occupancy_grid = OccupancyGrid()
-        updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
-        updated_occupancy_grid.header.frame_id = "map"
-        updated_occupancy_grid.info = self.map_info
-        updated_occupancy_grid.data = updated_map.flatten().tolist()
-        self.map_pub.publish(updated_occupancy_grid)
+        # updated_occupancy_grid = OccupancyGrid()
+        # updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
+        # updated_occupancy_grid.header.frame_id = "map"
+        # updated_occupancy_grid.info = self.map_info
+        # updated_occupancy_grid.data = updated_map.flatten().tolist()
+        # self.map_pub.publish(updated_occupancy_grid)
         # self.get_logger().info('Published updated map')
+
+        local_occupancy_grid = OccupancyGrid()
+        local_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
+        local_occupancy_grid.header.frame_id = "map"
+        local_occupancy_grid.info = self.map_info
+        local_occupancy_grid.data = self.local_map_data.flatten().tolist()
+        self.map_pub.publish(local_occupancy_grid)
 
 def main(args=None):
     rclpy.init(args=args)
