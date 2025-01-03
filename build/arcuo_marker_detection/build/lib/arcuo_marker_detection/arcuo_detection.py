@@ -151,8 +151,8 @@ class arcuo_marker_detection(Node): # Node class
                 t.transform.rotation.w = quat[3] 
 
                 # # Log the rotation and translation vectors
-                # self.get_logger().info(f'Translation Vector {i}: x={t.transform.translation.x}, y={t.transform.translation.y}, z={t.transform.translation.z}')
-                # self.get_logger().info(f'Rotation Vector {i}: x={quat[0]}, y={quat[1]}, z={quat[2]}, w={quat[3]}')
+                self.get_logger().info(f'Translation Vector {i}: x={t.transform.translation.x}, y={t.transform.translation.y}, z={t.transform.translation.z}')
+                self.get_logger().info(f'Rotation Vector {i}: x={quat[0]}, y={quat[1]}, z={quat[2]}, w={quat[3]}')
 
 
                 # origin_x = -9.07
@@ -190,7 +190,8 @@ class arcuo_marker_detection(Node): # Node class
                 # Extract x,y,z in robot/base frame
                 x_robot = marker_in_robot_frame.point.x
                 y_robot = marker_in_robot_frame.point.y
-                z_robot = marker_in_robot_frame.point.z
+                z_robot = round(marker_in_robot_frame.point.z * 10.0, 2)
+
 
                 # # ========== COMPUTE DISTANCE AND ANGLE ==========
                 # # 2D distance in the robot's XY-plane
@@ -208,7 +209,7 @@ class arcuo_marker_detection(Node): # Node class
                 # )
 
                 # Log the transformed position in the robot's frame
-                self.get_logger().info(f'Marker position in robot frame: x={marker_in_robot_frame.point.x}, y={marker_in_robot_frame.point.y}, z={marker_in_robot_frame.point.z}')
+                self.get_logger().info(f'Marker position in robot frame: x={x_robot}, y={y_robot}, z={z_robot}')
             
             
 

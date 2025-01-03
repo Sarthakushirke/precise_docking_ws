@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "aruco_marker_detection_node = arcuo_marker_detection.arcuo_detection:main"
+            "aruco_marker_detection_node = arcuo_marker_detection.arcuo_detection:main",
+            "aruco_marker_detection = arcuo_marker_detection.pose_arcuo_marker:main"
         ],
     },
 )

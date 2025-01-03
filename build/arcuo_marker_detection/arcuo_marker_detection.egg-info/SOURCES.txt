@@ -10,6 +10,7 @@ setup.py
 ../../build/arcuo_marker_detection/arcuo_marker_detection.egg-info/zip-safe
 arcuo_marker_detection/__init__.py
 arcuo_marker_detection/arcuo_detection.py
+arcuo_marker_detection/pose_arcuo_marker.py
 resource/arcuo_marker_detection
 test/test_copyright.py
 test/test_flake8.py
