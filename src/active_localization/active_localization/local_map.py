@@ -51,6 +51,7 @@ class OccupancyGridUpdater(Node):
 
         self.map_data = None
         self.map_info = None
+        
 
     def map_callback(self, msg):
         self.map_info = msg.info

@@ -76,6 +76,8 @@ class MultiLocationMarkerNode(Node):
         
         self.lidar_sub = self.create_subscription(LaserScan, '/scan', self.lidar_callback, 10)
         self.get_logger().info('Subscribed to /scan topic')
+
+        self.centroid_count_true = self.create_subscription(PoseArray, '/frontier_centroids_original', self.frontier_callback, 10)
         
         self.map_pub = self.create_publisher(OccupancyGrid, '/hypothesis_map', 10)
 
@@ -139,6 +141,9 @@ class MultiLocationMarkerNode(Node):
         self.x = None
         self.y = None
 
+        #Original scan centroids
+        self.orginal_scan_centroids = None
+
         self.get_logger().info('MultiLocationMarkerNode started.')
 
 
@@ -156,6 +161,15 @@ class MultiLocationMarkerNode(Node):
         # self.column = int((self.x - self.originX) / self.resolution)
         # self.row = int((self.y - self.originY) / self.resolution)
 
+
+    def frontier_callback(self, msg: PoseArray):
+        """
+        Called each time a PoseArray is received on /frontier_centroids.
+        We can log how many frontier poses are in the array
+        and optionally do further processing.
+        """
+        self.orginal_scan_centroids = len(msg.poses)
+        self.get_logger().info(f"Received {self.orginal_scan_centroids} frontier centroids.")
 
 
     def get_color(self, group_id):
@@ -175,6 +189,10 @@ class MultiLocationMarkerNode(Node):
             return
         
         if self.x is None or self.y is None:
+            self.get_logger().warn("Robot position not yet received.")
+            return
+        
+        if self.orginal_scan_centroids is None:
             self.get_logger().warn("Robot position not yet received.")
             return
         
@@ -294,13 +312,13 @@ class MultiLocationMarkerNode(Node):
             centroids_info = []
 
 
-            orginal_scan_centroids = 3
+            
           
             for frontier_id, (centroid_x, centroid_y) in frontiers_middle.items():
 
                 # print("Length of frontiers",len(frontiers_middle))
 
-                if orginal_scan_centroids == len(frontiers_middle):
+                if self.orginal_scan_centroids == len(frontiers_middle):
 
                     filtered_hypotheses.append((x_r, y_r, theta_r))
 

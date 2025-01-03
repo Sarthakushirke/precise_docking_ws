@@ -46,7 +46,7 @@ class OccupancyGridUpdater(Node):
 
 
         # Publisher for centroids
-        self.centroids_pub = self.create_publisher(PoseArray, '/frontier_centroids', 10)
+        self.centroids_pub = self.create_publisher(PoseArray, '/frontier_centroids_original', 10)
         self.get_logger().info('Publishing centroids on /frontier_centroids')
 
         # TF buffer and listener
