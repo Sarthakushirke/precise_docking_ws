@@ -148,6 +148,7 @@ class MultiLocationMarkerNode(Node):
         self.orginal_scan_centroids = None
 
         self.riviz_publish = True
+        self.detection = True
 
         self.get_logger().info('MultiLocationMarkerNode started.')
 
@@ -188,14 +189,16 @@ class MultiLocationMarkerNode(Node):
         We only receive the marker's position (x,y,z) in the robot frame.
         We'll assume orientation=0 (phi_marker_relative=0).
         """
+
         self.marker_pose = msg
-        
+         
         if self.marker_pose.point.z not in self.stored_marker_z_values:
             self.stored_marker_z_values.append(self.marker_pose.point.z)
 
-
-
         print("self.stored_marker_z_values", len(self.stored_marker_z_values))
+
+    
+        
 
         if self.map_data is None:
             self.get_logger().warn('Map data not available yet')
@@ -206,13 +209,15 @@ class MultiLocationMarkerNode(Node):
             return
         
         if self.orginal_scan_centroids is None:
-            self.get_logger().warn("Robot position not yet received.")
+            self.get_logger().warn("orginal scan centroids not yet received.")
             return
         
         # If the robot is currently moving towards a goal, skip computation
         if self.control_active:
             self.get_logger().info("Robot is moving towards a goal, skipping computation.")
             return
+
+
 
         # Hardcode the marker ID in this example
         marker_id = self.current_marker_id
@@ -566,10 +571,7 @@ class MultiLocationMarkerNode(Node):
                 self.measurement_model()
 
 
-            
-
-
-                                
+         
             # Multiply old weight by likelihood
             # updated_weights = []
             # for i in range(len(self.marker_map[0])):
@@ -597,6 +599,8 @@ class MultiLocationMarkerNode(Node):
 
             # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
             self.riviz_publish = False
+
+            print("Hypotheses dictnary",self.hypotheses_dict)
 
             self.publish_pose_array(self.hypotheses_dict)
 
