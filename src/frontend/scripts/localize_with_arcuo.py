@@ -98,6 +98,8 @@ class MultiLocationMarkerNode(Node):
         # Store current hypotheses (marker_id => list of (x_r, y_r, theta_r))
         self.hypotheses_dict = {}
 
+        self.predicted_distances = {} 
+
         # Hardcode a single marker ID for demonstration
         self.current_marker_id = 0
 
@@ -183,6 +185,9 @@ class MultiLocationMarkerNode(Node):
         We only receive the marker's position (x,y,z) in the robot frame.
         We'll assume orientation=0 (phi_marker_relative=0).
         """
+        self.marker_pose = msg
+        self.stored_marker_z_values = []
+        self.stored_marker_z_values.append(self.marker_pose.point.z)
 
         if self.map_data is None:
             self.get_logger().warn('Map data not available yet')
@@ -543,19 +548,50 @@ class MultiLocationMarkerNode(Node):
 
             self.apply_pose_diff_to_hypotheses(dx, dy, dtheta)
 
-            # -- APPLY THE SAME MOTION TO YOUR HYPOTHESES --
-            # self.hypotheses_dict = self.apply_motion_to_hypotheses(v, w, dt)
+            best_hypotheses = {}
 
-            # self.hypotheses_dict = self.apply_ackermann_motion_to_hypotheses(v,w,dt,0.12)
+            for measured_dist in self.stored_marker_z_values:
 
-            # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
-            self.publish_pose_array(self.hypotheses_dict)
+                print("measured_distance", round(measured_dist * 10.0, 2))
 
-            # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
-            self.publish_square_markers(self.hypotheses_dict)
+                best_likelihood = float('-inf')  # Initialize with negative infinity
+                best_hypothesis = None
 
-            # Suppose we detect marker_id=0, we compute a likelihood for each hypothesis i
-            # likelihoods = self.compute_likelihood()
+                for marker_id, hypotheses in self.hypotheses_dict.items():
+                    # retrieve the list of marker poses for that marker_id
+                    if marker_id not in self.marker_map:
+                        self.get_logger().warn(f"Marker ID {marker_id} not found in marker_map. Skipping.")
+                        continue
+                    
+                    marker_poses_list = self.marker_map[marker_id] 
+
+                    for marker_pose in marker_poses_list:
+
+                        print("Marker pose:", marker_pose)
+
+                        for hypothesis in hypotheses:
+                            # hypothesis = (x_r, y_r, theta_r)
+                            print("Hypothesis:", hypothesis)
+                            dist_pred = self.predict_marker_measurement(hypothesis, marker_pose)
+                            
+                            sigma_distance = 0.2 
+                            likelihood_hyp = self.compute_likelihood(round(measured_dist * 10.0, 2),dist_pred,sigma_distance)
+
+                            # print("Predicted Distance:", dist_pred)
+                            print("Liklihood hyp:", likelihood_hyp)
+
+                            # Update the best hypothesis if this one is better
+                            if likelihood_hyp > best_likelihood:
+                                best_likelihood = likelihood_hyp
+                                best_hypothesis = hypothesis
+
+                # Store the best hypothesis for this measured distance
+                best_hypotheses[round(measured_dist * 10.0, 2)] = {
+                    "hypothesis": best_hypothesis,
+                    "likelihood": best_likelihood
+                }
+                                
+
 
             # Multiply old weight by likelihood
             # updated_weights = []
@@ -571,6 +607,22 @@ class MultiLocationMarkerNode(Node):
 
             # # Store them back
             # self.hypothesis_weights[0] = updated_weights
+
+            # -- APPLY THE SAME MOTION TO YOUR HYPOTHESES --
+            # self.hypotheses_dict = self.apply_motion_to_hypotheses(v, w, dt)
+
+            # Print the best hypotheses for each measured distance
+            print("\nBest Hypotheses for each Measured Distance:")
+            for measured_dist, data in best_hypotheses.items():
+                print(f"Measured Distance: {measured_dist}")
+                print(f"  Best Hypothesis: {data['hypothesis']}")
+                print(f"  Likelihood: {data['likelihood']}")
+
+            # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+            self.publish_pose_array(self.hypotheses_dict)
+
+            # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+            self.publish_square_markers(self.hypotheses_dict)
 
             time.sleep(0.1)  # Control loop rate (10 Hz)
         self.get_logger().info("Control loop ended.")
@@ -657,31 +709,21 @@ class MultiLocationMarkerNode(Node):
 
     def compute_likelihood(self,
         distance_measured: float,
-        orientation_measured: float,
         distance_expected: float,
-        orientation_expected: float,
         sigma_distance: float,
-        sigma_orientation: float
     ) -> float:
         """
         Computes the likelihood of a measurement given the predicted measurement
         using a simple Gaussian sensor model in distance and orientation.
         
         :param distance_measured:   The distance observed by the sensor (e.g. from robot to marker)
-        :param orientation_measured:The orientation or bearing observed by the sensor (radians)
         :param distance_expected:   The distance we expect if this hypothesis is correct
-        :param orientation_expected:The orientation/bearing we expect if this hypothesis is correct
         :param sigma_distance:      Std dev for distance measurement noise
-        :param sigma_orientation:   Std dev for orientation measurement noise
         :return: A likelihood value in [0, 1].
         """
 
         # 1) Compute errors
         error_d = distance_measured - distance_expected
-        error_theta = orientation_measured - orientation_expected
-
-        # Optional: wrap orientation error to [-pi, pi]
-        error_theta = (error_theta + math.pi) % (2 * math.pi) - math.pi
 
         # 2) Compute Gaussian likelihood for distance
         # L_d = exp(-(error_d^2) / (2*sigma_distance^2))
@@ -691,19 +733,12 @@ class MultiLocationMarkerNode(Node):
         else:
             likelihood_distance = math.exp(-(error_d**2) / (2.0 * sigma_distance**2))
 
-        # 3) Compute Gaussian likelihood for orientation
-        # L_theta = exp(-(error_theta^2) / (2*sigma_orientation^2))
-        if sigma_orientation <= 0:
-            likelihood_orientation = 1.0 if abs(error_theta) < 1e-9 else 0.0
-        else:
-            likelihood_orientation = math.exp(-(error_theta**2) / (2.0 * sigma_orientation**2))
-
         # 4) Combine (assuming independence => multiply)
-        L = likelihood_distance * likelihood_orientation
+        L = likelihood_distance
 
         return L
 
-    def predict_marker_measurement(hyp_pose, marker_pose):
+    def predict_marker_measurement(self,hyp_pose, marker_pose):
         """
         Predict the (distance, bearing) you'd see for 'marker_pose'
         from the robot's hypothesized pose 'hyp_pose' in a 2D map.
@@ -713,19 +748,19 @@ class MultiLocationMarkerNode(Node):
         :return: (dist_pred, bearing_pred)
         """
         x_r, y_r, theta_r = hyp_pose
-        x_m, y_m = marker_pose
+        x_m, y_m, theta_map = marker_pose
 
         dx = x_m - x_r
         dy = y_m - y_r
 
         dist_pred = math.sqrt(dx*dx + dy*dy)
-        angle_global = math.atan2(dy, dx)
-        bearing_pred = angle_global - theta_r
+        # angle_global = math.atan2(dy, dx)
+        # bearing_pred = angle_global - theta_r
 
-        # Wrap bearing to [-pi, +pi], optional
-        bearing_pred = (bearing_pred + math.pi) % (2*math.pi) - math.pi
+        # # Wrap bearing to [-pi, +pi], optional
+        # bearing_pred = (bearing_pred + math.pi) % (2*math.pi) - math.pi
 
-        return dist_pred, bearing_pred
+        return dist_pred
 
 
     def exploration(self, data, width, height, resolution, column, row, originX, originY):

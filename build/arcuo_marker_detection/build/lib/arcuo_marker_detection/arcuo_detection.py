@@ -15,6 +15,7 @@ import tf2_ros
 import tf2_geometry_msgs
 from geometry_msgs.msg import PointStamped
 import math
+from geometry_msgs.msg import PoseArray, Pose
 
 
 # The different ArUco dictionaries built into the OpenCV library. 
@@ -52,7 +53,6 @@ class arcuo_marker_detection(Node): # Node class
         
         self.publisher_marker_in_robot_frame = self.create_publisher(PointStamped, 'marker_in_robot_frame', 10)
 
-        
 
         # Declare parameters
         self.declare_parameter("aruco_dictionary_name", "DICT_6X6_250")
@@ -63,6 +63,9 @@ class arcuo_marker_detection(Node): # Node class
         self.aruco_marker_side_length = self.get_parameter("aruco_marker_side_length").get_parameter_value().double_value
         aruco_dictionary_name = self.get_parameter("aruco_dictionary_name").get_parameter_value().string_value
         self.aruco_marker_name = self.get_parameter("aruco_marker_name").get_parameter_value().string_value
+
+        
+        self.detected_markers = {}  # e.g. { marker_id -> [(x1,y1,z1), (x2,y2,z2), ...] }
 
 
         #Load camera matrix
@@ -84,8 +87,8 @@ class arcuo_marker_detection(Node): # Node class
 
         # Used to convert between ROS and OpenCV images
         self.bridge = CvBridge()
-        
-        
+
+            
     def arcuo_detection_callback(self, msg: Image):
         
         # Display the message on the console
@@ -153,76 +156,48 @@ class arcuo_marker_detection(Node): # Node class
                 # # Log the rotation and translation vectors
                 self.get_logger().info(f'Translation Vector {i}: x={t.transform.translation.x}, y={t.transform.translation.y}, z={t.transform.translation.z}')
                 self.get_logger().info(f'Rotation Vector {i}: x={quat[0]}, y={quat[1]}, z={quat[2]}, w={quat[3]}')
-
-
-                # origin_x = -9.07
-                # origin_y = -9.08
-                # resolution = 0.05
-                # centroid_column = int((t.transform.translation.x - origin_x) / resolution)
-                # centroid_row = int((t.transform.translation.y - origin_y) / resolution)
-
-                # x_coordinate = centroid_column * resolution + origin_x
-                # y_coordinate = centroid_row * resolution + origin_y
-
-                # print(x_coordinate, y_coordinate)
-                # Send the transform
-                # self.tfbroadcaster.sendTransform(t)    
                 
 
-            # Transform to robot base frame using TF lookup
-            try:
-                # Lookup the transformation between 'diff_drive/lidar_link' and 'camera_link'
-                transform = self.tf_buffer.lookup_transform('map', 'diff_drive/cam_link/camera1', rclpy.time.Time())
+                # Transform to robot base frame using TF lookup
+                try:
+                    # Lookup the transformation between 'diff_drive/lidar_link' and 'camera_link'
+                    transform = self.tf_buffer.lookup_transform('map', 'diff_drive/cam_link/camera1', rclpy.time.Time())
+                    
+                    # Create a PointStamped message to hold the marker position in the camera frame
+                    point_in_camera_frame = PointStamped()
+                    point_in_camera_frame.header.stamp = self.get_clock().now().to_msg()
+                    point_in_camera_frame.header.frame_id = 'diff_drive/cam_link/camera1'
+                    
+                    # Set the marker's position in the camera frame
+                    point_in_camera_frame.point.x = t.transform.translation.x
+                    point_in_camera_frame.point.y = t.transform.translation.y
+                    point_in_camera_frame.point.z = t.transform.translation.z
+
+                    # Perform the transformation to the robot's frame
+                    marker_in_robot_frame = tf2_geometry_msgs.do_transform_point(point_in_camera_frame, transform)
+
+                    # Extract x,y,z in robot/base frame
+                    x_robot = marker_in_robot_frame.point.x
+                    y_robot = marker_in_robot_frame.point.y
+                    z_robot = round(marker_in_robot_frame.point.z * 10.0, 2)
+
+
+                    self.get_logger().info(f'Marker position in robot frame: x={x_robot}, y={y_robot}, z={z_robot}')
+
+
+                    # Draw the axes on the marker
+                    cv2.drawFrameAxes(current_frame, self.mtx, self.dst, rvecs[i], tvecs[i], 0.05)
                 
-                # Create a PointStamped message to hold the marker position in the camera frame
-                point_in_camera_frame = PointStamped()
-                point_in_camera_frame.header.stamp = self.get_clock().now().to_msg()
-                point_in_camera_frame.header.frame_id = 'diff_drive/cam_link/camera1'
+            
+                    # Publish the transformed marker position
+                    self.publisher_marker_in_robot_frame.publish(marker_in_robot_frame)
+
+
                 
-                # Set the marker's position in the camera frame
-                point_in_camera_frame.point.x = t.transform.translation.x
-                point_in_camera_frame.point.y = t.transform.translation.y
-                point_in_camera_frame.point.z = t.transform.translation.z
-
-                # Perform the transformation to the robot's frame
-                marker_in_robot_frame = tf2_geometry_msgs.do_transform_point(point_in_camera_frame, transform)
-
-                # Extract x,y,z in robot/base frame
-                x_robot = marker_in_robot_frame.point.x
-                y_robot = marker_in_robot_frame.point.y
-                z_robot = round(marker_in_robot_frame.point.z * 10.0, 2)
-
-
-                # # ========== COMPUTE DISTANCE AND ANGLE ==========
-                # # 2D distance in the robot's XY-plane
-                # distance = math.sqrt(x_robot**2 + y_robot**2)
-
-                # # Angle (yaw) around Z, in degrees (optional: in radians)
-                # # If you only care about angle in the horizontal plane:
-                # angle = math.degrees(math.atan2(y_robot, x_robot))
-
-                # # Log or publish the distance and angle
-                # self.get_logger().info(
-                #     f"Marker {marker_id} in robot frame => "
-                #     f"x={x_robot:.3f}, y={y_robot:.3f}, z={z_robot:.3f} | "
-                #     f"distance={distance:.3f} m, angle={angle:.1f} deg"
-                # )
-
-                # Log the transformed position in the robot's frame
-                self.get_logger().info(f'Marker position in robot frame: x={x_robot}, y={y_robot}, z={z_robot}')
-            
-            
-
-                # Publish the transformed marker position
-                self.publisher_marker_in_robot_frame.publish(marker_in_robot_frame)
-            
-            except Exception as e:
-                self.get_logger().error(f'Could not transform marker pose to robot frame: {e}')
-
-
-                # Draw the axes on the marker
-                # cv2.aruco.drawAxis(current_frame, self.mtx, self.dst, rvecs[i], tvecs[i], 0.05) 
-                cv2.drawFrameAxes(current_frame, self.mtx, self.dst, rvecs[i], tvecs[i], 0.05) 
+                except Exception as e:
+                    self.get_logger().error(f'Could not transform marker pose to robot frame: {e}')
+ 
+                 
 
         # Resize the frame to the desired size
         desired_width = 800
