@@ -102,6 +102,7 @@ class MultiLocationMarkerNode(Node):
 
         # Hardcode a single marker ID for demonstration
         self.current_marker_id = 0
+        self.stored_marker_z_values = []
 
         # Publisher for PoseArray (arrows in RViz)
         self.pose_array_pub = self.create_publisher(
@@ -146,6 +147,8 @@ class MultiLocationMarkerNode(Node):
         #Original scan centroids
         self.orginal_scan_centroids = None
 
+        self.riviz_publish = True
+
         self.get_logger().info('MultiLocationMarkerNode started.')
 
 
@@ -186,8 +189,13 @@ class MultiLocationMarkerNode(Node):
         We'll assume orientation=0 (phi_marker_relative=0).
         """
         self.marker_pose = msg
-        self.stored_marker_z_values = []
-        self.stored_marker_z_values.append(self.marker_pose.point.z)
+        
+        if self.marker_pose.point.z not in self.stored_marker_z_values:
+            self.stored_marker_z_values.append(self.marker_pose.point.z)
+
+
+
+        print("self.stored_marker_z_values", len(self.stored_marker_z_values))
 
         if self.map_data is None:
             self.get_logger().warn('Map data not available yet')
@@ -548,51 +556,20 @@ class MultiLocationMarkerNode(Node):
 
             self.apply_pose_diff_to_hypotheses(dx, dy, dtheta)
 
-            best_hypotheses = {}
+            if self.riviz_publish is True:
+                # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+                self.publish_pose_array(self.hypotheses_dict)
 
-            for measured_dist in self.stored_marker_z_values:
+                # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+                self.publish_square_markers(self.hypotheses_dict)
 
-                print("measured_distance", round(measured_dist * 10.0, 2))
+                self.measurement_model()
 
-                best_likelihood = float('-inf')  # Initialize with negative infinity
-                best_hypothesis = None
 
-                for marker_id, hypotheses in self.hypotheses_dict.items():
-                    # retrieve the list of marker poses for that marker_id
-                    if marker_id not in self.marker_map:
-                        self.get_logger().warn(f"Marker ID {marker_id} not found in marker_map. Skipping.")
-                        continue
-                    
-                    marker_poses_list = self.marker_map[marker_id] 
+            
 
-                    for marker_pose in marker_poses_list:
 
-                        print("Marker pose:", marker_pose)
-
-                        for hypothesis in hypotheses:
-                            # hypothesis = (x_r, y_r, theta_r)
-                            print("Hypothesis:", hypothesis)
-                            dist_pred = self.predict_marker_measurement(hypothesis, marker_pose)
-                            
-                            sigma_distance = 0.2 
-                            likelihood_hyp = self.compute_likelihood(round(measured_dist * 10.0, 2),dist_pred,sigma_distance)
-
-                            # print("Predicted Distance:", dist_pred)
-                            print("Liklihood hyp:", likelihood_hyp)
-
-                            # Update the best hypothesis if this one is better
-                            if likelihood_hyp > best_likelihood:
-                                best_likelihood = likelihood_hyp
-                                best_hypothesis = hypothesis
-
-                # Store the best hypothesis for this measured distance
-                best_hypotheses[round(measured_dist * 10.0, 2)] = {
-                    "hypothesis": best_hypothesis,
-                    "likelihood": best_likelihood
-                }
                                 
-
-
             # Multiply old weight by likelihood
             # updated_weights = []
             # for i in range(len(self.marker_map[0])):
@@ -612,13 +589,15 @@ class MultiLocationMarkerNode(Node):
             # self.hypotheses_dict = self.apply_motion_to_hypotheses(v, w, dt)
 
             # Print the best hypotheses for each measured distance
-            print("\nBest Hypotheses for each Measured Distance:")
-            for measured_dist, data in best_hypotheses.items():
-                print(f"Measured Distance: {measured_dist}")
-                print(f"  Best Hypothesis: {data['hypothesis']}")
-                print(f"  Likelihood: {data['likelihood']}")
+            # print("\nBest Hypotheses for each Measured Distance:")
+            # for measured_dist, data in best_hypotheses.items():
+            #     print(f"Measured Distance: {measured_dist}")
+            #     print(f"  Best Hypothesis: {data['hypothesis']}")
+            #     print(f"  Likelihood: {data['likelihood']}")
 
             # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+            self.riviz_publish = False
+
             self.publish_pose_array(self.hypotheses_dict)
 
             # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
@@ -644,7 +623,104 @@ class MultiLocationMarkerNode(Node):
         self.hypotheses_dict = new_hypotheses_dict
 
 
-    
+    def measurement_model(self):
+        # Store hypotheses per measurement
+        measurement_best_hypotheses = []
+
+        for measured_dist in self.stored_marker_z_values:
+
+            print("measured_distance", round(measured_dist * 10.0, 2))
+
+            # best_likelihood = float('-inf')  # Initialize with negative infinity
+            # best_hypothesis = None
+
+            current_best_hypotheses = []  # Store best hypotheses for this measurement
+            best_likelihood = float('-inf')  # Start with negative infinity
+
+            for marker_id, hypotheses in self.hypotheses_dict.items():
+                # retrieve the list of marker poses for that marker_id
+                if marker_id not in self.marker_map:
+                    self.get_logger().warn(f"Marker ID {marker_id} not found in marker_map. Skipping.")
+                    continue
+                
+                marker_poses_list = self.marker_map[marker_id] 
+
+                for marker_pose in marker_poses_list:
+
+                    print("Marker pose:", marker_pose)
+
+                    for hypothesis in hypotheses:
+                        # hypothesis = (x_r, y_r, theta_r)
+                        print("Hypothesis:", hypothesis)
+                        dist_pred = self.predict_marker_measurement(hypothesis, marker_pose)
+                        
+                        sigma_distance = 0.4 
+                        likelihood_hyp = self.compute_likelihood(round(measured_dist * 10.0, 2),dist_pred,sigma_distance)
+
+                        print("Predicted Distance:", dist_pred)
+                        print("Liklihood hyp:", likelihood_hyp)
+
+                        # Store all hypotheses with the same maximum likelihood
+                        if likelihood_hyp > best_likelihood:
+                            best_likelihood = likelihood_hyp
+                            current_best_hypotheses = [(hypothesis, likelihood_hyp)]
+                        elif likelihood_hyp == best_likelihood:
+                            current_best_hypotheses.append((hypothesis, likelihood_hyp))
+
+                
+
+                        # # Update the best hypothesis if this one is better
+                        # if likelihood_hyp > best_likelihood:
+                        #     best_likelihood = likelihood_hyp
+                        #     best_hypothesis = hypothesis
+
+            
+            # print(f"Best Hypotheses for Measurement {round(measured_dist * 10.0, 2)}:")
+            # for hyp, likelihood in current_best_hypotheses:
+            #     print(f"  Hypothesis: {hyp}, Likelihood: {likelihood}")
+                # Store current best hypotheses for this measurement
+
+                # Ensure current_best_hypotheses is added to measurement_best_hypotheses
+            if current_best_hypotheses:
+                measurement_best_hypotheses.append(current_best_hypotheses)
+                print("Measurement Best Hypotheses:", measurement_best_hypotheses)
+            else:
+                self.get_logger().warn("No valid hypotheses found for this measurement.")
+
+
+
+        # Compare hypotheses across measurements to find common ones
+        if len(measurement_best_hypotheses) == len(self.stored_marker_z_values):
+            common_hypotheses = set(hyp for hyp, _ in measurement_best_hypotheses[0])
+            
+            for measurement in measurement_best_hypotheses[1:]:
+                current_hypotheses_set = set(hyp for hyp, _ in measurement)
+                common_hypotheses &= current_hypotheses_set  # Keep only common hypotheses
+
+            # If there are common hypotheses, find the one with the highest cumulative likelihood
+            final_best_hypothesis = None
+            highest_combined_likelihood = float('-inf')
+
+            for common_hypothesis in common_hypotheses:
+                cumulative_likelihood = sum(
+                    likelihood for measurement in measurement_best_hypotheses
+                    for hyp, likelihood in measurement if hyp == common_hypothesis
+                )
+                if cumulative_likelihood > highest_combined_likelihood:
+                    highest_combined_likelihood = cumulative_likelihood
+                    final_best_hypothesis = common_hypothesis
+
+            print("\nFinal Best Hypothesis Across Measurements:")
+            print(f"  Hypothesis: {final_best_hypothesis}, Combined Likelihood: {highest_combined_likelihood}")
+
+            # Keep only the final best hypothesis in self.hypotheses_dict
+            for marker_id, hypotheses in self.hypotheses_dict.items():
+                if final_best_hypothesis in hypotheses:
+                    print(f"Keeping only Hypothesis: {final_best_hypothesis} for Marker ID: {marker_id}")
+                    self.hypotheses_dict[marker_id] = [final_best_hypothesis]
+                    break  # Once updated, stop iterating
+        else:
+            print("Not enough measurements to compare hypotheses across them.")
     
     def local_control(self):
         v = None
