@@ -30,7 +30,8 @@ class MultiLocationMarkerNode(Node):
         # marker_map[marker_id] => list of (x_map, y_map, theta_map)
         self.marker_map = {
             0: [
-                (3.0, -1.0, 0.0),
+                # (3.0, -1.0, 0.0),
+                (3.0, 4.0, 0.0),
                 (-6.0, 5.0, 0.0),
                 (-3.0,-4.0,0.0),
             ],
@@ -102,7 +103,7 @@ class MultiLocationMarkerNode(Node):
 
         # Hardcode a single marker ID for demonstration
         self.current_marker_id = 0
-        self.stored_marker_z_values = []
+        # self.stored_marker_z_values = []
 
         # Publisher for PoseArray (arrows in RViz)
         self.pose_array_pub = self.create_publisher(
@@ -191,14 +192,14 @@ class MultiLocationMarkerNode(Node):
         """
 
         self.marker_pose = msg
+
+        self.stored_marker_z_values = []
          
         if self.marker_pose.point.z not in self.stored_marker_z_values:
             self.stored_marker_z_values.append(self.marker_pose.point.z)
 
         print("self.stored_marker_z_values", len(self.stored_marker_z_values))
-
-    
-        
+        print("self.stored_marker_z_values:", [round(z * 10.0, 2) for z in self.stored_marker_z_values])
 
         if self.map_data is None:
             self.get_logger().warn('Map data not available yet')
@@ -216,8 +217,6 @@ class MultiLocationMarkerNode(Node):
         if self.control_active:
             self.get_logger().info("Robot is moving towards a goal, skipping computation.")
             return
-
-
 
         # Hardcode the marker ID in this example
         marker_id = self.current_marker_id
@@ -329,9 +328,6 @@ class MultiLocationMarkerNode(Node):
 
             centroids_info = []
 
-
-            
-          
             for frontier_id, (centroid_x, centroid_y) in frontiers_middle.items():
 
                 # print("Length of frontiers",len(frontiers_middle))
@@ -453,18 +449,6 @@ class MultiLocationMarkerNode(Node):
                     self.control_thread.start()
 
 
-        # else:
-        #     self.get_logger().warn("No path found from robot to best centroid.")
-
-        #####################################
-
-
-        # print("Updated map",updated_map)
-
-        # Log the number of free cells after update
-        # num_free_after = np.count_nonzero(updated_map == 0)
-        # self.get_logger().info(f"Number of free cells after update: {num_free_after}")
-
         # Publish the updated map
         updated_occupancy_grid = OccupancyGrid()
         updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
@@ -561,14 +545,43 @@ class MultiLocationMarkerNode(Node):
 
             self.apply_pose_diff_to_hypotheses(dx, dy, dtheta)
 
-            if self.riviz_publish is True:
-                # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
-                self.publish_pose_array(self.hypotheses_dict)
+            # if self.riviz_publish is True:
+            #     # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+            #     self.publish_pose_array(self.hypotheses_dict)
 
-                # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
-                self.publish_square_markers(self.hypotheses_dict)
+            #     # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+            #     self.publish_square_markers(self.hypotheses_dict)
+            
+            # Store the previous z values
+            previous_marker_z_values = getattr(self, 'previous_marker_z_values', [])
 
+            print("self.stored_marker_z_values", len(self.stored_marker_z_values))
+            print("self.stored_marker_z_values:", [round(z * 10.0, 2) for z in self.stored_marker_z_values])
+
+            # Check for drastic change (e.g., significant difference in average or max difference)
+            if previous_marker_z_values:
+                # Calculate the difference in average values
+                avg_diff = abs(
+                    sum(self.stored_marker_z_values) / len(self.stored_marker_z_values) -
+                    sum(previous_marker_z_values) / len(previous_marker_z_values)
+                )
+                
+                # Define a threshold for "drastic" change
+                threshold = 0.5  # Adjust this threshold as per your application
+                
+                if avg_diff > threshold:
+                    print("Drastic change detected, starting measurement model...")
+                    self.measurement_model()
+                else:
+                    print("No significant change detected.")
+            else:
+                # Run the measurement model the first time
+                print("First measurement, starting measurement model...")
                 self.measurement_model()
+
+            # Update previous_marker_z_values for the next comparison
+            self.previous_marker_z_values = self.stored_marker_z_values.copy()
+
 
 
          

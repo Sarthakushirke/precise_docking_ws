@@ -1,0 +1,26 @@
+[1.372s] Invoking command in '/home/sarthak/precise_docking_ws/build/localization_node': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/localization_node -- -j20 -l20
+[2.203s] [ 33%] [32mBuilding CXX object CMakeFiles/active_docking.dir/src/active_amcl.cpp.o[0m
+[2.204s] [ 66%] [32mBuilding CXX object CMakeFiles/active_docking.dir/src/main.cpp.o[0m
+[5.919s] [100%] [32m[1mLinking CXX executable active_docking[0m
+[6.090s] [100%] Built target active_docking
+[6.106s] Invoked command in '/home/sarthak/precise_docking_ws/build/localization_node' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/localization_node -- -j20 -l20
+[6.156s] Invoking command in '/home/sarthak/precise_docking_ws/build/localization_node': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/localization_node
+[6.179s] -- Install configuration: ""
+[6.180s] -- Installing: /home/sarthak/precise_docking_ws/install/localization_node/lib/localization_node/active_docking
+[6.181s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/localization_node/lib/localization_node/active_docking" to ""
+[6.182s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/ament_index/resource_index/package_run_dependencies/localization_node
+[6.182s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/ament_index/resource_index/parent_prefix_path/localization_node
+[6.182s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/environment/ament_prefix_path.sh
+[6.182s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/environment/ament_prefix_path.dsv
+[6.182s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/environment/path.sh
+[6.182s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/environment/path.dsv
+[6.183s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/local_setup.bash
+[6.183s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/local_setup.sh
+[6.183s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/local_setup.zsh
+[6.183s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/local_setup.dsv
+[6.183s] -- Installing: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/package.dsv
+[6.183s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/ament_index/resource_index/packages/localization_node
+[6.183s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/cmake/localization_nodeConfig.cmake
+[6.183s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/cmake/localization_nodeConfig-version.cmake
+[6.183s] -- Up-to-date: /home/sarthak/precise_docking_ws/install/localization_node/share/localization_node/package.xml
+[6.190s] Invoked command in '/home/sarthak/precise_docking_ws/build/localization_node' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/localization_node
