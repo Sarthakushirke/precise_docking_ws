@@ -196,10 +196,10 @@ class MultiLocationMarkerNode(Node):
         self.stored_marker_z_values = []
          
         if self.marker_pose.point.z not in self.stored_marker_z_values:
-            self.stored_marker_z_values.append(self.marker_pose.point.z)
+            self.stored_marker_z_values.append(round(self.marker_pose.point.z* 10.0, 2))
 
         print("self.stored_marker_z_values", len(self.stored_marker_z_values))
-        print("self.stored_marker_z_values:", [round(z * 10.0, 2) for z in self.stored_marker_z_values])
+        print("self.stored_marker_z_values:", [z for z in self.stored_marker_z_values])
 
         if self.map_data is None:
             self.get_logger().warn('Map data not available yet')
@@ -545,31 +545,30 @@ class MultiLocationMarkerNode(Node):
 
             self.apply_pose_diff_to_hypotheses(dx, dy, dtheta)
 
-            # if self.riviz_publish is True:
-            #     # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
-            #     self.publish_pose_array(self.hypotheses_dict)
+            if self.riviz_publish is True:
+                # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+                self.publish_pose_array(self.hypotheses_dict)
 
-            #     # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
-            #     self.publish_square_markers(self.hypotheses_dict)
+                # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+                self.publish_square_markers(self.hypotheses_dict)
             
             # Store the previous z values
             previous_marker_z_values = getattr(self, 'previous_marker_z_values', [])
 
             print("self.stored_marker_z_values", len(self.stored_marker_z_values))
-            print("self.stored_marker_z_values:", [round(z * 10.0, 2) for z in self.stored_marker_z_values])
+            print("self.stored_marker_z_values:", [z for z in self.stored_marker_z_values])
 
             # Check for drastic change (e.g., significant difference in average or max difference)
             if previous_marker_z_values:
-                # Calculate the difference in average values
-                avg_diff = abs(
-                    sum(self.stored_marker_z_values) / len(self.stored_marker_z_values) -
-                    sum(previous_marker_z_values) / len(previous_marker_z_values)
-                )
+                # Calculate element-wise difference
+                diff_list = [abs(curr - prev) for curr, prev in zip(self.stored_marker_z_values, previous_marker_z_values)]
                 
+                print("Element-wise Differences:", diff_list)
+
                 # Define a threshold for "drastic" change
                 threshold = 0.5  # Adjust this threshold as per your application
                 
-                if avg_diff > threshold:
+                if any(diff > threshold for diff in diff_list):
                     print("Drastic change detected, starting measurement model...")
                     self.measurement_model()
                 else:
@@ -646,7 +645,7 @@ class MultiLocationMarkerNode(Node):
 
         for measured_dist in self.stored_marker_z_values:
 
-            print("measured_distance", round(measured_dist * 10.0, 2))
+            print("measured_distance", measured_dist)
 
             # best_likelihood = float('-inf')  # Initialize with negative infinity
             # best_hypothesis = None
@@ -668,23 +667,35 @@ class MultiLocationMarkerNode(Node):
 
                     for hypothesis in hypotheses:
                         # hypothesis = (x_r, y_r, theta_r)
+                        x_r, y_r, theta_r = hypothesis
                         print("Hypothesis:", hypothesis)
-                        dist_pred = self.predict_marker_measurement(hypothesis, marker_pose)
                         
-                        sigma_distance = 0.4 
-                        likelihood_hyp = self.compute_likelihood(round(measured_dist * 10.0, 2),dist_pred,sigma_distance)
+                        if hypothesis:
+                            output_obj = check_visible_objects_from_centroid_simple(x_r, y_r)
+                            print("Object returned from check_visible_objects_from_centroid_simple:", output_obj)
 
-                        print("Predicted Distance:", dist_pred)
-                        print("Liklihood hyp:", likelihood_hyp)
+                            # Check if the marker pose is in output_obj
+                            if (marker_pose[0], marker_pose[1]) in output_obj:
+                                print("Marker pose found in output_obj:", marker_pose)
+                                # Perform further actions if needed
+                                
+                                dist_pred = self.predict_marker_measurement(hypothesis, marker_pose)
+                                
+                                sigma_distance = 0.4 
+                                likelihood_hyp = self.compute_likelihood(measured_dist,dist_pred,sigma_distance)
 
-                        # Store all hypotheses with the same maximum likelihood
-                        if likelihood_hyp > best_likelihood:
-                            best_likelihood = likelihood_hyp
-                            current_best_hypotheses = [(hypothesis, likelihood_hyp)]
-                        elif likelihood_hyp == best_likelihood:
-                            current_best_hypotheses.append((hypothesis, likelihood_hyp))
+                                print("Predicted Distance:", dist_pred)
+                                print("Liklihood hyp:", likelihood_hyp)
 
-                
+                                # Store all hypotheses with the same maximum likelihood
+                                if likelihood_hyp > best_likelihood:
+                                    best_likelihood = likelihood_hyp
+                                    current_best_hypotheses = [(hypothesis, likelihood_hyp)]
+                                elif likelihood_hyp == best_likelihood:
+                                    current_best_hypotheses.append((hypothesis, likelihood_hyp))
+                                
+                            else:
+                                print("Marker pose not found, checking next hypothesis...")
 
                         # # Update the best hypothesis if this one is better
                         # if likelihood_hyp > best_likelihood:
@@ -707,37 +718,54 @@ class MultiLocationMarkerNode(Node):
 
 
         # Compare hypotheses across measurements to find common ones
-        if len(measurement_best_hypotheses) == len(self.stored_marker_z_values):
-            common_hypotheses = set(hyp for hyp, _ in measurement_best_hypotheses[0])
-            
-            for measurement in measurement_best_hypotheses[1:]:
-                current_hypotheses_set = set(hyp for hyp, _ in measurement)
-                common_hypotheses &= current_hypotheses_set  # Keep only common hypotheses
+        print("self.stored_marker_z_values", len(self.stored_marker_z_values))
+        if len(self.stored_marker_z_values) != 1:
+            if len(measurement_best_hypotheses) == len(self.stored_marker_z_values):
+                common_hypotheses = set(hyp for hyp, _ in measurement_best_hypotheses[0])
+                
+                for measurement in measurement_best_hypotheses[1:]:
+                    current_hypotheses_set = set(hyp for hyp, _ in measurement)
+                    common_hypotheses &= current_hypotheses_set  # Keep only common hypotheses
 
-            # If there are common hypotheses, find the one with the highest cumulative likelihood
-            final_best_hypothesis = None
-            highest_combined_likelihood = float('-inf')
+                # If there are common hypotheses, find the one with the highest cumulative likelihood
+                final_best_hypothesis = None
+                highest_combined_likelihood = float('-inf')
 
-            for common_hypothesis in common_hypotheses:
-                cumulative_likelihood = sum(
-                    likelihood for measurement in measurement_best_hypotheses
-                    for hyp, likelihood in measurement if hyp == common_hypothesis
-                )
-                if cumulative_likelihood > highest_combined_likelihood:
-                    highest_combined_likelihood = cumulative_likelihood
-                    final_best_hypothesis = common_hypothesis
+                for common_hypothesis in common_hypotheses:
+                    cumulative_likelihood = sum(
+                        likelihood for measurement in measurement_best_hypotheses
+                        for hyp, likelihood in measurement if hyp == common_hypothesis
+                    )
+                    if cumulative_likelihood > highest_combined_likelihood:
+                        highest_combined_likelihood = cumulative_likelihood
+                        final_best_hypothesis = common_hypothesis
 
-            print("\nFinal Best Hypothesis Across Measurements:")
-            print(f"  Hypothesis: {final_best_hypothesis}, Combined Likelihood: {highest_combined_likelihood}")
+                print("\nFinal Best Hypothesis Across Measurements:")
+                print(f"  Hypothesis: {final_best_hypothesis}, Combined Likelihood: {highest_combined_likelihood}")
 
-            # Keep only the final best hypothesis in self.hypotheses_dict
-            for marker_id, hypotheses in self.hypotheses_dict.items():
-                if final_best_hypothesis in hypotheses:
-                    print(f"Keeping only Hypothesis: {final_best_hypothesis} for Marker ID: {marker_id}")
-                    self.hypotheses_dict[marker_id] = [final_best_hypothesis]
-                    break  # Once updated, stop iterating
+                # Keep only the final best hypothesis in self.hypotheses_dict
+                for marker_id, hypotheses in self.hypotheses_dict.items():
+                    if final_best_hypothesis in hypotheses:
+                        print(f"Keeping only Hypothesis: {final_best_hypothesis} for Marker ID: {marker_id}")
+                        self.hypotheses_dict[marker_id] = [final_best_hypothesis]
+                        break  # Once updated, stop iterating
+            else:
+                print("Not enough measurements to compare hypotheses across them.")
         else:
-            print("Not enough measurements to compare hypotheses across them.")
+            print("More than one hypothesis detected:", len(measurement_best_hypotheses[0]))
+            if len(measurement_best_hypotheses[0]) == 1: 
+                # # Keep only the final best hypothesis in self.hypotheses_dict
+                actual_best_hypothesis = measurement_best_hypotheses[0][0][0]
+                print("Actual hypothesis ", actual_best_hypothesis)
+                for marker_id, hypotheses in self.hypotheses_dict.items():
+                    print("Hypothes",hypotheses)
+                    print("Matches:", hypotheses == actual_best_hypothesis)
+                    if actual_best_hypothesis in hypotheses:
+                        print(f"Keeping only Hypothesis: {actual_best_hypothesis} for Marker ID: {marker_id}")
+                        self.hypotheses_dict[marker_id] = [actual_best_hypothesis]
+                        break  # Once updated, stop iterating
+
+
     
     def local_control(self):
         v = None
@@ -1168,6 +1196,11 @@ class MultiLocationMarkerNode(Node):
         """
         marker_array = MarkerArray()
         timestamp = self.get_clock().now().to_msg()
+
+        # delete_all_marker = Marker()
+        # delete_all_marker.action = Marker.DELETEALL
+        # marker_array.markers.append(delete_all_marker)
+        marker_array.markers.clear()
 
 
         for marker_id, hypotheses in hypotheses_dict.items():
