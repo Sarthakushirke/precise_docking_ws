@@ -13,7 +13,7 @@ def check_visible_objects_from_centroid_simple(centroid_x, centroid_y):
     fov_angle = math.radians(170)  # Convert degrees to radians
 
     # Sensor range
-    sensor_range = 10.0  # meters
+    sensor_range = 30.0  # meters
 
     # List of known objects
     objects = [(3.0, 4.0),(-6.0, 5.0),(-3.0,-4.0)]
