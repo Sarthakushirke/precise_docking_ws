@@ -140,6 +140,7 @@ class MultiLocationMarkerNode(Node):
         self.i = 0  # Index for pure pursuit
         self.scan_data = None  # Latest laser scan data
         self.centroid_goal_path = None
+        self.end_loop = False
 
         # Initialize robot position attributes
         self.x = None
@@ -177,6 +178,10 @@ class MultiLocationMarkerNode(Node):
         """
         self.orginal_scan_centroids = len(msg.poses)
         self.get_logger().info(f"Received {self.orginal_scan_centroids} frontier centroids.")
+   
+
+
+
 
 
     def get_color(self, group_id):
@@ -190,6 +195,15 @@ class MultiLocationMarkerNode(Node):
         We only receive the marker's position (x,y,z) in the robot frame.
         We'll assume orientation=0 (phi_marker_relative=0).
         """
+
+        print("I am in marker callback")
+
+        
+        self.compute_and_plan(msg)
+
+
+
+    def compute_and_plan(self,msg):
 
         self.marker_pose = msg
 
@@ -214,10 +228,11 @@ class MultiLocationMarkerNode(Node):
             return
         
         # If the robot is currently moving towards a goal, skip computation
+        # if self.end_loop is True:
         if self.control_active:
             self.get_logger().info("Robot is moving towards a goal, skipping computation.")
             return
-
+        
         # Hardcode the marker ID in this example
         marker_id = self.current_marker_id
 
@@ -239,8 +254,6 @@ class MultiLocationMarkerNode(Node):
         # Retrieve the list of known marker positions/orientations in the map
         marker_locations = self.marker_map[marker_id]
         new_hypotheses = []
-        # Filter hypotheses based on the frontier condition
-        filtered_hypotheses = []
 
         for (x_m, y_m, theta_m) in marker_locations:
             # Robot orientation in map
@@ -255,6 +268,8 @@ class MultiLocationMarkerNode(Node):
         # Save these hypotheses
         self.hypotheses_dict[marker_id] = new_hypotheses
 
+        self.compute_again(new_hypotheses)
+
         # Log them
         # for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
         #     self.get_logger().info(
@@ -267,6 +282,10 @@ class MultiLocationMarkerNode(Node):
 
         # # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
         # self.publish_square_markers(new_hypotheses)
+    
+
+    def compute_again(self,new_hypotheses):
+
 
         num_beams = 16000
         angle_increment = 0.0003927233046852052
@@ -327,6 +346,8 @@ class MultiLocationMarkerNode(Node):
             ######################
 
             centroids_info = []
+            # Filter hypotheses based on the frontier condition
+            filtered_hypotheses = []
 
             for frontier_id, (centroid_x, centroid_y) in frontiers_middle.items():
 
@@ -338,7 +359,6 @@ class MultiLocationMarkerNode(Node):
 
                     # Update the hypotheses with the filtered list
                     new_hypotheses = filtered_hypotheses
-
 
                     centroid_indices = (centroid_x, centroid_y)
 
@@ -388,6 +408,10 @@ class MultiLocationMarkerNode(Node):
                     else:
                         self.get_logger().warn(f"No path found from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal.")
 
+                else:
+                    print("Only one frontier left for exploration decide whether you have to re explore")
+                    return
+
             # store list of frontiers for hypothesis i
             self.all_frontiers_info[h] = centroids_info  
 
@@ -435,18 +459,18 @@ class MultiLocationMarkerNode(Node):
 
 
         if path_robot_to_centroid:
-                # Convert path indices to coordinates
-                self.path = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in path_robot_to_centroid]
+            # Convert path indices to coordinates
+            self.path = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in path_robot_to_centroid]
 
-                # print("Path robot to the centroid", self.path)
-                # Publish the path
-                self.publish_path_marker(self.path)
+            # print("Path robot to the centroid", self.path)
+            # Publish the path
+            self.publish_path_marker(self.path)
 
-                # Start the control thread
-                if not self.control_active:
-                    self.control_active = True
-                    self.control_thread = Thread(target=self.control_loop)
-                    self.control_thread.start()
+            # Start the control thread
+            if not self.control_active:
+                self.control_active = True
+                self.control_thread = Thread(target=self.control_loop)
+                self.control_thread.start()
 
 
         # Publish the updated map
@@ -456,6 +480,8 @@ class MultiLocationMarkerNode(Node):
         updated_occupancy_grid.info = self.map_info
         updated_occupancy_grid.data = updated_map.flatten().tolist()
         self.map_pub.publish(updated_occupancy_grid)
+
+
 
     def odom_callback(self,msg):
         self.odom_data = msg
@@ -509,6 +535,8 @@ class MultiLocationMarkerNode(Node):
         twist = Twist()
         # dt = 0.09  # your loop rate is time.sleep(0.1)
         while self.control_active:
+
+            
             # 1) get updated real robot pose in map frame
             new_x, new_y, new_theta = self.x, self.y ,self.yaw
 
@@ -539,6 +567,7 @@ class MultiLocationMarkerNode(Node):
                 w = 0.0
                 self.control_active = False
                 self.get_logger().info("Goal reached.")
+                
             twist.linear.x = v
             twist.angular.z = w
             self.velocity_pub.publish(twist)
@@ -581,9 +610,6 @@ class MultiLocationMarkerNode(Node):
             # Update previous_marker_z_values for the next comparison
             self.previous_marker_z_values = self.stored_marker_z_values.copy()
 
-
-
-         
             # Multiply old weight by likelihood
             # updated_weights = []
             # for i in range(len(self.marker_map[0])):
@@ -622,7 +648,18 @@ class MultiLocationMarkerNode(Node):
             time.sleep(0.1)  # Control loop rate (10 Hz)
         self.get_logger().info("Control loop ended.")
 
+        self.remove_out_of_bounds_hypotheses()
 
+        print("control active ", self.control_active)
+
+
+        if self.control_active is False and len(self.hypotheses_dict[0]) != 1:
+
+            list_from_dict = self.hypotheses_dict[0]
+            self.compute_again(list_from_dict)
+
+        
+        
     def apply_pose_diff_to_hypotheses(self, dx, dy, dtheta):
         new_hypotheses_dict = {}
         for marker_id, hypotheses in self.hypotheses_dict.items():
@@ -637,6 +674,40 @@ class MultiLocationMarkerNode(Node):
             new_hypotheses_dict[marker_id] = updated_list
 
         self.hypotheses_dict = new_hypotheses_dict
+
+    def remove_out_of_bounds_hypotheses(self):
+        """
+        Removes hypotheses that are out of the map bounds from hypotheses_dict.
+        """
+        valid_hypotheses_dict = {}
+        map_width = self.map_info.width
+        map_height = self.map_info.height
+        origin_x = self.map_info.origin.position.x
+        origin_y = self.map_info.origin.position.y
+        resolution = self.map_info.resolution
+
+        # Define map boundaries in world coordinates
+        map_x_min = origin_x
+        map_x_max = origin_x + map_width * resolution
+        map_y_min = origin_y
+        map_y_max = origin_y + map_height * resolution
+
+        for marker_id, hypotheses in self.hypotheses_dict.items():
+            valid_hypotheses = []
+            for (x_r, y_r, theta_r) in hypotheses:
+                # Check if hypothesis is within map bounds
+                if map_x_min <= x_r < map_x_max and map_y_min <= y_r < map_y_max:
+                    valid_hypotheses.append((x_r, y_r, theta_r))
+                else:
+                    self.get_logger().warn(
+                        f"Hypothesis ({x_r:.2f}, {y_r:.2f}) is out of map bounds and will be removed."
+                    )
+            if valid_hypotheses:
+                valid_hypotheses_dict[marker_id] = valid_hypotheses
+
+        self.hypotheses_dict = valid_hypotheses_dict
+        self.get_logger().info(f"Updated hypotheses_dict: {self.hypotheses_dict}")
+
 
 
     def measurement_model(self):
@@ -1372,17 +1443,22 @@ class MultiLocationMarkerNode(Node):
         self.centroids_pub.publish(pose_array)
         self.get_logger().info(f"Published {len(pose_array.poses)} centroids to /frontier_centroids")
 
+    def destroy_node(self):
+    # Stop the control thread if active
+        self.get_logger().info("Destroying node and stopping control thread.")
+        if self.control_active:
+            self.control_active = False
+            if self.control_thread is not None:
+                self.control_thread.join()
+        super().destroy_node()
+
 
 def main(args=None):
     rclpy.init(args=args)
     node = MultiLocationMarkerNode()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
