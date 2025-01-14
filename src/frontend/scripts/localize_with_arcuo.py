@@ -245,7 +245,7 @@ class MultiLocationMarkerNode(Node):
         # For demonstration, let's just assume a fixed distance=2
         distance = 2.0
 
-        self.expansion_size = 2
+        self.expansion_size = 3
         self.min_group_size = 40
 
         # We assume zero relative orientation
@@ -268,7 +268,6 @@ class MultiLocationMarkerNode(Node):
         # Save these hypotheses
         self.hypotheses_dict[marker_id] = new_hypotheses
 
-        self.compute_again(new_hypotheses)
 
         # Log them
         # for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
@@ -277,12 +276,14 @@ class MultiLocationMarkerNode(Node):
         #         f"x={x_r:.2f}, y={y_r:.2f}, theta={theta_r:.2f}"
         #     )
 
-        # # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
+        # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
         # self.publish_pose_array(new_hypotheses)
 
         # # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
         # self.publish_square_markers(new_hypotheses)
-    
+
+        self.compute_again(new_hypotheses)
+
 
     def compute_again(self,new_hypotheses):
 
@@ -315,7 +316,6 @@ class MultiLocationMarkerNode(Node):
         
             # Identify unreachable cells
             unreachable = ~reachable
-
 
             # Identify free and unreachable cells
             free_and_unreachable = free_cells & unreachable
@@ -408,9 +408,7 @@ class MultiLocationMarkerNode(Node):
                     else:
                         self.get_logger().warn(f"No path found from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal.")
 
-                else:
-                    print("Only one frontier left for exploration decide whether you have to re explore")
-                    return
+                    
 
             # store list of frontiers for hypothesis i
             self.all_frontiers_info[h] = centroids_info  
@@ -651,6 +649,11 @@ class MultiLocationMarkerNode(Node):
         self.remove_out_of_bounds_hypotheses()
 
         print("control active ", self.control_active)
+
+        self.publish_pose_array(self.hypotheses_dict)
+
+        # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+        self.publish_square_markers(self.hypotheses_dict)
 
 
         if self.control_active is False and len(self.hypotheses_dict[0]) != 1:
@@ -898,6 +901,33 @@ class MultiLocationMarkerNode(Node):
     def lidar_callback(self, msg):
         self.scan_data = msg
         self.scan = msg.ranges
+
+        # Define the safe distance and the front scan range
+        min_distance = 0.5  # Minimum safe distance in meters
+        front_angle_range = 30  # Degrees (e.g., ±30° around the front)
+
+        # LiDAR scan parameters
+        num_readings = len(self.scan)  # Total number of LiDAR readings
+        angle_increment = msg.angle_increment  # Angular resolution of each scan in radians
+        front_indices = int(front_angle_range / (angle_increment * 180 / math.pi))  # Convert angle to index range
+
+        # Extract front-facing LiDAR readings (center ± front_angle_range)
+        center_index = num_readings // 2
+        front_scan = self.scan[center_index - front_indices:center_index + front_indices]
+
+        # Check for collisions in the front scan
+        too_close = any(distance < min_distance for distance in front_scan if distance > 0)
+
+        if too_close:
+            self.get_logger().warn("Warning: Obstacle detected in front!")
+            # Example: Stop the robot if too close
+            twist = Twist()
+            twist.linear.x = 0.0
+            twist.angular.z = 0.0
+            self.velocity_pub.publish(twist)
+        else:
+            self.get_logger().info("Front is clear.")
+
 
     def compute_likelihood(self,
         distance_measured: float,
