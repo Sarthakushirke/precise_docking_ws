@@ -38,12 +38,11 @@ class OccupancyGridUpdater(Node):
         self.get_logger().info('Subscribed to /scan topic')
 
         # Publisher for frontier markers
-        self.frontier_pub = self.create_publisher(MarkerArray, '/frontier_markers', 10)
+        self.frontier_pub = self.create_publisher(MarkerArray, '/frontier_markers_original', 10)
         self.get_logger().info('Publishing frontier markers on /frontier_markers')
 
-        self.centroid_pub = self.create_publisher(MarkerArray, '/centroid_markers', 10)
+        self.centroid_pub = self.create_publisher(MarkerArray, '/centroid_markers_original', 10)
         self.get_logger().info('Publishing centroid markers on /centroid_markers')
-
 
         # Publisher for centroids
         self.centroids_pub = self.create_publisher(PoseArray, '/frontier_centroids_original', 10)
@@ -180,7 +179,7 @@ class OccupancyGridUpdater(Node):
 
         # Publish the centroids
         self.centroids_pub.publish(pose_array)
-        self.get_logger().info(f"Published {len(pose_array.poses)} centroids to /frontier_centroids")
+        self.get_logger().info(f"Published {len(pose_array.poses)} centroids to frontier_centroids_original")
 
 
     def publish_frontier_markers(self, groups, resolution, originX, originY):

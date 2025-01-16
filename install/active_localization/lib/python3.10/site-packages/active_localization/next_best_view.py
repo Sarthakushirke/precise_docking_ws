@@ -16,7 +16,15 @@ def check_visible_objects_from_centroid_simple(centroid_x, centroid_y):
     sensor_range = 30.0  # meters
 
     # List of known objects
-    objects = [(3.0, 4.0),(-6.0, 5.0),(-3.0,-4.0)]
+    # objects = [(3.0, 4.0),(-6.0, 5.0),(-3.0,-4.0)]
+
+    # List of known objects extra_features.sdf
+    objects = [ (5.0, -4.0),
+                (3.0, 2.0),
+                (5.0,7.0),
+                (-1.0,7.0),
+                (-3.0,-5.0),
+                (-11.0,5.0)]
 
     # List to store visible objects
     visible_objects = []

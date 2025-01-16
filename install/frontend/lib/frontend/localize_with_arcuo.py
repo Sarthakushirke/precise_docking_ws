@@ -27,21 +27,36 @@ class MultiLocationMarkerNode(Node):
     def __init__(self):
         super().__init__('multi_location_marker_node')
 
+
+        #For Gazebo model diff_drive.sdf
         # marker_map[marker_id] => list of (x_map, y_map, theta_map)
+        # self.marker_map = {
+        #     0: [
+        #         # (3.0, -1.0, 0.0),
+        #         (3.0, 4.0, 0.0),
+        #         (-6.0, 5.0, 0.0),
+        #         (-3.0,-4.0,0.0),
+        #     ],
+        # }
+
+        #For Gazebo model extra_features.sdf
         self.marker_map = {
             0: [
-                # (3.0, -1.0, 0.0),
-                (3.0, 4.0, 0.0),
-                (-6.0, 5.0, 0.0),
-                (-3.0,-4.0,0.0),
+    
+                (5.0, -4.0, 0.0),
+                (3.0, 2.0, 0.0),
+                (5.0,7.0,0.0),
+                (-1.0,7.0,0.0),
+                (-3.0,-5.0,0.0),
+                (-11.0,5.0,0.0),
             ],
         }
 
-        self.hypothesis_weights = {}
-        for marker_id, poses_list in self.marker_map.items():
-            n_hypotheses = len(poses_list)
-            prior = 1.0 / n_hypotheses
-            self.hypothesis_weights[marker_id] = [prior] * n_hypotheses
+        # self.hypothesis_weights = {}
+        # for marker_id, poses_list in self.marker_map.items():
+        #     n_hypotheses = len(poses_list)
+        #     prior = 1.0 / n_hypotheses
+        #     self.hypothesis_weights[marker_id] = [prior] * n_hypotheses
 
             
         # Subscribe to a topic that just gives a PointStamped in the robot frame
@@ -130,6 +145,8 @@ class MultiLocationMarkerNode(Node):
         self.goal_row = None
         self.global_centroid = []
         self.all_frontiers_info = {}  # dict of i -> list of frontier dicts
+        # Initialize the hypothesis local map data as a dictionary
+        self.local_map_data = {}
 
         self.goal_x = 7.0  # Goal x-coordinate in meters
         self.goal_y = 0.0  # Goal y-coordinate in meters
@@ -179,10 +196,6 @@ class MultiLocationMarkerNode(Node):
         self.orginal_scan_centroids = len(msg.poses)
         self.get_logger().info(f"Received {self.orginal_scan_centroids} frontier centroids.")
    
-
-
-
-
 
     def get_color(self, group_id):
         # Generate colors based on group_id
@@ -270,11 +283,11 @@ class MultiLocationMarkerNode(Node):
 
 
         # Log them
-        # for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
-        #     self.get_logger().info(
-        #         f"Marker {marker_id} - Hypothesis #{i}: "
-        #         f"x={x_r:.2f}, y={y_r:.2f}, theta={theta_r:.2f}"
-        #     )
+        for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
+            self.get_logger().info(
+                f"Marker {marker_id} - Hypothesis #{i}: "
+                f"x={x_r:.2f}, y={y_r:.2f}, theta={theta_r:.2f}"
+            )
 
         # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
         # self.publish_pose_array(new_hypotheses)
@@ -301,7 +314,7 @@ class MultiLocationMarkerNode(Node):
 
             # Re-init arrays for each hypothesis
             reachable = np.zeros_like(self.map_data, dtype=bool)
-            updated_map = self.map_data.copy()
+           
             for i in range(num_beams):
                 beam_angle = start_angle + i * angle_increment
                 reachable = self.get_ray_distance_bresenham(x_r, y_r, beam_angle, max_range,reachable)
@@ -327,6 +340,18 @@ class MultiLocationMarkerNode(Node):
             reachable_free = free_cells & reachable
             updated_map[reachable_free] = 0  # This line may not be necessary but ensures clarity
 
+             # Store or update the local_map_data for this hypothesis
+            if h not in self.local_map_data:
+                self.local_map_data[h] = updated_map
+            else:
+                # Merge with existing local map
+                height, width = self.local_map_data[h].shape
+                for r in range(height):
+                    for c in range(width):
+                        old_val = self.local_map_data[h][r, c]
+                        new_val = updated_map[r, c]
+                        self.local_map_data[h][r, c] = self.merge_cell(old_val, new_val)
+
             origin_x = self.map_info.origin.position.x
             origin_y = self.map_info.origin.position.y
             resolution = self.map_info.resolution
@@ -339,9 +364,14 @@ class MultiLocationMarkerNode(Node):
             self.goal_row = int((self.goal_y - origin_y) / resolution)
             self.goal_indices = (self.goal_row, self.goal_column)
 
-            frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
+            # frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
+
+            updated_exploration_map, frontiers_middle = self.exploration(self.local_map_data[h], self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
 
             print("Frontiers ", frontiers_middle)
+
+            # Reassign it back
+            self.local_map_data[h] = updated_exploration_map
 
             ######################
 
@@ -435,21 +465,30 @@ class MultiLocationMarkerNode(Node):
                 f"{best_global_frontier_info['centroid_y']:.2f}) utility={best_global_utility:.2f}"
             )
 
-        # best_global_frontier_column = 196.00
+        self.best_global_hypothesis = best_global_hypothesis
+
         best_global_frontier_column =  best_global_frontier_info['centroid_x'] 
-        # best_global_frontier_row = 149.00
+       
         best_global_frontier_row = best_global_frontier_info['centroid_y'] 
 
         # best_global_frontier_column = int((best_global_frontier_info['centroid_x'] - origin_x) / resolution)
         # best_global_frontier_row = int((best_global_frontier_info['centroid_y'] - origin_y) / resolution)
-        best_global_frontier_indices = (best_global_frontier_row, best_global_frontier_column)
+        best_global_frontier_indices = (best_global_frontier_column, best_global_frontier_row)
 
 
-        robot_column = int((self.x - origin_x) / resolution)
-        robot_row = int((self.y - origin_y) / resolution)
+        # robot_column = int((self.x - origin_x) / resolution)
+        # robot_row = int((self.y - origin_y) / resolution)
         #Example for other hypothesis 
-        # robot_column = int((1 - origin_x) / resolution)
-        # robot_row = int((-1 - origin_y) / resolution)
+        # robot_column = int((3 - origin_x) / resolution)
+        # robot_row = int((7 - origin_y) / resolution)
+
+        print("Global frontier row", best_global_frontier_row )
+
+        print("global frontier column ",best_global_frontier_column)
+
+        robot_column = int((self.hypotheses_dict[0][best_global_hypothesis-1][0] - origin_x) / resolution)
+        robot_row = int((self.hypotheses_dict[0][best_global_hypothesis-1][1] - origin_y) / resolution)
+
         robot_indices = (robot_row, robot_column) #This should be one of the hypothesis
         #Also the best_centroid_indices should that particular hypothesis centroid.
 
@@ -489,6 +528,38 @@ class MultiLocationMarkerNode(Node):
         self.yaw = self.euler_from_quaternion(msg.pose.pose.orientation.x,msg.pose.pose.orientation.y,
         msg.pose.pose.orientation.z,msg.pose.pose.orientation.w)
 
+    def merge_cell(self,old_val, new_val):
+        """
+        Example rules for merging one cell from local_map_data (old_val)
+        with updated_map (new_val).
+        Return the merged value.
+        """
+        # If the new cell is -1 => unknown, keep old value (unless old was also -1).
+        if new_val == -1:
+            # For example, keep the old_val if it is known
+            return old_val  
+
+        # If new cell is free (0) and old_val was unknown (-1) => now it's discovered free
+        if new_val == 0:
+            if old_val == -1:
+                return 0  # we discovered it is free
+            # If old_val is 0 or 100, you can decide how to handle:
+            # e.g., if old_val was 100 but new says 0 => conflict, pick a policy
+            # For now, let's trust new_val if old_val != 100
+            if old_val == 100:
+                # conflict; do we trust old or new? 
+                # let's suppose we trust old if we previously had it as occupied
+                return 100
+            return 0
+
+        # If new cell is 100 => discovered occupied
+        if new_val == 100:
+            # If old was -1 or 0, override with 100
+            return 100
+
+        # Otherwise, fallback
+        return new_val
+
 
     def publish_path_marker(self, path_coords):
         marker = Marker()
@@ -527,9 +598,9 @@ class MultiLocationMarkerNode(Node):
 
         # self.get_logger().info("Control loop started.")
         #Example for other hypothesis 
-        # hyp_pose_x = 1
-        # hyp_pose_y = -1
-        # hyp_pose_theta = 0
+        hyp_pose_x = self.hypotheses_dict[0][self.best_global_hypothesis-1][0]
+        hyp_pose_y = self.hypotheses_dict[0][self.best_global_hypothesis-1][1]
+        hyp_pose_theta = 0
         twist = Twist()
         # dt = 0.09  # your loop rate is time.sleep(0.1)
         while self.control_active:
@@ -548,19 +619,19 @@ class MultiLocationMarkerNode(Node):
 
             v, w = self.local_control()
             #Example for other hypothesis 
-            # hyp_pose_x = hyp_pose_x + dx
-            # hyp_pose_y = hyp_pose_y + dy
-            # hyp_pose_theta = hyp_pose_theta + dtheta
+            hyp_pose_x = hyp_pose_x + dx
+            hyp_pose_y = hyp_pose_y + dy
+            hyp_pose_theta = hyp_pose_theta + dtheta
             # wrap heading
-            # hyp_pose_theta = (hyp_pose_theta + math.pi) % (2 * math.pi) - math.pi
+            hyp_pose_theta = (hyp_pose_theta + math.pi) % (2 * math.pi) - math.pi
             if v is None:
-                v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, self.path, self.i)
+                # v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, self.path, self.i)
                 #Example for other hypothesis 
-                # v, w, self.i = self.pure_pursuit(hyp_pose_x, hyp_pose_y, hyp_pose_theta, self.path, self.i)
+                v, w, self.i = self.pure_pursuit(hyp_pose_x, hyp_pose_y, hyp_pose_theta, self.path, self.i)
             # Check if goal is reached
-            if self.i >= len(self.path) - 1 and self.distance_to_point(self.x, self.y, self.path[-1][0], self.path[-1][1]) < target_error:
+            # if self.i >= len(self.path) - 1 and self.distance_to_point(self.x, self.y, self.path[-1][0], self.path[-1][1]) < target_error:
             #Example for other hypothesis 
-            # if self.i >= len(self.path) - 1 and self.distance_to_point(hyp_pose_x, hyp_pose_y, self.path[-1][0], self.path[-1][1]) < target_error:
+            if self.i >= len(self.path) - 1 and self.distance_to_point(hyp_pose_x, hyp_pose_y, self.path[-1][0], self.path[-1][1]) < target_error:
                 v = 0.0 
                 w = 0.0
                 self.control_active = False
@@ -782,7 +853,7 @@ class MultiLocationMarkerNode(Node):
             #     print(f"  Hypothesis: {hyp}, Likelihood: {likelihood}")
                 # Store current best hypotheses for this measurement
 
-                # Ensure current_best_hypotheses is added to measurement_best_hypotheses
+            # Ensure current_best_hypotheses is added to measurement_best_hypotheses
             if current_best_hypotheses:
                 measurement_best_hypotheses.append(current_best_hypotheses)
                 print("Measurement Best Hypotheses:", measurement_best_hypotheses)
@@ -925,6 +996,7 @@ class MultiLocationMarkerNode(Node):
             twist.linear.x = 0.0
             twist.angular.z = 0.0
             self.velocity_pub.publish(twist)
+            
         else:
             self.get_logger().info("Front is clear.")
 
@@ -1012,7 +1084,7 @@ class MultiLocationMarkerNode(Node):
         # # Publish the centroids to a topic
         self.publish_centroids(centroids, resolution, originX, originY)
 
-        return centroids
+        return data, centroids
     
     def euler_from_quaternion(self,x,y,z,w):
         t0 = +2.0 * (w * x + y * z)
