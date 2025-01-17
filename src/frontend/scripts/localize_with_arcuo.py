@@ -148,7 +148,7 @@ class MultiLocationMarkerNode(Node):
         # Initialize the hypothesis local map data as a dictionary
         self.local_map_data = {}
 
-        self.goal_x = 7.0  # Goal x-coordinate in meters
+        self.goal_x = 13.0  # Goal x-coordinate in meters
         self.goal_y = 0.0  # Goal y-coordinate in meters
 
         self.path = None  # Path to follow
@@ -158,6 +158,7 @@ class MultiLocationMarkerNode(Node):
         self.scan_data = None  # Latest laser scan data
         self.centroid_goal_path = None
         self.end_loop = False
+        self.global_start = True
 
         # Initialize robot position attributes
         self.x = None
@@ -211,8 +212,11 @@ class MultiLocationMarkerNode(Node):
 
         print("I am in marker callback")
 
-        
+        # if self.global_start is True:
+        #     print("start", self.global_start)
+             
         self.compute_and_plan(msg)
+
 
 
 
@@ -245,6 +249,8 @@ class MultiLocationMarkerNode(Node):
         if self.control_active:
             self.get_logger().info("Robot is moving towards a goal, skipping computation.")
             return
+
+        
         
         # Hardcode the marker ID in this example
         marker_id = self.current_marker_id
@@ -255,47 +261,85 @@ class MultiLocationMarkerNode(Node):
                 f"Marker ID {marker_id} not found in marker_map. Ignoring.")
             return
 
-        # For demonstration, let's just assume a fixed distance=2
-        distance = 2.0
+        if self.global_start:
 
-        self.expansion_size = 3
-        self.min_group_size = 40
+            # For demonstration, let's just assume a fixed distance=2
+            distance = 2.0
 
-        # We assume zero relative orientation
-        phi_marker_relative = 0.0
+            self.expansion_size = 3
+            self.min_group_size = 40
 
-        # Retrieve the list of known marker positions/orientations in the map
-        marker_locations = self.marker_map[marker_id]
-        new_hypotheses = []
+            # We assume zero relative orientation
+            phi_marker_relative = 0.0
 
-        for (x_m, y_m, theta_m) in marker_locations:
-            # Robot orientation in map
-            theta_r = theta_m - phi_marker_relative  # => just theta_m if phi=0
+            # Retrieve the list of known marker positions/orientations in the map
+            marker_locations = self.marker_map[marker_id]
+            new_hypotheses = []
 
-            # Robot position in map
-            x_r = x_m - distance * math.cos(theta_r)
-            y_r = y_m - distance * math.sin(theta_r)
+            for (x_m, y_m, theta_m) in marker_locations:
+                # Robot orientation in map
+                theta_r = theta_m - phi_marker_relative  # => just theta_m if phi=0
 
-            new_hypotheses.append((x_r, y_r, theta_r))
+                # Robot position in map
+                x_r = x_m - distance * math.cos(theta_r)
+                y_r = y_m - distance * math.sin(theta_r)
 
-        # Save these hypotheses
-        self.hypotheses_dict[marker_id] = new_hypotheses
+                new_hypotheses.append((x_r, y_r, theta_r))
+
+            # Save these hypotheses
+            self.hypotheses_dict[marker_id] = new_hypotheses
 
 
-        # Log them
-        for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
-            self.get_logger().info(
-                f"Marker {marker_id} - Hypothesis #{i}: "
-                f"x={x_r:.2f}, y={y_r:.2f}, theta={theta_r:.2f}"
-            )
+            # Log them
+            for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
+                self.get_logger().info(
+                    f"Marker {marker_id} - Hypothesis #{i}: "
+                    f"x={x_r:.2f}, y={y_r:.2f}, theta={theta_r:.2f}"
+                )
 
         # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
         # self.publish_pose_array(new_hypotheses)
 
         # # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
         # self.publish_square_markers(new_hypotheses)
+        self.global_start = False
 
-        self.compute_again(new_hypotheses)
+        if len(self.hypotheses_dict[0]) != 1 :
+            self.compute_again(new_hypotheses)
+
+
+        if len(self.hypotheses_dict[0]) == 1:
+
+            print("In the desitnation path")
+
+            origin_x = self.map_info.origin.position.x
+            origin_y = self.map_info.origin.position.y
+            resolution = self.map_info.resolution
+            # Convert goal position to grid indices
+            self.goal_column = int((self.goal_x - origin_x) / resolution)
+            self.goal_row = int((self.goal_y - origin_y) / resolution)
+            self.goal_indices = (self.goal_row, self.goal_column)
+
+            robot_destination_column = int((self.hypotheses_dict[0][0][0] - origin_x) / resolution)
+            robot_destination_row = int((self.hypotheses_dict[0][0][1] - origin_y) / resolution)
+
+            print("Robot indices", robot_destination_column, robot_destination_row )
+
+            bot_indices = (robot_destination_row, robot_destination_column)
+
+            # # Compute the path from centroid to goal
+            destination_path = self.astar(self.map_data, bot_indices, self.goal_indices)
+
+            
+            if destination_path:
+
+                print("Got the final path")
+
+                desination_go = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in destination_path ]  
+
+                self.publish_path_marker(desination_go)
+                     
+                # self.final_robot_loop(self.hypotheses_dict[0][0][0],self.hypotheses_dict[0][0][1],desination_go)
 
 
     def compute_again(self,new_hypotheses):
@@ -657,7 +701,7 @@ class MultiLocationMarkerNode(Node):
             print("self.stored_marker_z_values:", [z for z in self.stored_marker_z_values])
 
             # Check for drastic change (e.g., significant difference in average or max difference)
-            if previous_marker_z_values:
+            if previous_marker_z_values and len(self.hypotheses_dict[0]) != 1:
                 # Calculate element-wise difference
                 diff_list = [abs(curr - prev) for curr, prev in zip(self.stored_marker_z_values, previous_marker_z_values)]
                 
@@ -673,8 +717,9 @@ class MultiLocationMarkerNode(Node):
                     print("No significant change detected.")
             else:
                 # Run the measurement model the first time
-                print("First measurement, starting measurement model...")
-                self.measurement_model()
+                if len(self.hypotheses_dict[0]) != 1:
+                    print("First measurement, starting measurement model...")
+                    self.measurement_model()
 
             # Update previous_marker_z_values for the next comparison
             self.previous_marker_z_values = self.stored_marker_z_values.copy()
@@ -717,7 +762,10 @@ class MultiLocationMarkerNode(Node):
             time.sleep(0.1)  # Control loop rate (10 Hz)
         self.get_logger().info("Control loop ended.")
 
-        self.remove_out_of_bounds_hypotheses()
+
+        if len(self.hypotheses_dict[0]) != 1:
+
+            self.remove_out_of_bounds_hypotheses()
 
         print("control active ", self.control_active)
 
@@ -732,7 +780,8 @@ class MultiLocationMarkerNode(Node):
             list_from_dict = self.hypotheses_dict[0]
             self.compute_again(list_from_dict)
 
-        
+
+    
         
     def apply_pose_diff_to_hypotheses(self, dx, dy, dtheta):
         new_hypotheses_dict = {}
@@ -910,6 +959,54 @@ class MultiLocationMarkerNode(Node):
                         self.hypotheses_dict[marker_id] = [actual_best_hypothesis]
                         break  # Once updated, stop iterating
 
+
+    def final_robot_loop(self,robot_x,robot_y,robot_theta,journey_path):
+        # Keep track of old pose
+        old_x, old_y, old_theta = self.x, self.y ,self.yaw
+
+        # self.get_logger().info("Control loop started.")
+        #Example for other hypothesis  
+        hyp_pose_x = robot_x
+        hyp_pose_y = robot_y
+        hyp_pose_theta = robot_theta
+        twist = Twist()
+       
+        while self.control_active:
+
+            # 1) get updated real robot pose in map frame
+            new_x, new_y, new_theta = self.x, self.y ,self.yaw
+
+            # 2) compute difference
+            dx = new_x - old_x
+            dy = new_y - old_y
+            dtheta = new_theta - old_theta
+
+            # update old pose
+            old_x, old_y, old_theta = new_x, new_y, new_theta
+
+            v, w = self.local_control()
+            #Example for other hypothesis 
+            hyp_pose_x = hyp_pose_x + dx
+            hyp_pose_y = hyp_pose_y + dy
+            hyp_pose_theta = hyp_pose_theta + dtheta
+            # wrap heading
+            hyp_pose_theta = (hyp_pose_theta + math.pi) % (2 * math.pi) - math.pi
+            if v is None:
+                # v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, self.path, self.i)
+                #Example for other hypothesis 
+                v, w, self.i = self.pure_pursuit(hyp_pose_x, hyp_pose_y, hyp_pose_theta,journey_path , self.i)
+            # Check if goal is reached
+            # if self.i >= len(self.path) - 1 and self.distance_to_point(self.x, self.y, self.path[-1][0], self.path[-1][1]) < target_error:
+            #Example for other hypothesis 
+            if self.i >= len(self.path) - 1 and self.distance_to_point(hyp_pose_x, hyp_pose_y, journey_path[-1][0], journey_path[-1][1]) < target_error:
+                v = 0.0 
+                w = 0.0
+                self.control_active = False
+                self.get_logger().info("Goal reached.")
+                
+            twist.linear.x = v
+            twist.angular.z = w
+            self.velocity_pub.publish(twist)
 
     
     def local_control(self):
