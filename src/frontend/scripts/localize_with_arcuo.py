@@ -152,13 +152,17 @@ class MultiLocationMarkerNode(Node):
         self.goal_y = 0.0  # Goal y-coordinate in meters
 
         self.path = None  # Path to follow
+        self.desination_go = None #Final path
         self.control_thread = None  # Thread for control loop
+        self.robot_control_thread = None
         self.control_active = False  # Flag to control the thread
         self.i = 0  # Index for pure pursuit
         self.scan_data = None  # Latest laser scan data
         self.centroid_goal_path = None
         self.end_loop = False
         self.global_start = True
+        self.final_robot_active = False
+        
 
         # Initialize robot position attributes
         self.x = None
@@ -335,12 +339,19 @@ class MultiLocationMarkerNode(Node):
 
                 print("Got the final path")
 
-                desination_go = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in destination_path ]  
+                self.desination_go = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in destination_path ]  
 
-                self.publish_path_marker(desination_go)
+                self.publish_path_marker(self.desination_go)
+
+                if not self.final_robot_active:
+                    self.final_robot_active = True
+                    self.robot_control_thread = Thread(target=self.final_robot_loop)
+                    self.robot_control_thread.start()
+
+
                      
-                # self.final_robot_loop(self.hypotheses_dict[0][0][0],self.hypotheses_dict[0][0][1],desination_go)
-
+                
+                # self.hypotheses_dict[0][0][0],self.hypotheses_dict[0][0][1],self.hypotheses_dict[0][0][2],desination_go
 
     def compute_again(self,new_hypotheses):
 
@@ -571,6 +582,9 @@ class MultiLocationMarkerNode(Node):
 
         self.yaw = self.euler_from_quaternion(msg.pose.pose.orientation.x,msg.pose.pose.orientation.y,
         msg.pose.pose.orientation.z,msg.pose.pose.orientation.w)
+
+        # print(f"Odom callback => x: {self.x}, y: {self.y}, yaw: {self.yaw}")
+
 
     def merge_cell(self,old_val, new_val):
         """
@@ -960,53 +974,91 @@ class MultiLocationMarkerNode(Node):
                         break  # Once updated, stop iterating
 
 
-    def final_robot_loop(self,robot_x,robot_y,robot_theta,journey_path):
-        # Keep track of old pose
-        old_x, old_y, old_theta = self.x, self.y ,self.yaw
+    # def final_robot_loop(self,robot_x,robot_y,robot_theta, journey_path):
+    #     # Keep track of old pose
+    #     old_x, old_y, old_theta = self.x, self.y ,self.yaw
 
-        # self.get_logger().info("Control loop started.")
-        #Example for other hypothesis  
-        hyp_pose_x = robot_x
-        hyp_pose_y = robot_y
-        hyp_pose_theta = robot_theta
-        twist = Twist()
+    #     print("self.x, self.y, self.thetha", self.x, self.y, self.yaw)
+
+    #     self.get_logger().info("Control loop started.")
+  
+    #     twist = Twist()
        
-        while self.control_active:
+    #     while self.final_robot_active:
 
-            # 1) get updated real robot pose in map frame
-            new_x, new_y, new_theta = self.x, self.y ,self.yaw
+    #         self.get_logger().info("While  loop started.")
 
-            # 2) compute difference
-            dx = new_x - old_x
-            dy = new_y - old_y
-            dtheta = new_theta - old_theta
+    #         # 1) get updated real robot pose in map frame
+    #         new_x, new_y, new_theta = self.x, self.y ,self.yaw
 
-            # update old pose
-            old_x, old_y, old_theta = new_x, new_y, new_theta
+    #         print("self.x, self.y, self.thetha in while loop", self.x, self.y, self.yaw)
 
-            v, w = self.local_control()
-            #Example for other hypothesis 
-            hyp_pose_x = hyp_pose_x + dx
-            hyp_pose_y = hyp_pose_y + dy
-            hyp_pose_theta = hyp_pose_theta + dtheta
-            # wrap heading
-            hyp_pose_theta = (hyp_pose_theta + math.pi) % (2 * math.pi) - math.pi
-            if v is None:
-                # v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, self.path, self.i)
-                #Example for other hypothesis 
-                v, w, self.i = self.pure_pursuit(hyp_pose_x, hyp_pose_y, hyp_pose_theta,journey_path , self.i)
-            # Check if goal is reached
-            # if self.i >= len(self.path) - 1 and self.distance_to_point(self.x, self.y, self.path[-1][0], self.path[-1][1]) < target_error:
-            #Example for other hypothesis 
-            if self.i >= len(self.path) - 1 and self.distance_to_point(hyp_pose_x, hyp_pose_y, journey_path[-1][0], journey_path[-1][1]) < target_error:
-                v = 0.0 
-                w = 0.0
-                self.control_active = False
-                self.get_logger().info("Goal reached.")
+    #         # 2) compute difference
+    #         dx = new_x - old_x
+    #         dy = new_y - old_y
+    #         dtheta = new_theta - old_theta
+
+    #         print("dx,dy and dtheta", dx, dy, dtheta)
+
+    #         # update old pose
+    #         old_x, old_y, old_theta = new_x, new_y, new_theta
+
+    #         v, w = self.local_control()
+
+    #         #Example for other hypothesis 
+    #         robot_x = robot_x + dx
+    #         robot_y = robot_y + dy
+    #         robot_theta = robot_theta + dtheta
+    #         # wrap heading
+    #         robot_theta = (robot_theta + math.pi) % (2 * math.pi) - math.pi
+    #         if v is None:
+    #             # v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, journey_path, self.i)
+    #             #Example for other hypothesis 
+    #             print("In pure pursit")
+    #             v, w, self.i = self.pure_pursuit(robot_x, robot_y, robot_theta, journey_path , self.i)
+
+    #         # if self.i >= len(journey_path) - 1 and self.distance_to_point(self.x, self.y, journey_path[-1][0], journey_path[-1][1]) < target_error:
+            
+    #         if self.i >= len(journey_path) - 1 and self.distance_to_point(robot_x, robot_y, journey_path[-1][0], journey_path[-1][1]) < target_error:
+    #             print("2")
+    #             v = 0.0 
+    #             w = 0.0
+    #             self.final_robot_active = False
+    #             self.get_logger().info("Goal reached.")
+
+    #         print(f"Commanding v={v:.2f}, w={w:.2f}")
+
                 
+    #         twist.linear.x = v
+    #         twist.angular.z = w
+    #         self.velocity_pub.publish(twist)
+
+    #         time.sleep(0.1)
+
+    #     self.final_robot_active = False
+    #     self.get_logger().info("Final reached.")
+
+    #     # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+    #     self.publish_square_markers(self.hypotheses_dict)
+
+    def final_robot_loop(self):
+        self.get_logger().info("Control loop started.")
+        twist = Twist()
+        while self.final_robot_active:
+            v, w = self.local_control()
+            if v is None:
+                v, w, self.i = self.pure_pursuit(self.x, self.y, self.yaw, self.desination_go, self.i)
+            # Check if goal is reached
+            if self.i >= len(self.desination_go) - 1 and self.distance_to_point(self.x, self.y, self.desination_go[-1][0], self.desination_go[-1][1]) < target_error:
+                v = 0.0
+                w = 0.0
+                self.final_robot_active = False
+                self.get_logger().info("Goal reached.")
             twist.linear.x = v
             twist.angular.z = w
             self.velocity_pub.publish(twist)
+            time.sleep(0.1)  # Control loop rate (10 Hz)
+        self.get_logger().info("Control loop ended.")
 
     
     def local_control(self):

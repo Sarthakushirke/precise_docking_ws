@@ -1,0 +1,105 @@
+[1.154s] Invoking command in '/home/sarthak/precise_docking_ws/build/localization_amcl': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=10 /usr/bin/cmake /home/sarthak/precise_docking_ws/src/localization_amcl -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/sarthak/precise_docking_ws/install/localization_amcl
+[2.030s] -- The C compiler identification is GNU 11.4.0
+[2.030s] -- The CXX compiler identification is GNU 11.4.0
+[2.030s] -- Detecting C compiler ABI info
+[2.030s] -- Detecting C compiler ABI info - done
+[2.030s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.030s] -- Detecting C compile features
+[2.030s] -- Detecting C compile features - done
+[2.030s] -- Detecting CXX compiler ABI info
+[2.030s] -- Detecting CXX compiler ABI info - done
+[2.030s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.030s] -- Detecting CXX compile features
+[2.030s] -- Detecting CXX compile features - done
+[2.031s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[2.122s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[2.206s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.250s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[2.305s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.311s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.320s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.335s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.354s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.408s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.412s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[2.520s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[2.554s] -- Found FastRTPS: /opt/ros/humble/include  
+[2.605s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.616s] -- Looking for pthread.h
+[2.710s] -- Looking for pthread.h - found
+[2.711s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[2.792s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[2.792s] -- Found Threads: TRUE  
+[2.855s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[2.889s] -- Found rclpy: 3.3.15 (/opt/ros/humble/share/rclpy/cmake)
+[2.892s] -- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)
+[2.910s] -- Found tf2_ros: 0.25.9 (/opt/ros/humble/share/tf2_ros/cmake)
+[3.063s] -- Found tf2_geometry_msgs: 0.25.9 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[3.087s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[3.089s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[3.090s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[4.524s] -- Found Python3: /usr/include/python3.10 (found version "3.10.12") found components: Development Development.Module Development.Embed 
+[4.529s] -- Found tf2_sensor_msgs: 0.25.9 (/opt/ros/humble/share/tf2_sensor_msgs/cmake)
+[4.816s] -- Configuring done
+[4.825s] -- Generating done
+[4.830s] -- Build files have been written to: /home/sarthak/precise_docking_ws/build/localization_amcl
+[4.876s] Invoked command in '/home/sarthak/precise_docking_ws/build/localization_amcl' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=10 /usr/bin/cmake /home/sarthak/precise_docking_ws/src/localization_amcl -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/sarthak/precise_docking_ws/install/localization_amcl
+[4.879s] Invoking command in '/home/sarthak/precise_docking_ws/build/localization_amcl': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=10 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/localization_amcl -- -j20 -l20
+[4.965s] [ 50%] [32mBuilding CXX object CMakeFiles/cpp_executable.dir/src/cpp_node.cpp.o[0m
+[4.972s] [ 50%] Built target ament_cmake_python_symlink_localization_amcl
+[5.473s] running egg_info
+[5.482s] creating localization_amcl.egg-info
+[5.536s] writing localization_amcl.egg-info/PKG-INFO
+[5.536s] writing dependency_links to localization_amcl.egg-info/dependency_links.txt
+[5.536s] writing top-level names to localization_amcl.egg-info/top_level.txt
+[5.536s] writing manifest file 'localization_amcl.egg-info/SOURCES.txt'
+[8.141s] writing manifest file 'localization_amcl.egg-info/SOURCES.txt'
+[8.302s] [ 50%] Built target ament_cmake_python_build_localization_amcl_egg
+[9.483s] [100%] [32m[1mLinking CXX executable cpp_executable[0m
+[9.681s] [100%] Built target cpp_executable
+[9.698s] Invoked command in '/home/sarthak/precise_docking_ws/build/localization_amcl' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=10 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/localization_amcl -- -j20 -l20
+[9.729s] Invoking command in '/home/sarthak/precise_docking_ws/build/localization_amcl': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=10 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/localization_amcl
+[9.743s] -- Install configuration: ""
+[9.743s] -- Execute custom install script
+[9.743s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/lib/localization_amcl/cpp_executable
+[9.752s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/environment/pythonpath.sh
+[9.767s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/environment/pythonpath.dsv
+[9.786s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl-0.0.0-py3.10.egg-info/PKG-INFO
+[9.800s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl-0.0.0-py3.10.egg-info/SOURCES.txt
+[9.814s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl-0.0.0-py3.10.egg-info/dependency_links.txt
+[9.825s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl-0.0.0-py3.10.egg-info/top_level.txt
+[9.834s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/__init__.py
+[9.844s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/module_to_import.py
+[9.855s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/__init__.py
+[9.864s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/laser_trace.so
+[9.872s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/pf.py
+[9.885s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/pf_base.py
+[9.895s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/sensor_model.py
+[9.905s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/util.py
+[9.914s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/lib/localization_amcl/py_node.py
+[9.927s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/lib/localization_amcl/localization.py
+[9.941s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/ament_index/resource_index/package_run_dependencies/localization_amcl
+[9.948s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/ament_index/resource_index/parent_prefix_path/localization_amcl
+[9.959s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/environment/ament_prefix_path.sh
+[9.972s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/environment/ament_prefix_path.dsv
+[9.979s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/environment/path.sh
+[9.989s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/environment/path.dsv
+[9.999s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/local_setup.bash
+[10.012s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/local_setup.sh
+[10.021s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/local_setup.zsh
+[10.030s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/local_setup.dsv
+[10.038s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/package.dsv
+[10.052s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/ament_index/resource_index/packages/localization_amcl
+[10.061s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/cmake/localization_amclConfig.cmake
+[10.074s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/cmake/localization_amclConfig-version.cmake
+[10.086s] -- Symlinking: /home/sarthak/precise_docking_ws/install/localization_amcl/share/localization_amcl/package.xml
+[10.161s] Listing '/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl'...
+[10.162s] Compiling '/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/__init__.py'...
+[10.162s] Compiling '/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/module_to_import.py'...
+[10.162s] Listing '/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation'...
+[10.162s] Compiling '/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/__init__.py'...
+[10.162s] Compiling '/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/pf.py'...
+[10.162s] Compiling '/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/pf_base.py'...
+[10.162s] Compiling '/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/sensor_model.py'...
+[10.162s] Compiling '/home/sarthak/precise_docking_ws/install/localization_amcl/local/lib/python3.10/dist-packages/localization_amcl/pf_localisation/util.py'...
+[10.181s] Invoked command in '/home/sarthak/precise_docking_ws/build/localization_amcl' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=10 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/localization_amcl

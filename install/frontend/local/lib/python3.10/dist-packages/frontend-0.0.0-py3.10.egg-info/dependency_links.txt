@@ -1,1 +1,1 @@
-
+/home/sarthak/precise_docking_ws/build/frontend/ament_cmake_python/frontend/frontend.egg-info/dependency_links.txt

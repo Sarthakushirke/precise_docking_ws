@@ -1,0 +1,34 @@
+[2.973s] Invoking command in '/home/sarthak/precise_docking_ws/build/template_ros2': PYTHONPATH=/home/sarthak/precise_docking_ws/build/template_ros2/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sarthak/precise_docking_ws/build/template_ros2/build --no-deps symlink_data
+[3.192s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+[3.192s]   warnings.warn(msg)
+[3.634s] running develop
+[3.634s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/command/develop.py:41: EasyInstallDeprecationWarning: easy_install command is deprecated.
+[3.634s] !!
+[3.634s] 
+[3.634s]         ********************************************************************************
+[3.634s]         Please avoid running ``setup.py`` and ``easy_install``.
+[3.634s]         Instead, use pypa/build, pypa/installer or other
+[3.634s]         standards-based tools.
+[3.634s] 
+[3.634s]         See https://github.com/pypa/setuptools/issues/917 for details.
+[3.634s]         ********************************************************************************
+[3.634s] 
+[3.634s] !!
+[3.635s]   easy_install.initialize_options(self)
+[4.107s] running egg_info
+[4.108s] creating template_ros2.egg-info
+[4.142s] writing template_ros2.egg-info/PKG-INFO
+[4.143s] writing dependency_links to template_ros2.egg-info/dependency_links.txt
+[4.143s] writing requirements to template_ros2.egg-info/requires.txt
+[4.145s] writing top-level names to template_ros2.egg-info/top_level.txt
+[4.145s] writing manifest file 'template_ros2.egg-info/SOURCES.txt'
+[6.779s] writing manifest file 'template_ros2.egg-info/SOURCES.txt'
+[6.827s] running build_ext
+[6.827s] Creating /home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template-ros2.egg-link (link to .)
+[6.832s] 
+[6.832s] Installed /home/sarthak/precise_docking_ws/build/template_ros2
+[6.832s] running symlink_data
+[6.832s] creating /home/sarthak/precise_docking_ws/install/template_ros2/share/ament_index/resource_index/packages
+[6.832s] symbolically linking /home/sarthak/precise_docking_ws/build/template_ros2/resource/template_ros2 -> /home/sarthak/precise_docking_ws/install/template_ros2/share/ament_index/resource_index/packages
+[6.833s] symbolically linking /home/sarthak/precise_docking_ws/build/template_ros2/package.xml -> /home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2
+[7.060s] Invoked command in '/home/sarthak/precise_docking_ws/build/template_ros2' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/template_ros2/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sarthak/precise_docking_ws/build/template_ros2/build --no-deps symlink_data

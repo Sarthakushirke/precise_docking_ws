@@ -1,0 +1,32 @@
+[3.139s] Invoking command in '/home/sarthak/precise_docking_ws/build/arcuo_marker_detection': PYTHONPATH=/home/sarthak/precise_docking_ws/build/arcuo_marker_detection/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=35 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/build --no-deps symlink_data
+[3.374s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+[3.374s]   warnings.warn(msg)
+[3.717s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/command/develop.py:41: EasyInstallDeprecationWarning: easy_install command is deprecated.
+[3.718s] !!
+[3.718s] 
+[3.718s]         ********************************************************************************
+[3.718s]         Please avoid running ``setup.py`` and ``easy_install``.
+[3.718s]         Instead, use pypa/build, pypa/installer or other
+[3.718s]         standards-based tools.
+[3.718s] 
+[3.718s]         See https://github.com/pypa/setuptools/issues/917 for details.
+[3.718s]         ********************************************************************************
+[3.718s] 
+[3.718s] !!
+[3.718s]   easy_install.initialize_options(self)
+[3.719s] running develop
+[4.054s] running egg_info
+[4.078s] writing arcuo_marker_detection.egg-info/PKG-INFO
+[4.082s] writing dependency_links to arcuo_marker_detection.egg-info/dependency_links.txt
+[4.083s] writing entry points to arcuo_marker_detection.egg-info/entry_points.txt
+[4.084s] writing requirements to arcuo_marker_detection.egg-info/requires.txt
+[4.084s] writing top-level names to arcuo_marker_detection.egg-info/top_level.txt
+[5.996s] writing manifest file 'arcuo_marker_detection.egg-info/SOURCES.txt'
+[6.040s] running build_ext
+[6.041s] Creating /home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages/arcuo-marker-detection.egg-link (link to .)
+[6.042s] Installing aruco_marker_detection script to /home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/arcuo_marker_detection
+[6.042s] Installing aruco_marker_detection_node script to /home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/arcuo_marker_detection
+[6.043s] 
+[6.043s] Installed /home/sarthak/precise_docking_ws/build/arcuo_marker_detection
+[6.043s] running symlink_data
+[6.206s] Invoked command in '/home/sarthak/precise_docking_ws/build/arcuo_marker_detection' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/arcuo_marker_detection/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=35 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sarthak/precise_docking_ws/build/arcuo_marker_detection/build --no-deps symlink_data

@@ -39,69 +39,69 @@ ament_target_dependencies(icp_node rclcpp sensor_msgs libpointmatcher tf2 tf2_ge
 target_link_libraries(icp_node ${Python3_LIBRARIES})
 
 # Install Cpp executables
-install(TARGETS
-  cpp_executable
-  icp_node  # Ensure the ICP node is installed
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(TARGETS
+#   cpp_executable
+#   icp_node  # Ensure the ICP node is installed
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 # Install Python modules
 ament_python_install_package(${PROJECT_NAME})
 
 # Install Python executables
-install(PROGRAMS
-  scripts/py_node.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/py_node.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/main.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/main.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/laser_scan.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/laser_scan.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/odom_to_map.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/odom_to_map.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/scan_to_map.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/scan_to_map.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/map_create.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/map_create.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/pose_graph.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/pose_graph.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/pose_graph_odom.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/pose_graph_odom.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/pose_graph_odom_landmark.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/pose_graph_odom_landmark.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/plot_odom.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/plot_odom.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
-install(PROGRAMS
-  scripts/two_landmark.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(PROGRAMS
+#   scripts/two_landmark.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
 install(PROGRAMS
   scripts/localize_with_arcuo.py

@@ -1,1 +1,1 @@
-ultralytics_ros
+/home/sarthak/precise_docking_ws/build/ultralytics_ros/ament_cmake_python/ultralytics_ros/ultralytics_ros.egg-info/top_level.txt

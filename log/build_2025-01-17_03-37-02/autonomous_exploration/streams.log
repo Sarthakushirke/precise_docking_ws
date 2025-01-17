@@ -1,0 +1,31 @@
+[2.977s] Invoking command in '/home/sarthak/precise_docking_ws/build/autonomous_exploration': PYTHONPATH=/home/sarthak/precise_docking_ws/build/autonomous_exploration/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=218 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sarthak/precise_docking_ws/build/autonomous_exploration/build --no-deps symlink_data
+[3.236s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+[3.236s]   warnings.warn(msg)
+[3.678s] running develop
+[3.678s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/command/develop.py:41: EasyInstallDeprecationWarning: easy_install command is deprecated.
+[3.678s] !!
+[3.678s] 
+[3.679s]         ********************************************************************************
+[3.679s]         Please avoid running ``setup.py`` and ``easy_install``.
+[3.679s]         Instead, use pypa/build, pypa/installer or other
+[3.679s]         standards-based tools.
+[3.679s] 
+[3.679s]         See https://github.com/pypa/setuptools/issues/917 for details.
+[3.679s]         ********************************************************************************
+[3.679s] 
+[3.679s] !!
+[3.680s]   easy_install.initialize_options(self)
+[4.049s] running egg_info
+[4.072s] writing autonomous_exploration.egg-info/PKG-INFO
+[4.074s] writing dependency_links to autonomous_exploration.egg-info/dependency_links.txt
+[4.074s] writing entry points to autonomous_exploration.egg-info/entry_points.txt
+[4.074s] writing requirements to autonomous_exploration.egg-info/requires.txt
+[4.074s] writing top-level names to autonomous_exploration.egg-info/top_level.txt
+[5.980s] writing manifest file 'autonomous_exploration.egg-info/SOURCES.txt'
+[6.009s] running build_ext
+[6.009s] Creating /home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages/autonomous-exploration.egg-link (link to .)
+[6.011s] Installing control script to /home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/autonomous_exploration
+[6.011s] 
+[6.011s] Installed /home/sarthak/precise_docking_ws/build/autonomous_exploration
+[6.012s] running symlink_data
+[6.173s] Invoked command in '/home/sarthak/precise_docking_ws/build/autonomous_exploration' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/autonomous_exploration/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/autonomous_exploration/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=218 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sarthak/precise_docking_ws/build/autonomous_exploration/build --no-deps symlink_data

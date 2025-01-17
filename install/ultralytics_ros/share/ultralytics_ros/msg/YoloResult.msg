@@ -1,3 +1,1 @@
-std_msgs/Header header
-vision_msgs/Detection2DArray detections
-sensor_msgs/Image[] masks
+/home/sarthak/precise_docking_ws/src/ultralytics_ros/msg/YoloResult.msg

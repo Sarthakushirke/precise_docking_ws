@@ -1,0 +1,39 @@
+[3.021s] Invoking command in '/home/sarthak/precise_docking_ws/build/active_localization': PYTHONPATH=/home/sarthak/precise_docking_ws/build/active_localization/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=75 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sarthak/precise_docking_ws/build/active_localization/build --no-deps symlink_data
+[3.239s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+[3.239s]   warnings.warn(msg)
+[3.558s] running develop
+[3.559s] /home/sarthak/.local/lib/python3.10/site-packages/setuptools/command/develop.py:41: EasyInstallDeprecationWarning: easy_install command is deprecated.
+[3.559s] !!
+[3.560s] 
+[3.560s]         ********************************************************************************
+[3.560s]         Please avoid running ``setup.py`` and ``easy_install``.
+[3.560s]         Instead, use pypa/build, pypa/installer or other
+[3.560s]         standards-based tools.
+[3.560s] 
+[3.560s]         See https://github.com/pypa/setuptools/issues/917 for details.
+[3.560s]         ********************************************************************************
+[3.560s] 
+[3.560s] !!
+[3.560s]   easy_install.initialize_options(self)
+[3.925s] running egg_info
+[3.926s] creating active_localization.egg-info
+[3.954s] writing active_localization.egg-info/PKG-INFO
+[3.954s] writing dependency_links to active_localization.egg-info/dependency_links.txt
+[3.955s] writing entry points to active_localization.egg-info/entry_points.txt
+[3.955s] writing requirements to active_localization.egg-info/requires.txt
+[3.955s] writing top-level names to active_localization.egg-info/top_level.txt
+[3.955s] writing manifest file 'active_localization.egg-info/SOURCES.txt'
+[6.549s] writing manifest file 'active_localization.egg-info/SOURCES.txt'
+[6.588s] running build_ext
+[6.589s] Creating /home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages/active-localization.egg-link (link to .)
+[6.591s] Installing frontier_detection script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization
+[6.591s] Installing local_map_node script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization
+[6.592s] Installing localization script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization
+[6.594s] Installing path_to_goal script to /home/sarthak/precise_docking_ws/install/active_localization/lib/active_localization
+[6.594s] 
+[6.594s] Installed /home/sarthak/precise_docking_ws/build/active_localization
+[6.595s] running symlink_data
+[6.595s] creating /home/sarthak/precise_docking_ws/install/active_localization/share/ament_index/resource_index/packages
+[6.597s] symbolically linking /home/sarthak/precise_docking_ws/build/active_localization/resource/active_localization -> /home/sarthak/precise_docking_ws/install/active_localization/share/ament_index/resource_index/packages
+[6.597s] symbolically linking /home/sarthak/precise_docking_ws/build/active_localization/package.xml -> /home/sarthak/precise_docking_ws/install/active_localization/share/active_localization
+[6.774s] Invoked command in '/home/sarthak/precise_docking_ws/build/active_localization' returned '0': PYTHONPATH=/home/sarthak/precise_docking_ws/build/active_localization/prefix_override:/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/sarthak/precise_docking_ws/install/active_localization/lib/python3.10/site-packages:${PYTHONPATH} ROS_DOMAIN_ID=75 /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sarthak/precise_docking_ws/build/active_localization/build --no-deps symlink_data

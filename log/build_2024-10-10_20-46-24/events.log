@@ -1,9 +1,0 @@
-[0.000000] (-) TimerEvent: {}
-[0.000468] (-) JobUnselected: {'identifier': 'arcuo_marker_detection'}
-[0.000633] (-) JobUnselected: {'identifier': 'docking_bringup'}
-[0.000669] (-) JobUnselected: {'identifier': 'frontend'}
-[0.000681] (-) JobUnselected: {'identifier': 'reach_the_goal'}
-[0.000691] (-) JobUnselected: {'identifier': 'teleop_cpp_ros2'}
-[0.000699] (-) JobUnselected: {'identifier': 'template_ros2'}
-[0.000708] (-) JobUnselected: {'identifier': 'ultralytics_ros'}
-[0.000717] (-) EventReactorShutdown: {}

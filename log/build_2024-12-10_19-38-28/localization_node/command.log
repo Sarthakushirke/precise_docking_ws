@@ -1,2 +1,0 @@
-Invoking command in '/home/sarthak/precise_docking_ws/build/localization_node': /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/localization_node -- -j20 -l20
-Invoked command in '/home/sarthak/precise_docking_ws/build/localization_node' returned '2': /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/localization_node -- -j20 -l20

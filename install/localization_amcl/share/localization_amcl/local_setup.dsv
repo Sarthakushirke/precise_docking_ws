@@ -1,3 +1,1 @@
-source;share/localization_amcl/environment/ament_prefix_path.sh
-source;share/localization_amcl/environment/path.sh
-source;share/localization_amcl/environment/pythonpath.sh
+/home/sarthak/precise_docking_ws/build/localization_amcl/ament_cmake_environment_hooks/local_setup.dsv

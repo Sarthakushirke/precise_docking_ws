@@ -1,9 +1,0 @@
-[ 50%] [32mBuilding CXX object CMakeFiles/main.dir/src/main.cpp.o[0m
-In file included from [01m[K/home/sarthak/precise_docking_ws/src/localization_node/src/main.cpp:3[m[K:
-[01m[K/home/sarthak/precise_docking_ws/src/localization_node/include/localization_node/active_amcl.hpp:13:10:[m[K [01;31m[Kfatal error: [m[Knav2_msgs/msg/particle.hpp: No such file or directory
-   13 | #include [01;31m[K"nav2_msgs/msg/particle.hpp"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
-compilation terminated.
-gmake[2]: *** [CMakeFiles/main.dir/build.make:76: CMakeFiles/main.dir/src/main.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/main.dir/all] Error 2
-gmake: *** [Makefile:146: all] Error 2
