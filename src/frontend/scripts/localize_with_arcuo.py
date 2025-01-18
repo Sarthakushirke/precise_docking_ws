@@ -157,6 +157,7 @@ class MultiLocationMarkerNode(Node):
         self.all_frontiers_info = {}  # dict of i -> list of frontier dicts
         # Initialize the hypothesis local map data as a dictionary
         self.local_map_data = {}
+        self.compute_start = True
 
         self.goal_x = 13.0  # Goal x-coordinate in meters
         self.goal_y = 0.0  # Goal y-coordinate in meters
@@ -382,150 +383,104 @@ class MultiLocationMarkerNode(Node):
 
     def compute_again(self,new_hypotheses):
 
+        if self.compute_start:
+            num_beams = 16000
+            angle_increment = 0.0003927233046852052
+            scan_ranges = []
+            start_angle = -3.14
+            max_range = 10
 
-        num_beams = 16000
-        angle_increment = 0.0003927233046852052
-        scan_ranges = []
-        start_angle = -3.14
-        max_range = 10
+            # reachable = np.zeros_like(self.map_data, dtype=bool)
+            self.all_frontiers_info = {}
 
-        # reachable = np.zeros_like(self.map_data, dtype=bool)
-        self.all_frontiers_info = {}
+            self.filtered_hypotheses = []
 
-        for h, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
+            local_map_delete = []
 
-            # Re-init arrays for each hypothesis
-            reachable = np.zeros_like(self.map_data, dtype=bool)
-           
-            for i in range(num_beams):
-                beam_angle = start_angle + i * angle_increment
-                reachable = self.get_ray_distance_bresenham(x_r, y_r, beam_angle, max_range,reachable)
-                # scan_ranges.append(dist)
+            for h, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
 
-            # print("Reachable:", np.array2string(reachable, threshold=np.inf))
-            # Update the map
-            updated_map = self.map_data.copy()
-
-            # Identify free cells in the map
-            free_cells = (updated_map == 0)
-        
-            # Identify unreachable cells
-            unreachable = ~reachable
-
-            # Identify free and unreachable cells
-            free_and_unreachable = free_cells & unreachable
-
-            # Mark free, unreachable cells as unknown (-1)
-            updated_map[free_and_unreachable] = -1
+                # Re-init arrays for each hypothesis
+                reachable = np.zeros_like(self.map_data, dtype=bool)
             
-            # Ensure reachable free cells remain as 0
-            reachable_free = free_cells & reachable
-            updated_map[reachable_free] = 0  # This line may not be necessary but ensures clarity
+                for i in range(num_beams):
+                    beam_angle = start_angle + i * angle_increment
+                    reachable = self.get_ray_distance_bresenham(x_r, y_r, beam_angle, max_range,reachable)
+                    # scan_ranges.append(dist)
 
-             # Store or update the local_map_data for this hypothesis
-            if h not in self.local_map_data:
-                self.local_map_data[h] = updated_map
-            else:
-                # Merge with existing local map
-                height, width = self.local_map_data[h].shape
-                for r in range(height):
-                    for c in range(width):
-                        old_val = self.local_map_data[h][r, c]
-                        new_val = updated_map[r, c]
-                        self.local_map_data[h][r, c] = self.merge_cell(old_val, new_val)
+                # print("Reachable:", np.array2string(reachable, threshold=np.inf))
+                # Update the map
+                updated_map = self.map_data.copy()
 
-            origin_x = self.map_info.origin.position.x
-            origin_y = self.map_info.origin.position.y
-            resolution = self.map_info.resolution
+                # Identify free cells in the map
+                free_cells = (updated_map == 0)
+            
+                # Identify unreachable cells
+                unreachable = ~reachable
 
-            self.column = int((x_r - origin_x) / resolution)
-            self.row = int((y_r - origin_y) / resolution)
+                # Identify free and unreachable cells
+                free_and_unreachable = free_cells & unreachable
 
-            # Convert goal position to grid indices
-            self.goal_column = int((self.goal_x - origin_x) / resolution)
-            self.goal_row = int((self.goal_y - origin_y) / resolution)
-            self.goal_indices = (self.goal_row, self.goal_column)
+                # Mark free, unreachable cells as unknown (-1)
+                updated_map[free_and_unreachable] = -1
+                
+                # Ensure reachable free cells remain as 0
+                reachable_free = free_cells & reachable
+                updated_map[reachable_free] = 0  # This line may not be necessary but ensures clarity
 
-            # frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
+                # Store or update the local_map_data for this hypothesis
+                if h not in self.local_map_data:
+                    self.local_map_data[h] = updated_map
+                # else:
+                #     # Merge with existing local map
+                #     height, width = self.local_map_data[h].shape
+                #     for r in range(height):
+                #         for c in range(width):
+                #             old_val = self.local_map_data[h][r, c]
+                #             new_val = updated_map[r, c]
+                #             self.local_map_data[h][r, c] = self.merge_cell(old_val, new_val)
 
-            updated_exploration_map, frontiers_middle = self.exploration(self.local_map_data[h], self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
+                origin_x = self.map_info.origin.position.x
+                origin_y = self.map_info.origin.position.y
+                resolution = self.map_info.resolution
 
-            print("Frontiers ", frontiers_middle)
+                self.column = int((x_r - origin_x) / resolution)
+                self.row = int((y_r - origin_y) / resolution)
 
-            # Reassign it back
-            self.local_map_data[h] = updated_exploration_map
+                # Convert goal position to grid indices
+                self.goal_column = int((self.goal_x - origin_x) / resolution)
+                self.goal_row = int((self.goal_y - origin_y) / resolution)
+                self.goal_indices = (self.goal_row, self.goal_column)
 
-            ######################
+                # frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
 
-            centroids_info = []
-            # Filter hypotheses based on the frontier condition
-            filtered_hypotheses = []
+                updated_exploration_map, frontiers_middle = self.exploration(self.local_map_data[h], self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
 
-            for frontier_id, (centroid_x, centroid_y) in frontiers_middle.items():
+                print("Frontiers ", frontiers_middle)
 
-                # print("Length of frontiers",len(frontiers_middle))
+                # Reassign it back
+                self.local_map_data[h] = updated_exploration_map
+
+                ###############################################################
+
+                # store list of frontiers for hypothesis i  (#centroids_info  )
+                self.all_frontiers_info[h] =  self.centroid_info_function(frontiers_middle,x_r, y_r, theta_r,resolution,origin_x,origin_y)   
 
                 if self.orginal_scan_centroids == len(frontiers_middle):
 
-                    filtered_hypotheses.append((x_r, y_r, theta_r))
+                    print("I am here")
 
-                    # Update the hypotheses with the filtered list
-                    new_hypotheses = filtered_hypotheses
+                    local_map_delete.append(h)
 
-                    centroid_indices = (centroid_x, centroid_y)
-
-                    # Compute the path from centroid to goal
-                    path = self.astar(self.map_data, centroid_indices, self.goal_indices)
-
-                    # Calculate visible objects from this centroid
-
-                    centroid_visible_x = centroid_x * resolution + origin_x
-                    centroid_visible_y = centroid_y * resolution + origin_y
-                    print("Coordinates of the centroild in ",centroid_visible_y,centroid_visible_x)
-                    visible_objects = check_visible_objects_from_centroid_simple( centroid_visible_y, centroid_visible_x)
-                    num_visible_objects = len(visible_objects)
-
-                    if path:
-                        # path_length = len(path) * resolution
-
-                        self.centroid_goal_path = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in path] 
-
-                        self.publish_path_marker( self.centroid_goal_path)
-
-                        # print("The centroild to goal path", self.centroid_goal_path)
-                        path_length = self.pathLength(self.centroid_goal_path)
-
-                        # Weights for utility calculation
-                        weight_info_gain = 1.0
-                        weight_path_length = 1.0
-
-                        # Compute utility
-                        utility_value = (weight_info_gain * num_visible_objects) - (weight_path_length * path_length)
-
-                        self.get_logger().info(
-                            f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}, "
-                            f"utility is {utility_value:.2f},"
-                            f"Num of visible objects is {num_visible_objects:.2f},")
-
-                        # Store information for utility calculation
-                        centroids_info.append({
-                            'centroid_x': centroid_x,
-                            'centroid_y': centroid_y,
-                            'path': path,
-                            'path_length': path_length,
-                            'utility': utility_value,
-                            'num_visible_objects': num_visible_objects,
-                            'centroid_indices': centroid_indices
-                        })
-                    else:
-                        self.get_logger().warn(f"No path found from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal.")
-
-                    
-
-            # store list of frontiers for hypothesis i
-            self.all_frontiers_info[h] = centroids_info  
+                    self.filtered_hypotheses.append((x_r, y_r, theta_r))
 
 
+        # Keep only the keys in `local_map_delete`
+        self.local_map_data = {k: v for k, v in self.local_map_data.items() if k in local_map_delete}
+
+        print(len(self.local_map_data))
+
+        self.compute_start = False
+        
         #Pick one hypothesis and one path (TO DO) #OUTPUT: 1 hypothses which might not be the real one and the path to that 
         # hypotheses best centroid.
         # AFTER processing all hypotheses, pick best overall
@@ -601,7 +556,6 @@ class MultiLocationMarkerNode(Node):
         self.map_pub.publish(updated_occupancy_grid)
 
 
-
     def odom_callback(self,msg):
         self.odom_data = msg
         self.x = msg.pose.pose.position.x
@@ -611,6 +565,68 @@ class MultiLocationMarkerNode(Node):
         msg.pose.pose.orientation.z,msg.pose.pose.orientation.w)
 
         # print(f"Odom callback => x: {self.x}, y: {self.y}, yaw: {self.yaw}")
+
+    def centroid_info_function(self,frontiers_middle,x_r, y_r, theta_r,resolution,origin_x,origin_y):
+        centroids_info = []
+        # Filter hypotheses based on the frontier condition
+       
+
+        for frontier_id, (centroid_x, centroid_y) in frontiers_middle.items():
+
+            # print("Length of frontiers",len(frontiers_middle))
+
+            if self.orginal_scan_centroids == len(frontiers_middle):
+
+
+                centroid_indices = (centroid_x, centroid_y)
+
+                # Compute the path from centroid to goal
+                path = self.astar(self.map_data, centroid_indices, self.goal_indices)
+
+                # Calculate visible objects from this centroid
+
+                centroid_visible_x = centroid_x * resolution + origin_x
+                centroid_visible_y = centroid_y * resolution + origin_y
+                print("Coordinates of the centroild in ",centroid_visible_y,centroid_visible_x)
+                visible_objects = check_visible_objects_from_centroid_simple( centroid_visible_y, centroid_visible_x)
+                num_visible_objects = len(visible_objects)
+
+                if path:
+                    # path_length = len(path) * resolution
+
+                    self.centroid_goal_path = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in path] 
+
+                    self.publish_path_marker( self.centroid_goal_path)
+
+                    # print("The centroild to goal path", self.centroid_goal_path)
+                    path_length = self.pathLength(self.centroid_goal_path)
+
+                    # Weights for utility calculation
+                    weight_info_gain = 1.0
+                    weight_path_length = 1.0
+
+                    # Compute utility
+                    utility_value = (weight_info_gain * num_visible_objects) - (weight_path_length * path_length)
+
+                    self.get_logger().info(
+                        f"Path length from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal: {path_length:.2f}, "
+                        f"utility is {utility_value:.2f},"
+                        f"Num of visible objects is {num_visible_objects:.2f},")
+
+                    # Store information for utility calculation
+                    centroids_info.append({
+                        'centroid_x': centroid_x,
+                        'centroid_y': centroid_y,
+                        'path': path,
+                        'path_length': path_length,
+                        'utility': utility_value,
+                        'num_visible_objects': num_visible_objects,
+                        'centroid_indices': centroid_indices
+                    })
+                else:
+                    self.get_logger().warn(f"No path found from centroid at ({centroid_x:.2f}, {centroid_y:.2f}) to goal.")
+
+        return centroids_info    
 
 
     def merge_cell(self,old_val, new_val):
@@ -686,6 +702,9 @@ class MultiLocationMarkerNode(Node):
         hyp_pose_x = self.hypotheses_dict[0][self.best_global_hypothesis-1][0]
         hyp_pose_y = self.hypotheses_dict[0][self.best_global_hypothesis-1][1]
         hyp_pose_theta = 0
+
+        self.hypotheses_dict[0] = self.filtered_hypotheses
+        print(self.hypotheses_dict[0])
         twist = Twist()
         # dt = 0.09  # your loop rate is time.sleep(0.1)
         while self.control_active:
@@ -746,6 +765,7 @@ class MultiLocationMarkerNode(Node):
             self.velocity_pub.publish(twist)
 
             self.apply_pose_diff_to_hypotheses(dx, dy, dtheta)
+            # self.local_map_data =  self.update_hypothesis_maps_with_lidar(dx, dy, dtheta, self.full_scan_data)
 
             if self.riviz_publish is True:
                 # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
@@ -863,6 +883,47 @@ class MultiLocationMarkerNode(Node):
             new_hypotheses_dict[marker_id] = updated_list
 
         self.hypotheses_dict = new_hypotheses_dict
+
+
+    def update_hypothesis_maps_with_lidar(self, dx, dy, dtheta, real_robot_lidar_scan):
+    
+        # 2) For each hypothesis, do partial raycasting from the updated pose
+        
+        for h, (hx, hy, htheta) in enumerate(self.hypotheses_dict[0], start=1):
+            reachable = np.zeros_like(self.map_data, dtype=bool)
+
+            # For each beam in the new LiDAR scan:
+            for (beam_angle, beam_range) in real_robot_lidar_scan:
+                # The beam_angle is relative to the robot's heading htheta, so the absolute angle is:
+                global_angle = htheta + beam_angle
+
+                reachable = self.get_ray_distance_bresenham(hx, hy, global_angle, beam_range, reachable)
+
+            # 3) Merge the new partial occupancy info into local_map_data[h]
+            updated_map = self.map_data.copy()
+
+            # Mark free/occupied
+            free_cells = (updated_map == 0)
+            unreachable = ~reachable
+            free_and_unreachable = free_cells & unreachable
+            updated_map[free_and_unreachable] = -1
+            reachable_free = free_cells & reachable
+            updated_map[reachable_free] = 0
+
+            # Merge with existing local map
+            if h not in self.local_map_data:
+                self.local_map_data[h] = updated_map
+            else:
+                height, width = self.local_map_data[h].shape
+                for r in range(height):
+                    for c in range(width):
+                        old_val = self.local_map_data[h][r, c]
+                        new_val = updated_map[r, c]
+                        self.local_map_data[h][r, c] = self.merge_cell(old_val, new_val)
+
+
+        return self.local_map_data
+
 
     def remove_out_of_bounds_hypotheses(self):
         """
@@ -1180,6 +1241,9 @@ class MultiLocationMarkerNode(Node):
     def lidar_callback(self, msg):
         self.scan_data = msg
         self.scan = msg.ranges
+        angle_min = msg.angle_min
+
+
 
         # Define the safe distance and the front scan range
         min_distance = 0.5  # Minimum safe distance in meters
@@ -1189,6 +1253,13 @@ class MultiLocationMarkerNode(Node):
         num_readings = len(self.scan)  # Total number of LiDAR readings
         angle_increment = msg.angle_increment  # Angular resolution of each scan in radians
         front_indices = int(front_angle_range / (angle_increment * 180 / math.pi))  # Convert angle to index range
+
+        self.full_scan_data = []
+
+        for i, dist in enumerate(self.scan):
+            beam_angle = angle_min + i * angle_increment
+            if dist > 0.0 and dist < float('inf'):
+                self.full_scan_data.append((beam_angle, dist))
 
         # Extract front-facing LiDAR readings (center ± front_angle_range)
         center_index = num_readings // 2
@@ -1284,7 +1355,6 @@ class MultiLocationMarkerNode(Node):
         for group_id, points in filtered_groups.items():
             centroid = self.calculate_centroid(points)
             centroids[group_id] = centroid
-
 
         # Publish the frontier markers
         self.publish_frontier_markers(filtered_groups, resolution, originX, originY)
@@ -1471,9 +1541,6 @@ class MultiLocationMarkerNode(Node):
         map_y0 = int((robot_y - origin_y) / resolution)
         map_x1 = int((x_end   - origin_x) / resolution)
         map_y1 = int((y_end   - origin_y) / resolution)
-
-
-   
 
         # 3) Run Bresenham
         line_cells = self.bresenham_line(map_x0, map_y0, map_x1, map_y1)
