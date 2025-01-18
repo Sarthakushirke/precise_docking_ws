@@ -16,6 +16,7 @@ import tf2_geometry_msgs
 from geometry_msgs.msg import PointStamped
 import math
 from geometry_msgs.msg import PoseArray, Pose
+from std_msgs.msg import Float64MultiArray
 
 
 # The different ArUco dictionaries built into the OpenCV library. 
@@ -52,6 +53,9 @@ class arcuo_marker_detection(Node): # Node class
             10)
         
         self.publisher_marker_in_robot_frame = self.create_publisher(PointStamped, 'marker_in_robot_frame', 10)
+
+        self.z_multiarray_pub = self.create_publisher(Float64MultiArray, '/all_marker_z_values', 10)
+
 
 
         # Declare parameters
@@ -124,6 +128,9 @@ class arcuo_marker_detection(Node): # Node class
             # x-axis points to the right
             # y-axis points straight down towards your toes
             # z-axis points straight ahead away from your eye, out of the camera
+
+            z_values_list = []
+
             for i, marker_id in enumerate(marker_ids): 
 
                 # self.get_logger().info('Publishing')
@@ -184,6 +191,8 @@ class arcuo_marker_detection(Node): # Node class
 
                     self.get_logger().info(f'Marker position in robot frame: x={x_robot}, y={y_robot}, z={z_robot}')
 
+                    z_values_list.append(z_robot)
+
 
                     # Draw the axes on the marker
                     cv2.drawFrameAxes(current_frame, self.mtx, self.dst, rvecs[i], tvecs[i], 0.05)
@@ -196,6 +205,13 @@ class arcuo_marker_detection(Node): # Node class
                 
                 except Exception as e:
                     self.get_logger().error(f'Could not transform marker pose to robot frame: {e}')
+
+            # Create the multi-array message
+            z_multi_msg = Float64MultiArray()
+            z_multi_msg.data = z_values_list  # simple assignment, or you can set layout if needed
+
+            # Publish once for all markers in this frame
+            self.z_multiarray_pub.publish(z_multi_msg)
  
                  
 

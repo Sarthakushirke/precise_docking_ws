@@ -16,6 +16,9 @@ from nav_msgs.msg import OccupancyGrid, Odometry
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy, QoSHistoryPolicy
 from active_localization.next_best_view import check_visible_objects_from_centroid_simple
 from sensor_msgs.msg import LaserScan
+from std_msgs.msg import Float64MultiArray
+
+
 
 
 speed = 0.2  # Linear speed (m/s)
@@ -60,10 +63,17 @@ class MultiLocationMarkerNode(Node):
 
             
         # Subscribe to a topic that just gives a PointStamped in the robot frame
-        self.marker_sub = self.create_subscription(
-            PointStamped,
-            '/marker_in_robot_frame',
-            self.marker_callback,
+        # self.marker_sub = self.create_subscription(
+        #     PointStamped,
+        #     '/marker_in_robot_frame',
+        #     self.marker_callback,
+        #     10
+        # )
+
+        self.z_array_sub = self.create_subscription(
+            Float64MultiArray,
+            '/all_marker_z_values',
+            self.z_array_callback,
             10
         )
 
@@ -168,6 +178,11 @@ class MultiLocationMarkerNode(Node):
         self.x = None
         self.y = None
 
+        #Re compute if wrong path 
+        self.too_close_in_front = False     # Indicates if an obstacle is detected
+        self.obstacle_start_time = None     # When obstacle was first detected
+        self.obstacle_threshold_sec = 30.0  # 30 second threshold
+
         #Original scan centroids
         self.orginal_scan_centroids = None
 
@@ -208,17 +223,29 @@ class MultiLocationMarkerNode(Node):
         color = np.random.rand(3)
         return color
 
-    def marker_callback(self, msg: PointStamped):
-        """
-        We only receive the marker's position (x,y,z) in the robot frame.
-        We'll assume orientation=0 (phi_marker_relative=0).
-        """
+    # def marker_callback(self, msg: PointStamped):
+    #     """
+    #     We only receive the marker's position (x,y,z) in the robot frame.
+    #     We'll assume orientation=0 (phi_marker_relative=0).
+    #     """
+
+    #     print("I am in marker callback")
+
+    #     # if self.global_start is True:
+    #     #     print("start", self.global_start)
+             
+    #     self.compute_and_plan(msg)
+
+
+    def z_array_callback(self, msg: Float64MultiArray):
 
         print("I am in marker callback")
 
-        # if self.global_start is True:
-        #     print("start", self.global_start)
-             
+        self.stored_marker_z_values = msg.data
+        self.get_logger().info(f"Got {len(self.stored_marker_z_values)} marker Z-values in one message.")
+        for z in self.stored_marker_z_values:
+            print(f"Z = {z}")
+
         self.compute_and_plan(msg)
 
 
@@ -228,10 +255,10 @@ class MultiLocationMarkerNode(Node):
 
         self.marker_pose = msg
 
-        self.stored_marker_z_values = []
+        # self.stored_marker_z_values = []
          
-        if self.marker_pose.point.z not in self.stored_marker_z_values:
-            self.stored_marker_z_values.append(round(self.marker_pose.point.z* 10.0, 2))
+        # if self.marker_pose.point.z not in self.stored_marker_z_values:
+        #     self.stored_marker_z_values.append(round(self.marker_pose.point.z* 10.0, 2))
 
         print("self.stored_marker_z_values", len(self.stored_marker_z_values))
         print("self.stored_marker_z_values:", [z for z in self.stored_marker_z_values])
@@ -694,6 +721,25 @@ class MultiLocationMarkerNode(Node):
                 w = 0.0
                 self.control_active = False
                 self.get_logger().info("Goal reached.")
+
+            #If the LiDAR says there's an obstacle in front, override
+            if self.too_close_in_front:
+                self.get_logger().info("Overriding command due to obstacle in front!")
+                v = 0.0
+                w = 0.0
+
+                # Check how long the obstacle has been there
+                if self.obstacle_start_time is not None:
+                    elapsed = time.time() - self.obstacle_start_time
+                    if elapsed >= self.obstacle_threshold_sec:
+                        self.get_logger().warn("Obstacle in front for 30+ seconds, re-planning...")
+                        # You can call re-planning here:
+                        self.compute_again(self.hypotheses_dict[0])
+                        # Then reset the timer or handle your logic
+                        self.obstacle_start_time = None
+            else:
+                # If obstacle is cleared, reset the timer
+                self.obstacle_start_time = None
                 
             twist.linear.x = v
             twist.angular.z = w
@@ -714,8 +760,14 @@ class MultiLocationMarkerNode(Node):
             print("self.stored_marker_z_values", len(self.stored_marker_z_values))
             print("self.stored_marker_z_values:", [z for z in self.stored_marker_z_values])
 
+
+                # 1) Check if the length has changed (new marker or lost marker)
+            if previous_marker_z_values and (len(self.stored_marker_z_values) != len(previous_marker_z_values)):
+                print("Marker list length changed, starting measurement model...")
+                self.measurement_model()
+
             # Check for drastic change (e.g., significant difference in average or max difference)
-            if previous_marker_z_values and len(self.hypotheses_dict[0]) != 1:
+            elif previous_marker_z_values and len(self.hypotheses_dict[0]) != 1:
                 # Calculate element-wise difference
                 diff_list = [abs(curr - prev) for curr, prev in zip(self.stored_marker_z_values, previous_marker_z_values)]
                 
@@ -736,7 +788,9 @@ class MultiLocationMarkerNode(Node):
                     self.measurement_model()
 
             # Update previous_marker_z_values for the next comparison
-            self.previous_marker_z_values = self.stored_marker_z_values.copy()
+            # self.previous_marker_z_values = self.stored_marker_z_values.copy()
+            self.previous_marker_z_values = self.stored_marker_z_values[:]
+
 
             # Multiply old weight by likelihood
             # updated_weights = []
@@ -794,9 +848,7 @@ class MultiLocationMarkerNode(Node):
             list_from_dict = self.hypotheses_dict[0]
             self.compute_again(list_from_dict)
 
-
-    
-        
+  
     def apply_pose_diff_to_hypotheses(self, dx, dy, dtheta):
         new_hypotheses_dict = {}
         for marker_id, hypotheses in self.hypotheses_dict.items():
@@ -1054,6 +1106,13 @@ class MultiLocationMarkerNode(Node):
                 w = 0.0
                 self.final_robot_active = False
                 self.get_logger().info("Goal reached.")
+
+            if self.too_close_in_front:
+                self.get_logger().info("Overriding command due to obstacle in front!")
+                v = 0.0
+                w = 0.0
+
+
             twist.linear.x = v
             twist.angular.z = w
             self.velocity_pub.publish(twist)
@@ -1139,15 +1198,18 @@ class MultiLocationMarkerNode(Node):
         too_close = any(distance < min_distance for distance in front_scan if distance > 0)
 
         if too_close:
-            self.get_logger().warn("Warning: Obstacle detected in front!")
-            # Example: Stop the robot if too close
-            twist = Twist()
-            twist.linear.x = 0.0
-            twist.angular.z = 0.0
-            self.velocity_pub.publish(twist)
-            
+            self.too_close_in_front = True
+            self.get_logger().warn("Warning: Obstacle detected in front!")  
         else:
+            self.too_close_in_front = False
             self.get_logger().info("Front is clear.")
+
+        if self.too_close_in_front and self.obstacle_start_time is None:
+        # Just detected an obstacle
+            self.obstacle_start_time = time.time()
+        elif not self.too_close_in_front:
+            # Obstacle is gone
+            self.obstacle_start_time = None
 
 
     def compute_likelihood(self,
