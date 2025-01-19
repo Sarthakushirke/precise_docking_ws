@@ -144,6 +144,8 @@ class OccupancyGridUpdater(Node):
     
 
     def lidar_callback(self, msg):
+
+        
         if self.map_data is None:
             self.get_logger().warn('Map data not available yet')
             return
