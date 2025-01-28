@@ -1,0 +1,280 @@
+[1.074s] Invoking command in '/home/sarthak/precise_docking_ws/build/ultralytics_ros': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake /home/sarthak/precise_docking_ws/src/ultralytics_ros -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/sarthak/precise_docking_ws/install/ultralytics_ros
+[1.134s] -- The C compiler identification is GNU 11.4.0
+[1.204s] -- The CXX compiler identification is GNU 11.4.0
+[1.213s] -- Detecting C compiler ABI info
+[1.280s] -- Detecting C compiler ABI info - done
+[1.290s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.290s] -- Detecting C compile features
+[1.291s] -- Detecting C compile features - done
+[1.295s] -- Detecting CXX compiler ABI info
+[1.396s] -- Detecting CXX compiler ABI info - done
+[1.405s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.405s] -- Detecting CXX compile features
+[1.406s] -- Detecting CXX compile features - done
+[1.409s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.865s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.964s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.990s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[2.055s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.062s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.075s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.094s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.119s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.183s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.188s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[2.285s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[2.309s] -- Found FastRTPS: /opt/ros/humble/include  
+[2.347s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.355s] -- Looking for pthread.h
+[2.411s] -- Looking for pthread.h - found
+[2.411s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[2.471s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[2.471s] -- Found Threads: TRUE  
+[2.516s] -- Found rclpy: 3.3.15 (/opt/ros/humble/share/rclpy/cmake)
+[2.517s] -- Found geometry_msgs: 4.2.4 (/opt/ros/humble/share/geometry_msgs/cmake)
+[2.527s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[2.544s] -- Found vision_msgs: 4.1.1 (/opt/ros/humble/share/vision_msgs/cmake)
+[2.563s] -- Found visualization_msgs: 4.2.4 (/opt/ros/humble/share/visualization_msgs/cmake)
+[2.587s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[2.602s] -- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)
+[2.607s] -- Found image_geometry: 3.2.1 (/opt/ros/humble/share/image_geometry/cmake)
+[2.611s] -- Found message_filters: 4.3.5 (/opt/ros/humble/share/message_filters/cmake)
+[2.615s] -- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)
+[2.656s] -- Checking for module 'eigen3'
+[2.671s] --   Found eigen3, version 3.4.0
+[2.716s] -- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+[2.716s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[2.747s] -- Checking for module 'flann'
+[2.769s] --   Found flann, version 1.9.1
+[2.809s] -- Found FLANN: /usr/lib/x86_64-linux-gnu/libflann_cpp.so  
+[2.809s] -- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+[3.789s] -- Checking for module 'libusb-1.0'
+[3.805s] --   Found libusb-1.0, version 1.0.25
+[3.855s] -- Found libusb: /usr/lib/x86_64-linux-gnu/libusb-1.0.so  
+[3.856s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[3.928s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[4.091s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[4.099s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[4.108s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[4.238s] -- Found Qhull version 8.0.2
+[4.382s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[4.525s] -- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  
+[4.526s] -- Found PCL_KDTREE: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so  
+[4.526s] -- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  
+[4.527s] -- Found PCL_SEARCH: /usr/lib/x86_64-linux-gnu/libpcl_search.so  
+[4.527s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so  
+[4.528s] -- Found PCL_FILTERS: /usr/lib/x86_64-linux-gnu/libpcl_filters.so  
+[4.528s] -- Found PCL_2D: /usr/include/pcl-1.12  
+[4.529s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.12  
+[4.529s] -- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  
+[4.530s] -- Found PCL_FEATURES: /usr/lib/x86_64-linux-gnu/libpcl_features.so  
+[4.531s] -- Found PCL_ML: /usr/lib/x86_64-linux-gnu/libpcl_ml.so  
+[4.531s] -- Found PCL_SEGMENTATION: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so  
+[4.532s] -- Found PCL_VISUALIZATION: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so  
+[4.533s] -- Found PCL_SURFACE: /usr/lib/x86_64-linux-gnu/libpcl_surface.so  
+[4.533s] -- Found PCL_REGISTRATION: /usr/lib/x86_64-linux-gnu/libpcl_registration.so  
+[4.534s] -- Found PCL_KEYPOINTS: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so  
+[4.535s] -- Found PCL_TRACKING: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so  
+[4.536s] -- Found PCL_RECOGNITION: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so  
+[4.536s] -- Found PCL_STEREO: /usr/lib/x86_64-linux-gnu/libpcl_stereo.so  
+[4.537s] -- Found PCL_APPS: /usr/lib/x86_64-linux-gnu/libpcl_apps.so  
+[4.537s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.12  
+[4.538s] -- Found PCL_MODELER: /usr/include/pcl-1.12  
+[4.538s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.12  
+[4.539s] -- Found PCL_OUTOFCORE: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so  
+[4.539s] -- Found PCL_PEOPLE: /usr/lib/x86_64-linux-gnu/libpcl_people.so  
+[4.542s] -- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)
+[4.569s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[4.570s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[4.570s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[4.641s] -- Found tf2_eigen: 0.25.11 (/opt/ros/humble/share/tf2_eigen/cmake)
+[4.646s] -- Found OpenCV: /usr (found version "4.5.4") 
+[5.054s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[5.578s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[5.733s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[5.756s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[5.760s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[5.798s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[5.798s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[5.798s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[5.798s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[5.818s] -- Found PythonExtra: .so  
+[5.901s] -- Configuring done
+[5.961s] -- Generating done
+[5.964s] -- Build files have been written to: /home/sarthak/precise_docking_ws/build/ultralytics_ros
+[5.981s] Invoked command in '/home/sarthak/precise_docking_ws/build/ultralytics_ros' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake /home/sarthak/precise_docking_ws/src/ultralytics_ros -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/sarthak/precise_docking_ws/install/ultralytics_ros
+[5.982s] Invoking command in '/home/sarthak/precise_docking_ws/build/ultralytics_ros': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/ultralytics_ros -- -j20 -l20
+[6.026s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[6.036s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[6.040s] [  6%] Built target ament_cmake_python_symlink_ultralytics_ros
+[6.205s] [  6%] Built target ultralytics_ros__cpp
+[6.213s] [ 12%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[6.213s] [ 12%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[6.217s] [ 15%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[6.221s] [ 18%] [32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_generator_c.dir/rosidl_generator_c/ultralytics_ros/msg/detail/yolo_result__functions.c.o[0m
+[6.269s] [ 21%] [32m[1mLinking C shared library libultralytics_ros__rosidl_generator_c.so[0m
+[6.304s] [ 21%] Built target ultralytics_ros__rosidl_generator_c
+[6.316s] [ 24%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[6.317s] [ 30%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[6.317s] [ 30%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[6.360s] running egg_info
+[6.361s] creating ultralytics_ros.egg-info
+[6.374s] writing ultralytics_ros.egg-info/PKG-INFO
+[6.374s] writing dependency_links to ultralytics_ros.egg-info/dependency_links.txt
+[6.374s] writing top-level names to ultralytics_ros.egg-info/top_level.txt
+[6.375s] writing manifest file 'ultralytics_ros.egg-info/SOURCES.txt'
+[6.390s] [ 33%] [32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ultralytics_ros/msg/detail/yolo_result__type_support.cpp.o[0m
+[6.391s] [ 36%] [32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ultralytics_ros/msg/yolo_result__type_support.cpp.o[0m
+[6.410s] [ 39%] [32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ultralytics_ros/msg/detail/dds_fastrtps/yolo_result__type_support.cpp.o[0m
+[6.486s] [ 42%] [32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ultralytics_ros/msg/detail/yolo_result__type_support.c.o[0m
+[6.499s] [ 45%] [32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ultralytics_ros/msg/detail/yolo_result__type_support_c.cpp.o[0m
+[6.529s] [ 48%] [32m[1mLinking C shared library libultralytics_ros__rosidl_typesupport_introspection_c.so[0m
+[6.570s] [ 48%] Built target ultralytics_ros__rosidl_typesupport_introspection_c
+[6.571s] [ 51%] [32m[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_cpp.so[0m
+[6.589s] [ 54%] [32mBuilding CXX object CMakeFiles/ultralytics_ros__rosidl_typesupport_c.dir/rosidl_typesupport_c/ultralytics_ros/msg/yolo_result__type_support.cpp.o[0m
+[6.618s] [ 54%] Built target ultralytics_ros__rosidl_typesupport_cpp
+[6.622s] reading manifest file 'ultralytics_ros.egg-info/SOURCES.txt'
+[6.623s] writing manifest file 'ultralytics_ros.egg-info/SOURCES.txt'
+[6.627s] [ 57%] [32m[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_c.so[0m
+[6.638s] [ 60%] [32mBuilding CXX object CMakeFiles/tracker_with_cloud_node.dir/src/tracker_with_cloud_node.cpp.o[0m
+[6.668s] [ 60%] Built target ultralytics_ros__rosidl_typesupport_c
+[6.670s] [ 60%] Built target ament_cmake_python_build_ultralytics_ros_egg
+[6.724s] [ 63%] [32m[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_introspection_cpp.so[0m
+[6.733s] [ 66%] [32m[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_fastrtps_cpp.so[0m
+[6.776s] [ 69%] [32m[1mLinking CXX shared library libultralytics_ros__rosidl_typesupport_fastrtps_c.so[0m
+[6.789s] [ 69%] Built target ultralytics_ros__rosidl_typesupport_fastrtps_cpp
+[6.809s] [ 69%] Built target ultralytics_ros__rosidl_typesupport_introspection_cpp
+[6.849s] [ 69%] Built target ultralytics_ros__rosidl_typesupport_fastrtps_c
+[6.870s] [ 69%] Built target ultralytics_ros
+[6.892s] [ 72%] [34m[1mGenerating Python code for ROS interfaces[0m
+[7.099s] [ 72%] Built target ultralytics_ros__py
+[7.117s] [ 75%] [32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_generator_py.dir/rosidl_generator_py/ultralytics_ros/msg/_yolo_result_s.c.o[0m
+[7.190s] [ 78%] [32m[1mLinking C shared library rosidl_generator_py/ultralytics_ros/libultralytics_ros__rosidl_generator_py.so[0m
+[7.229s] [ 78%] Built target ultralytics_ros__rosidl_generator_py
+[7.249s] [ 81%] [32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[7.249s] [ 84%] [32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_c.c.o[0m
+[7.249s] [ 87%] [32mBuilding C object CMakeFiles/ultralytics_ros__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[7.315s] [ 90%] [32m[1mLinking C shared library rosidl_generator_py/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[7.316s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[7.319s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[7.356s] [ 96%] Built target ultralytics_ros__rosidl_typesupport_introspection_c__pyext
+[7.360s] [ 96%] Built target ultralytics_ros__rosidl_typesupport_fastrtps_c__pyext
+[7.364s] [ 96%] Built target ultralytics_ros__rosidl_typesupport_c__pyext
+[25.028s] [100%] [32m[1mLinking CXX executable tracker_with_cloud_node[0m
+[27.044s] [100%] Built target tracker_with_cloud_node
+[27.062s] Invoked command in '/home/sarthak/precise_docking_ws/build/ultralytics_ros' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake --build /home/sarthak/precise_docking_ws/build/ultralytics_ros -- -j20 -l20
+[27.151s] Invoking command in '/home/sarthak/precise_docking_ws/build/ultralytics_ros': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/ultralytics_ros
+[27.157s] -- Install configuration: ""
+[27.158s] -- Execute custom install script
+[27.158s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ament_index/resource_index/rosidl_interfaces/ultralytics_ros
+[27.166s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__functions.h
+[27.176s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__struct.h
+[27.189s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__type_support.h
+[27.201s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/rosidl_generator_c__visibility_control.h
+[27.209s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/yolo_result.h
+[27.217s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/library_path.sh
+[27.226s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/library_path.dsv
+[27.233s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__rosidl_typesupport_fastrtps_c.h
+[27.241s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[27.249s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__builder.hpp
+[27.257s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__struct.hpp
+[27.263s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__traits.hpp
+[27.269s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__type_support.hpp
+[27.278s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/rosidl_generator_cpp__visibility_control.hpp
+[27.288s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/yolo_result.hpp
+[27.299s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__rosidl_typesupport_fastrtps_cpp.hpp
+[27.307s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[27.320s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__rosidl_typesupport_introspection_c.h
+[27.332s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[27.340s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/include/ultralytics_ros/ultralytics_ros/msg/detail/yolo_result__rosidl_typesupport_introspection_cpp.hpp
+[27.351s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/pythonpath.sh
+[27.357s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/pythonpath.dsv
+[27.365s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros-0.0.0-py3.10.egg-info/PKG-INFO
+[27.372s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros-0.0.0-py3.10.egg-info/SOURCES.txt
+[27.378s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros-0.0.0-py3.10.egg-info/dependency_links.txt
+[27.388s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros-0.0.0-py3.10.egg-info/top_level.txt
+[27.399s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/__init__.py
+[27.409s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_c.c
+[27.418s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_fastrtps_c.c
+[27.428s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/_ultralytics_ros_s.ep.rosidl_typesupport_introspection_c.c
+[27.438s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/libultralytics_ros__rosidl_generator_py.so
+[27.448s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/__init__.py
+[27.458s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/_yolo_result.py
+[27.469s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/_yolo_result_s.c
+[27.479s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[27.489s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[27.500s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[27.511s] -- Up-to-date symlink: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[27.511s] -- Up-to-date symlink: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[27.511s] -- Up-to-date symlink: /home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/ultralytics_ros_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[27.512s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/msg/YoloResult.idl
+[27.522s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/msg/YoloResult.msg
+[27.532s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/ultralytics_ros/tracker_with_cloud_node
+[27.542s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/ultralytics_ros/tracker_node.py
+[27.550s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/launch/kitti_tracker.launch.xml
+[27.556s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/launch/kitti_tracker_with_cloud.launch.xml
+[27.563s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/launch/tracker.launch.xml
+[27.574s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/launch/tracker_with_cloud.launch.xml
+[27.585s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/rviz2/default.rviz
+[27.598s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/rviz2/kitti.rviz
+[27.608s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ament_index/resource_index/package_run_dependencies/ultralytics_ros
+[27.619s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ament_index/resource_index/parent_prefix_path/ultralytics_ros
+[27.628s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/ament_prefix_path.sh
+[27.638s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/ament_prefix_path.dsv
+[27.644s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/path.sh
+[27.650s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/environment/path.dsv
+[27.659s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/local_setup.bash
+[27.669s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/local_setup.sh
+[27.680s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/local_setup.zsh
+[27.691s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/local_setup.dsv
+[27.703s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/package.dsv
+[27.715s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ament_index/resource_index/packages/ultralytics_ros
+[27.726s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/rosidl_cmake-extras.cmake
+[27.737s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ament_cmake_export_dependencies-extras.cmake
+[27.748s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ament_cmake_export_include_directories-extras.cmake
+[27.757s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ament_cmake_export_libraries-extras.cmake
+[27.765s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ament_cmake_export_targets-extras.cmake
+[27.772s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[27.779s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[27.790s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_rosConfig.cmake
+[27.796s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_rosConfig-version.cmake
+[27.804s] -- Symlinking: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/package.xml
+[27.813s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_generator_c.so
+[27.814s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_generator_c.so" to ""
+[27.814s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_fastrtps_c.so
+[27.814s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_fastrtps_c.so" to ""
+[27.814s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_fastrtps_cpp.so
+[27.814s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_fastrtps_cpp.so" to ""
+[27.814s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_introspection_c.so
+[27.814s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_introspection_c.so" to ""
+[27.814s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_c.so
+[27.814s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_c.so" to ""
+[27.815s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_introspection_cpp.so
+[27.815s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_introspection_cpp.so" to ""
+[27.815s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_cpp.so
+[27.815s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_typesupport_cpp.so" to ""
+[27.851s] Listing '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros'...
+[27.851s] Compiling '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/__init__.py'...
+[27.851s] Listing '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg'...
+[27.851s] Compiling '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/__init__.py'...
+[27.851s] Compiling '/home/sarthak/precise_docking_ws/install/ultralytics_ros/local/lib/python3.10/dist-packages/ultralytics_ros/msg/_yolo_result.py'...
+[27.854s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_generator_py.so
+[27.854s] -- Set runtime path of "/home/sarthak/precise_docking_ws/install/ultralytics_ros/lib/libultralytics_ros__rosidl_generator_py.so" to ""
+[27.854s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_cExport.cmake
+[27.854s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_cExport-noconfig.cmake
+[27.854s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_typesupport_fastrtps_cExport.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_cppExport.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_typesupport_fastrtps_cppExport.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_introspection_cExport.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_cExport.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_cExport-noconfig.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_introspection_cppExport.cmake
+[27.855s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[27.856s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_cppExport.cmake
+[27.856s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/ultralytics_ros__rosidl_typesupport_cppExport-noconfig.cmake
+[27.856s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_pyExport.cmake
+[27.856s] -- Installing: /home/sarthak/precise_docking_ws/install/ultralytics_ros/share/ultralytics_ros/cmake/export_ultralytics_ros__rosidl_generator_pyExport-noconfig.cmake
+[27.857s] Invoked command in '/home/sarthak/precise_docking_ws/build/ultralytics_ros' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sarthak/precise_docking_ws/install/template_ros2:/home/sarthak/precise_docking_ws/install/reach_the_goal:/home/sarthak/precise_docking_ws/install/autonomous_exploration:/home/sarthak/precise_docking_ws/install/arcuo_marker_detection:/home/sarthak/precise_docking_ws/install/active_localization:/opt/ros/humble ROS_DOMAIN_ID=41 /usr/bin/cmake --install /home/sarthak/precise_docking_ws/build/ultralytics_ros

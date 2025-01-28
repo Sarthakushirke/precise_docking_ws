@@ -21,8 +21,6 @@ import tf_transformations
 import tf2_ros
 
 
-
-
 speed = 0.2  # Linear speed (m/s)
 lookahead_distance = 0.5  # Lookahead distance for pure pursuit (meters)
 robot_r = 0.5  # Robot radius for obstacle detection (meters)
@@ -56,6 +54,20 @@ class MultiLocationMarkerNode(Node):
                 (-11.0,5.0,0.0),
             ],
         }
+
+
+        #For Robot features 
+        # self.marker_map = {
+        #     0: [
+    
+        #         (1.0, -0.8, 0.0),
+        #         (0.6, 0.4, 0.0),
+        #         (1.0,1.4,0.0),
+        #         (-0.2,1.4,0.0),
+        #         (-0.6,-1.0,0.0),
+        #         (-2.2,1.0,0.0),
+        #     ],
+        # }
 
         # self.hypothesis_weights = {}
         # for marker_id, poses_list in self.marker_map.items():
@@ -161,12 +173,20 @@ class MultiLocationMarkerNode(Node):
         self.local_map_data = {}
         self.compute_start = True
 
+
+        #Goal for simulation
         self.goal_x = 13.0  # Goal x-coordinate in meters
         self.goal_y = 0.0  # Goal y-coordinate in meters
+
+
+        # For Robot
+        # self.goal_x = 2.6  # Goal x-coordinate in meters
+        # self.goal_y = 0.0  # Goal y-coordinate in meters
 
         self.path = None  # Path to follow
         self.desination_go = None #Final path
         self.control_thread = None  # Thread for control loop
+        self.lidar_thread = None   # Thread for lidar loop
         self.robot_control_thread = None
         self.control_active = False  # Flag to control the thread
         self.i = 0  # Index for pure pursuit
@@ -175,6 +195,8 @@ class MultiLocationMarkerNode(Node):
         self.end_loop = False
         self.global_start = True
         self.final_robot_active = False
+
+        self.lidar_active = False
         
 
         # Initialize robot position attributes
@@ -702,6 +724,8 @@ class MultiLocationMarkerNode(Node):
         print(self.hypotheses_dict[0])
 
         self.compute_start = False
+
+        self.lidar_active = True
 
         twist = Twist()
         # dt = 0.09  # your loop rate is time.sleep(0.1)
@@ -1244,7 +1268,9 @@ class MultiLocationMarkerNode(Node):
         #########################################################
 
         # Define the safe distance and the front scan range
-        min_distance = 0.5  # Minimum safe distance in meters
+        min_distance = 0.5  # Minimum safe distance in meters SImulation
+        # min_distance = 0.1  # Minimum safe distance in meters real world
+
         front_angle_range = 30  # Degrees (e.g., ±30° around the front)
 
         # LiDAR scan parameters
@@ -1275,92 +1301,103 @@ class MultiLocationMarkerNode(Node):
 
 
         ############################################################################
-
-        if self.compute_start is False:
-
-            print("I am in the lidar loop where I update the hypotheses scan")
-
-            print(f"All keys in self.local_map_data: {list(self.local_map_data.keys())}")
-
-
-            # Transform LIDAR points to map frame
-            ranges = np.array(msg.ranges)
-            angle_min = msg.angle_min
-            angle_increment = msg.angle_increment
-            max_range = msg.range_max
-
-            # Replace 'inf' values with max_range
-            ranges = np.where(np.isinf(ranges), max_range, ranges)
-
-            # Process updates for each hypothesis
-            # for h, (x_r, y_r, theta_r) in enumerate(self.hypotheses_dict[0], start=1):
-            for local_map_key, (x_r, y_r, theta_r) in zip(self.local_map_data.keys(), self.hypotheses_dict[0]):
-
-                print(f"Processing hypothesis with local_map_data key {local_map_key}")
-                print(f"Pose: ({x_r}, {y_r}, {theta_r})")
-
-                # Initialize reachable array for this hypothesis
-                reachable = np.zeros_like(self.map_data, dtype=bool)
-
-                # Adjust robot position and yaw for the hypothesis
-                robot_x, robot_y, yaw = x_r, y_r, theta_r
-
-                for i, r in enumerate(ranges):
-                    if np.isfinite(r):
-                        # Calculate global angle for the beam
-                        angle = angle_min + i * angle_increment + yaw
-                        x_end = robot_x + r * np.cos(angle)
-                        y_end = robot_y + r * np.sin(angle)
-
-                        # Convert start and end positions to map grid indices
-                        map_x0 = int(np.floor((robot_x - self.map_info.origin.position.x) / self.map_info.resolution))
-                        map_y0 = int(np.floor((robot_y - self.map_info.origin.position.y) / self.map_info.resolution))
-                        map_x1 = int(np.floor((x_end - self.map_info.origin.position.x) / self.map_info.resolution))
-                        map_y1 = int(np.floor((y_end - self.map_info.origin.position.y) / self.map_info.resolution))
-
-                        # Get all grid cells along the LIDAR beam path
-                        line_cells = self.bresenham_line(map_x0, map_y0, map_x1, map_y1)
-
-                        for map_x, map_y in line_cells:
-                            if 0 <= map_x < self.map_info.width and 0 <= map_y < self.map_info.height:
-                                reachable[map_y, map_x] = True
-                            else:
-                                self.get_logger().debug(f"Computed cell ({map_x}, {map_y}) is out of bounds.")
-
-                # Update the local map for this hypothesis
-                updated_map = self.map_data.copy()
-                free_cells = (updated_map == 0)
-                unreachable = ~reachable
-                free_and_unreachable = free_cells & unreachable
-                updated_map[free_and_unreachable] = -1
-                reachable_free = free_cells & reachable
-                updated_map[reachable_free] = 0
-
-                
-                # Merge updates into the hypothesis's local map
-                if local_map_key not in self.local_map_data:
-                    print("I couldn't find any self.local_map_data")
-                    self.local_map_data[local_map_key] = updated_map
-                else:
-                    # Merge the updated map with the existing local map for this hypothesis
-                    height, width = self.local_map_data[local_map_key].shape
-                    for r in range(height):
-                        for c in range(width):
-                            old_val = self.local_map_data[local_map_key][r, c]
-                            new_val = updated_map[r, c]
-                            merged = self.merge_cell(old_val, new_val)
-                            self.local_map_data[local_map_key][r, c] = merged
+        # if self.compute_start is False:
+        #     # if len(self.hypotheses_dict[0]) != 1: 
+        #         # Start the control thread
+        #         if self.lidar_active:
+        #             self.lidar_thread = Thread(target=self.lidar_loop, args=(msg,))
+        #             self.lidar_thread.start()
 
 
-            updated_occupancy_grid = OccupancyGrid()
-            updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
-            updated_occupancy_grid.header.frame_id = "map"
-            updated_occupancy_grid.info = self.map_info
-            updated_occupancy_grid.data = updated_map.flatten().tolist()
-            self.map_pub.publish(updated_occupancy_grid)
+    def lidar_loop(self,msg):
+            
+
+        while self.lidar_active:
+
+            if self.compute_start is False:
+
+                print("I am in the lidar loop where I update the hypotheses scan")
+
+                print(f"All keys in self.local_map_data: {list(self.local_map_data.keys())}")
 
 
+                # Transform LIDAR points to map frame
+                ranges = np.array(msg.ranges)
+                angle_min = msg.angle_min
+                angle_increment = msg.angle_increment
+                max_range = msg.range_max
 
+                # Replace 'inf' values with max_range
+                ranges = np.where(np.isinf(ranges), max_range, ranges)
+
+                # Process updates for each hypothesis
+                # for h, (x_r, y_r, theta_r) in enumerate(self.hypotheses_dict[0], start=1):
+                for local_map_key, (x_r, y_r, theta_r) in zip(self.local_map_data.keys(), self.hypotheses_dict[0]):
+
+                    print(f"Processing hypothesis with local_map_data key {local_map_key}")
+                    print(f"Pose: ({x_r}, {y_r}, {theta_r})")
+
+                    # Initialize reachable array for this hypothesis
+                    reachable = np.zeros_like(self.map_data, dtype=bool)
+
+                    # Adjust robot position and yaw for the hypothesis
+                    robot_x, robot_y, yaw = x_r, y_r, theta_r
+
+                    for i, r in enumerate(ranges):
+                        if np.isfinite(r):
+                            # Calculate global angle for the beam
+                            angle = angle_min + i * angle_increment + yaw
+                            x_end = robot_x + r * np.cos(angle)
+                            y_end = robot_y + r * np.sin(angle)
+
+                            # Convert start and end positions to map grid indices
+                            map_x0 = int(np.floor((robot_x - self.map_info.origin.position.x) / self.map_info.resolution))
+                            map_y0 = int(np.floor((robot_y - self.map_info.origin.position.y) / self.map_info.resolution))
+                            map_x1 = int(np.floor((x_end - self.map_info.origin.position.x) / self.map_info.resolution))
+                            map_y1 = int(np.floor((y_end - self.map_info.origin.position.y) / self.map_info.resolution))
+
+                            # Get all grid cells along the LIDAR beam path
+                            line_cells = self.bresenham_line(map_x0, map_y0, map_x1, map_y1)
+
+                            for map_x, map_y in line_cells:
+                                if 0 <= map_x < self.map_info.width and 0 <= map_y < self.map_info.height:
+                                    reachable[map_y, map_x] = True
+                                else:
+                                    self.get_logger().debug(f"Computed cell ({map_x}, {map_y}) is out of bounds.")
+
+                    # Update the local map for this hypothesis
+                    updated_map = self.map_data.copy()
+                    free_cells = (updated_map == 0)
+                    unreachable = ~reachable
+                    free_and_unreachable = free_cells & unreachable
+                    updated_map[free_and_unreachable] = -1
+                    reachable_free = free_cells & reachable
+                    updated_map[reachable_free] = 0
+
+                    
+                    # Merge updates into the hypothesis's local map
+                    if local_map_key not in self.local_map_data:
+                        print("I couldn't find any self.local_map_data")
+                        self.local_map_data[local_map_key] = updated_map
+                    else:
+                        # Merge the updated map with the existing local map for this hypothesis
+                        height, width = self.local_map_data[local_map_key].shape
+                        for r in range(height):
+                            for c in range(width):
+                                old_val = self.local_map_data[local_map_key][r, c]
+                                new_val = updated_map[r, c]
+                                merged = self.merge_cell(old_val, new_val)
+                                self.local_map_data[local_map_key][r, c] = merged
+
+
+                time.sleep(3000)
+
+        # updated_occupancy_grid = OccupancyGrid()
+        # updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
+        # updated_occupancy_grid.header.frame_id = "map"
+        # updated_occupancy_grid.info = self.map_info
+        # updated_occupancy_grid.data = updated_map.flatten().tolist()
+        # self.map_pub.publish(updated_occupancy_grid)
 
 
     def compute_likelihood(self,

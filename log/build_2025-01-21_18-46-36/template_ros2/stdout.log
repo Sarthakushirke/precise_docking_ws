@@ -1,0 +1,18 @@
+running develop
+running egg_info
+creating template_ros2.egg-info
+writing template_ros2.egg-info/PKG-INFO
+writing dependency_links to template_ros2.egg-info/dependency_links.txt
+writing requirements to template_ros2.egg-info/requires.txt
+writing top-level names to template_ros2.egg-info/top_level.txt
+writing manifest file 'template_ros2.egg-info/SOURCES.txt'
+reading manifest file 'template_ros2.egg-info/SOURCES.txt'
+writing manifest file 'template_ros2.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/sarthak/precise_docking_ws/install/template_ros2/lib/python3.10/site-packages/template-ros2.egg-link (link to .)
+
+Installed /home/sarthak/precise_docking_ws/build/template_ros2
+running symlink_data
+creating /home/sarthak/precise_docking_ws/install/template_ros2/share/ament_index/resource_index/packages
+symbolically linking /home/sarthak/precise_docking_ws/build/template_ros2/resource/template_ros2 -> /home/sarthak/precise_docking_ws/install/template_ros2/share/ament_index/resource_index/packages
+symbolically linking /home/sarthak/precise_docking_ws/build/template_ros2/package.xml -> /home/sarthak/precise_docking_ws/install/template_ros2/share/template_ros2

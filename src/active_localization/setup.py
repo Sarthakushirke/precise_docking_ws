@@ -23,7 +23,8 @@ setup(
             "local_map_node = active_localization.local_map:main",
             "frontier_detection = active_localization.frontier_detection:main",
             "path_to_goal = active_localization.path_to_goal:main",
-            "localization = active_localization.localization:main"
+            "localization = active_localization.localization:main",
+            "local_map_lidar_node = active_localization.local_map_lidar:main"
         ],
     },
 )
