@@ -109,4 +109,9 @@ install(PROGRAMS
 )
 
 
+install(PROGRAMS
+  scripts/hypotheses_map.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()

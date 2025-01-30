@@ -1,0 +1,18 @@
+[0.000000] (-) TimerEvent: {}
+[0.000654] (-) JobUnselected: {'identifier': 'active_localization'}
+[0.000835] (-) JobUnselected: {'identifier': 'autonomous_exploration'}
+[0.000924] (-) JobUnselected: {'identifier': 'docking_bringup'}
+[0.000957] (-) JobUnselected: {'identifier': 'frontend'}
+[0.000992] (-) JobUnselected: {'identifier': 'localization_amcl'}
+[0.001020] (-) JobUnselected: {'identifier': 'localization_node'}
+[0.001107] (-) JobUnselected: {'identifier': 'reach_the_goal'}
+[0.001133] (-) JobUnselected: {'identifier': 'teleop_cpp_ros2'}
+[0.001158] (-) JobUnselected: {'identifier': 'template_ros2'}
+[0.001180] (-) JobUnselected: {'identifier': 'ultralytics_ros'}
+[0.001218] (arcuo_marker_detection) JobQueued: {'identifier': 'arcuo_marker_detection', 'dependencies': OrderedDict()}
+[0.001297] (arcuo_marker_detection) JobStarted: {'identifier': 'arcuo_marker_detection'}
+[0.099693] (-) TimerEvent: {}
+[0.199947] (-) TimerEvent: {}
+[0.212622] (arcuo_marker_detection) StderrLine: {'line': b'Traceback (most recent call last):\n  File "/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/executor/__init__.py", line 91, in __call__\n    rc = await self.task(*args, **kwargs)\n  File "/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/__init__.py", line 93, in __call__\n    return await task_method(*args, **kwargs)\n  File "/home/sarthak/.local/lib/python3.10/site-packages/colcon_ros/task/ament_python/build.py", line 51, in build\n    setup_py_data = get_setup_data(self.context.pkg, env)\n  File "/home/sarthak/.local/lib/python3.10/site-packages/colcon_core/task/python/__init__.py", line 20, in get_setup_data\n    return dict(pkg.metadata[key](env))\n  File "/home/sarthak/.local/lib/python3.10/site-packages/colcon_ros/package_augmentation/ros_ament_python.py", line 57, in getter\n    return get_setup_information(\n  File "/home/sarthak/.local/lib/python3.10/site-packages/colcon_python_setup_py/package_identification/python_setup_py.py", line 241, in get_setup_information\n    _setup_information_cache[hashable_env] = _get_setup_information(\n  File "/home/sarthak/.local/lib/python3.10/site-packages/colcon_python_setup_py/package_identification/python_setup_py.py", line 288, in _get_setup_information\n    result = subprocess.run(\n  File "/usr/lib/python3.10/subprocess.py", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command \'[\'/usr/bin/python3\', \'-c\', \'import sys;from contextlib import suppress;exec("with suppress(ImportError):    from setuptools.extern.packaging.specifiers    import SpecifierSet");exec("with suppress(ImportError):    from packaging.specifiers import SpecifierSet");from distutils.core import run_setup;dist = run_setup(    \\\'setup.py\\\', script_args=(\\\'--dry-run\\\',), stop_after=\\\'config\\\');skip_keys = (\\\'cmdclass\\\', \\\'distclass\\\', \\\'ext_modules\\\', \\\'metadata\\\');data = {    key: value for key, value in dist.__dict__.items()     if (        not key.startswith(\\\'_\\\') and         not callable(value) and         key not in skip_keys and         key not in dist.display_option_names    )};data[\\\'metadata\\\'] = {    k: v for k, v in dist.metadata.__dict__.items()     if k not in (\\\'license_files\\\', \\\'provides_extras\\\')};sys.stdout.buffer.write(repr(data).encode(\\\'utf-8\\\'))\']\' returned non-zero exit status 1.\n'}
+[0.213064] (arcuo_marker_detection) JobEnded: {'identifier': 'arcuo_marker_detection', 'rc': 1}
+[0.223029] (-) EventReactorShutdown: {}

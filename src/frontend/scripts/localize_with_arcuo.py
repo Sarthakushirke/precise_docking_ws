@@ -14,11 +14,14 @@ from tf_transformations import quaternion_from_euler
 from visualization_msgs.msg import Marker, MarkerArray
 from nav_msgs.msg import OccupancyGrid, Odometry
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy, QoSHistoryPolicy
+from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
 from active_localization.next_best_view import check_visible_objects_from_centroid_simple
 from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Float64MultiArray
 import tf_transformations
 import tf2_ros
+from std_msgs.msg import String
+import json
 
 
 speed = 0.2  # Linear speed (m/s)
@@ -99,6 +102,13 @@ class MultiLocationMarkerNode(Node):
             depth=1
         )
 
+        # Create a QoS profile for a latched topic (transient local)
+        latched_qos = QoSProfile(
+            depth=1,  # Only keep the latest message
+            reliability=ReliabilityPolicy.RELIABLE,
+            durability=DurabilityPolicy.TRANSIENT_LOCAL  # Ensures message persistence
+        )
+
         # Subscriptions
         self.map_sub = self.create_subscription(
             OccupancyGrid,
@@ -119,7 +129,7 @@ class MultiLocationMarkerNode(Node):
 
         self.centroid_count_true = self.create_subscription(PoseArray, '/frontier_centroids_original', self.frontier_callback, 10)
         
-        self.map_pub = self.create_publisher(OccupancyGrid, '/hypothesis_map', 10)
+        # self.map_pub = self.create_publisher(OccupancyGrid, '/hypothesis_map', latched_qos)
 
         self.velocity_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.get_logger().info('Publishing velocity commands on /cmd_vel')
@@ -134,6 +144,9 @@ class MultiLocationMarkerNode(Node):
         # Publisher for centroids
         self.centroids_pub = self.create_publisher(PoseArray, '/frontier_centroids', 10)
         self.get_logger().info('Publishing centroids on /frontier_centroids')
+
+        # Create publisher on a topic of your choice
+        self.publisher_ = self.create_publisher(String, 'hypotheses_data', 10)
 
         # Store current hypotheses (marker_id => list of (x_r, y_r, theta_r))
         self.hypotheses_dict = {}
@@ -271,6 +284,7 @@ class MultiLocationMarkerNode(Node):
         for z in self.stored_marker_z_values:
             print(f"Z = {z}")
 
+        
         self.compute_and_plan(msg)
 
 
@@ -401,8 +415,6 @@ class MultiLocationMarkerNode(Node):
                     self.robot_control_thread.start()
 
 
-                     
-                
                 # self.hypotheses_dict[0][0][0],self.hypotheses_dict[0][0][1],self.hypotheses_dict[0][0][2],desination_go
 
     def compute_again(self,new_hypotheses):
@@ -420,6 +432,8 @@ class MultiLocationMarkerNode(Node):
             self.filtered_hypotheses = []
 
             local_map_delete = []
+
+            print(self.hypotheses_dict[0])
 
             for h, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
 
@@ -467,6 +481,9 @@ class MultiLocationMarkerNode(Node):
                 self.goal_row = int((self.goal_y - origin_y) / resolution)
                 self.goal_indices = (self.goal_row, self.goal_column)
 
+
+
+
                 # frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
 
                 updated_exploration_map, frontiers_middle = self.exploration(self.local_map_data[h], self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
@@ -474,7 +491,7 @@ class MultiLocationMarkerNode(Node):
                 print("Frontiers ", frontiers_middle)
 
                 # Reassign it back
-                self.local_map_data[h] = updated_exploration_map
+                # self.local_map_data[h] = updated_exploration_map
 
                 ###############################################################
 
@@ -495,8 +512,36 @@ class MultiLocationMarkerNode(Node):
             # Keep only the keys in `local_map_delete`
             self.local_map_data = {k: v for k, v in self.local_map_data.items() if k in local_map_delete}
 
+            latched_qos = QoSProfile(
+                depth=1,  # Keep only the latest message
+                reliability=ReliabilityPolicy.RELIABLE,  # Ensures reliable delivery
+                durability=DurabilityPolicy.TRANSIENT_LOCAL  # Makes the topic latched 
+                )
 
-        
+
+            for h, updated_map in self.local_map_data.items():
+                # Create a unique topic name for each hypothesis
+                topic_name = f"/hypothesis_map_{h}"
+
+                # Create an OccupancyGrid message
+                updated_occupancy_grid = OccupancyGrid()
+                updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
+                updated_occupancy_grid.header.frame_id = f"hypothesis_{h}" 
+                updated_occupancy_grid.header.frame_id = "map"
+                updated_occupancy_grid.info = self.map_info  # Use the existing map metadata
+
+                # Convert to list format (ROS2 OccupancyGrid requires a flattened list of integers)
+                updated_occupancy_grid.data = updated_map.flatten().astype(int).tolist()
+
+                # Create a publisher for this specific hypothesis
+                hypothesis_pub = self.create_publisher(OccupancyGrid, topic_name, latched_qos)
+                
+                # Publish the updated map
+                hypothesis_pub.publish(updated_occupancy_grid)
+
+                print(f"Published updated local map for hypothesis {h} on {topic_name}")
+
+
         
         #Pick one hypothesis and one path (TO DO) #OUTPUT: 1 hypothses which might not be the real one and the path to that 
         # hypotheses best centroid.
@@ -803,8 +848,8 @@ class MultiLocationMarkerNode(Node):
             print("self.stored_marker_z_values:", [z for z in self.stored_marker_z_values])
 
 
-                # 1) Check if the length has changed (new marker or lost marker)
-            if previous_marker_z_values and (len(self.stored_marker_z_values) != len(previous_marker_z_values)):
+            # 1) Check if the length has changed (new marker or lost marker)
+            if previous_marker_z_values and (len(self.stored_marker_z_values) != len(previous_marker_z_values)) :
                 print("Marker list length changed, starting measurement model...")
                 self.measurement_model()
 
@@ -1199,6 +1244,16 @@ class MultiLocationMarkerNode(Node):
             twist.linear.x = v
             twist.angular.z = w
             self.velocity_pub.publish(twist)
+
+
+            self.hypotheses_dict[0] = [(self.x, self.y, self.yaw)]
+
+            self.publish_pose_array(self.hypotheses_dict)
+
+            # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
+            self.publish_square_markers(self.hypotheses_dict)
+
+
             time.sleep(0.1)  # Control loop rate (10 Hz)
         self.get_logger().info("Control loop ended.")
 
@@ -1301,12 +1356,33 @@ class MultiLocationMarkerNode(Node):
 
 
         ############################################################################
-        # if self.compute_start is False:
-        #     # if len(self.hypotheses_dict[0]) != 1: 
+        if self.compute_start is False:
+            if len(self.hypotheses_dict[0]) != 1: 
+                pass
+                # print(type(self.hypotheses_dict))
+
+                #  # Publish periodically
+                # timer_period = 2.0
+                # self.timer = self.create_timer(timer_period, self.timer_callback)
+                # self.get_logger().info('HypothesesPublisher initialized.')
+
         #         # Start the control thread
         #         if self.lidar_active:
         #             self.lidar_thread = Thread(target=self.lidar_loop, args=(msg,))
         #             self.lidar_thread.start()
+
+
+    # def timer_callback(self):
+    #     # Convert your dictionary to JSON
+    #     dict_str = json.dumps(self.hypotheses_dict)
+
+    #     # Wrap it in a String message
+    #     msg = String()
+    #     msg.data = dict_str
+
+    #     # Publish
+    #     self.publisher_.publish(msg)
+    #     self.get_logger().info(f"Published Hypotheses: {msg.data}")
 
 
     def lidar_loop(self,msg):

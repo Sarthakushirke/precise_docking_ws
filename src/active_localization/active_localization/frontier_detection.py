@@ -3,6 +3,8 @@ from rclpy.node import Node
 from nav_msgs.msg import OccupancyGrid, Odometry
 from rclpy.qos import QoSProfile
 from geometry_msgs.msg import PoseArray, Pose
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 
 
 import tf_transformations
@@ -65,6 +67,13 @@ class OccupancyGridUpdater(Node):
         self.map_info = None
         self.expansion_size = 3
         self.min_group_size = 40
+
+        # # Robot size (matches RViz dimensions)
+        # self.robot_width = 0.3  # X scale
+        # self.robot_height = 0.3  # Y scale
+
+        # # Start visualization loop
+        # self.create_timer(1.0, self.plot_map)  # Update plot every 1 second
 
     def costmap(self, data, width, height, resolution):
         data = np.array(data).reshape(height, width)
@@ -312,6 +321,51 @@ class OccupancyGridUpdater(Node):
         frontiers_middle = self.exploration(self.data, self.width, self.height, self.resolution, column, row, self.originX, self.originY)
 
         print("Frontiers ", frontiers_middle)
+
+    # def plot_map(self):
+    #     """Visualize the occupancy grid, robot position, and frontiers"""
+    #     if self.map_data is None:
+    #         self.get_logger().warn("Map data not received yet.")
+    #         return
+        
+    #     # Extract map properties
+    #     resolution = self.map_data.info.resolution
+    #     width = self.map_data.info.width
+    #     height = self.map_data.info.height
+    #     origin_x = self.map_data.info.origin.position.x
+    #     origin_y = self.map_data.info.origin.position.y
+    #     data = np.array(self.map_data.data).reshape((height, width))
+
+    #     print("Map data",self.map_data)
+
+    #     # Convert occupancy grid to an image
+    #     map_image = np.copy(data)
+    #     map_image[map_image == -1] = 0  # Unknown space (gray)
+    #     map_image[map_image == 100] = 150   # Obstacles (black)
+    #     map_image[map_image == 0] = 255   # Free space (white)
+
+    #     fig, ax = plt.subplots(figsize=(6, 6))
+    #     ax.imshow(map_image, cmap='gray', origin='lower', extent=[origin_x, origin_x + width * resolution, 
+    #                                                               origin_y, origin_y + height * resolution])
+        
+
+    #     # Plot robot as a yellow filled rectangle
+    #     if self.x is not None and self.y is not None:
+    #         robot_rect = patches.Rectangle(
+    #             (self.x - self.robot_width / 2, self.y - self.robot_height / 2),  # Center the rectangle
+    #             self.robot_width, self.robot_height,  # Width and height
+    #             edgecolor='black', facecolor='yellow', linewidth=2, label="Robot"  # Yellow filled with black border
+    #         )
+    #         ax.add_patch(robot_rect)
+        
+
+    #     # Labels and legend
+    #     ax.set_title("Occupancy Grid & Frontiers")
+    #     ax.set_xlabel("X Position (m)")
+    #     ax.set_ylabel("Y Position (m)")
+    #     ax.legend(loc='upper right')
+    #     plt.show()
+
 
     def odom_callback(self, msg):
         self.odom_data = msg
