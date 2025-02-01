@@ -88,10 +88,10 @@ ament_python_install_package(${PROJECT_NAME})
 #   DESTINATION lib/${PROJECT_NAME}
 # )
 
-# install(PROGRAMS
-#   scripts/pose_graph_odom_landmark.py
-#   DESTINATION lib/${PROJECT_NAME}
-# )
+install(PROGRAMS
+  scripts/pose_graph_odom_landmark.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 # install(PROGRAMS
 #   scripts/plot_odom.py
@@ -113,5 +113,12 @@ install(PROGRAMS
   scripts/hypotheses_map.py
   DESTINATION lib/${PROJECT_NAME}
 )
+
+install(PROGRAMS
+  scripts/hypotheses_test_map.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+
 
 ament_package()

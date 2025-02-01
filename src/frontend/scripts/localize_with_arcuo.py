@@ -22,6 +22,7 @@ import tf_transformations
 import tf2_ros
 from std_msgs.msg import String
 import json
+import pprint
 
 
 speed = 0.2  # Linear speed (m/s)
@@ -129,6 +130,8 @@ class MultiLocationMarkerNode(Node):
 
         self.centroid_count_true = self.create_subscription(PoseArray, '/frontier_centroids_original', self.frontier_callback, 10)
         
+        self.hypo_centroid = self.create_subscription(PoseArray, '/hyp_frontier_centroids', self.hyp_frontier_callback, 10)
+
         # self.map_pub = self.create_publisher(OccupancyGrid, '/hypothesis_map', latched_qos)
 
         self.velocity_pub = self.create_publisher(Twist, '/cmd_vel', 10)
@@ -224,6 +227,8 @@ class MultiLocationMarkerNode(Node):
         #Original scan centroids
         self.orginal_scan_centroids = None
 
+        self.hyp_scan_centroids = None
+
         self.riviz_publish = True
         self.detection = True
 
@@ -243,6 +248,33 @@ class MultiLocationMarkerNode(Node):
 
         # self.column = int((self.x - self.originX) / self.resolution)
         # self.row = int((self.y - self.originY) / self.resolution)
+
+
+    def hyp_frontier_callback(self, msg: PoseArray):
+
+
+        self.hypothesis_frontiers = {}  # Dictionary to store frontiers per hypothesis
+
+        origin_x = self.map_info.origin.position.x
+        origin_y = self.map_info.origin.position.y
+        resolution = self.map_info.resolution
+
+        # Iterate over poses and store their (x, y) positions
+        for i, pose in enumerate(msg.poses):
+
+            x = int((pose.position.x - origin_x) / resolution)
+            y = int((pose.position.y - origin_y) / resolution)
+
+
+            # Store in dictionary, assuming each pose corresponds to a different hypothesis ID
+            self.hypothesis_frontiers[i] = (x, y)
+
+        self.get_logger().info(f"Stored {self.hypothesis_frontiers} frontier centroids.")
+
+        self.hyp_scan_centroids = len(msg.poses)
+        self.get_logger().info(f"Received {self.orginal_scan_centroids} frontier centroids.")
+
+        
 
 
     def frontier_callback(self, msg: PoseArray):
@@ -419,6 +451,11 @@ class MultiLocationMarkerNode(Node):
 
     def compute_again(self,new_hypotheses):
 
+
+        origin_x = self.map_info.origin.position.x
+        origin_y = self.map_info.origin.position.y
+        resolution = self.map_info.resolution
+
         if self.compute_start:
             num_beams = 16000
             angle_increment = 0.0003927233046852052
@@ -469,10 +506,6 @@ class MultiLocationMarkerNode(Node):
                 if h not in self.local_map_data:
                     self.local_map_data[h] = updated_map
 
-                origin_x = self.map_info.origin.position.x
-                origin_y = self.map_info.origin.position.y
-                resolution = self.map_info.resolution
-
                 self.column = int((x_r - origin_x) / resolution)
                 self.row = int((y_r - origin_y) / resolution)
 
@@ -480,8 +513,6 @@ class MultiLocationMarkerNode(Node):
                 self.goal_column = int((self.goal_x - origin_x) / resolution)
                 self.goal_row = int((self.goal_y - origin_y) / resolution)
                 self.goal_indices = (self.goal_row, self.goal_column)
-
-
 
 
                 # frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
@@ -506,9 +537,7 @@ class MultiLocationMarkerNode(Node):
 
                     self.filtered_hypotheses.append((x_r, y_r, theta_r))
 
-            
-            
-            
+                   
             # Keep only the keys in `local_map_delete`
             self.local_map_data = {k: v for k, v in self.local_map_data.items() if k in local_map_delete}
 
@@ -542,7 +571,35 @@ class MultiLocationMarkerNode(Node):
                 print(f"Published updated local map for hypothesis {h} on {topic_name}")
 
 
+        print("self.orginal_scan_centroids",self.orginal_scan_centroids)
+        print("self.hyp_scan_centroids",self.hyp_scan_centroids)
+        print("self.compute_start",self.compute_start)
         
+
+        if self.orginal_scan_centroids == self.hyp_scan_centroids and self.compute_start is False:
+
+            self.control_active = False
+
+            self.all_frontiers_info.clear()
+
+
+            # for h, (x_r, y_r, theta_r) in enumerate(self.hypotheses_dict[0], start=1):
+
+                # if self.orginal_scan_centroids == self.hyp_scan_centroids:
+
+            #Take the frontiers for recomputation
+            x_r, y_r, theta_r = self.hypotheses_dict[0][1]
+
+            self.all_frontiers_info[0] =  self.centroid_info_function(self.hypothesis_frontiers,x_r, y_r, theta_r,resolution,origin_x,origin_y)
+
+            print("I am here")
+
+                # local_map_delete.append(h)
+
+                # self.filtered_hypotheses.append((x_r, y_r, theta_r))        
+
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(self.all_frontiers_info)
         #Pick one hypothesis and one path (TO DO) #OUTPUT: 1 hypothses which might not be the real one and the path to that 
         # hypotheses best centroid.
         # AFTER processing all hypotheses, pick best overall
@@ -602,8 +659,14 @@ class MultiLocationMarkerNode(Node):
             # Publish the path
             self.publish_path_marker(self.path)
 
+            print("Outside the control loop")
+
+            print("self.control_active",self.control_active)
+
             # Start the control thread
             if not self.control_active:
+
+                print("In the control loop")
                 self.control_active = True
                 self.control_thread = Thread(target=self.control_loop)
                 self.control_thread.start()
@@ -1354,6 +1417,16 @@ class MultiLocationMarkerNode(Node):
             # Obstacle is gone
             self.obstacle_start_time = None
 
+        # Check how long the obstacle has been there
+        if self.obstacle_start_time is not None:
+            elapsed = time.time() - self.obstacle_start_time
+            if elapsed >= self.obstacle_threshold_sec:
+                self.get_logger().warn("Obstacle in front for 30+ seconds, re-planning...")
+                # You can call re-planning here:
+                self.compute_again(self.hypotheses_dict[0])
+                # Then reset the timer or handle your logic
+                self.obstacle_start_time = None
+
 
         ############################################################################
         if self.compute_start is False:
@@ -1372,17 +1445,6 @@ class MultiLocationMarkerNode(Node):
         #             self.lidar_thread.start()
 
 
-    # def timer_callback(self):
-    #     # Convert your dictionary to JSON
-    #     dict_str = json.dumps(self.hypotheses_dict)
-
-    #     # Wrap it in a String message
-    #     msg = String()
-    #     msg.data = dict_str
-
-    #     # Publish
-    #     self.publisher_.publish(msg)
-    #     self.get_logger().info(f"Published Hypotheses: {msg.data}")
 
 
     def lidar_loop(self,msg):

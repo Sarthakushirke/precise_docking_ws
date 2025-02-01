@@ -9,6 +9,11 @@ import numpy as np
 from sensor_msgs.msg import LaserScan
 from nav_msgs.msg import OccupancyGrid
 from geometry_msgs.msg import PoseArray
+from geometry_msgs.msg import PointStamped, PoseArray, Pose, Point, Twist
+from tf_transformations import quaternion_from_euler
+from visualization_msgs.msg import Marker, MarkerArray
+import math
+
 
 class HypothesisMapSubscriber(Node):
     def __init__(self):
@@ -50,12 +55,29 @@ class HypothesisMapSubscriber(Node):
             '/map',
             self.map_callback,
             qos_profile)
+        
+
+        self.frontier_pub = self.create_publisher(MarkerArray, '/hyp_frontier_markers', 10)
+
+        self.centroids_pub = self.create_publisher(PoseArray, '/hyp_frontier_centroids', 10)
+        self.get_logger().info('Publishing centroids on /hyp_frontier_centroids')
+
+
+        self.centroid_pub = self.create_publisher(MarkerArray, '/hyp_centroid_markers', 10)
+        self.get_logger().info('Publishing centroid markers on /hyp_centroid_markers')
 
         # Subscribe to hypothesis maps dynamically (will be updated in pose callback)
         self.map_subs = {}
-        self.hypothesis_id = 6
+        self.hypothesis_id = 3
         self.map_publishers = {}  # Dictionary to store publishers for hypothesis maps
         self.start = True
+
+        #Goal for simulation
+        self.goal_x = 13.0  # Goal x-coordinate in meters
+        self.goal_y = 0.0  # Goal y-coordinate in meters
+
+        self.expansion_size = 3
+        self.min_group_size = 40
 
 
     def pose_callback(self, msg):
@@ -80,7 +102,23 @@ class HypothesisMapSubscriber(Node):
             x = pose.position.x
             y = pose.position.y
             theta = self.yaw_from_quaternion(pose.orientation)
-            self.hypotheses_dict[0] = (x, y, theta)
+
+            # # If we have a previous position, calculate the distance moved
+            # if hasattr(self, 'prev_x') and hasattr(self, 'prev_y'):
+            #     dx = x - self.prev_x
+            #     dy = y - self.prev_y
+            #     distance = math.sqrt(dx * dx + dy * dy)
+            #     if distance > 1.0:
+            #         self.get_logger().warn(
+            #             f"Large jump detected (distance: {distance:.2f}). Skipping this odom update."
+            #         )
+            #         return  # Skip processing this message
+
+            # # Update the previous position
+            # self.prev_x = x
+            # self.prev_y = y
+
+            self.hypotheses_dict[1] = (x, y, theta)
 
             print("Hypotheses",self.hypotheses_dict)
 
@@ -99,6 +137,7 @@ class HypothesisMapSubscriber(Node):
                 self.get_logger().info(f"Subscribed to {topic_name}")
 
         self.start = False
+
 
     def map_callback_local(self, msg):
         """ Receives local maps for each hypothesis and stores them """
@@ -138,7 +177,7 @@ class HypothesisMapSubscriber(Node):
         # Replace 'inf' values with max_range
         ranges = np.where(np.isinf(ranges), max_range, ranges)
 
-        h = 6
+        h = 3
 
         for d, (x_r, y_r, theta_r) in self.hypotheses_dict.items():
             # if h not in self.local_map_data:
@@ -165,6 +204,7 @@ class HypothesisMapSubscriber(Node):
                     map_y1 = int((y_end - self.map_info.origin.position.y) / self.map_info.resolution)
 
                     line_cells = self.bresenham_line(map_x0, map_y0, map_x1, map_y1)
+                    
                     for map_x, map_y in line_cells:
                         if 0 <= map_x < self.map_info.width and 0 <= map_y < self.map_info.height:
                             reachable[map_y, map_x] = True
@@ -197,9 +237,54 @@ class HypothesisMapSubscriber(Node):
                         self.local_map_data[h][r, c] = merged
 
 
-
             # Publish the updated map for this hypothesis
             self.publish_updated_map(h, self.local_map_data[h])
+
+
+            origin_x = self.map_info.origin.position.x
+            origin_y = self.map_info.origin.position.y
+            resolution = self.map_info.resolution
+
+            self.column = int((x_r - origin_x) / resolution)
+            self.row = int((y_r - origin_y) / resolution)
+
+            # Convert goal position to grid indices
+            self.goal_column = int((self.goal_x - origin_x) / resolution)
+            self.goal_row = int((self.goal_y - origin_y) / resolution)
+            self.goal_indices = (self.goal_row, self.goal_column)
+
+            updated_exploration_map, frontiers_middle = self.exploration(self.local_map_data[h], self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
+
+            print("Frontiers ", frontiers_middle)
+
+
+    def exploration(self, data, width, height, resolution, column, row, originX, originY):
+        data = self.costmap(data, width, height, resolution)  # Expand barriers
+        data[row][column] = 0  # Robot's current location
+        data[data > 5] = 1  # Set obstacles
+        data = self.frontierB(data)  # Find frontier points
+        data, groups = self.assign_groups(data)  # Group frontier points
+
+        # Filter out small groups
+        filtered_groups = {gid: points for gid, points in groups.items() if len(points) >= self.min_group_size}
+
+        # Calculate centroids for all valid groups
+        centroids = {}
+
+        for group_id, points in filtered_groups.items():
+            centroid = self.calculate_centroid(points)
+            centroids[group_id] = centroid
+
+        # Publish the frontier markers
+        self.publish_frontier_markers(filtered_groups, resolution, originX, originY)
+
+        # Publish the centroid markers (spheres)
+        self.publish_centroid_markers(centroids, resolution, originX, originY)
+
+        # # Publish the centroids to a topic
+        self.publish_centroids(centroids, resolution, originX, originY)
+
+        return data, centroids
 
 
 
@@ -284,6 +369,262 @@ class HypothesisMapSubscriber(Node):
                     y += sy
                 points.append((x, y))
             return points
+    
+
+    def costmap(self, data, width, height, resolution):
+        data = np.array(data).reshape(height, width)
+        wall = np.where(data == 100)
+        for i in range(-self.expansion_size, self.expansion_size + 1):
+            for j in range(-self.expansion_size, self.expansion_size + 1):
+                if i == 0 and j == 0:
+                    continue
+                x = wall[0] + i
+                y = wall[1] + j
+                x = np.clip(x, 0, height - 1)
+                y = np.clip(y, 0, width - 1)
+                data[x, y] = 100
+        data = data * resolution
+        return data
+
+    def frontierB(self, matrix):
+        for i in range(len(matrix)):
+            for j in range(len(matrix[i])):
+                if matrix[i][j] == 0.0:
+                    if i > 0 and matrix[i - 1][j] < 0:
+                        matrix[i][j] = 2
+                    elif i < len(matrix) - 1 and matrix[i + 1][j] < 0:
+                        matrix[i][j] = 2
+                    elif j > 0 and matrix[i][j - 1] < 0:
+                        matrix[i][j] = 2
+                    elif j < len(matrix[i]) - 1 and matrix[i][j + 1] < 0:
+                        matrix[i][j] = 2
+        return matrix
+
+    def assign_groups(self, matrix):
+        group = 1
+        groups = {}
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == 2:
+                    group = self.dfs_iterative(matrix, i, j, group, groups)
+        return matrix, groups      
+    
+
+    def dfs_iterative(self, matrix, i, j, group, groups):
+        stack = [(i, j)]
+        while stack:
+            i, j = stack.pop()
+            if i < 0 or i >= len(matrix) or j < 0 or j >= len(matrix[0]):
+                continue
+            if matrix[i][j] != 2:
+                continue
+            if group in groups:
+                groups[group].append((i, j))
+            else:
+                groups[group] = [(i, j)]
+            matrix[i][j] = 0  # Mark as visited
+            # Add neighboring cells to the stack
+            stack.extend([
+                (i + 1, j),
+                (i - 1, j),
+                (i, j + 1),
+                (i, j - 1),
+                (i + 1, j + 1),
+                (i - 1, j - 1),
+                (i - 1, j + 1),
+                (i + 1, j - 1),
+            ])
+        return group + 1
+    
+
+    def calculate_centroid(self, points):
+        """Calculate the centroid (middle point) of a list of points."""
+        if not points:
+            return None
+        x_coords = [p[0] for p in points]
+        y_coords = [p[1] for p in points]
+        mean_x = sum(x_coords) / len(points)
+        mean_y = sum(y_coords) / len(points)
+        return (int(mean_x), int(mean_y))
+    
+
+    def publish_frontier_markers(self, groups, resolution, originX, originY):
+        marker_array = MarkerArray()
+        marker_id = 0
+
+        # Clear previous markers
+        delete_marker = Marker()
+        delete_marker.action = Marker.DELETEALL
+        marker_array.markers.append(delete_marker)
+
+        for group_id, points in groups.items():
+            marker = Marker()
+            marker.header.frame_id = "map"
+            marker.header.stamp = self.get_clock().now().to_msg()
+            marker.ns = "frontiers"
+            marker.id = marker_id
+            marker.type = Marker.POINTS
+            marker.action = Marker.ADD
+            marker.pose.orientation.w = 1.0
+
+            # Set the scale of the marker
+            marker.scale.x = resolution * 1.5  # Adjust as needed
+            marker.scale.y = resolution * 1.5  # Adjust as needed
+
+            # Set a unique color for each group
+            color = self.get_color(group_id)
+            marker.color.r = color[0]
+            marker.color.g = color[1]
+            marker.color.b = color[2]
+            marker.color.a = 1.0
+
+            # Add the points to the marker
+            for (i, j) in points:
+                x = originX + j * resolution
+                y = originY + i * resolution
+
+                point = Point()
+                point.x = x
+                point.y = y
+                point.z = 0.0
+                marker.points.append(point)
+
+            marker_array.markers.append(marker)
+            marker_id += 1
+
+        # Publish the markers
+        self.frontier_pub.publish(marker_array)
+
+
+    def publish_centroid_markers(self, centroids, resolution, originX, originY):
+        """
+        Publish centroid markers as spheres in RViz.
+        """
+        marker_array = MarkerArray()
+        marker_id = 0
+
+        # Clear previous centroid markers
+        delete_marker = Marker()
+        delete_marker.action = Marker.DELETEALL
+        marker_array.markers.append(delete_marker)
+
+        for group_id, centroid in centroids.items():
+            x = originX + centroid[1] * resolution
+            y = originY + centroid[0] * resolution
+
+            marker = Marker()
+            marker.header.frame_id = "map"
+            marker.header.stamp = self.get_clock().now().to_msg()
+            marker.ns = "centroids"
+            marker.id = marker_id
+            marker.type = Marker.SPHERE
+            marker.action = Marker.ADD
+            marker.pose.position.x = x
+            marker.pose.position.y = y
+            marker.pose.position.z = 0.2  # Slightly elevate for better visibility
+            marker.pose.orientation.w = 1.0
+
+            # Set the scale of the marker
+            marker.scale.x = resolution * 2.0  # Adjust size as needed
+            marker.scale.y = resolution * 2.0
+            marker.scale.z = resolution * 2.0
+
+            # Set the color of the centroid marker
+            marker.color.r = 1.0  # Red
+            marker.color.g = 0.0  # Green
+            marker.color.b = 0.0  # Yellow
+            marker.color.a = 1.0  # Fully opaque
+
+            marker_array.markers.append(marker)
+            marker_id += 1
+
+        # Publish the centroid markers
+        self.centroid_pub.publish(marker_array)
+
+
+    def publish_centroid_markers(self, centroids, resolution, originX, originY):
+        """
+        Publish centroid markers as spheres in RViz.
+        """
+        marker_array = MarkerArray()
+        marker_id = 0
+
+        # Clear previous centroid markers
+        delete_marker = Marker()
+        delete_marker.action = Marker.DELETEALL
+        marker_array.markers.append(delete_marker)
+
+        for group_id, centroid in centroids.items():
+            x = originX + centroid[1] * resolution
+            y = originY + centroid[0] * resolution
+
+            marker = Marker()
+            marker.header.frame_id = "map"
+            marker.header.stamp = self.get_clock().now().to_msg()
+            marker.ns = "centroids"
+            marker.id = marker_id
+            marker.type = Marker.SPHERE
+            marker.action = Marker.ADD
+            marker.pose.position.x = x
+            marker.pose.position.y = y
+            marker.pose.position.z = 0.2  # Slightly elevate for better visibility
+            marker.pose.orientation.w = 1.0
+
+            # Set the scale of the marker
+            marker.scale.x = resolution * 2.0  # Adjust size as needed
+            marker.scale.y = resolution * 2.0
+            marker.scale.z = resolution * 2.0
+
+            # Set the color of the centroid marker
+            marker.color.r = 1.0  # Red
+            marker.color.g = 0.0  # Green
+            marker.color.b = 0.0  # Yellow
+            marker.color.a = 1.0  # Fully opaque
+
+            marker_array.markers.append(marker)
+            marker_id += 1
+
+        # Publish the centroid markers
+        self.centroid_pub.publish(marker_array)
+
+
+    def publish_centroids(self, centroids, resolution, originX, originY):
+        pose_array = PoseArray()
+        pose_array.header.frame_id = "map"  # Set to your map frame
+        pose_array.header.stamp = self.get_clock().now().to_msg()
+
+        for centroid in centroids.values():
+            # Convert grid indices to world coordinates
+            x = originX + centroid[1] * resolution + resolution / 2
+            y = originY + centroid[0] * resolution + resolution / 2
+
+            pose = Pose()
+            pose.position.x = x
+            pose.position.y = y
+            pose.position.z = 0.0  # Assuming a flat ground
+            pose.orientation.w = 1.0  # Neutral orientation (no rotation)
+
+            pose_array.poses.append(pose)
+
+        # print("Pose array", pose_array)
+        self.get_logger().info("Publishing centroids PoseArray:")
+        for i, p in enumerate(pose_array.poses, start=1):
+            self.get_logger().info(
+                f" - Pose #{i}: x={p.position.x:.2f}, y={p.position.y:.2f}, "
+                f"qw={p.orientation.w:.2f}"
+        )
+
+        # Publish the centroids
+        self.centroids_pub.publish(pose_array)
+        self.get_logger().info(f"Published {len(pose_array.poses)} centroids to /frontier_centroids")
+
+
+    def get_color(self, group_id):
+        # Generate colors based on group_id
+        np.random.seed(group_id)
+        color = np.random.rand(3)
+        return color
+    
 
 
     def publish_updated_map(self, hypothesis_id, updated_map):

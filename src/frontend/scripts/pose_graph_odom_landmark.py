@@ -89,7 +89,7 @@ class PoseGraphOptimization(Node):
     def marker_callback(self, msg):
         """Handles incoming ArUco marker pose data"""
         self.marker_data = msg.point  # Store the marker's pose
-        # print("This is the data",msg.point)
+        print("This is the data",msg.point)
 
     def cmd_vel_callback(self, msg):
         """Handles incoming cmd_vel data"""
@@ -100,6 +100,8 @@ class PoseGraphOptimization(Node):
             self.process_data()
 
     def process_data(self):
+
+
         """Process odometry data and velocity"""
         if self.odom_data and self.cmd_velocity:
             # Check if cmd_velocity is non-zero
