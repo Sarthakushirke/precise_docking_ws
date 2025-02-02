@@ -119,6 +119,9 @@ install(PROGRAMS
   DESTINATION lib/${PROJECT_NAME}
 )
 
-
+install(PROGRAMS
+  scripts/pose_graph_optimization.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_package()
