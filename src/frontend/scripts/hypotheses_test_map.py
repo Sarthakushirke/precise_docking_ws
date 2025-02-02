@@ -206,8 +206,6 @@ class HypothesisMapSubscriber(Node):
         if self.hypotheses_dict:
             (robot_x_map, robot_y_map, yaw) = self.hypotheses_dict[1]
             
-
-            
             print("Pose", robot_x_map, robot_y_map, yaw)
 
 

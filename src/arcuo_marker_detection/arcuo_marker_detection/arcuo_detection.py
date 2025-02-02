@@ -17,6 +17,8 @@ from geometry_msgs.msg import PointStamped
 import math
 from geometry_msgs.msg import PoseArray, Pose
 from std_msgs.msg import Float64MultiArray
+from scipy.spatial.transform import Rotation as R
+from tf_transformations import quaternion_from_euler
 
 
 # The different ArUco dictionaries built into the OpenCV library. 
@@ -61,6 +63,7 @@ class arcuo_marker_detection(Node): # Node class
 
         self.z_multiarray_pub = self.create_publisher(Float64MultiArray, '/all_marker_z_values', 10)
 
+        self.pose_array_publisher = self.create_publisher(PoseArray, 'aruco_poses', 10)
 
 
         # Declare parameters
@@ -129,6 +132,12 @@ class arcuo_marker_detection(Node): # Node class
         current_frame, self.this_aruco_dictionary, parameters=self.this_aruco_parameters)
 
 
+        # Create a PoseArray message
+        pose_array_msg = PoseArray()
+        pose_array_msg.header.stamp = self.get_clock().now().to_msg()
+        pose_array_msg.header.frame_id = "diff_drive/cam_link/camera1"  # Set the appropriate frame
+
+
          # Check that at least one ArUco marker was detected
         if marker_ids is not None:
 
@@ -155,6 +164,8 @@ class arcuo_marker_detection(Node): # Node class
 
             for i, marker_id in enumerate(marker_ids): 
 
+                pose_msg = Pose()
+
                 # self.get_logger().info('Publishing')
 
                 self.get_logger().info(f'Publishing {marker_id}')
@@ -162,8 +173,8 @@ class arcuo_marker_detection(Node): # Node class
                 # Create the coordinate transform in the camera frame
                 t = TransformStamped()
                 t.header.stamp = self.get_clock().now().to_msg()
-                # t.header.frame_id = 'diff_drive/cam_link/camera1'
-                t.header.frame_id = 'camera_color_optical_frame'
+                
+                # t.header.frame_id = 'camera_color_optical_frame'
                 t.child_frame_id = self.aruco_marker_name
             
                 # Store the translation (i.e. position) information
@@ -186,8 +197,34 @@ class arcuo_marker_detection(Node): # Node class
                 # # Log the rotation and translation vectors
                 self.get_logger().info(f'Translation Vector {i}: x={t.transform.translation.x}, y={t.transform.translation.y}, z={t.transform.translation.z}')
                 # self.get_logger().info(f'Rotation Vector {i}: x={quat[0]}, y={quat[1]}, z={quat[2]}, w={quat[3]}')
-                
 
+
+                # Convert quaternion to rotation matrix
+                rotation = R.from_quat([quat[0], quat[1], quat[2], quat[3]])
+
+                # Convert to Euler angles (roll, pitch, yaw)
+                roll, pitch, yaw = rotation.as_euler('xyz', degrees=False)  # radians
+
+                # Theta (yaw angle)
+                theta = yaw
+
+
+                print("THeta", theta)
+
+                quater = quaternion_from_euler(0.0, 0.0, theta) 
+
+                # Set position
+                pose_msg.position.x = tvecs[i][0][0]
+                pose_msg.position.y = tvecs[i][0][1]
+                pose_msg.position.z = tvecs[i][0][2]
+                
+                # Set orientation (already in quaternion format)
+                pose_msg.orientation.x = quater[0]
+                pose_msg.orientation.y = quater[1]
+                pose_msg.orientation.z = quater[2]
+                pose_msg.orientation.w = quater[3]
+                
+                pose_array_msg.poses.append(pose_msg)
                 # Transform to robot base frame using TF lookup
                 try:
                     # Lookup the transformation between 'diff_drive/lidar_link' and 'camera_link'
@@ -251,6 +288,9 @@ class arcuo_marker_detection(Node): # Node class
 
             # Publish once for all markers in this frame
             self.z_multiarray_pub.publish(z_multi_msg)
+
+            # Publish PoseArray
+            self.pose_array_publisher.publish(pose_array_msg)
           
 
         # Resize the frame to the desired size

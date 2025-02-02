@@ -70,12 +70,14 @@ class arcuo_marker_detection(Node): # Node class
         #     qos_profile)
 
 
-        self.image_transport = image_transport.ImageTransport(self)
-        self.subscription = self.image_transport.subscribe(
-                "/camera/color/image_raw/theora",  
-                self.arcuo_detection_callback,  
-                qos_profile
-            )
+
+        self.subscription = self.create_subscription(
+            CompressedImage,  # Change message type to CompressedImage
+            "/camera/color/image_raw/theora",  # Theora topic
+            self.arcuo_detection_callback,  
+            qos_profile
+        )
+
 
         
         self.publisher_marker_in_robot_frame = self.create_publisher(PointStamped, 'marker_in_robot_frame', 10)
@@ -146,8 +148,13 @@ class arcuo_marker_detection(Node): # Node class
         self.get_logger().info('Receiving video frame')
 
 
+        # Convert compressed image to raw image
+        np_arr = np.frombuffer(msg.data, np.uint8)
+        current_frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+
+
         # Convert ROS Image message to OpenCV image
-        current_frame = self.bridge.imgmsg_to_cv2(msg)
+        # current_frame = self.bridge.imgmsg_to_cv2(msg)
 
         # Detect ArUco markers in the video frame
         (corners, marker_ids, rejected) = cv2.aruco.detectMarkers(
