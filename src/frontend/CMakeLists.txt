@@ -110,6 +110,12 @@ install(PROGRAMS
 
 
 install(PROGRAMS
+  scripts/localize_robot.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+
+install(PROGRAMS
   scripts/hypotheses_map.py
   DESTINATION lib/${PROJECT_NAME}
 )

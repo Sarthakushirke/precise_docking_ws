@@ -24,7 +24,10 @@ setup(
             "frontier_detection = active_localization.frontier_detection:main",
             "path_to_goal = active_localization.path_to_goal:main",
             "localization = active_localization.localization:main",
-            "local_map_lidar_node = active_localization.local_map_lidar:main"
+            "local_map_lidar_node = active_localization.local_map_lidar:main",
+            "local_map_robot = active_localization.local_map_robot:main",
+            "local_map_robot_1 = active_localization.local_map_robot_1:main",
+            "frontier_detection_robot = active_localization.frontier_detection_robot:main"
         ],
     },
 )

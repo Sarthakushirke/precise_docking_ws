@@ -73,7 +73,7 @@ class arcuo_marker_detection(Node): # Node class
 
         self.subscription = self.create_subscription(
             CompressedImage,  # Change message type to CompressedImage
-            "/camera/color/image_raw/theora",  # Theora topic
+            "/camera/color/image_raw/compressed",  # Theora topic
             self.arcuo_detection_callback,  
             qos_profile
         )
@@ -139,7 +139,7 @@ class arcuo_marker_detection(Node): # Node class
 
         self.a = 0
 
-        self.get_logger().info('Receiving video frame')
+        
 
             
     def arcuo_detection_callback(self, msg: Image):
@@ -289,17 +289,17 @@ class arcuo_marker_detection(Node): # Node class
             self.z_multiarray_pub.publish(z_multi_msg)
           
 
-        # # Resize the frame to the desired size
-        # desired_width = 800
-        # desired_height = 800
-        # resized_frame = cv2.resize(current_frame, (desired_width, desired_height))
+        # Resize the frame to the desired size
+        desired_width = 800
+        desired_height = 800
+        resized_frame = cv2.resize(current_frame, (desired_width, desired_height))
             
-        # # Display image for testing
-        # # cv2.imshow("camera", current_frame)
+        # Display image for testing
+        # cv2.imshow("camera", current_frame)
 
-        # # Simulation 
-        # cv2.imshow("camera", resized_frame)
-        # cv2.waitKey(1)
+        # Simulation 
+        cv2.imshow("camera", resized_frame)
+        cv2.waitKey(1)
         
 
         # position_pallet_msg = Point()

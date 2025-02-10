@@ -32,17 +32,17 @@ class OccupancyGridUpdater(Node):
         self.get_logger().info('Subscribed to /map topic with TRANSIENT_LOCAL durability')
 
         # Odometry subscription (uses default QoS)
-        self.odom_sub = self.create_subscription(
-            Odometry,
-            '/odom',
-            self.odom_callback,
-            10)
-        
         # self.odom_sub = self.create_subscription(
         #     Odometry,
-        #     '/rosbot_base_controller/odom',
+        #     '/odom',
         #     self.odom_callback,
         #     10)
+        
+        self.odom_sub = self.create_subscription(
+            Odometry,
+            '/rosbot_base_controller/odom',
+            self.odom_callback,
+            10)
         
         
         self.get_logger().info('Subscribed to /odom topic')

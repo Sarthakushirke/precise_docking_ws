@@ -48,14 +48,8 @@ class OccupancyGridUpdater(Node):
         # Use Approximate Time Synchronization
         self.ts = message_filters.ApproximateTimeSynchronizer([self.odom_sub, self.lidar_sub], queue_size=10, slop=0.1)
         self.ts.registerCallback(self.synchronized_callback)
-        
-        # self.odom_sub = self.create_subscription(
-        #     Odometry,
-        #     '/rosbot_base_controller/odom',
-        #     self.odom_callback,
-        #     10)
-        
-        
+
+                
         self.get_logger().info('Subscribed to /odom topic')
 
         # self.lidar_sub = self.create_subscription(LaserScan, '/scan', self.lidar_callback, 10)
@@ -83,30 +77,28 @@ class OccupancyGridUpdater(Node):
         self.lidar_callback(lidar_msg)
 
     def map_callback(self, msg):
+
+        print("In map callback")
         self.map_info = msg.info
         # Convert the map data to a 2D NumPy array
         self.map_data = np.array(msg.data, dtype=np.int8).reshape((self.map_info.height, self.map_info.width))
         # self.resolution = self.map_info.resolution
 
+        #Simulation
         self.local_map_width = self.map_info.width + 10
         self.local_map_height = self.map_info.height + 10
+        
         self.local_map_resolution = self.map_info.resolution
+
+        #Simulation
         self.origin_x = self.map_info.origin.position.x
         self.origin_y = self.map_info.origin.position.y
 
 
-    # def odom_callback(self, msg):
-    #     self.odom_data = msg
-    #     self.x = msg.pose.pose.position.x
-    #     self.y = msg.pose.pose.position.y
-    #     self.yaw = self.euler_from_quaternion(msg.pose.pose.orientation.x,msg.pose.pose.orientation.y,
-    #     msg.pose.pose.orientation.z,msg.pose.pose.orientation.w)
-    #     self.get_logger().debug(f'Odom callback triggered, x: {self.x}, y: {self.y}')
-
-    #     self.get_logger().info(f'Synchronized Odom: {msg.header.stamp.sec}.{msg.header.stamp.nanosec}')
-
 
     def odom_callback(self, msg):
+
+        print("In odom")
         # Get the current position from the odometry message
         current_x = msg.pose.pose.position.x
         current_y = msg.pose.pose.position.y
@@ -197,15 +189,9 @@ class OccupancyGridUpdater(Node):
         if self.local_map_data is None:
             # Suppose we want a 100x100 grid, each cell = 5cm, all unknown:
 
-            # # Center the robot in the middle of this grid
-            # self.local_origin_x = - ( self.local_map_width * self.local_map_resolution) / 2.0
-            # self.local_origin_y = - ( self.local_map_height * self.local_map_resolution) / 2.0
-
             # Initialize the local_map_data with -1 (unknown)
-            # self.local_map_data = np.full((self.local_map_height, self.local_map_width), -1, dtype=np.int8)
+            #For simulation
             self.local_map_data = np.full((self.local_map_height, self.local_map_width), -1, dtype=np.int8)
-
-
 
 
         robot_x_map = self.x
@@ -217,7 +203,7 @@ class OccupancyGridUpdater(Node):
         print("Robot position", robot_x_map,robot_y_map)
 
 
-        # Helper: convert world (map) coords -> local map indices
+        # Helper: convert world (map) coords -> local map indices for simulation
         def world_to_map_ixyz(wx, wy):
             # mx = int((wx - self.local_origin_x) / self.local_map_resolution)
             # my = int((wy - self.local_origin_y) / self.local_map_resolution)
@@ -225,19 +211,24 @@ class OccupancyGridUpdater(Node):
             mx = int((wx - self.origin_x) / self.local_map_resolution)
             my = int((wy - self.origin_y) / self.local_map_resolution)
             return mx, my
+        
 
-        # 4. For each beam, compute the end coordinates
         angle = msg.angle_min
 
         print("Minimum range", msg.range_min)
         for r in msg.ranges:
 
-            if r < msg.range_min:
+            if r < msg.range_min :
                 continue  # skip this beam
 
             if np.isinf(r):
                 r = msg.range_max  # treat inf as max range
-            beam_angle = angle + yaw
+
+            # For robot
+            # beam_angle = angle + yaw +  math.pi
+
+            # For simulation
+            beam_angle = angle + yaw 
 
             # End of beam in world
             end_x = robot_x_map + r * np.cos(beam_angle)

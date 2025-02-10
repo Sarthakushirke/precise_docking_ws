@@ -4,12 +4,14 @@ import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
 import gtsam
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 from geometry_msgs.msg import PoseStamped, PointStamped, PoseArray, Pose
 from tf2_ros import Buffer, TransformListener, TransformException
 from scipy.spatial.transform import Rotation as R
 from geometry_msgs.msg import Twist
+
 
 class PoseGraphOptimization(Node):
     def __init__(self):
@@ -45,12 +47,37 @@ class PoseGraphOptimization(Node):
         self.odometry_poses_y = []
         self.optimized_poses_x = []
         self.optimized_poses_y = []
+        self.last_odometry_poses = []
+        self.last_optimized_poses = []
+
+        self.previous_landmarks = {}  # Dictionary to store previous landmark positions
+        self.landmark_change_threshold = 4  # Adjust threshold as needed (meters)
 
         # Initialize the plot
         plt.ion()
         self.figure, self.ax = plt.subplots()
 
     def odometry_callback(self, msg):
+
+        current_x = msg.pose.pose.position.x
+        current_y = msg.pose.pose.position.y
+
+        # If we have a previous position, calculate the distance moved
+        if hasattr(self, 'prev_x') and hasattr(self, 'prev_y'):
+            dx = current_x - self.prev_x
+            dy = current_y - self.prev_y
+            distance = math.sqrt(dx * dx + dy * dy)
+            if distance > 1.0:
+                self.get_logger().warn(
+                    f"Large jump detected (distance: {distance:.2f}). Skipping this odom update."
+                )
+                return  # Skip processing this message
+
+        # Update the previous position
+        self.prev_x = current_x
+        self.prev_y = current_y
+
+
         """Handles incoming odometry data"""
         odom_pose = PoseStamped()
         odom_pose.header = msg.header
@@ -66,39 +93,135 @@ class PoseGraphOptimization(Node):
         print("In the command velocity", self.cmd_velocity)
         self.process_data()
 
+    # def aruco_callback(self, msg):
+    #     """Handles incoming ArUco markers in map frame"""
+    #     for pose in msg.poses:
+    #         yaw = self.quaternion_to_yaw(pose.orientation)  # Extract yaw (θ)
+    #         z_distance = pose.position.z*10  # Distance to marker
+
+    #         print("z_distance",z_distance)
+
+    #         # Compute global landmark position using robot's current pose
+    #         if self.odom_data:
+    #             landmark_x = self.odom_data.x() + z_distance * np.cos(yaw)
+    #             landmark_y = self.odom_data.y() + z_distance * np.sin(yaw)
+
+    #             print("Odom data", self.odom_data)
+
+    #             print("Landmark data",landmark_x, landmark_y)
+
+    #             self.add_landmark(landmark_x, landmark_y)
+
+
+    # def aruco_callback(self, msg):
+    #     """Handles incoming ArUco markers in the map frame and adds only if position change is significant."""
+    #     for pose in msg.poses:
+    #         yaw = self.quaternion_to_yaw(pose.orientation)  # Extract yaw (θ)
+    #         z_distance = pose.position.z * 10  # Distance to marker
+
+    #         print("z_distance", z_distance)
+
+    #         # Compute global landmark position using robot's current pose
+    #         if self.odom_data:
+    #             landmark_x = self.odom_data.x() + z_distance * np.cos(yaw)
+    #             landmark_y = self.odom_data.y() + z_distance * np.sin(yaw)
+
+    #             print("Odom data", self.odom_data)
+    #             print("Landmark data", landmark_x, landmark_y)
+
+    #             # Check if the landmark has changed significantly
+    #             landmark_key = f"{round(landmark_x, 2)}_{round(landmark_y, 2)}"
+
+    #             if landmark_key in self.previous_landmarks:
+    #                 prev_x, prev_y = self.previous_landmarks[landmark_key]
+    #                 distance_change = np.linalg.norm([landmark_x - prev_x, landmark_y - prev_y])
+
+    #                 print("Distance change", distance_change)
+
+    #                 if distance_change < self.landmark_change_threshold:
+    #                     print(f"Landmark change ({distance_change:.2f}m) is below threshold. Skipping update.")
+    #                     continue  # Skip this landmark update
+
+    #             # Store the new landmark position
+    #             self.previous_landmarks[landmark_key] = (landmark_x, landmark_y)
+
+    #             print("Landmark added ", self.previous_landmarks )
+
+    #             # Add landmark to the pose graph
+    #             self.add_landmark(landmark_x, landmark_y)
+
+
     def aruco_callback(self, msg):
-        """Handles incoming ArUco markers in map frame"""
+
+
+        if not (self.odom_data and self.cmd_velocity):
+
+            print("In arcuo marker")
+            return
+
+
+        """Handles incoming ArUco markers in the map frame and adds only if position change is significant."""
         for pose in msg.poses:
             yaw = self.quaternion_to_yaw(pose.orientation)  # Extract yaw (θ)
-            z_distance = pose.position.z*10  # Distance to marker
+            z_distance = pose.position.z * 10  # Distance to marker
 
-            print("z_distance",z_distance)
+            print("z_distance", z_distance)
 
             # Compute global landmark position using robot's current pose
             if self.odom_data:
                 landmark_x = self.odom_data.x() + z_distance * np.cos(yaw)
                 landmark_y = self.odom_data.y() + z_distance * np.sin(yaw)
 
+                # Compute distance between robot and landmark
+                distance_to_robot = np.linalg.norm([landmark_x - self.odom_data.x(), landmark_y - self.odom_data.y()])
+
                 print("Odom data", self.odom_data)
+                print("Landmark data", landmark_x, landmark_y)
 
-                print("Landmark data",landmark_x, landmark_y)
+                    # Check if the landmark is within a 5-meter range
+                if distance_to_robot > 11.0:  # Change 5.0 to your preferred threshold
+                    print(f"Landmark at ({landmark_x}, {landmark_y}) is out of range ({distance_to_robot:.2f}m). Skipping.")
+                    continue  # Skip adding this landmark
 
-                self.add_landmark(landmark_x, landmark_y)
+
+                # Compare with all previous landmarks
+                add_landmark = True  # Assume the landmark should be added
+
+                for prev_x, prev_y in self.previous_landmarks.values():
+                    distance_change = np.linalg.norm([landmark_x - prev_x, landmark_y - prev_y])
+
+                    print("Distance change:", distance_change)
+
+                    if distance_change < self.landmark_change_threshold:
+                        print(f"Landmark change ({distance_change:.2f}m) is below threshold. Skipping update.")
+                        add_landmark = False
+                        break  # No need to check further, already below threshold
+
+                if add_landmark:
+                    # Store the new landmark position
+                    landmark_key = len(self.previous_landmarks)  # Assign a new ID for tracking
+                    self.previous_landmarks[landmark_key] = (landmark_x, landmark_y)
+
+                    print("Landmark added:", self.previous_landmarks)
+
+                    # Add landmark to the pose graph
+                    self.add_landmark(landmark_x, landmark_y)
+
 
     def process_data(self):
         """Process odometry data and velocity"""
         if not (self.odom_data and self.cmd_velocity):
 
-            print("1")
+            print("Odom and velocity not yet")
             return
         
         if self.cmd_velocity.linear.x == 0 and self.cmd_velocity.angular.z == 0:
-            print("2")
+            print("velocity not yet ")
             return  # Skip if the robot is stationary
 
         # Ensure new pose is different from previous pose
         if self.previous_odom_data and np.isclose(self.previous_odom_data.x(), self.odom_data.x(), atol=1e-3) and np.isclose(self.previous_odom_data.y(), self.odom_data.y(), atol=1e-3):
-            print("3")
+            print("Ensuring previous and not pose is slightly different")
             return  # Skip duplicate poses
 
 
@@ -133,6 +256,8 @@ class PoseGraphOptimization(Node):
             return  # Skip adding a landmark if no pose is available
 
         landmark_pose = gtsam.Point2(x, y)
+
+        print("landmark_pose", landmark_pose)
         landmark_id = len(self.landmark_inserted)
         landmark_key = gtsam.symbol('L', landmark_id)
 
@@ -179,21 +304,57 @@ class PoseGraphOptimization(Node):
         self.ax.cla()  # Clear previous plot
 
         # Plot odometry trajectory
-        self.ax.plot(self.odometry_poses_x, self.odometry_poses_y, 'r--', label='Odometry Trajectory')
+        # self.ax.plot(self.odometry_poses_x, self.odometry_poses_y, 'r--', label='Odometry Trajectory')
 
-        # Plot optimized trajectory
-        self.ax.plot(self.optimized_poses_x, self.optimized_poses_y, 'b-', label='Optimized Trajectory')
+        # # Plot optimized trajectory
+        # self.ax.plot(self.optimized_poses_x, self.optimized_poses_y, 'b-', label='Optimized Trajectory')
+        
+
+            # Store the last N odometry poses
+        if self.odometry_poses_x and self.odometry_poses_y:
+            last_odom = (self.odometry_poses_x[-1], self.odometry_poses_y[-1])
+            self.last_odometry_poses.append(last_odom)
+
+
+        if self.optimized_poses_x and self.optimized_poses_y:
+            last_pose = (self.optimized_poses_x[-1], self.optimized_poses_y[-1])
+            self.last_optimized_poses.append(last_pose)
+
+
+        for pose_x, pose_y in self.last_optimized_poses:
+            self.ax.scatter(pose_x, pose_y, color='magenta', marker='D', s=100, label='Last Optimized Pose' if pose_x == self.last_optimized_poses[-1][0] else "")
+
+
+
+        for odom_x, odom_y in self.last_odometry_poses:
+            self.ax.scatter(odom_x, odom_y, color='cyan', marker='s', s=100, label='Last Odom' if odom_x == self.last_odometry_poses[-1][0] else "")
+
 
         # Plot landmark positions
+        # for landmark_id in self.landmark_inserted:
+        #     landmark_key = gtsam.symbol('L', landmark_id)
+        #     optimized_landmark = self.initial_estimates.atPoint2(landmark_key)
+
+        #     print("Landmark pose",optimized_landmark[0], optimized_landmark[1])
+
+        #     # Plot landmark position as a green dot
+        #     self.ax.scatter(optimized_landmark[0], optimized_landmark[1], color='g', marker='o', label='Landmark' if landmark_id == 0 else "")
+
+        #     # Annotate landmark ID on the plot
+        #     self.ax.text(optimized_landmark[0], optimized_landmark[1], f"L{landmark_id}", fontsize=10, ha='right')
+
+
         for landmark_id in self.landmark_inserted:
             landmark_key = gtsam.symbol('L', landmark_id)
-            optimized_landmark = self.initial_estimates.atPoint2(landmark_key)
 
-            # Plot landmark position as a green dot
-            self.ax.scatter(optimized_landmark[0], optimized_landmark[1], color='g', marker='o', label='Landmark' if landmark_id == 0 else "")
+            # Directly retrieve and plot landmark
+            if self.initial_estimates.exists(landmark_key):
+                landmark_pose = self.initial_estimates.atPoint2(landmark_key)
 
-            # Annotate landmark ID on the plot
-            self.ax.text(optimized_landmark[0], optimized_landmark[1], f"L{landmark_id}", fontsize=10, ha='right')
+                print("Landmark plot pose",landmark_pose[0], landmark_pose[1])
+                self.ax.scatter(landmark_pose[0], landmark_pose[1], color='g', marker='o', label='Landmark')
+                self.ax.text(landmark_pose[0], landmark_pose[1], f"L{landmark_id}", fontsize=10, ha='right')
+
 
         # Labels, title, and legend
         self.ax.set_xlabel('X Position')

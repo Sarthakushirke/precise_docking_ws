@@ -60,19 +60,6 @@ class MultiLocationMarkerNode(Node):
         }
 
 
-        #For Robot features 
-        # self.marker_map = {
-        #     0: [
-    
-        #         (1.0, -0.8, 0.0),
-        #         (0.6, 0.4, 0.0),
-        #         (1.0,1.4,0.0),
-        #         (-0.2,1.4,0.0),
-        #         (-0.6,-1.0,0.0),
-        #         (-2.2,1.0,0.0),
-        #     ],
-        # }
-
         # self.hypothesis_weights = {}
         # for marker_id, poses_list in self.marker_map.items():
         #     n_hypotheses = len(poses_list)
@@ -195,10 +182,6 @@ class MultiLocationMarkerNode(Node):
         self.goal_y = 0.0  # Goal y-coordinate in meters
 
 
-        # For Robot
-        # self.goal_x = 2.6  # Goal x-coordinate in meters
-        # self.goal_y = 0.0  # Goal y-coordinate in meters
-
         self.path = None  # Path to follow
         self.desination_go = None #Final path
         self.control_thread = None  # Thread for control loop
@@ -267,7 +250,7 @@ class MultiLocationMarkerNode(Node):
 
 
             # Store in dictionary, assuming each pose corresponds to a different hypothesis ID
-            self.hypothesis_frontiers[i] = (x, y)
+            self.hypothesis_frontiers[i] = (y, x)
 
         self.get_logger().info(f"Stored {self.hypothesis_frontiers} frontier centroids.")
 
@@ -369,7 +352,8 @@ class MultiLocationMarkerNode(Node):
             distance = 2.0
 
             self.expansion_size = 3
-            self.min_group_size = 40
+
+            self.min_group_size = 60
 
             # We assume zero relative orientation
             phi_marker_relative = 0.0
@@ -392,6 +376,9 @@ class MultiLocationMarkerNode(Node):
             self.hypotheses_dict[marker_id] = new_hypotheses
 
 
+            print("Hyp dict at the start ", self.hypotheses_dict)
+
+
             # Log them
             for i, (x_r, y_r, theta_r) in enumerate(new_hypotheses, start=1):
                 self.get_logger().info(
@@ -410,7 +397,7 @@ class MultiLocationMarkerNode(Node):
             self.compute_again(new_hypotheses)
 
 
-        if len(self.hypotheses_dict[0]) == 1:
+        if len(self.hypotheses_dict[0]) == 1 and self.compute_start is False:
 
             print("In the desitnation path")
 
@@ -441,6 +428,10 @@ class MultiLocationMarkerNode(Node):
 
                 self.publish_path_marker(self.desination_go)
 
+                # Pause execution for a few seconds
+                
+
+
                 if not self.final_robot_active:
                     self.final_robot_active = True
                     self.robot_control_thread = Thread(target=self.final_robot_loop)
@@ -452,6 +443,8 @@ class MultiLocationMarkerNode(Node):
     def compute_again(self,new_hypotheses):
 
 
+        print("I am in compute again")
+
         origin_x = self.map_info.origin.position.x
         origin_y = self.map_info.origin.position.y
         resolution = self.map_info.resolution
@@ -461,7 +454,8 @@ class MultiLocationMarkerNode(Node):
             angle_increment = 0.0003927233046852052
             scan_ranges = []
             start_angle = -3.14
-            max_range = 10
+            max_range = 10    #For simulation
+            # max_range = 2 #For robot
 
             # reachable = np.zeros_like(self.map_data, dtype=bool)
             self.all_frontiers_info = {}
@@ -517,9 +511,10 @@ class MultiLocationMarkerNode(Node):
 
                 # frontiers_middle = self.exploration(updated_map, self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
 
-                updated_exploration_map, frontiers_middle = self.exploration(self.local_map_data[h], self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
+                updated_exploration_map, frontiers_middle, frontier_groups = self.exploration(self.local_map_data[h], self.map_info.width, self.map_info.height, resolution, self.column, self.row, origin_x, origin_y)
 
                 print("Frontiers ", frontiers_middle)
+
 
                 # Reassign it back
                 # self.local_map_data[h] = updated_exploration_map
@@ -527,11 +522,11 @@ class MultiLocationMarkerNode(Node):
                 ###############################################################
 
                 # store list of frontiers for hypothesis i  (#centroids_info  )
-                self.all_frontiers_info[h] =  self.centroid_info_function(frontiers_middle,x_r, y_r, theta_r,resolution,origin_x,origin_y)   
+                self.all_frontiers_info[h] =  self.centroid_info_function(frontiers_middle,frontier_groups, y_r, theta_r,resolution,origin_x,origin_y)   
 
                 if self.orginal_scan_centroids == len(frontiers_middle):
 
-                    print("I am here")
+                    print("I am here", x_r,y_r,theta_r)
 
                     local_map_delete.append(h)
 
@@ -574,6 +569,8 @@ class MultiLocationMarkerNode(Node):
         print("self.orginal_scan_centroids",self.orginal_scan_centroids)
         print("self.hyp_scan_centroids",self.hyp_scan_centroids)
         print("self.compute_start",self.compute_start)
+
+        # time.sleep(120)
         
 
         if self.orginal_scan_centroids == self.hyp_scan_centroids and self.compute_start is False:
@@ -590,6 +587,8 @@ class MultiLocationMarkerNode(Node):
             #Take the frontiers for recomputation
             x_r, y_r, theta_r = self.hypotheses_dict[0][1]
 
+            print("x,y, theta", x_r, y_r, theta_r)
+
             self.all_frontiers_info[0] =  self.centroid_info_function(self.hypothesis_frontiers,x_r, y_r, theta_r,resolution,origin_x,origin_y)
 
             print("I am here")
@@ -598,8 +597,8 @@ class MultiLocationMarkerNode(Node):
 
                 # self.filtered_hypotheses.append((x_r, y_r, theta_r))        
 
-        pp = pprint.PrettyPrinter(indent=4)
-        pp.pprint(self.all_frontiers_info)
+        # pp = pprint.PrettyPrinter(indent=4)
+        # pp.pprint(self.all_frontiers_info)
         #Pick one hypothesis and one path (TO DO) #OUTPUT: 1 hypothses which might not be the real one and the path to that 
         # hypotheses best centroid.
         # AFTER processing all hypotheses, pick best overall
@@ -682,6 +681,27 @@ class MultiLocationMarkerNode(Node):
 
 
     def odom_callback(self,msg):
+
+
+        current_x = msg.pose.pose.position.x
+        current_y = msg.pose.pose.position.y
+
+        # If we have a previous position, calculate the distance moved
+        if hasattr(self, 'prev_x') and hasattr(self, 'prev_y'):
+            dx = current_x - self.prev_x
+            dy = current_y - self.prev_y
+            distance = math.sqrt(dx * dx + dy * dy)
+            if distance > 1.0:
+                self.get_logger().warn(
+                    f"Large jump detected (distance: {distance:.2f}). Skipping this odom update."
+                )
+                return  # Skip processing this message
+
+        # Update the previous position
+        self.prev_x = current_x
+        self.prev_y = current_y
+    
+
         self.odom_data = msg
         self.x = msg.pose.pose.position.x
         self.y = msg.pose.pose.position.y
@@ -691,10 +711,15 @@ class MultiLocationMarkerNode(Node):
 
         # print(f"Odom callback => x: {self.x}, y: {self.y}, yaw: {self.yaw}")
 
-    def centroid_info_function(self,frontiers_middle,x_r, y_r, theta_r,resolution,origin_x,origin_y):
+    def centroid_info_function(self,frontiers_middle,frontier_groups, y_r, theta_r,resolution,origin_x,origin_y):
         centroids_info = []
         # Filter hypotheses based on the frontier condition
        
+        # self.publish_frontier_markers(frontier_groups, resolution, origin_x, origin_y)
+
+        # self.publish_centroids(frontiers_middle, resolution, origin_x, origin_y)
+
+        print("Frontier middle", frontiers_middle)
 
         for frontier_id, (centroid_x, centroid_y) in frontiers_middle.items():
 
@@ -710,11 +735,19 @@ class MultiLocationMarkerNode(Node):
 
                 # Calculate visible objects from this centroid
 
-                centroid_visible_x = centroid_x * resolution + origin_x
-                centroid_visible_y = centroid_y * resolution + origin_y
-                print("Coordinates of the centroild in ",centroid_visible_y,centroid_visible_x)
-                visible_objects = check_visible_objects_from_centroid_simple( centroid_visible_y, centroid_visible_x)
+                # centroid_visible_x = centroid_x * resolution + origin_x
+                # centroid_visible_y = centroid_y * resolution + origin_y
+
+                centroid_visible_x = origin_x + centroid_y * resolution  + resolution / 2
+                centroid_visible_y = origin_y + centroid_x * resolution  + resolution / 2
+
+
+                print("Coordinates of the centroild in ",centroid_visible_x, centroid_visible_y)
+
+                visible_objects = check_visible_objects_from_centroid_simple( centroid_visible_x, centroid_visible_y)
                 num_visible_objects = len(visible_objects)
+
+                print("Visible objects", visible_objects)
 
                 if path:
                     # path_length = len(path) * resolution
@@ -722,6 +755,9 @@ class MultiLocationMarkerNode(Node):
                     self.centroid_goal_path = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in path] 
 
                     self.publish_path_marker( self.centroid_goal_path)
+
+
+                    # time.sleep(60)  # Adjust the time as needed
 
                     # print("The centroild to goal path", self.centroid_goal_path)
                     path_length = self.pathLength(self.centroid_goal_path)
@@ -828,8 +864,11 @@ class MultiLocationMarkerNode(Node):
         hyp_pose_y = self.hypotheses_dict[0][self.best_global_hypothesis-1][1]
         hyp_pose_theta = 0
 
-        self.hypotheses_dict[0] = self.filtered_hypotheses
-        print(self.hypotheses_dict[0])
+
+        if self.compute_start is True:
+            self.hypotheses_dict[0] = self.filtered_hypotheses
+            print("HYpothes in control loop",self.hypotheses_dict[0])
+
 
         self.compute_start = False
 
@@ -997,6 +1036,48 @@ class MultiLocationMarkerNode(Node):
 
             list_from_dict = self.hypotheses_dict[0]
             self.compute_again(list_from_dict)
+
+
+
+        if len(self.hypotheses_dict[0]) == 1 and self.compute_start is False:
+
+            print("In the desitnation path")
+
+            origin_x = self.map_info.origin.position.x
+            origin_y = self.map_info.origin.position.y
+            resolution = self.map_info.resolution
+            # Convert goal position to grid indices
+            self.goal_column = int((self.goal_x - origin_x) / resolution)
+            self.goal_row = int((self.goal_y - origin_y) / resolution)
+            self.goal_indices = (self.goal_row, self.goal_column)
+
+            robot_destination_column = int((self.hypotheses_dict[0][0][0] - origin_x) / resolution)
+            robot_destination_row = int((self.hypotheses_dict[0][0][1] - origin_y) / resolution)
+
+            print("Robot indices", robot_destination_column, robot_destination_row )
+
+            bot_indices = (robot_destination_row, robot_destination_column)
+
+            # # Compute the path from centroid to goal
+            destination_path = self.astar(self.map_data, bot_indices, self.goal_indices)
+
+            
+            if destination_path:
+
+                print("Got the final path")
+
+                self.desination_go = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in destination_path ]  
+
+                self.publish_path_marker(self.desination_go)
+
+                # Pause execution for a few seconds
+                
+
+
+                if not self.final_robot_active:
+                    self.final_robot_active = True
+                    self.robot_control_thread = Thread(target=self.final_robot_loop)
+                    self.robot_control_thread.start()
 
   
     def apply_pose_diff_to_hypotheses(self, dx, dy, dtheta):
@@ -1386,8 +1467,8 @@ class MultiLocationMarkerNode(Node):
         #########################################################
 
         # Define the safe distance and the front scan range
-        min_distance = 0.5  # Minimum safe distance in meters SImulation
-        # min_distance = 0.1  # Minimum safe distance in meters real world
+        #min_distance = 0.5  # Minimum safe distance in meters SImulation
+        min_distance = 0.1  # Minimum safe distance in meters real world
 
         front_angle_range = 30  # Degrees (e.g., ±30° around the front)
 
@@ -1620,7 +1701,7 @@ class MultiLocationMarkerNode(Node):
         # # Publish the centroids to a topic
         self.publish_centroids(centroids, resolution, originX, originY)
 
-        return data, centroids
+        return data, centroids, filtered_groups
     
     def euler_from_quaternion(self,x,y,z,w):
         t0 = +2.0 * (w * x + y * z)
@@ -2015,6 +2096,8 @@ class MultiLocationMarkerNode(Node):
         marker_array.markers.append(delete_marker)
 
         for group_id, centroid in centroids.items():
+
+            
             x = originX + centroid[1] * resolution
             y = originY + centroid[0] * resolution
 
@@ -2055,6 +2138,9 @@ class MultiLocationMarkerNode(Node):
 
         for centroid in centroids.values():
             # Convert grid indices to world coordinates
+
+            print("centroid in markers", centroid[1], centroid[0])
+
             x = originX + centroid[1] * resolution + resolution / 2
             y = originY + centroid[0] * resolution + resolution / 2
 

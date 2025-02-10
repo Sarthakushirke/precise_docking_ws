@@ -66,12 +66,10 @@ class OccupancyGridUpdater(Node):
         self.map_data = None
         self.map_info = None
         self.expansion_size = 3
-        self.min_group_size = 40
+        self.min_group_size = 60
 
-        # # Robot size (matches RViz dimensions)
-        # self.robot_width = 0.3  # X scale
-        # self.robot_height = 0.3  # Y scale
-
+        # self.min_group_size = 30 # In simulation
+      
         # # Start visualization loop
         # self.create_timer(1.0, self.plot_map)  # Update plot every 1 second
 

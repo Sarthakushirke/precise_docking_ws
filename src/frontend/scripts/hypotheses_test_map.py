@@ -77,7 +77,7 @@ class HypothesisMapSubscriber(Node):
         self.goal_y = 0.0  # Goal y-coordinate in meters
 
         self.expansion_size = 3
-        self.min_group_size = 40
+        self.min_group_size = 50
 
 
     def pose_callback(self, msg):
@@ -107,8 +107,6 @@ class HypothesisMapSubscriber(Node):
             self.hypotheses_dict[i] = (x, y, theta)  # Store each pose uniquely
 
         print("Hypotheses:", self.hypotheses_dict)
-
-
 
 
         # print(f"In the pose callback for hypothesis {self.hypothesis_id}")
