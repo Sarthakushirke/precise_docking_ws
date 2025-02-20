@@ -339,6 +339,7 @@ class MultiLocationMarkerNode(Node):
 
         self.stored_marker_z_values = msg.data
         self.get_logger().info(f"Got {len(self.stored_marker_z_values)} marker Z-values in one message.")
+
         for z in self.stored_marker_z_values:
             print(f"Z = {z}")
 
@@ -395,7 +396,7 @@ class MultiLocationMarkerNode(Node):
             # distance = 2.0
 
             #Robot
-            distance = 0.4
+            distance = 0.14
 
             self.expansion_size = 3
 
@@ -566,6 +567,9 @@ class MultiLocationMarkerNode(Node):
                 print("Frontiers ", frontiers_middle)
 
 
+                # time.sleep(10)
+
+
                 # Reassign it back
                 # self.local_map_data[h] = updated_exploration_map
 
@@ -576,53 +580,61 @@ class MultiLocationMarkerNode(Node):
 
                 # if self.orginal_scan_centroids == len(frontiers_middle):
 
-                print("I am here", x_r,y_r,theta_r)
+                # x_m = x_r - 0.4* math.cos(theta_r)
+                # y_m = y_r - 0.4* math.sin(theta_r)
+
+                print(" x_r,y_r,theta_r", x_r,y_r,theta_r)
+                # print("Marker pose",x_m, y_m)
 
                 local_map_delete.append(h)
 
                 self.filtered_hypotheses.append((x_r, y_r, theta_r))
 
+                # time.sleep(20)
+
                    
             # Keep only the keys in `local_map_delete`
-            self.local_map_data = {k: v for k, v in self.local_map_data.items() if k in local_map_delete}
+                self.local_map_data = {k: v for k, v in self.local_map_data.items() if k in local_map_delete}
 
-            latched_qos = QoSProfile(
-                depth=1,  # Keep only the latest message
-                reliability=ReliabilityPolicy.RELIABLE,  # Ensures reliable delivery
-                durability=DurabilityPolicy.TRANSIENT_LOCAL  # Makes the topic latched 
-                )
-            
-            self.publish_square_markers(self.hypotheses_dict)
-
-
-            for h, updated_map in self.local_map_data.items():
-                # Create a unique topic name for each hypothesis
-                topic_name = f"/hypothesis_map_{h}"
-
-                # Create an OccupancyGrid message
-                updated_occupancy_grid = OccupancyGrid()
-                updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
-                updated_occupancy_grid.header.frame_id = f"hypothesis_{h}" 
-                updated_occupancy_grid.header.frame_id = "map"
-                updated_occupancy_grid.info = self.map_info  # Use the existing map metadata
-
-                # Convert to list format (ROS2 OccupancyGrid requires a flattened list of integers)
-                updated_occupancy_grid.data = updated_map.flatten().astype(int).tolist()
-
-                # Create a publisher for this specific hypothesis
-                hypothesis_pub = self.create_publisher(OccupancyGrid, topic_name, latched_qos)
+                latched_qos = QoSProfile(
+                    depth=1,  # Keep only the latest message
+                    reliability=ReliabilityPolicy.RELIABLE,  # Ensures reliable delivery
+                    durability=DurabilityPolicy.TRANSIENT_LOCAL  # Makes the topic latched 
+                    )
                 
-                # Publish the updated map
-                hypothesis_pub.publish(updated_occupancy_grid)
+                self.publish_square_markers(self.hypotheses_dict)
 
-                print(f"Published updated local map for hypothesis {h} on {topic_name}")
 
+                for h, updated_map in self.local_map_data.items():
+                    # Create a unique topic name for each hypothesis
+                    topic_name = f"/hypothesis_map_{h}"
+
+                    # Create an OccupancyGrid message
+                    updated_occupancy_grid = OccupancyGrid()
+                    updated_occupancy_grid.header.stamp = self.get_clock().now().to_msg()
+                    updated_occupancy_grid.header.frame_id = f"hypothesis_{h}" 
+                    updated_occupancy_grid.header.frame_id = "map"
+                    updated_occupancy_grid.info = self.map_info  # Use the existing map metadata
+
+                    # Convert to list format (ROS2 OccupancyGrid requires a flattened list of integers)
+                    updated_occupancy_grid.data = updated_map.flatten().astype(int).tolist()
+
+                    # Create a publisher for this specific hypothesis
+                    hypothesis_pub = self.create_publisher(OccupancyGrid, topic_name, latched_qos)
+                    
+                    # Publish the updated map
+                    hypothesis_pub.publish(updated_occupancy_grid)
+
+                    print(f"Published updated local map for hypothesis {h} on {topic_name}")
+
+
+                    time.sleep(10)
 
         print("self.orginal_scan_centroids",self.orginal_scan_centroids)
         print("self.hyp_scan_centroids",self.hyp_scan_centroids)
         print("self.compute_start",self.compute_start)
 
-        # time.sleep(120)
+        time.sleep(500)
         
 
         if self.orginal_scan_centroids == self.hyp_scan_centroids and self.compute_start is False:
@@ -711,6 +723,8 @@ class MultiLocationMarkerNode(Node):
             print("Outside the control loop")
 
             print("self.control_active",self.control_active)
+
+            # time.sleep(60)
 
             # Start the control thread
             if not self.control_active:
@@ -987,7 +1001,7 @@ class MultiLocationMarkerNode(Node):
                 print("Element-wise Differences:", diff_list)
 
                 # Define a threshold for "drastic" change
-                threshold = 0.5  # Adjust this threshold as per your application
+                threshold = 0.03  # Adjust this threshold as per your application
                 
                 if any(diff > threshold for diff in diff_list):
                     print("Drastic change detected, starting measurement model...")
@@ -1999,8 +2013,8 @@ class MultiLocationMarkerNode(Node):
                 marker.pose.orientation.w = quat[3]
 
                 # Scale (make it look like a 2D square, e.g. 0.5 x 0.5 x 0.01)
-                marker.scale.x = 0.3
-                marker.scale.y = 0.3
+                marker.scale.x = 0.1
+                marker.scale.y = 0.1
                 marker.scale.z = 0.1
 
                 # Color (e.g. green squares)

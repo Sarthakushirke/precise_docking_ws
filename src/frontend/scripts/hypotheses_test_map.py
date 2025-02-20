@@ -68,7 +68,7 @@ class HypothesisMapSubscriber(Node):
 
         # Subscribe to hypothesis maps dynamically (will be updated in pose callback)
         self.map_subs = {}
-        self.hypothesis_id = 6
+        self.hypothesis_id = 3
         self.map_publishers = {}  # Dictionary to store publishers for hypothesis maps
         self.start = True
 
@@ -77,7 +77,9 @@ class HypothesisMapSubscriber(Node):
         self.goal_y = 0.0  # Goal y-coordinate in meters
 
         self.expansion_size = 3
+        # self.min_group_size = 50
         self.min_group_size = 50
+
 
 
     def pose_callback(self, msg):
@@ -168,8 +170,8 @@ class HypothesisMapSubscriber(Node):
         
 
         # Ensure at least one hypothesis exists before checking
-        if 1 in self.hypotheses_dict:
-            x, y, _ = self.hypotheses_dict[1]  # Extract x, y from the first hypothesis
+        if 0 in self.hypotheses_dict:
+            x, y, _ = self.hypotheses_dict[0]  # Extract x, y from the first hypothesis
 
             # If we have a previous position, calculate the distance moved
             if hasattr(self, 'prev_x') and hasattr(self, 'prev_y'):
@@ -197,12 +199,12 @@ class HypothesisMapSubscriber(Node):
         # Replace 'inf' values with max_range
         ranges = np.where(np.isinf(ranges), max_range, ranges)
 
-        h = 6
+        h = 3
 
         # for d, (x_r, y_r, theta_r) in self.hypotheses_dict.items():
 
         if self.hypotheses_dict:
-            (robot_x_map, robot_y_map, yaw) = self.hypotheses_dict[1]
+            (robot_x_map, robot_y_map, yaw) = self.hypotheses_dict[0]
             
             print("Pose", robot_x_map, robot_y_map, yaw)
 

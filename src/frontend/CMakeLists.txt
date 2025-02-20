@@ -130,4 +130,9 @@ install(PROGRAMS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(PROGRAMS
+  scripts/noisy_odom.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()

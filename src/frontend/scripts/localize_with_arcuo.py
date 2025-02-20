@@ -60,11 +60,12 @@ class MultiLocationMarkerNode(Node):
         }
 
 
-        # self.hypothesis_weights = {}
-        # for marker_id, poses_list in self.marker_map.items():
-        #     n_hypotheses = len(poses_list)
-        #     prior = 1.0 / n_hypotheses
-        #     self.hypothesis_weights[marker_id] = [prior] * n_hypotheses
+        self.hypothesis_weights = {}
+        for marker_id, poses_list in self.marker_map.items():
+            n_hypotheses = len(poses_list)
+            prior = 1.0 / n_hypotheses
+            self.hypothesis_weights[marker_id] = {pose: prior for pose in poses_list}  
+
 
             
         # Subscribe to a topic that just gives a PointStamped in the robot frame
@@ -307,6 +308,9 @@ class MultiLocationMarkerNode(Node):
 
     def compute_and_plan(self,msg):
 
+
+        self.publish_square_markers(self.hypotheses_dict)
+
         self.marker_pose = msg
 
         # self.stored_marker_z_values = []
@@ -386,6 +390,7 @@ class MultiLocationMarkerNode(Node):
                     f"x={x_r:.2f}, y={y_r:.2f}, theta={theta_r:.2f}"
                 )
 
+        self.publish_square_markers(self.hypotheses_dict)
         # --- PUBLISH POSE ARRAY (Arrows) FOR RVIZ ---
         # self.publish_pose_array(new_hypotheses)
 
@@ -532,6 +537,8 @@ class MultiLocationMarkerNode(Node):
 
                     self.filtered_hypotheses.append((x_r, y_r, theta_r))
 
+
+
                    
             # Keep only the keys in `local_map_delete`
             self.local_map_data = {k: v for k, v in self.local_map_data.items() if k in local_map_delete}
@@ -586,6 +593,8 @@ class MultiLocationMarkerNode(Node):
 
             #Take the frontiers for recomputation
             x_r, y_r, theta_r = self.hypotheses_dict[0][1]
+
+            del self.hypotheses_dict[0][0]
 
             print("x,y, theta", x_r, y_r, theta_r)
 
@@ -715,9 +724,7 @@ class MultiLocationMarkerNode(Node):
         centroids_info = []
         # Filter hypotheses based on the frontier condition
        
-        # self.publish_frontier_markers(frontier_groups, resolution, origin_x, origin_y)
 
-        # self.publish_centroids(frontiers_middle, resolution, origin_x, origin_y)
 
         print("Frontier middle", frontiers_middle)
 
@@ -751,6 +758,10 @@ class MultiLocationMarkerNode(Node):
 
                 if path:
                     # path_length = len(path) * resolution
+
+                    # self.publish_frontier_markers(frontier_groups, resolution, origin_x, origin_y)
+
+                    # self.publish_centroids(frontiers_middle, resolution, origin_x, origin_y)
 
                     self.centroid_goal_path = [(p[1] * resolution + origin_x, p[0] * resolution + origin_y) for p in path] 
 
@@ -981,20 +992,6 @@ class MultiLocationMarkerNode(Node):
             self.previous_marker_z_values = self.stored_marker_z_values[:]
 
 
-            # Multiply old weight by likelihood
-            # updated_weights = []
-            # for i in range(len(self.marker_map[0])):
-            #     old_w = self.hypothesis_weights[0][i]
-            #     new_w = old_w * likelihoods[i]
-            #     updated_weights.append(new_w)
-
-            # # Normalize
-            # w_sum = sum(updated_weights)
-            # if w_sum > 1e-9:
-            #     updated_weights = [w / w_sum for w in updated_weights]
-
-            # # Store them back
-            # self.hypothesis_weights[0] = updated_weights
 
             # -- APPLY THE SAME MOTION TO YOUR HYPOTHESES --
             # self.hypotheses_dict = self.apply_motion_to_hypotheses(v, w, dt)
@@ -1174,6 +1171,7 @@ class MultiLocationMarkerNode(Node):
     def measurement_model(self):
         # Store hypotheses per measurement
         measurement_best_hypotheses = []
+        likelihoods = {}  # Store likelihoods for updating Bayesian probability
 
         for measured_dist in self.stored_marker_z_values:
 
@@ -1219,6 +1217,11 @@ class MultiLocationMarkerNode(Node):
                                 print("Predicted Distance:", dist_pred)
                                 print("Liklihood hyp:", likelihood_hyp)
 
+                                # Store likelihood for Bayesian update
+                                if marker_id not in likelihoods:
+                                    likelihoods[marker_id] = {}
+                                likelihoods[marker_id][hypothesis] = likelihood_hyp
+
                                 # Store all hypotheses with the same maximum likelihood
                                 if likelihood_hyp > best_likelihood:
                                     best_likelihood = likelihood_hyp
@@ -1248,6 +1251,10 @@ class MultiLocationMarkerNode(Node):
                 self.get_logger().warn("No valid hypotheses found for this measurement.")
 
 
+
+
+        # Apply Bayesian Update to Hypothesis Weights
+        self.update_hypothesis_weights(likelihoods)
 
         # Compare hypotheses across measurements to find common ones
         print("self.stored_marker_z_values", len(self.stored_marker_z_values))
@@ -1364,6 +1371,28 @@ class MultiLocationMarkerNode(Node):
 
     #     # --- PUBLISH MARKER ARRAY (Squares) FOR RVIZ ---
     #     self.publish_square_markers(self.hypotheses_dict)
+
+
+
+    def update_hypothesis_weights(self, likelihoods):
+        """Applies Bayesian update to hypothesis weights."""
+        for marker_id, hypothesis_likelihoods in likelihoods.items():
+            updated_weights = []
+            for hypothesis, likelihood in hypothesis_likelihoods.items():
+                old_w = self.hypothesis_weights[marker_id].get(hypothesis, 1.0 / len(hypothesis_likelihoods))  # Prior probability
+                new_w = old_w * likelihood  # Bayesian Update: P(H_i | Z) ∝ P(Z | H_i) * P(H_i)
+                updated_weights.append(new_w)
+
+            # Normalize the weights
+            w_sum = sum(updated_weights)
+            if w_sum > 1e-9:  # Prevent division by zero
+                updated_weights = [w / w_sum for w in updated_weights]
+
+            # Store updated weights
+            for i, hypothesis in enumerate(hypothesis_likelihoods.keys()):
+                self.hypothesis_weights[marker_id][hypothesis] = updated_weights[i]
+
+        print("Hypotheses weight", self.hypothesis_weights)
 
     def final_robot_loop(self):
         self.get_logger().info("Control loop started.")
@@ -1700,6 +1729,7 @@ class MultiLocationMarkerNode(Node):
 
         # # Publish the centroids to a topic
         self.publish_centroids(centroids, resolution, originX, originY)
+
 
         return data, centroids, filtered_groups
     

@@ -220,7 +220,7 @@ class arcuo_marker_detection(Node): # Node class
                 t.transform.rotation.w = quat[3] 
 
                 # # Log the rotation and translation vectors
-                self.get_logger().info(f'Translation Vector {i}: x={t.transform.translation.x}, y={t.transform.translation.y}, z={t.transform.translation.z}')
+                # self.get_logger().info(f'Translation Vector {i}: x={t.transform.translation.x}, y={t.transform.translation.y}, z={t.transform.translation.z}')
                 # self.get_logger().info(f'Rotation Vector {i}: x={quat[0]}, y={quat[1]}, z={quat[2]}, w={quat[3]}')
                 
 
@@ -259,14 +259,34 @@ class arcuo_marker_detection(Node): # Node class
                     x_robot = marker_in_robot_frame.point.x
                     y_robot = marker_in_robot_frame.point.y
                     #In simulation
-                    z_robot = round(marker_in_robot_frame.point.z * 10.0, 2)
+                    z_robot = round(marker_in_robot_frame.point.z, 2)
                     # On RObot
                     #z_robot = round(marker_in_robot_frame.point.z, 2)
 
 
                     self.get_logger().info(f'Marker position in robot frame: x={x_robot}, y={y_robot}, z={z_robot}')
 
-                    z_values_list.append(z_robot)
+
+                    if abs(z_robot) <= 0.14:  
+                        z_values_list.append(z_robot)
+
+
+                    # previous_values = []  # List to store the last 4 values
+                    # max_consecutive = 4   # Number of consecutive values required
+
+                    # if abs(z_robot) <= 2.0:
+                    #     # Add the new value to the rolling buffer
+                    #     previous_values.append(z_robot)
+                        
+                    #     # Keep only the last 4 values
+                    #     if len(previous_values) > max_consecutive:
+                    #         previous_values.pop(0)
+
+                    #     # Check if we have at least 4 previous values and they are the same
+                    #     if len(previous_values) == max_consecutive and all(val == previous_values[0] for val in previous_values):
+                    #         z_values_list.append(z_robot)  # Append the value
+                    #         previous_values.clear()  # Clear the list after appending
+
 
 
                     # Draw the axes on the marker
@@ -284,6 +304,8 @@ class arcuo_marker_detection(Node): # Node class
             # Create the multi-array message
             z_multi_msg = Float64MultiArray()
             z_multi_msg.data = z_values_list  # simple assignment, or you can set layout if needed
+
+            print("List of detection", z_values_list)
 
             # Publish once for all markers in this frame
             self.z_multiarray_pub.publish(z_multi_msg)

@@ -22,7 +22,9 @@ class PoseGraphOptimization(Node):
         self.tf_listener = TransformListener(self.tf_buffer, self)
         
         # Subscriptions for odometry, velocity, and ArUco marker data
-        self.odometry_sub = self.create_subscription(Odometry, '/odom', self.odometry_callback, 10)
+        self.odometry_sub = self.create_subscription(Odometry, '/noisy_odom', self.odometry_callback, 10)
+        self.true_odom_sub = self.create_subscription(Odometry, '/odom', self.true_odometry_callback, 10)  # True odometry
+        
         self.cmd_vel_sub = self.create_subscription(Twist, '/cmd_vel', self.cmd_vel_callback, 10)
         self.marker_sub = self.create_subscription(PoseArray, '/aruco_poses_in_map', self.aruco_callback, 10)
 
@@ -49,6 +51,8 @@ class PoseGraphOptimization(Node):
         self.optimized_poses_y = []
         self.last_odometry_poses = []
         self.last_optimized_poses = []
+        self.noisy_odom_x, self.noisy_odom_y = [], []
+        self.true_odom_x, self.true_odom_y = [], []
 
         self.previous_landmarks = {}  # Dictionary to store previous landmark positions
         self.landmark_change_threshold = 4  # Adjust threshold as needed (meters)
@@ -77,6 +81,10 @@ class PoseGraphOptimization(Node):
         self.prev_x = current_x
         self.prev_y = current_y
 
+        # Store noisy odometry position
+        self.noisy_odom_x.append(current_x)
+        self.noisy_odom_y.append(current_y)
+
 
         """Handles incoming odometry data"""
         odom_pose = PoseStamped()
@@ -92,6 +100,38 @@ class PoseGraphOptimization(Node):
 
         print("In the command velocity", self.cmd_velocity)
         self.process_data()
+
+
+    def true_odometry_callback(self, msg):
+        """Handles incoming true odometry data (ground truth)."""
+
+
+
+        current_x = msg.pose.pose.position.x
+        current_y = msg.pose.pose.position.y
+
+        # If we have a previous position, calculate the distance moved
+        if hasattr(self, 'prev_x') and hasattr(self, 'prev_y'):
+            dx = current_x - self.prev_x
+            dy = current_y - self.prev_y
+            distance = math.sqrt(dx * dx + dy * dy)
+            if distance > 1.0:
+                self.get_logger().warn(
+                    f"Large jump detected (distance: {distance:.2f}). Skipping this odom update."
+                )
+                return  # Skip processing this message
+
+        # Update the previous position
+        self.prev_x = current_x
+        self.prev_y = current_y
+
+
+        true_x = msg.pose.pose.position.x
+        true_y = msg.pose.pose.position.y
+
+        # Store true odometry position
+        self.true_odom_x.append(true_x)
+        self.true_odom_y.append(true_y)
 
     # def aruco_callback(self, msg):
     #     """Handles incoming ArUco markers in map frame"""
@@ -305,29 +345,34 @@ class PoseGraphOptimization(Node):
 
         # Plot odometry trajectory
         # self.ax.plot(self.odometry_poses_x, self.odometry_poses_y, 'r--', label='Odometry Trajectory')
-
-        # # Plot optimized trajectory
-        # self.ax.plot(self.optimized_poses_x, self.optimized_poses_y, 'b-', label='Optimized Trajectory')
+        self.ax.plot(self.true_odom_x, self.true_odom_y, 'g-', label='True Odometry')
         
+        # # Plot optimized trajectory
+        self.ax.plot(self.optimized_poses_x, self.optimized_poses_y, 'b-', label='Pose graph Optimized Trajectory')
+
+        # Plot true odometry (Ground Truth)
+        
+        
+        # self.ax.plot(self.noisy_odom_x, self.noisy_odom_y, 'r--', label='Noisy Odometry')
 
             # Store the last N odometry poses
-        if self.odometry_poses_x and self.odometry_poses_y:
-            last_odom = (self.odometry_poses_x[-1], self.odometry_poses_y[-1])
-            self.last_odometry_poses.append(last_odom)
+        # if self.odometry_poses_x and self.odometry_poses_y:
+        #     last_odom = (self.odometry_poses_x[-1], self.odometry_poses_y[-1])
+        #     self.last_odometry_poses.append(last_odom)
 
 
-        if self.optimized_poses_x and self.optimized_poses_y:
-            last_pose = (self.optimized_poses_x[-1], self.optimized_poses_y[-1])
-            self.last_optimized_poses.append(last_pose)
+        # if self.optimized_poses_x and self.optimized_poses_y:
+        #     last_pose = (self.optimized_poses_x[-1], self.optimized_poses_y[-1])
+        #     self.last_optimized_poses.append(last_pose)
 
 
-        for pose_x, pose_y in self.last_optimized_poses:
-            self.ax.scatter(pose_x, pose_y, color='magenta', marker='D', s=100, label='Last Optimized Pose' if pose_x == self.last_optimized_poses[-1][0] else "")
+        # for pose_x, pose_y in self.last_optimized_poses:
+        #     self.ax.scatter(pose_x, pose_y, color='magenta', marker='D', s=1, label='Last Optimized Pose' if pose_x == self.last_optimized_poses[-1][0] else "")
 
 
 
-        for odom_x, odom_y in self.last_odometry_poses:
-            self.ax.scatter(odom_x, odom_y, color='cyan', marker='s', s=100, label='Last Odom' if odom_x == self.last_odometry_poses[-1][0] else "")
+        # for odom_x, odom_y in self.last_odometry_poses:
+        #     self.ax.scatter(odom_x, odom_y, color='cyan', marker='s', s=100, label='Last Odom' if odom_x == self.last_odometry_poses[-1][0] else "")
 
 
         # Plot landmark positions

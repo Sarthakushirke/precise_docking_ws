@@ -158,11 +158,11 @@ class OccupancyGridUpdater(Node):
             # Remove the SECOND frontier (if it exists)
             # ---------------------------
             # Sort the group IDs
-            sorted_ids = sorted(filtered_groups.keys())
-            if len(sorted_ids) > 1:
-                second_id = sorted_ids[1]
-                self.get_logger().warn(f"Removing second frontier group with ID: {second_id}")
-                del filtered_groups[second_id]
+            # sorted_ids = sorted(filtered_groups.keys())
+            # if len(sorted_ids) > 1:
+            #     second_id = sorted_ids[1]
+            #     self.get_logger().warn(f"Removing second frontier group with ID: {second_id}")
+            #     del filtered_groups[second_id]
 
             # Calculate centroids for all valid groups
             centroids = {}
