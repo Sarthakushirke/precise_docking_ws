@@ -19,7 +19,7 @@ The code is all in the src folder. The robot's simulation model can be found in 
 To run the packages and the code inside them,
 
 For example,
-Use ros2 run active_localization frontier_detection.py
+Use "ros2 run active_localization frontier_detection.py"
 
 
 Note:- Will update the tutorial on how to use the code step by step.
