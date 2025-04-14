@@ -11,3 +11,15 @@ confidence.
 This active localization strategy ensures efficient exploration while progressively converging on a precise pose without forgetting to reach a target location. Once localization is sufficiently accurate, the robot transitions seamlessly to goal-directed planning. This thesis demonstrates how integrating active localization with decision-making improves localization and helps the robot reach the targets.
 
 We demonstrate the effectiveness of the framework by validating it with a fully actuated robot equipped with a 360° laser range scanner and RGB camera in the simulation environment using ROS and Gazebo, and extend it to initial hardware experiments using a ROSbot 2 pro robot.
+
+
+# Run the code
+The code is all in the src folder. The robot's simulation model can be found in another repository named "precise_docking_simulatiom_ws"(https://github.com/Sarthakushirke/precise_docking_simulatiom_ws.git).
+
+To run the packages and the code inside them,
+
+For example,
+Use ros2 run active_localization frontier_detection.py
+
+
+Note:- Will update the tutorial on how to use the code step by step.
