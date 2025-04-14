@@ -1,3 +1,4 @@
+![Thesis_first_page](https://github.com/user-attachments/assets/009ccea8-f8d7-4498-9d50-706848a2cb83)
 [Graduation_project.pdf](https://github.com/user-attachments/files/19734537/Graduation_project.pdf)
 # Utility-Based Frontier Exploration for  Active Localization!
 
